@@ -1,0 +1,10 @@
+class RscText;
+class RscPicture;
+class RscControlsGroupNoScrollbars;
+class RscSlider;
+class RscEdit;
+class RscButton;
+class IGUIBack;
+class RscButtonMenuOK;
+class RscButtonMenuCancel;
+class RscStructuredText;
