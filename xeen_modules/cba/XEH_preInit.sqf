@@ -5,4 +5,5 @@
 ["xeen_garrisonUnits", "EDITBOX", ["Garrison Units", "A comma seperated list of classnames to be used to garrison buildings"], ["XBE Settings", "Garrison Settings"], "O_Soldier_F,O_Soldier_AR_F"] call cba_settings_fnc_init;
 
 // Forward Observer Settings
+["xeen_observerType", "LIST",     ["IDF Type", "The type of IDF to be used by forward observers"], ["XBE Settings", "Observer Settings"], [["82mm", "155mm", "planeGunRun", "planeMissiles", "planeGunMissiles", "planeBombStrike", "planeRandom"], ["82mm Mortar", "155mm Artillery", "Plane (Gun Run)", "Plane (Missiles)", "Plane (Gun + Missiles)", "Plane (Bomb Strike)", "Plane (Random)"], 1]] call cba_settings_fnc_init;
 ["xeen_observerPlane", "EDITBOX", ["Forward Observer Plane", "A comma seperated list of classnames to be used for airstrikes"], ["XBE Settings", "Observer Settings"], "O_Plane_CAS_02_dynamicLoadout_F,O_Plane_CAS_02_dynamicLoadout_F"] call cba_settings_fnc_init;

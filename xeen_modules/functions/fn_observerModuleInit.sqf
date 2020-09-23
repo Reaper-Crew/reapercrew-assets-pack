@@ -3,7 +3,7 @@ params ["_logic"];
 diag_log "FORWARD OBSERVER (INIT): Initialising";
 
 _units = [];
-_supportType = _logic getVariable ["SupportType","82mm"];
+_supportType = xeen_observerType;
 _retryTime = _logic getVariable ["retryTime",240];
 
 diag_log "FORWARD OBSERVER (INIT): Checking for attached units";
@@ -12,6 +12,8 @@ _attachedObject = attachedTo _logic;
 if (!isNull _attachedObject) then {
 	_units pushBack _attachedObject;
 };
+
+diag_log format ["FORWARD OBSERVER (INIT): Affected Units: %1", _attachedObject ];
 
 diag_log "FORWARD OBSERVER (INIT): Checking for synchronised units";
 // Check to see if the module has syncronised units
@@ -57,5 +59,3 @@ diag_log format ["FORWARD OBSERVER (INIT): Affected Units: %1", _units ];
 
 // Delete the logic
 deleteVehicle _logic;
-
-true
