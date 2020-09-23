@@ -15,7 +15,14 @@
  * Public: No
  */
 
-params ["_logicLocation", "_radius", "_number"];
+// TEMP REWORK
+params ["_logic"];
+
+_logicLocation = (getPos _logic);
+_radius = 100;
+_number = 3;
+
+//params ["_logicLocation", "_radius", "_number"];
 
 diag_log format ["Recieved logic %1", _logicLocation];
 

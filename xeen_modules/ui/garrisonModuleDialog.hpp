@@ -60,7 +60,7 @@ class garrisonModuleDialog
 			y = 0.88;
 			w = 0.1;
 			h = 0.1;
-			onButtonClick = "[(findDisplay 99) getVariable ['_logicLocation', objNull], sliderPosition 1901, sliderPosition 1900] call xeen_fnc_garrisonModuleInit; (findDisplay 99) closeDisplay 1;"
+			onButtonClick = "[(findDisplay 99) getVariable ['_logicLocation', objNull], sliderPosition 1901, sliderPosition 1900] call xeen_fnc_garrisonModuleInit; (findDisplay 99) closeDisplay 1;";
 		};
 		class RscButtonMenuCancel_2700: RscButtonMenuCancel
 		{
@@ -87,7 +87,7 @@ class garrisonModuleDialog
             sliderRange[] = {0,10};
             sliderStep = 1;
             lineSize = 1;
-			onSliderPosChanged="((findDisplay 99) displayCtrl 1102) ctrlSetStructuredText parseText str(sliderPosition 1900)"
+			onSliderPosChanged="((findDisplay 99) displayCtrl 1102) ctrlSetStructuredText parseText str(sliderPosition 1900)";
 		};
 
 		class RscSlider_1901: RscSlider
@@ -108,7 +108,7 @@ class garrisonModuleDialog
             sliderRange[] = {0,100};
             sliderStep = 10;
             lineSize = 1;
-			onSliderPosChanged="((findDisplay 99) displayCtrl 1103) ctrlSetStructuredText parseText str(sliderPosition 1901)"
+			onSliderPosChanged="((findDisplay 99) displayCtrl 1103) ctrlSetStructuredText parseText str(sliderPosition 1901)";
 		};
 
 	};

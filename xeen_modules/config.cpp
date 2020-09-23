@@ -3,7 +3,7 @@ class CfgPatches
 {
 	class Xeenenta_Modules
 	{
-		units[] = {"xeen_moduleGarrison", "xeen_moduleForwardObserver"};
+		units[] = {"xeen_moduleGarrison", "xeen_moduleForwardObserver", "xeen_moduleDisarmPlayers", "xeen_moduleScanArea"};
 		weapons[] = {""};
 		vehicles[] = {""};
 		requiredVersion = 1.0;
@@ -58,7 +58,7 @@ class CfgVehicles
 		icon = "\xeen_modules\insignia.paa";
 		category = "xeen_modules";
 		isGlobal = 0;
-		isTriggerActivated = 1;
+		isTriggerActivated = 0;
 		isDisposable = 1;
 		is3DEN = 0;	
 		curatorCanAttach = 1;
@@ -66,13 +66,36 @@ class CfgVehicles
 		scopeCurator = 1;
 	};
 
+	class xeen_moduleDisarmPlayers: xeen_module_base
+	{
+		displayName = "Disarm all players";
+		function = "xeen_fnc_disarmModuleInit";
+		functionPriority = 1;
+		scope = 1;
+		scopeCurator = 2;
+		isGlobal = 1;
+	};
+
+	class xeen_moduleScanArea: xeen_module_base
+	{
+		displayName = "Scan area";
+		function = "xeen_fnc_scanAreaModuleInit";
+		functionPriority = 1;
+		scope = 2;
+		scopeCurator = 2;
+		isGlobal = 1;
+		isTriggerActivated = 0;
+		curatorCanAttach = 1;
+	};
+
 	class xeen_moduleGarrison: xeen_module_base
 	{
-		displayName = "Garrison Area";
-		function = "xeen_fnc_garrisonModuleDialog";
-		functionPriority = 10;
-		scope = 2;
+		displayName = "Garrison Area (3 per building, 100m radius)";
+		function = "xeen_fnc_garrisonModuleInit";
+		functionPriority = 1;
+		scope = 1;
 		scopeCurator = 2;	
+		curatorInfoType = "garrisonModuleDialog";
 		class Attributes: AttributesBase
 		{
 			class GarrisonSpread: Edit
@@ -99,7 +122,7 @@ class CfgVehicles
 	{
 		displayName = "Forward Observer";
 		function = "xeen_fnc_observerModuleInit";
-		functionPriority = 10;
+		functionPriority = 1;
 		curatorInfoType = "testView";
 		scope = 2;
 		scopeCurator = 2;
@@ -176,6 +199,8 @@ class CfgFunctions
 			class observerModuleIDF{};
 			class observerModuleBehavior{};
 			class observerModuleInit{};
+			class disarmModuleInit{};
+			class scanAreaModuleInit{};
 		};
 	};
 };
