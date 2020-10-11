@@ -35,7 +35,11 @@ _moduleLocation = (getPos _logic);
 	removeHeadgear _x;
 	removeGoggles _x;
 
-	_x forceAddUniform "U_BG_Guerilla2_1";	
+	_x forceAddUniform "U_BG_Guerilla2_1";
+	_x linkItem "ItemMap";
+	_x linkItem "ItemCompass";
+	_x linkItem "ItemWatch";
+	_x linkItem "ItemGPS";	
 
 } forEach _allPlayers;
 

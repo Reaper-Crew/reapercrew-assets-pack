@@ -1,28 +1,56 @@
 # Overview
 
-The 'Battlefield Enhancements' mod is designed to add AI gameplay mechanics with an emphasis on Electronic Warfare within ArmA 3.
+This repository holds the sources files for the Reaper Crew Assets pack
 
-## Current feature list
+# Textures
 
-- The Forward Observers can currently call in Airstrikes and Artillery fire when engaged by the enemy
-- Players with the 'ICOM Device' will hear enemy communications within 1km.
-- Enemy forces are able to summon QRFs for assistance when engaged provided a HQ location is defined
-- Garrison module can be used to populate urban areas for dense CQB combat
+## Billboards
 
-## TODO List
+### General
 
-### Garrison Module
+* reapercrew_common\data\general_bcrMusterPoint.paa
+* reapercrew_common\data\general_briefingZone.paa
+* reapercrew_common\data\general_standardLogo.paa
+* reapercrew_common\data\insignia.paa
+* reapercrew_common\data\reaperLogo.paa
 
-- Stop AI spawning in the floor
-- Take barricade and fortications (sandbags, bunkers, etc) into account
+### Task Organisation
 
-### QRF Module
+* reapercrew_common\data\taskOrganisation_armouredSupport.paa
+* reapercrew_common\data\taskOrganisation_casSupport.paa
+* reapercrew_common\data\taskOrganisation_riflePlatoon.paa
 
-- ~~Add mechanised/motorised infantry teams~~
+### Callsigns
 
-### Forward Observer Module
-
-- ~~Call in strikes on fixed position as oppossed to following the player~~
-- Signal interception to allow for advanced warning of enemy activity
-- Signal disruption to prevent the enemy from calling for additional assets.
-- Hacking AI Cyber defences in order to gain access to enemy Blue Force Tracking.
+* reapercrew_common\data\billboard_foxhound71.paa
+* reapercrew_common\data\billboard_foxhound72.paa
+* reapercrew_common\data\billboard_foxhound73.paa
+* reapercrew_common\data\billboard_foxhound74.paa
+* reapercrew_common\data\billboard_fury21.paa
+* reapercrew_common\data\billboard_fury22.paa
+* reapercrew_common\data\billboard_fury23.paa
+* reapercrew_common\data\billboard_fury24.paa
+* reapercrew_common\data\billboard_hammer31.paa
+* reapercrew_common\data\billboard_hammer32.paa
+* reapercrew_common\data\billboard_hammer33.paa
+* reapercrew_common\data\billboard_phantom61.paa
+* reapercrew_common\data\billboard_phantom62.paa
+* reapercrew_common\data\billboard_phantom63.paa
+* reapercrew_common\data\billboard_phantom64.paa
+* reapercrew_common\data\billboard_reaper11.paa
+* reapercrew_common\data\billboard_reaper12.paa
+* reapercrew_common\data\billboard_reaper13.paa
+* reapercrew_common\data\billboard_reaper14.paa
+* reapercrew_common\data\billboard_shadow81.paa
+* reapercrew_common\data\billboard_shadow82.paa
+* reapercrew_common\data\billboard_shadow83.paa
+* reapercrew_common\data\billboard_shadow84.paa
+* reapercrew_common\data\billboard_ugly51.paa
+* reapercrew_common\data\billboard_ugly52.paa
+* reapercrew_common\data\billboard_ugly53.paa
+* reapercrew_common\data\billboard_ugly54.paa
+* reapercrew_common\data\billboard_viper41.paa
+* reapercrew_common\data\billboard_viper42.paa
+* reapercrew_common\data\billboard_viper43.paa
+* reapercrew_common\data\billboard_viper44.paa
+* reapercrew_common\data\billboard_zero.paa
