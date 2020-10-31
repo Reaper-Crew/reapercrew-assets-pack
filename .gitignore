@@ -2,6 +2,7 @@
 *.bisign
 todo_notes.txt
 arc/
-xeen_modules/
+xeen_modules
+addons\xeen_modules
 build_all.ps1
 changelog.txt
