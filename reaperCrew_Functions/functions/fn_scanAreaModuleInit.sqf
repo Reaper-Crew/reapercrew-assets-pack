@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [_logic] call xeen_fnc_scanAreaModuleInit
+ * [_logic] call reaperCrew_Func_scanAreaModuleInit
  *
  * Public: No
  */

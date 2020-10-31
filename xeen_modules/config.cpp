@@ -33,6 +33,34 @@ class CfgFactionClasses
 		scopeCurator = 2;
 	};
 };
+class CfgFunctions
+{
+	class xeen
+	{
+		class Effects
+		{
+			file = "\xeen_modules\functions";
+			class garrisonModuleInit{};
+			class garrisonModuleWaypoint{};
+			class garrisonModuleDialog{};
+			class observerModuleCAS{};
+			class observerModuleIDF{};
+			class observerModuleBehavior{};
+			class observerModuleInit{};
+			class disarmModuleInit{};
+			class scanAreaModuleInit{};
+		};
+	};
+};
+
+class Extended_PreInit_EventHandlers
+{
+	class my_preInit
+	{
+		init="call compile preProcessFileLineNumbers '\xeen_modules\cba\XEH_preInit.sqf'";
+	};
+};
+
 class CfgVehicles
 {
 	class Logic;
@@ -183,33 +211,6 @@ class CfgVehicles
 			};
 			class ModuleDescription: ModuleDescription{}; // Module description should be shown last
 		};
-	};
-};
-class CfgFunctions
-{
-	class xeen
-	{
-		class Effects
-		{
-			file = "\xeen_modules\functions";
-			class garrisonModuleInit{};
-			class garrisonModuleWaypoint{};
-			class garrisonModuleDialog{};
-			class observerModuleCAS{};
-			class observerModuleIDF{};
-			class observerModuleBehavior{};
-			class observerModuleInit{};
-			class disarmModuleInit{};
-			class scanAreaModuleInit{};
-		};
-	};
-};
-
-class Extended_PreInit_EventHandlers
-{
-	class my_preInit
-	{
-		init="call compile preProcessFileLineNumbers '\xeen_modules\cba\XEH_preInit.sqf'";
 	};
 };
 

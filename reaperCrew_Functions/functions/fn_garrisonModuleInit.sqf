@@ -1,5 +1,5 @@
 /*
- * Author: Xeenenta
+ * Author: reaperCrewenta
  * Garrisons the nearby buildings
  *
  * Arguments:
@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [_logic] call xeen_fnc_moduleGarrisoninit
+ * [_logic] call reaperCrew_fnc_moduleGarrisoninit
  *
  * Public: No
  */
@@ -31,22 +31,22 @@ diag_log format ["Recieved logic %1", _logicLocation];
 diag_log "GARRISON MODULE: Garrison Process started";
 
 // Check to see if HQ variables are present
-if (isNil "xeen_garrisonUnits") then {
-  diag_log "GARRISON MODULE: xeen_garrisonUnits not defined, using default";
-  xeen_garrisonUnits = "O_Soldier_F,O_Soldier_AR_F";
-  publicVariable "xeen_garrisonUnits";
+if (isNil "reaperCrew_garrisonUnits") then {
+  diag_log "GARRISON MODULE: reaperCrew_garrisonUnits not defined, using default";
+  reaperCrew_garrisonUnits = "O_Soldier_F,O_Soldier_AR_F";
+  publicVariable "reaperCrew_garrisonUnits";
 };
-if (isNil "xeen_forcesSide") then {
-  diag_log "GARRISON MODULE: xeen_forcesSide not defined, using default";
-  xeen_forcesSide = east;
-  publicVariable "xeen_forcesSide";
+if (isNil "reaperCrew_forcesSide") then {
+  diag_log "GARRISON MODULE: reaperCrew_forcesSide not defined, using default";
+  reaperCrew_forcesSide = east;
+  publicVariable "reaperCrew_forcesSide";
 };
 
 // Variables
 //_garrisonlogic = _logic;
 _maxSpread = _radius; //_logic getVariable ["GarrisonSpread",100];
 _maxPerBuilding = _number; //_logic getVariable ["MaxPerBuilding",3];
-_garrisonUnits = xeen_garrisonUnits splitString ",";
+_garrisonUnits = reaperCrew_garrisonUnits splitString ",";
   
 [_logicLocation, _maxSpread, _garrisonUnits, _maxPerBuilding] spawn {
 
@@ -83,7 +83,7 @@ _garrisonUnits = xeen_garrisonUnits splitString ",";
     };
 
     // Create Group
-    _buildingGroup = createGroup xeen_forcesSide;
+    _buildingGroup = createGroup reaperCrew_forcesSide;
 
     //Add a rifleman to the group for every single position
     {
@@ -108,7 +108,7 @@ _garrisonUnits = xeen_garrisonUnits splitString ",";
     _wp setWaypointType "SCRIPTED";
     _wp setWaypointBehaviour "AWARE";
     [_buildingGroup, 0] setWaypointSpeed "LIMITED";
-    _wp setWaypointStatements ["true", "[thisList] call xeen_fnc_garrisonModuleWaypoint"];
+    _wp setWaypointStatements ["true", "[thisList] call reaperCrew_fnc_garrisonModuleWaypoint"];
 
     sleep 2;
 

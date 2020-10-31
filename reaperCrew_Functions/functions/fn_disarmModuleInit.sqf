@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [_logic] call xeen_fnc_moduleDisarmPlayers
+ * [_logic] call reaperCrew_Func_moduleDisarmPlayers
  *
  * Public: No
  */

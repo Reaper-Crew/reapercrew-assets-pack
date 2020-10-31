@@ -9,7 +9,7 @@
  * None
  *
  * Example:
- * [_logic] call xeen_fnc_garrisonModuleDialog
+ * [_logic] call reaperCrew_Func_garrisonModuleDialog
  *
  * Public: No
  */

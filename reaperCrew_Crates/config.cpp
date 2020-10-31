@@ -1,5 +1,3 @@
-#DEFINE item_xx(a,b) class _xx_##a {name = a; count = b;}
-
 class CfgPatches
 {
 	class ReaperCrew_Crate
