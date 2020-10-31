@@ -16,10 +16,6 @@ class CfgFunctions
 		class Effects
 		{
 			file = "\reaperCrew_Functions\functions";
-			class garrisonModuleInit{};
-			class garrisonModuleWaypoint{};
-			class disarmModuleInit{};
-			class scanAreaModuleInit{};
 			class setACRESettings{
 				preInit = 1;
 				postInit = 1;
@@ -28,6 +24,11 @@ class CfgFunctions
 			class logisticsCreateSupplyCrate{};
 			class logisticsCreateMedicalCrate{};
 			class logisticsAddActions{};
+			class logisticsModuleInit{};
+            class disarmModuleInit{};
+            class garrisonModuleInit{};
+			class garrisonModuleWaypoint{};
+            class scanAreaModuleInit{};
 		};
 	};
 };
