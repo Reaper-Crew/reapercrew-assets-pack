@@ -25,6 +25,9 @@ class CfgFunctions
 				postInit = 1;
 				preStart = 1;
 			};
+			class logisticsCreateSupplyCrate{};
+			class logisticsCreateMedicalCrate{};
+			class logisticsAddActions{};
 		};
 	};
 };
