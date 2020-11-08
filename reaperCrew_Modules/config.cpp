@@ -54,7 +54,7 @@ class CfgVehicles
 	};
 	class reaperCrew_module_base: Module_F
 	{	
-		icon = "\reaperCrew_Modules\insignia.paa";
+		icon = "\reaperCrew_Common\data\insignia.paa";
 		category = "reaperCrew_Modules";
 		isGlobal = 0;
 		isTriggerActivated = 0;
