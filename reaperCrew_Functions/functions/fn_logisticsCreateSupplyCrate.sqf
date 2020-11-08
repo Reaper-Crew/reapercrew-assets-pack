@@ -35,6 +35,7 @@ _allGrenades = _lethalGrenades + _nonLethalGrenades + _smokeGrenades;
 
 // Crate Variables
 _supplyCrate = "B_supplyCrate_F" createVehicle position player;
+[_supplyCrate, 8] call ace_cargo_fnc_setSize;
 [_resupplyObject, _supplyCrate, [([-5,5] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;
 
 clearItemCargoGlobal _supplyCrate;
