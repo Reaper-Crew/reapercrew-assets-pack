@@ -18,4 +18,4 @@ params ["_resupplyObject"];
 
 // Crate Variables
 _supplyCrate = "ReaperCrew_PlasticCase_Medical" createVehicle position player;
-[_resupplyObject, _supplyCrate, [([-5,5] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;
+[_resupplyObject, _supplyCrate, [([-10,10] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;
