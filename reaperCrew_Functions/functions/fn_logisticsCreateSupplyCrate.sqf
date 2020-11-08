@@ -34,9 +34,9 @@ _smokeGrenades = reaperCrew_smokeGrenades splitString ",";
 _allGrenades = _lethalGrenades + _nonLethalGrenades + _smokeGrenades;
 
 // Crate Variables
-_supplyCrate = "B_supplyCrate_F" createVehicle position player;
+_supplyCrate = "B_CargoNet_01_ammo_F" createVehicle position player;
 [_supplyCrate, 8] call ace_cargo_fnc_setSize;
-[_resupplyObject, _supplyCrate, [([-5,5] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;
+[_resupplyObject, _supplyCrate, [([-10,10] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;
 
 clearItemCargoGlobal _supplyCrate;
 clearWeaponCargoGlobal _supplyCrate;
