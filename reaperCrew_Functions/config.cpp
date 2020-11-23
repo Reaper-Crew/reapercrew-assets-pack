@@ -29,6 +29,8 @@ class CfgFunctions
             class garrisonModuleInit{};
 			class garrisonModuleWaypoint{};
             class scanAreaModuleInit{};
+			class initAirDefenceTurretTruck{};
+			class initAirDefenceRadarTruck{};
 		};
 	};
 };
