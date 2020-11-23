@@ -2,9 +2,9 @@ class CfgPatches
 {
 	class reaperCrew_Modules
 	{
-		units[] = {""};
+		units[] = {"reaperCrew_moduleGarrison", "reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleScanArea", "reaperCrew_moduleResupplyPoint"};
 		weapons[] = {""};
-		vehicles[] = {"reaperCrew_moduleGarrison", "reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleScanArea", "reaperCrew_moduleResupplyPoint"};
+		vehicles[] = {""};
 		requiredVersion = 1.0;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings"};
 	};
