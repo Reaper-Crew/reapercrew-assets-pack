@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class ReaperCrew_Insignia_Units
+	class ReaperCrew_Common
 	{
 		units[]={};
 		weapons[]={};
@@ -13,16 +13,6 @@ class UniformSlotInfo
 {
 	slotType=0;
 	linkProxy="-";
-};
-class CfgUnitInsignia
-{
-	class reaperCrewInsignia
-	{
-		displayName="Reaper Crew Insignia";
-		author="Xeenenta";
-		texture="reaperCrew_Common\data\reaperLogo.paa";
-		textureVehicle="";
-	};
 };
 class cfgFactionClasses
 {
