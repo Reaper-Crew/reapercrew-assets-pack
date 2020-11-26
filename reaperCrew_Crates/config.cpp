@@ -15,6 +15,13 @@ class CfgPatches
 		weapons[]={};
 	};
 };
+class CfgEditorSubcategories
+{
+	class reaperCrewStorageObjects // Category class, you point to it in editorSubcategory property
+	{
+		displayName = "Storage"; // Name visible in the list
+	};
+};
 class CfgVehicles
 {
 	class Items_base_F;
@@ -28,7 +35,8 @@ class CfgVehicles
 		displayName="Supply Crate (Reaper Crew)";
 		model="\A3\Weapons_F\empty.p3d";
 		icon="iconObject";
-		editorSubcategory="EdSubcat_Storage";
+		editorCategory = "reaperCrew";
+        editorSubcategory = "reaperCrewStorageObjects";
 		vehicleClass="Container";
 		waterLeakiness=100;
 		maximumLoad=2000;
