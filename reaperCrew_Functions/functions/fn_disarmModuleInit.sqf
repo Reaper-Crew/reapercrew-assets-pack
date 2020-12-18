@@ -36,6 +36,7 @@ _moduleLocation = (getPos _logic);
 	removeGoggles _x;
 
 	_x forceAddUniform "U_BG_Guerilla2_1";
+	_x addHeadgear "RC_Beret_01";
 	_x linkItem "ItemMap";
 	_x linkItem "ItemCompass";
 	_x linkItem "ItemWatch";
