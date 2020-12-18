@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [_logic] call reaperCrew_fnc_moduleGarrisoninit
+ * [_logic] call reaperCrew_fnc_garrisonModuleInit
  *
  * Public: No
  */
