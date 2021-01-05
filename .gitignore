@@ -1,8 +1,6 @@
 *.pbo
 *.bisign
-todo_notes.txt
 arc/
-xeen_modules
-addons\xeen_modules
 build_all.ps1
 changelog.txt
+todo_notes.txt
