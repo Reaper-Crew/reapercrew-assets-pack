@@ -1,12 +1,10 @@
 // Get the list of DLCs owned by the player
 _DLCList = getDLCs 1;
-//_aircraftList = ["B_Heli_Transport_03_unarmed_F", "B_Heli_Light_01_F", "B_Heli_Transport_01_F", "O_Heli_Transport_04_covered_F", "O_Heli_Light_02_unarmed_F", "I_Heli_Transport_02_F", "I_Heli_light_03_unarmed_F"];
+_aircraftList = ["B_Heli_Transport_03_unarmed_F", "B_Heli_Light_01_F", "B_Heli_Transport_01_F", "O_Heli_Transport_04_covered_F", "O_Heli_Light_02_unarmed_F", "I_Heli_Transport_02_F", "I_Heli_light_03_unarmed_F"];
 
 if (1042220 in _DLCList) then {
-	//_aircraftList = _aircraftList + ["gm_ge_army_ch53g", "gm_ge_army_bo105p1m_vbh_swooper"];
+	_aircraftList = _aircraftList + ["gm_ge_army_ch53g", "gm_ge_army_bo105p1m_vbh_swooper"];
 };
-
-_aircraftList = ["CPC_NAM_B_US_UH1H"];
 
 _helicopter = (selectRandom (_aircraftList)) createVehicle position helipad1;
 
