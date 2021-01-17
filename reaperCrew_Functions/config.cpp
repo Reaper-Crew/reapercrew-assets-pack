@@ -32,6 +32,7 @@ class CfgFunctions
             class scanAreaModuleInit{};
 			class initAirDefenceTurretTruck{};
 			class initAirDefenceRadarTruck{};
+			class CoverMap{};
 		};
 	};
 };
