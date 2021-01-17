@@ -20,6 +20,7 @@ class Land_DragonsTeeth_01_1x1_new_F;
 class Land_DragonsTeeth_01_1x1_new_redwhite_F;
 class Land_DragonsTeeth_01_1x1_old_redwhite_F;
 class Land_CzechHedgehog_01_new_F;
+class Land_CzechHedgehog_01_old_F;
 
 class RC_Land_ConcreteHedgehog_01_F: Land_ConcreteHedgehog_01_F {
     editorCategory = "reaperCrew";
@@ -295,6 +296,19 @@ class RC_Land_DragonsTeeth_01_1x1_old_redwhite_F: Land_DragonsTeeth_01_1x1_old_r
 	};
 };
 class RC_Land_CzechHedgehog_01_new_F: Land_CzechHedgehog_01_new_F {
+    editorCategory = "reaperCrew";
+    editorSubcategory = "reaperCrewFortificationsGeneric";
+    class SimpleObject
+	{
+		eden=1;
+		animate[]={};
+		hide[]={};
+		verticalOffset=0.382000;
+		verticalOffsetWorld=0;
+		init="''";
+	};
+};
+class RC_Land_CzechHedgehog_01_old_F: Land_CzechHedgehog_01_old_F {
     editorCategory = "reaperCrew";
     editorSubcategory = "reaperCrewFortificationsGeneric";
     class SimpleObject
