@@ -1,4 +1,4 @@
-[] call reapercrew_training_fnc_startTraining;
+[] execVM "fn_startTraining.sqf";
 
 _structuredTest ="
 <font color='#ffc300' size='15'>Mission Briefing</font><br/>
