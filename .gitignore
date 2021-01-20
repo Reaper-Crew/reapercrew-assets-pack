@@ -1,6 +1,5 @@
-*.pbo
-*.bisign
-arc/
+addons/*.pbo
+addons/*.bisign
 build_all.ps1
 changelog.txt
 todo_notes.txt
