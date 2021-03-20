@@ -17,7 +17,7 @@
 params ["_resupplyObject"];
 
 // Crate Variables
-_supplyCrate = "B_CargoNet_01_ammo_F" createVehicle position player;
+_supplyCrate = "ReaperCrew_PlatoonAmmo_Base" createVehicle position player;
 [_supplyCrate, 8] call ace_cargo_fnc_setSize;
 [_supplyCrate] call reapercrew_fnc_logisticsPopulateSupplyCrate;
 [_resupplyObject, _supplyCrate, [([-10,10] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;

@@ -21,12 +21,16 @@ class CfgFunctions
 				postInit = 1;
 				preStart = 1;
 			};
+			// class setPersonalACRESettings{
+			// 	preInit = 1;
+			// };
 			class logisticsCreateSupplyCrate{};
 			class logisticsPopulateSupplyCrate{};
 			class logisticsCreateMedicalCrate{};
 			class logisticsAddActions{};
 			class logisticsModuleInit{};
             class disarmModuleInit{};
+			class disarmModuleKitChange{};
             class garrisonModuleInit{};
 			class garrisonModuleWaypoint{};
             class scanAreaModuleInit{};

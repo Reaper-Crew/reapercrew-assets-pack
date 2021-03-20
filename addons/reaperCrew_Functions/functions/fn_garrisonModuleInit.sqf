@@ -19,8 +19,8 @@
 params ["_logic"];
 
 _logicLocation = (getPos _logic);
-_radius = 100;
-_number = 3;
+_radius = 50;
+_number = 5;
 
 //params ["_logicLocation", "_radius", "_number"];
 
@@ -43,7 +43,6 @@ if (isNil "reaperCrew_forcesSide") then {
 };
 
 // Variables
-//_garrisonlogic = _logic;
 _maxSpread = _radius; //_logic getVariable ["GarrisonSpread",100];
 _maxPerBuilding = _number; //_logic getVariable ["MaxPerBuilding",3];
 _garrisonUnits = reaperCrew_garrisonUnits splitString ",";
@@ -114,12 +113,12 @@ _garrisonUnits = reaperCrew_garrisonUnits splitString ",";
 
   } forEach _garrisonBuildings;
 
-  // Delete the logic
-  //deleteVehicle _garrisonlogic;
+
 
 };
 
-
+// Delete the logic
+deleteVehicle _logic;
 
 // Module function is executed by spawn command, so returned value is not necessary, but it's good practice.
 true

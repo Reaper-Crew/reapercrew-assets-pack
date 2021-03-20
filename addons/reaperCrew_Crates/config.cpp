@@ -25,6 +25,24 @@ class CfgEditorSubcategories
 class CfgVehicles
 {
 	class Items_base_F;
+	class B_CargoNet_01_ammo_F;
+	class ReaperCrew_PlatoonAmmo_Base: B_CargoNet_01_ammo_F {
+		author="Reaper Crew";
+		displayName="Ammo Crate (Reaper Crew)";
+		editorCategory = "reaperCrew";
+        editorSubcategory = "reaperCrewStorageObjects";
+
+		// Dragging
+        ace_dragging_canDrag = 1;
+        ace_dragging_dragPosition[] = {0, 1.2, 0};
+        ace_dragging_dragDirection = 0;
+		ace_maxWeightDrag = 9999;
+
+        // Carrying
+        ace_dragging_canCarry = 1;
+        ace_dragging_carryPosition[] = {0, 1.2, 0};
+        ace_dragging_carryDirection = 0;
+	};
     class ReaperCrew_PlasticCase_Base: Items_base_F
 	{
 		author="Reaper Crew";
@@ -46,6 +64,17 @@ class CfgVehicles
 
         ace_cargo_size = 8;
         ace_cargo_canLoad = 1;
+
+		// Dragging
+        ace_dragging_canDrag = 1;
+        ace_dragging_dragPosition[] = {0, 1.2, 0};
+        ace_dragging_dragDirection = 0;
+		ace_maxWeightDrag = 9999;
+
+        // Carrying
+        ace_dragging_canCarry = 1;
+        ace_dragging_carryPosition[] = {0, 1.2, 0};
+        ace_dragging_carryDirection = 0;
 		class TransportItems
 		{
 		};

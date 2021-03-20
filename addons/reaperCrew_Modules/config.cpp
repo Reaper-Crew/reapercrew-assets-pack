@@ -71,7 +71,7 @@ class CfgVehicles
 		function = "reaperCrew_fnc_disarmModuleInit";
 		scope = 1;
 		scopeCurator = 2;
-		isGlobal = 1;
+		isGlobal = 0;
 	};
 	class reaperCrew_moduleScanArea: reaperCrew_module_base
 	{
@@ -85,7 +85,7 @@ class CfgVehicles
 	};
 	class reaperCrew_moduleGarrison: reaperCrew_module_base
 	{
-		displayName = "Garrison Area (3 per building, 100m radius)";
+		displayName = "Garrison Area (5 per building, 50m radius)";
 		function = "reaperCrew_fnc_garrisonModuleInit";
 		scope = 1;
 		scopeCurator = 2;
