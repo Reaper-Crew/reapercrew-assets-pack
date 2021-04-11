@@ -9,6 +9,16 @@ class CfgPatches
 		{};
 	};
 };
+class CfgMods
+{
+	class Mod_Base;
+	class ReaperCrew_Common: Mod_Base
+	{
+		logo="reaperCrew_Common\data\reaperLogo.paa";
+	};
+	author="Reaper Crew";
+	timepacked="1618105293";
+};
 class UniformSlotInfo
 {
 	slotType=0;
