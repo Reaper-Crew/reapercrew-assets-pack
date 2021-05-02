@@ -37,3 +37,6 @@
 
 // Explosives
 ["reaperCrew_explosives", "EDITBOX", ["Explosives", "A comma seperated list of all Explovies that should be available from the logistics crate"], ["Reaper Crew", "Logistics Settings"], "DemoCharge_Remote_Mag"] call cba_settings_fnc_init;
+
+// Mortar
+["reaperCrew_82mmCheckbox", "CHECKBOX", ["Add 82mm Mortar crate", "Should a 82mm mortar crate be added to the list of available crates?"], ["Reaper Crew", "Logistics Settings"]] call cba_settings_fnc_init;

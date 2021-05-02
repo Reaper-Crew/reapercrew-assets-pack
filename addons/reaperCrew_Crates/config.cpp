@@ -10,7 +10,8 @@ class CfgPatches
 		requiredVersion=0.100000;
 		units[]=
 		{
-			"ReaperCrew_PlasticCase_Medical"
+			"ReaperCrew_PlasticCase_Medical",
+			"ReaperCrew_PlatoonAmmo_Base"
 		};
 		weapons[]={};
 	};
@@ -20,18 +21,18 @@ class CfgEditorSubcategories
 	class reaperCrewStorageObjects // Category class, you point to it in editorSubcategory property
 	{
 		displayName = "Storage"; // Name visible in the list
+		scope=2;
+		scopeCurator=2;
 	};
 };
 class CfgVehicles
 {
 	class Items_base_F;
 	class B_CargoNet_01_ammo_F;
-	class ReaperCrew_PlatoonAmmo_Base: B_CargoNet_01_ammo_F {
+	class ReaperCrew_SupplyCrate: B_CargoNet_01_ammo_F {
 		author="Reaper Crew";
-		displayName="Ammo Crate (Reaper Crew)";
 		editorCategory = "reaperCrew";
         editorSubcategory = "reaperCrewStorageObjects";
-
 		// Dragging
         ace_dragging_canDrag = 1;
         ace_dragging_dragPosition[] = {0, 1.2, 0};
@@ -42,6 +43,41 @@ class CfgVehicles
         ace_dragging_canCarry = 1;
         ace_dragging_carryPosition[] = {0, 1.2, 0};
         ace_dragging_carryDirection = 0;
+
+		class TransportItems{};
+	};
+	class ReaperCrew_PlatoonAmmo_Base: ReaperCrew_SupplyCrate {	
+		displayName="Supply Crate (Small Arms)";
+		scope=2;
+		scopeCurator=2;
+	};
+	class ReaperCrew_Shells82: ReaperCrew_SupplyCrate {	
+		displayName="Supply Crate (82mm Mortar)";
+		scope=2;
+		scopeCurator=2;
+		class TransportMagazines
+		{
+            class HEGuided {
+                name = ACE_1Rnd_82mm_Mo_HE_Guided;
+                count = 50;
+            }
+			class HE {
+                name = ACE_1Rnd_82mm_Mo_HE;
+                count = 50;
+            }
+			class Illum {
+                name = ACE_1Rnd_82mm_Mo_Illum;
+                count = 50;
+            }
+			class HELaserGuided {
+                name = ACE_1Rnd_82mm_Mo_HE_LaserGuided;
+                count = 50;
+            }
+			class Smoke {
+                name = ACE_1Rnd_82mm_Mo_Smoke;
+                count = 50;
+            }
+		};
 	};
     class ReaperCrew_PlasticCase_Base: Items_base_F
 	{

@@ -26,7 +26,6 @@ class CfgFunctions
 			// };
 			class logisticsCreateSupplyCrate{};
 			class logisticsPopulateSupplyCrate{};
-			class logisticsCreateMedicalCrate{};
 			class logisticsAddActions{};
 			class logisticsModuleInit{};
             class disarmModuleInit{};
