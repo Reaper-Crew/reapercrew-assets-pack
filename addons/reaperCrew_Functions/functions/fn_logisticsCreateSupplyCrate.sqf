@@ -28,11 +28,13 @@ switch (_crateType) do {
 	case "82Mortar": {
 		_classname = "ReaperCrew_Shells82";
 	};
+	case "emptyTransport": {
+		_classname = "Land_WoodenCrate_01_F";
+	};
 };
 
 // Crate Variables
 _supplyCrate = _classname createVehicle position player;
-[_supplyCrate, 8] call ace_cargo_fnc_setSize;
 [_resupplyObject, _supplyCrate, [([-10,10] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;
 _supplyCrate enableSimulationGlobal true;
 

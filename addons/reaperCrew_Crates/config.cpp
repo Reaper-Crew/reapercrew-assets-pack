@@ -33,6 +33,8 @@ class CfgVehicles
 		author="Reaper Crew";
 		editorCategory = "reaperCrew";
         editorSubcategory = "reaperCrewStorageObjects";
+		scope=0;
+		scopeCurator=0;
 		// Dragging
         ace_dragging_canDrag = 1;
         ace_dragging_dragPosition[] = {0, 1.2, 0};
@@ -45,6 +47,8 @@ class CfgVehicles
         ace_dragging_carryDirection = 0;
 
 		class TransportItems{};
+		class TransportMagazines{};
+		class TransportWeapons{};
 	};
 	class ReaperCrew_PlatoonAmmo_Base: ReaperCrew_SupplyCrate {	
 		displayName="Supply Crate (Small Arms)";
@@ -55,7 +59,7 @@ class CfgVehicles
 		displayName="Supply Crate (82mm Mortar)";
 		scope=2;
 		scopeCurator=2;
-		class TransportMagazines
+		class TransportItems
 		{
             class HEGuided {
                 name = ACE_1Rnd_82mm_Mo_HE_Guided;

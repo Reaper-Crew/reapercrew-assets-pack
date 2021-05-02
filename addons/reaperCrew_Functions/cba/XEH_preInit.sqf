@@ -40,3 +40,6 @@
 
 // Mortar
 ["reaperCrew_82mmCheckbox", "CHECKBOX", ["Add 82mm Mortar crate", "Should a 82mm mortar crate be added to the list of available crates?"], ["Reaper Crew", "Logistics Settings"]] call cba_settings_fnc_init;
+
+// Misc
+["reaperCrew_transportCheckbox", "CHECKBOX", ["Add empty crates", "Should players have the option to spawn empty wooden boxes for transport?"], ["Reaper Crew", "Logistics Settings"]] call cba_settings_fnc_init;
