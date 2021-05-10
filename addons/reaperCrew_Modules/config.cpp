@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class reaperCrew_Modules
 	{
-		units[] = {"reaperCrew_moduleGarrison", "reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleScanArea", "reaperCrew_moduleResupplyPoint"};
+		units[] = {"reaperCrew_moduleGarrison", "reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleScanArea", "reaperCrew_moduleResupplyPoint", "reaperCrew_modulePrimaryFix"};
 		weapons[] = {""};
 		vehicles[] = {""};
 		requiredVersion = 1.0;
@@ -25,9 +25,21 @@ class CfgAddons
 class CfgFactionClasses
 {
 	class NO_CATEGORY;
-	class reaperCrew_Modules: NO_CATEGORY
+	class reaperCrew_ModulesLogistics: NO_CATEGORY
 	{
-		displayName = "Reaper Crew";
+		displayName = "Reaper Crew - Logistics";
+		scope = 2;
+		scopeCurator = 2;
+	};
+	class reaperCrew_ModulesAI: NO_CATEGORY
+	{
+		displayName = "Reaper Crew - AI";
+		scope = 2;
+		scopeCurator = 2;
+	};
+	class reaperCrew_ModulesPlayers: NO_CATEGORY
+	{
+		displayName = "Reaper Crew - Players";
 		scope = 2;
 		scopeCurator = 2;
 	};
@@ -69,6 +81,7 @@ class CfgVehicles
 	{
 		displayName = "Disarm all players";
 		function = "reaperCrew_fnc_disarmModuleInit";
+		category = "reaperCrew_ModulesPlayers";
 		scope = 1;
 		scopeCurator = 2;
 		isGlobal = 0;
@@ -77,6 +90,7 @@ class CfgVehicles
 	{
 		displayName = "Scan area";
 		function = "reaperCrew_fnc_scanAreaModuleInit";
+		category = "reaperCrew_ModulesAI";
 		scope = 1;
 		scopeCurator = 2;
 		isGlobal = 1;
@@ -87,6 +101,7 @@ class CfgVehicles
 	{
 		displayName = "Garrison Area (5 per building, 50m radius)";
 		function = "reaperCrew_fnc_garrisonModuleInit";
+		category = "reaperCrew_ModulesAI";
 		scope = 1;
 		scopeCurator = 2;
 	};
@@ -94,6 +109,18 @@ class CfgVehicles
 	{
 		displayName = "Resupply Point";
 		function = "reaperCrew_fnc_logisticsModuleInit";
+		category = "reaperCrew_ModulesLogistics";
+		scope = 2;
+		scopeCurator = 2;
+		isGlobal = 1;
+		isTriggerActivated = 0;
+		curatorCanAttach = 1;
+	};
+	class reaperCrew_modulePrimaryFix: reaperCrew_module_base
+	{
+		displayName = "Primary Weapon Fix";
+		function = "reaperCrew_fnc_primaryWeaponFix";
+		category = "reaperCrew_ModulesAI";
 		scope = 2;
 		scopeCurator = 2;
 		isGlobal = 1;

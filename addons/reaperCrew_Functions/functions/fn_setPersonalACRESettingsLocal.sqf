@@ -51,6 +51,27 @@ if (hasInterface) then {
 		case "Reaper-1-6": {
 			[_personalRadio, 6] call acre_api_fnc_setRadioChannel;
 		};
+		case "Hammer-1": {
+			[_personalRadio, 7] call acre_api_fnc_setRadioChannel;
+		};
+		case "Fury-1": {
+			[_personalRadio, 8] call acre_api_fnc_setRadioChannel;
+		};
+		case "Foxhound-1": {
+			[_personalRadio, 9] call acre_api_fnc_setRadioChannel;
+		};
+		case "Shadow-1": {
+			[_personalRadio, 10] call acre_api_fnc_setRadioChannel;
+		};
+		case "Viper-1": {
+			[_personalRadio, 11] call acre_api_fnc_setRadioChannel;
+		};
+		case "Phantom-1": {
+			[_personalRadio, 11] call acre_api_fnc_setRadioChannel;
+		};
+		case "Ugly-1": {
+			[_personalRadio, 13] call acre_api_fnc_setRadioChannel;
+		};
 	};
 
 	// Assign the PTT values

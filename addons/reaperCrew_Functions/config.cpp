@@ -41,6 +41,7 @@ class CfgFunctions
 				postInit = 1;
 			};
 			class setUnitInsigniaLocal{};
+			class primaryWeaponFix{};
 		};
 	};
 };
