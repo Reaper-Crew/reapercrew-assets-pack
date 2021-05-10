@@ -15,7 +15,7 @@
  * Public: No
  */
 
-diag_log "Reaper Crew: Setting ACRE Settings";
+diag_log "[Reaper Crew]: Configuring ACRE channel names";
 
 ["ACRE_PRC152", "default", "reapercrew_preset_1"] call acre_api_fnc_copyPreset;
 ["ACRE_PRC117F", "default", "reapercrew_preset_1"] call acre_api_fnc_copyPreset;

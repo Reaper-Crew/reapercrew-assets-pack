@@ -21,9 +21,10 @@ class CfgFunctions
 				postInit = 1;
 				preStart = 1;
 			};
-			// class setPersonalACRESettings{
-			// 	preInit = 1;
-			// };
+			class setPersonalACRESettingsLocal{};
+			class setPersonalACRESettingsServer{
+				postInit = 1;
+			};
 			class logisticsCreateSupplyCrate{};
 			class logisticsPopulateSupplyCrate{};
 			class logisticsAddActions{};
@@ -37,9 +38,7 @@ class CfgFunctions
 			class initAirDefenceRadarTruck{};
 			class CoverMap{};
 			class setUnitInsigniaGlobal{
-				preInit = 0;
 				postInit = 1;
-				preStart = 0;
 			};
 			class setUnitInsigniaLocal{};
 		};

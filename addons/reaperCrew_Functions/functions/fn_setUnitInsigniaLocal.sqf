@@ -15,15 +15,16 @@
  * Public: No
  */
 
-if (!isServer) then {
+if (hasInterface) then {
 
 	_roleDesc = roleDescription player;
 
-	diag_log format ["[Reaper Crew] Setting role insignia. Current role is: %1", _roleDesc];
+	diag_log format ["[Reaper Crew]: Setting role insignia. Current role is: %1", _roleDesc];
 
 	switch (_roleDesc) do {
 		case "Platoon Sergeant": {
 			[player, "ReaperCrew_PlatoonSergeant"] call BIS_fnc_setUnitInsignia;
+			player setRank "MAJOR";
 		};
 		case "Logistics Commander": {
 			[player, "ReaperCrew_jtac"] call BIS_fnc_setUnitInsignia;
@@ -33,12 +34,15 @@ if (!isServer) then {
 		};
 		case "Platoon Medic": {
 			[player, "ReaperCrew_platoonMedic"] call BIS_fnc_setUnitInsignia;
+			player setRank "CAPTAIN";
 		};
 		case "Section 2IC": {
 			[player, "ReaperCrew_2IC"] call BIS_fnc_setUnitInsignia;
+			player setRank "MAJOR";
 		};
 		case "Medic": {
 			[player, "ReaperCrew_Medic"] call BIS_fnc_setUnitInsignia;
+			player setRank "CAPTAIN";
 		};
 		case "Machine Gunner": {
 			[player, "ReaperCrew_Machinegunner"] call BIS_fnc_setUnitInsignia;
@@ -66,15 +70,17 @@ if (!isServer) then {
 		};
 	};
 
-	_isPlatoonCommander = [_roleDesc, "Platoon Commander"] call BIS_fnc_inString;
-	_isSectionCommander = [_roleDesc, "Section Commander"] call BIS_fnc_inString;
+	_isPlatoonCommander = ["Platoon Commander", _roleDesc] call BIS_fnc_inString;
+	_isSectionCommander = ["Section Commander", _roleDesc] call BIS_fnc_inString;
 
 	// Role names with extensions
 	if ( _isPlatoonCommander ) then {
 		[player, "ReaperCrew_PlatoonCommander"] call BIS_fnc_setUnitInsignia;
+		player setRank "COLONEL";
 	};
 	if ( _isSectionCommander ) then {
 		[player, "ReaperCrew_SectionCommander"] call BIS_fnc_setUnitInsignia;
+		player setRank "COLONEL";
 	};
 
 };
