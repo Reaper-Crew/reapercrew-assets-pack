@@ -12,7 +12,7 @@
  * None
  *
  * Example:
- * [_centerPoint, _sizeX, _sizeY, _dir] call reaperCrew_fnc_CoverMap;
+ * [_centerPoint, _sizeX, _sizeY, _dir] call reapercrew_common_fnc_CoverMap;
  *
  * Public: No
  */

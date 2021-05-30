@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call reapercrew_fnc_setACRESettings
+ * [] call reapercrew_common_fnc_setACRESettings
  *
  * Public: No
  */

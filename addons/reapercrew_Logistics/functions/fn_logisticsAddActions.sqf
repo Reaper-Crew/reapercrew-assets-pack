@@ -9,7 +9,7 @@
  * None
  *
  * Example:
- * [_object] call reapercrew_fnc_logisticsAddActions
+ * [_object] call reapercrew_logistics_fnc_logisticsAddActions
  *
  * Public: No
  */

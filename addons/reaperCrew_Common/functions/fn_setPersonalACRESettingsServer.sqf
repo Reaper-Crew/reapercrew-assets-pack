@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call reaperCrew_fnc_setPersonalACRESettingsServer
+ * [] call reapercrew_common_fnc_setPersonalACRESettingsServer
  *
  * Public: No
  */
@@ -18,6 +18,6 @@
 // Only run this on a server
 if (isServer) then {
 	diag_log "[Reaper Crew]: Starting JIP ACRE auto-configuation";
-	[] remoteExec ["reaperCrew_fnc_setPersonalACRESettingsLocal", 0, true];
+	[] remoteExec ["reapercrew_common_fnc_setPersonalACRESettingsLocal", 0, true];
 };
 

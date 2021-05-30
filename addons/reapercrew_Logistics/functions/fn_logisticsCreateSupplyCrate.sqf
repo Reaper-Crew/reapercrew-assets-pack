@@ -9,7 +9,7 @@
  * None
  *
  * Example:
- * [_object] call reapercrew_fnc_logisticsCreateSupplyCrate
+ * [_object] call reapercrew_logistics_fnc_logisticsCreateSupplyCrate
  *
  * Public: No
  */
@@ -39,5 +39,5 @@ _supplyCrate = _classname createVehicle position player;
 _supplyCrate enableSimulationGlobal true;
 
 if (_crateType == "smallArms") then {
-	[_supplyCrate] call reapercrew_fnc_logisticsPopulateSupplyCrate;
+	[_supplyCrate] call reapercrew_logistics_fnc_logisticsPopulateSupplyCrate;
 };

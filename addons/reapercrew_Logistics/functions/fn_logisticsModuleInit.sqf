@@ -9,7 +9,7 @@
  * None
  *
  * Example:
- * [_logic] call reaperCrew_fnc_logisticsModuleInit
+ * [_logic] call reapercrew_logistics_fnc_logisticsModuleInit
  *
  * Public: No
  */
@@ -47,5 +47,5 @@ if (count _units == 0) exitWith {
 diag_log format ["RESUPPLY POINT: Affected Units: %1", _units ];
 
 {
-	[_x] call reapercrew_fnc_logisticsAddActions;
+	[_x] call reapercrew_logistics_fnc_logisticsAddActions;
 } forEach _units;

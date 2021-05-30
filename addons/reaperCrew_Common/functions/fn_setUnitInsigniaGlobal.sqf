@@ -10,11 +10,11 @@
  * None
  *
  * Example:
- * [] call reapercrew_fnc_setUnitInsigniaGlobal
+ * [] call reapercrew_common_fnc_setUnitInsigniaGlobal
  *
  * Public: No
  */
 
 if (isServer) then {
-	remoteExecCall ["reapercrew_fnc_setUnitInsigniaLocal", 0, true];
+	remoteExecCall ["reapercrew_common_fnc_setUnitInsigniaLocal", 0, true];
 };
