@@ -18,9 +18,9 @@ All of the settings for this system can be found in the CBA settings menu under 
 
 | Setting Label | Purpose | Example |
 |---------------|---------|---------|
-| Reinforcement Units | This setting is an array of classnames that determines the units that a reinforcements team will be comprised of. These can be units of any side, but they will be automatically switched to the side defined in the 'Opposition Faction' settings upon creation. A key aspect here is to make sure that the vehicles you select in the next settings can hold all of the reinforcements group. | O_Soldier_SL_F,O_Soldier_F,O_Soldier_LAT_F,O_soldier_M_F,O_Soldier_TL_F,O_Soldier_AR_F,O_Soldier_A_F,O_medic_F |
-| Transport Vehicles | The purpose of this settings is to allocate vehicles that can be used by the motorised reinforcements. Upon spawning a reinforcements group, a random vehicle from this list will be selected. | O_Truck_02_transport_F,O_Truck_02_covered_F |
-| Transport Helicopters | Similar to the above, this list determines what transport helicopters are available for the reinforcements groups. A random vehicle will be selected from this list upon the creation of a reinforcements group | O_Heli_Light_02_unarmed_F,O_Heli_Transport_04_bench_F |
+| Reinforcement Units | This setting is an array of classnames that determines the units that a reinforcements team will be comprised of. These can be units of any side, but they will be automatically switched to the side defined in the 'Opposition Faction' settings upon creation. A key aspect here is to make sure that the vehicles you select in the next settings can hold all of the reinforcements group. | O_Soldier_SL_F, O_Soldier_F, O_Soldier_LAT_F, O_soldier_M_F, O_Soldier_TL_F, O_Soldier_AR_F, O_Soldier_A_F, O_medic_F |
+| Transport Vehicles | The purpose of this settings is to allocate vehicles that can be used by the motorised reinforcements. Upon spawning a reinforcements group, a random vehicle from this list will be selected. | O_Truck_02_transport_F, O_Truck_02_covered_F |
+| Transport Helicopters | Similar to the above, this list determines what transport helicopters are available for the reinforcements groups. A random vehicle will be selected from this list upon the creation of a reinforcements group | O_Heli_Light_02_unarmed_F, O_Heli_Transport_04_bench_F |
 
 ### Debugging
 
