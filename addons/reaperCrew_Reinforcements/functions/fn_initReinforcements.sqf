@@ -16,10 +16,19 @@ rifleSection = reaperCrew_reinforcements_units splitString ",";
 enemyTransportGround = reaperCrew_reinforcements_transportGround splitString ",";
 enemyTransportHelicopter = reaperCrew_reinforcements_transportHelicopter splitString ",";
 
+enemyFireSupportHeavyArmour = reaperCrew_reinforcements_fireSupportHeavyArmour splitString ",";
+enemyFireSupportLightArmour = reaperCrew_reinforcements_fireSupportLightArmour splitString ",";
+enemyFireSupportTechnicals = reaperCrew_reinforcements_fireSupportTechnicals splitString ",";
+
 // Broadcast variables for use by the HCs
+// Infantry Reinforcement Settings
 publicVariable "rifleSection";
 publicVariable "enemyTransportGround";
 publicVariable "enemyTransportHelicopter";
+// Enemy Vehicle Settings
+publicVariable "enemyFireSupportHeavyArmour";
+publicVariable "enemyFireSupportLightArmour";
+publicVariable "enemyFireSupportTechnicals";
 
 // Local Variables
 _triggerCheckArray = [];
@@ -55,7 +64,7 @@ AircraftSpawns = entities "reaperCrew_moduleAircraftSpawn";
 {
 	// Outer Zone
 	_outerZone = createTrigger ["EmptyDetector", position _x, true];
-	_outerZone setTriggerArea [4000, 4000, 0, false, 20];
+	_outerZone setTriggerArea [5000, 5000, 0, false, 20];
 	_outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 
 	// Inner Zone

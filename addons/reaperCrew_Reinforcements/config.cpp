@@ -50,9 +50,11 @@ class CfgFunctions
 			class spawnHeadlessInfantry{};
 			class spawnHeadlessInfantryVehicle{};
 			class spawnHeadlessInfantryHelicopter{};
+			class spawnHeadlessVehicle{};
 			class moduleSpawnHeadlessInfantry{};
 			class moduleSpawnHeadlessInfantryVehicle{};
 			class moduleSpawnHeadlessInfantryAircraft{};
+			class moduleSpawnHeadlessMaraudingVehicles{};
 		};
 	};
 };
@@ -123,8 +125,8 @@ class CfgVehicles
 		class AttributeValues {
             size3[] = {5, 5, -1};
         };
-		class Attributes {
-			class reinforcementCount {
+		class Attributes: AttributesBase {
+			class reinforcementCount: Edit {
 				displayName = "Reinforcement Count";
 				property = "reinforcementCount";
 				typeName = "NUMBER";
@@ -132,7 +134,7 @@ class CfgVehicles
 				control = "Edit";
 				defaultValue = "50";
 			};
-			class zoneThreshold {
+			class zoneThreshold: Edit {
 				displayName = "Zone Threshold";
 				property = "zoneThreshold";
 				typeName = "NUMBER";
@@ -257,6 +259,53 @@ class CfgVehicles
 				tooltip = "";
 				control = "Edit";
 				defaultValue = "800";
+			};
+		};
+	};
+	class reaperCrew_moduleReinforcementsHeadlessMaraudingVehicles: reaperCrew_moduleReinforcementsBase
+	{
+		displayName = "Marauding Vehicles";
+		function = "reapercrew_reinforcements_fnc_moduleSpawnHeadlessMaraudingVehicles";
+		scope = 2;
+		class Attributes: AttributesBase {
+			class vehicleCount: Edit {
+				displayName = "Vehicle Count";
+				property = "vehicleCount";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = "25";
+			};
+			class vehicleFrequencyMin: Edit {
+				displayName = "Vehicle Frequency Min (seconds)";
+				property = "vehicleFrequencyMin";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = "180";
+			};
+			class vehicleFrequencyMax: Edit {
+				displayName = "Vehicle Frequency Max(seconds)";
+				property = "vehicleFrequencyMax";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = "240";
+			};
+			class vehicleType: Edit {
+				displayName = "Vehicle Types";
+				property = "vehicleType";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Combo";
+				defaultValue = "0";
+				class Values
+				{
+					class randomSelection	{name = "Random Mix";	value = 0;}; // Listbox item
+					class HeavyArmour	{name = "Heavy Armour"; value = 1; };
+					class LightArmour	{name = "Light Armour"; value = 2; };
+					class Technicals	{name = "Technicals"; value = 3; };
+				};
 			};
 		};
 	};
