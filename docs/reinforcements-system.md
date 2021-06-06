@@ -41,7 +41,7 @@ Spawnpoints should be placed out of sight from the players, in compounds and ter
 | Spawnpoint Type     | Outer Zone | Inner Zone |
 |---------------------|------------|------------|
 | Infantry Spawnpoint | 2km        | 500m       |
-| Vehicle Spawnpoint  | 4km        | 1km        |
+| Vehicle Spawnpoint  | 5km        | 1km        |
 | Aircraft Spawnpoint | 20km       | 5km        |
 
 ## Module Configuration

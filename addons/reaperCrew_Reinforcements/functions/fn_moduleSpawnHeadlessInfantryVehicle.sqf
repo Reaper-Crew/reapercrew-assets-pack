@@ -28,6 +28,13 @@ if (_activated) then {
 	_logicArea = _logic getVariable ["objectarea", [50, 50, 0, false, -1]];
 	_logicArea2D = [getPos _logic, _logicArea select 0, _logicArea select 1];
 
+	// Create a trigger, wait for it to be activated
+	_activationTrigger = createTrigger ["EmptyDetector", (getPos _logic), true];
+	_activationTrigger setTriggerArea [_logicArea select 0, _logicArea select 1, 0, false, 20];
+	_activationTrigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+	_activationTrigger setTriggerStatements ["this", "", ""];
+	waitUntil { triggerActivated _activationTrigger };
+
 	// Get an initial count of the number of units in the area
 	_allOpforUnits = (allUnits select {side _x == reaperCrew_reinforcements_side});
 	_opforUnits = _allOpforUnits inAreaArray _logicArea2D;
