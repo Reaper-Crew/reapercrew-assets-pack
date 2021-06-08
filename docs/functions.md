@@ -9,6 +9,7 @@ Supported role names:
 * Logistics Commander
 * Platoon JTAC
 * Section Commander
+* Section 2IC
 * Medic
 * Machine Gunner
 * Marksman
