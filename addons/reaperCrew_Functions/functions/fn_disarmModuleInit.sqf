@@ -24,7 +24,7 @@ _allPlayers = call BIS_fnc_listPlayers;
 _moduleLocation = (getPos _logic);
 
 {
-	diag_log format ["Disarming player %1", _x];
+	diag_log format ["Disarming player %1", name(_x)];
 	remoteExecCall ["reaperCrew_fnc_disarmModuleKitChange", _x, false];	
 
 } forEach _allPlayers;

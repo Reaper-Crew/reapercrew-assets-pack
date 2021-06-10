@@ -30,3 +30,6 @@ player linkItem "ItemMap";
 player linkItem "ItemCompass";
 player linkItem "ItemWatch";
 player linkItem "ItemGPS";	
+
+// Heal the player
+[player] call ace_medical_treatment_fnc_fullHealLocal;
