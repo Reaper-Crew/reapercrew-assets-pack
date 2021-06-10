@@ -1,9 +1,11 @@
 // Debug Settings
-["reaperCrew_HCDiscoveryCheckbox", "CHECKBOX", ["Debug HC Discovery", "Log HC discovery to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
-["reaperCrew_InfantrySpawnCheckbox", "CHECKBOX", ["Debug Infantry Spawn Discovery", "Log Infantry Spawn discovery to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
-["reaperCrew_VehicleSpawnCheckbox", "CHECKBOX", ["Debug Vehicle Spawn Discovery", "Log Vehicle Spawn discovery to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
-["reaperCrew_AircraftSpawnCheckbox", "CHECKBOX", ["Debug Aircraft Spawn Discovery", "Log Aircraft Spawn discovery to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
-["reaperCrew_ReinforcementsCheckbox", "CHECKBOX", ["Debug Reinforcements System", "Log reinforcements output to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
+["reaperCrew_HCDiscoveryCheckbox", "CHECKBOX", ["DEBUG: Log HC Discovery", "Log HC discovery to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
+["reaperCrew_InfantrySpawnCheckbox", "CHECKBOX", ["DEBUG: Log infantry spawn discovery", "Log Infantry Spawn discovery to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
+["reaperCrew_VehicleSpawnCheckbox", "CHECKBOX", ["DEBUG: Log vehicle spawn discovery", "Log Vehicle Spawn discovery to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
+["reaperCrew_AircraftSpawnCheckbox", "CHECKBOX", ["DEBUG: Log aircraft spawn discovery", "Log Aircraft Spawn discovery to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
+["reaperCrew_ReinforcementsCheckbox", "CHECKBOX", ["DEBUG: Log reinforcement output", "Log reinforcements output to console?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
+["reaperCrew_SpawnpointsMapMarkers", "CHECKBOX", ["DEBUG: Show spawnpoints on map", "Show the location of spawnpoints and their zones on the map?"], ["Reaper Crew - Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
+
 
 // Discovery Settings
 

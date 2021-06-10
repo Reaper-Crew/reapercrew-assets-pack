@@ -97,6 +97,16 @@ class CfgVehicles
 		category = "reaperCrew_ModulesReinforcements";
 		scope = 2;
 		scopeCurator = 0;
+		class Attributes: AttributesBase {
+			class allowCapture: Checkbox {
+				displayName = "Allow position to be captured";
+				property = "allowCapture";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+		};
 	};
     class reaperCrew_moduleVehicleSpawn: reaperCrew_module_reinforcements_base
 	{
@@ -104,6 +114,16 @@ class CfgVehicles
 		category = "reaperCrew_ModulesReinforcements";
 		scope = 2;
 		scopeCurator = 0;
+		class Attributes: AttributesBase {
+			class allowCapture: Checkbox {
+				displayName = "Allow position to be captured";
+				property = "allowCapture";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+		};
 	};
 	class reaperCrew_moduleAircraftSpawn: reaperCrew_module_reinforcements_base
 	{
@@ -111,6 +131,16 @@ class CfgVehicles
 		category = "reaperCrew_ModulesReinforcements";
 		scope = 2;
 		scopeCurator = 0;
+		class Attributes: AttributesBase {
+			class allowCapture: Checkbox {
+				displayName = "Allow position to be captured";
+				property = "allowCapture";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+		};
 	};
 	class reaperCrew_moduleReinforcementsBase: reaperCrew_module_reinforcements_base
 	{

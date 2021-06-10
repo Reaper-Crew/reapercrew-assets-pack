@@ -56,6 +56,29 @@ AircraftSpawns = entities "reaperCrew_moduleAircraftSpawn";
 	_innerZone setTriggerArea [500, 500, 0, false, 20];
 	_innerZone setTriggerActivation ["ANYPLAYER", "NOT PRESENT", true];
 
+	if (reaperCrew_SpawnpointsMapMarkers == true) then {
+		_spawnMarkerName = format ["spawnMarker%1", [1,9999] call BIS_fnc_randomInt];
+		_outerZoneMarkerName = format ["outerZone%1", [1,9999] call BIS_fnc_randomInt];
+		_innerZoneMarkerName = format ["innerZone%1", [1,9999] call BIS_fnc_randomInt];
+		// Spawn Point Marker
+		_spawnMarker = createMarker [_spawnMarkerName, position _x];
+		_spawnMarker setMarkerText "Infantry Spawnpoint";
+		_spawnMarker setMarkerColor "colorOPFOR";
+		_spawnMarker setMarkerType "mil_warning";
+		// Outer Zone
+		_outerZoneMarker = createMarker [_outerZoneMarkerName, position _x];
+		_outerZoneMarker setMarkerSize [2000, 2000];
+		_outerZoneMarker setMarkerColor "ColorBlue";
+		_outerZoneMarker setMarkerShape "ELLIPSE";
+		_outerZoneMarker setMarkerBrush "Border";
+		// Inner Zone
+		_innerZoneMarker = createMarker [_innerZoneMarkerName, position _x];
+		_innerZoneMarker setMarkerSize [500, 500];
+		_innerZoneMarker setMarkerColor "ColorRed";
+		_innerZoneMarker setMarkerShape "ELLIPSE";
+		_innerZoneMarker setMarkerBrush "Border";
+	};
+
 	_triggerCheckArray = [_outerZone, _innerZone];
 
 	InfantrySpawnTriggers pushBack _triggerCheckArray;
@@ -72,6 +95,29 @@ AircraftSpawns = entities "reaperCrew_moduleAircraftSpawn";
 	_innerZone setTriggerArea [1000, 1000, 0, false, 20];
 	_innerZone setTriggerActivation ["ANYPLAYER", "NOT PRESENT", true];
 
+	if (reaperCrew_SpawnpointsMapMarkers == true) then {
+		_spawnMarkerName = format ["spawnMarker%1", [1,9999] call BIS_fnc_randomInt];
+		_outerZoneMarkerName = format ["outerZone%1", [1,9999] call BIS_fnc_randomInt];
+		_innerZoneMarkerName = format ["innerZone%1", [1,9999] call BIS_fnc_randomInt];
+		// Spawn Point Marker
+		_spawnMarker = createMarker [_spawnMarkerName, position _x];
+		_spawnMarker setMarkerText "Vehicle Spawnpoint";
+		_spawnMarker setMarkerColor "colorOPFOR";
+		_spawnMarker setMarkerType "mil_warning";
+		// Outer Zone
+		_outerZoneMarker = createMarker [_outerZoneMarkerName, position _x];
+		_outerZoneMarker setMarkerSize [5000, 5000];
+		_outerZoneMarker setMarkerColor "ColorBlue";
+		_outerZoneMarker setMarkerShape "ELLIPSE";
+		_outerZoneMarker setMarkerBrush "Border";
+		// Inner Zone
+		_innerZoneMarker = createMarker [_innerZoneMarkerName, position _x];
+		_innerZoneMarker setMarkerSize [1000, 1000];
+		_innerZoneMarker setMarkerColor "ColorRed";
+		_innerZoneMarker setMarkerShape "ELLIPSE";
+		_innerZoneMarker setMarkerBrush "Border";
+	};
+
 	_triggerCheckArray = [_outerZone, _innerZone];
 
 	VehicleSpawnTriggers pushBack _triggerCheckArray;
@@ -87,6 +133,29 @@ AircraftSpawns = entities "reaperCrew_moduleAircraftSpawn";
 	_innerZone = createTrigger ["EmptyDetector", position _x, true];
 	_innerZone setTriggerArea [5000, 5000, 0, false, 20];
 	_innerZone setTriggerActivation ["ANYPLAYER", "NOT PRESENT", true];
+
+	if (reaperCrew_SpawnpointsMapMarkers == true) then {
+		_spawnMarkerName = format ["spawnMarker%1", [1,9999] call BIS_fnc_randomInt];
+		_outerZoneMarkerName = format ["outerZone%1", [1,9999] call BIS_fnc_randomInt];
+		_innerZoneMarkerName = format ["innerZone%1", [1,9999] call BIS_fnc_randomInt];
+		// Spawn Point Marker
+		_spawnMarker = createMarker [_spawnMarkerName, position _x];
+		_spawnMarker setMarkerText "Aircraft Spawnpoint";
+		_spawnMarker setMarkerColor "colorOPFOR";
+		_spawnMarker setMarkerType "mil_warning";
+		// Outer Zone
+		_outerZoneMarker = createMarker [_outerZoneMarkerName, position _x];
+		_outerZoneMarker setMarkerSize [20000, 20000];
+		_outerZoneMarker setMarkerColor "ColorBlue";
+		_outerZoneMarker setMarkerShape "ELLIPSE";
+		_outerZoneMarker setMarkerBrush "Border";
+		// Inner Zone
+		_innerZoneMarker = createMarker [_innerZoneMarkerName, position _x];
+		_innerZoneMarker setMarkerSize [5000, 5000];
+		_innerZoneMarker setMarkerColor "ColorRed";
+		_innerZoneMarker setMarkerShape "ELLIPSE";
+		_innerZoneMarker setMarkerBrush "Border";
+	};
 
 	_triggerCheckArray = [_outerZone, _innerZone];
 
