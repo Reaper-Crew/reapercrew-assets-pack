@@ -18,9 +18,21 @@ Youc an enable debugging for these modules by using the following option under '
 
 ![CBA Settings](https://imgur.com/3ScfrNf.png)
 
+### Live Pausing
+
+The system supports the pausing of the reinforcements system mid-mission. You can do this via the CBA settings menu under the 'Live Mission Settings' section:
+
+![CBA Settings](https://imgur.com/tR4uMHs.png)
+
+This setting can be toggle repeatedly during the mission as required.
+
 ## Spawn Points
 
-Vehicles created by this module share the 'Vehicle Spawnpoints' that are part of the [Reinforcements System](docs/reinforcements-system.md).
+Both of the marauding modules utlise the spawnpoint modules that are part of the [Reinforcements System](docs/reinforcements-system.md).
+
+The 'Marauding Vehicles' module utilises the 'Vehicle Spawnpoint' module.
+
+The 'Marauding Aircraft' module utilises the 'Aircraft Spawnpoint' module.
 
 ## Quick Start
 
@@ -30,6 +42,8 @@ Once players have been detected in the zone, vehicles will begin spawning and ma
 
 ### Module Configuration
 
+#### Ground Vehicles
+
 * **Vehicle Count** - This will determine the total number of vehicles that will be spawned by this module
 * **Vehicle Frequency Min (seconds)** - This is the minimum amount of seconds between vehicles spawning.
 * **Vehicle Frequency Max (seconds)** - This is the maximum amount of seconds between vehicles spawning.
@@ -38,3 +52,14 @@ Once players have been detected in the zone, vehicles will begin spawning and ma
   * **Heavy Armour** - *The 'Heavy Armour' units that have been defined in the settings*
   * **Light Armour** - *The 'Light Armour' units that have been defined in the settings*
   * **Technicals** - *The 'Technicals' that have been defined in the settings*
+
+### Aircraft
+
+* **Aircraft Count** - This will determine the total number of Aircrafts that will be spawned by this module
+* **Aircraft Frequency Min (seconds)** - This is the minimum amount of seconds between Aircrafts spawning.
+* **Aircraft Frequency Max (seconds)** - This is the maximum amount of seconds between Aircrafts spawning.
+* **Aircraft Types** - This combo option determines what types of Aircrafts should be spawned by the module
+  * **Random Mix** - *This will spawn a random Aircraft from any of the configured groups.*
+  * **Light Rotary** - *The 'Light Rotary' aircraft that have been defined in the settings*
+  * **Heavy Rotary** - *The 'Heavy Rotary' aircraft that have been defined in the settings*
+  * **Fixed Wing** - *The 'Fixed Wing' aircraft that have been defined in the settings*
