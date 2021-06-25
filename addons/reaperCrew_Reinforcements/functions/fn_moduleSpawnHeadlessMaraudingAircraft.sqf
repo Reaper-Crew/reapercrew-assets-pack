@@ -41,30 +41,35 @@ if (_activated) then {
 	// Start the reinforcements loop
 	while {_AircraftCount > 0} do {
 
-		// If spawn point available, spawn an enemy group
-		if (count activeAircraftTriggers > 0 ) then {
-			// Select a random spawn point
-			_randomTrigger = (selectRandom activeAircraftTriggers);
-			_triggerPos = getPos _randomTrigger;
+		if (reaperCrew_pauseAircraftReinforcements == false) then {
+			// If spawn point available, spawn an enemy group
+			if (count activeAircraftTriggers > 0 ) then {
+				// Select a random spawn point
+				_randomTrigger = (selectRandom activeAircraftTriggers);
+				_triggerPos = getPos _randomTrigger;
 
-			if (count HeadlessClients > 0) then {
-				// If a headless client is available, spawn it with RemoteExec
-				_selectedClient = selectRandom HeadlessClients;
-    			[_logic, _triggerPos, _AircraftType] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessAircraft", _selectedClient];
-				// Output debug information
-				if (reaperCrew_ReinforcementsCheckbox == true) then {
-					diag_log format ["SCENARIO: Spawning reinforcements on client %1 at grid %2, %3 Aircrafts remain", name(_selectedClient), (mapGridPosition _randomTrigger), _AircraftCount];
-				};		
-			} else {
-				// If no HCs are available, spawn it on the server
-				[_logic, _triggerPos, _AircraftType] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessAircraft", 2];
-				if (reaperCrew_ReinforcementsCheckbox == true) then {
-					diag_log format ["SCENARIO: Spawning reinforcements at grid %1, %2 Aircrafts remain", (mapGridPosition _randomTrigger), _AircraftCount];
+				if (count HeadlessClients > 0) then {
+					// If a headless client is available, spawn it with RemoteExec
+					_selectedClient = selectRandom HeadlessClients;
+    				[_logic, _triggerPos, _AircraftType] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessAircraft", _selectedClient];
+					// Output debug information
+					if (reaperCrew_ReinforcementsCheckbox == true) then {
+						diag_log format ["SCENARIO: Spawning reinforcements on client %1 at grid %2, %3 Aircrafts remain", name(_selectedClient), (mapGridPosition _randomTrigger), _AircraftCount];
+					};		
+				} else {
+					// If no HCs are available, spawn it on the server
+					[_logic, _triggerPos, _AircraftType] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessAircraft", 2];
+					if (reaperCrew_ReinforcementsCheckbox == true) then {
+						diag_log format ["SCENARIO: Spawning reinforcements at grid %1, %2 Aircrafts remain", (mapGridPosition _randomTrigger), _AircraftCount];
+					};
 				};
+				// Reduce the number of available reinforcements
+				_AircraftCount = _AircraftCount - 1;
+				sleep _sleepTimer;
 			};
-			// Reduce the number of available reinforcements
-			_AircraftCount = _AircraftCount - 1;
-			sleep _sleepTimer;
+		} else {
+			diag_log "SCENARIO: Aircraft Spawning is currently paused, sleeping for 1 min";
+			sleep 60;
 		};
 	};
 

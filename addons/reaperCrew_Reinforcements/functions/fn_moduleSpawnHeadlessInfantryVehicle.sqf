@@ -73,38 +73,42 @@ if (_activated) then {
 			diag_log format ["SCENARIO: Reinforcements module is active, found %1 enemies within the zone", _opforCounter];
 		};
 
-		// If below the threshold and spawn point available, spawn an enemy group
-		if (_opforCounter < _zoneThreshold && (count activeVehicleTriggers) > 0 ) then {
-			// Select a random spawn point
-			_randomTrigger = (selectRandom activeVehicleTriggers);
-			_triggerPos = getPos _randomTrigger;
+		if (reaperCrew_pauseInfantryReinforcements == false) then {
+			// If below the threshold and spawn point available, spawn an enemy group
+			if (_opforCounter < _zoneThreshold && (count activeVehicleTriggers) > 0 ) then {
+				// Select a random spawn point
+				_randomTrigger = (selectRandom activeVehicleTriggers);
+				_triggerPos = getPos _randomTrigger;
 
-			if (count HeadlessClients > 0) then {
-				// If a headless client is available, spawn it with RemoteExec
-				_selectedClient = selectRandom HeadlessClients;
-    			[_logic, _triggerPos, _directionMin, _directionMax, _distanceMin, _distanceMax] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle", _selectedClient];
-				// Output debug information
-				if (reaperCrew_ReinforcementsCheckbox == true) then {
-					diag_log format ["SCENARIO: Spawning reinforcements on client %1 at grid %2", name(_selectedClient), (mapGridPosition _randomTrigger)];
-				};		
-			} else {
-				// If no HCs are available, spawn it on the server
-				[_logic, _triggerPos, _directionMin, _directionMax, _distanceMin, _distanceMax] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle", 2];
-				if (reaperCrew_ReinforcementsCheckbox == true) then {
-					diag_log format ["SCENARIO: Spawning reinforcements at grid %1", (mapGridPosition _randomTrigger)];
+				if (count HeadlessClients > 0) then {
+					// If a headless client is available, spawn it with RemoteExec
+					_selectedClient = selectRandom HeadlessClients;
+    				[_logic, _triggerPos, _directionMin, _directionMax, _distanceMin, _distanceMax] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle", _selectedClient];
+					// Output debug information
+					if (reaperCrew_ReinforcementsCheckbox == true) then {
+						diag_log format ["SCENARIO: Spawning reinforcements on client %1 at grid %2", name(_selectedClient), (mapGridPosition _randomTrigger)];
+					};		
+				} else {
+					// If no HCs are available, spawn it on the server
+					[_logic, _triggerPos, _directionMin, _directionMax, _distanceMin, _distanceMax] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle", 2];
+					if (reaperCrew_ReinforcementsCheckbox == true) then {
+						diag_log format ["SCENARIO: Spawning reinforcements at grid %1", (mapGridPosition _randomTrigger)];
+					};
 				};
+				// Reduce the number of available reinforcements
+				_reinforcementsCount = _reinforcementsCount - _unitCount;
+				if (reaperCrew_ReinforcementsCheckbox == true) then {
+					diag_log format ["SCENARIO: Reinforcements created, %1 infantry remain", _reinforcementsCount];
+				};
+				sleep 25;
+			} else {
+				sleep 60;
 			};
-			// Reduce the number of available reinforcements
-			_reinforcementsCount = _reinforcementsCount - _unitCount;
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["SCENARIO: Reinforcements created, %1 infantry remain", _reinforcementsCount];
-			};
-			sleep 25;
 		} else {
+			diag_log "SCENARIO: Infantry Spawning is currently paused, sleeping for 1 min";
 			sleep 60;
 		};
 	};
-
 };
 
 true
