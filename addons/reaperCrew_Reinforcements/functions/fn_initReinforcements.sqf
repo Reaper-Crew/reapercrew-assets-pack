@@ -94,6 +94,9 @@ AircraftSpawns = entities "reaperCrew_moduleAircraftSpawn";
 } forEach InfantrySpawns;
 
 {
+	// Get variable
+	_allowCapture = _x getVariable ["allowCapture", true];
+
 	// Outer Zone
 	_outerZone = createTrigger ["EmptyDetector", position _x, true];
 	_outerZone setTriggerArea [5000, 5000, 0, false, -1];
@@ -139,6 +142,9 @@ AircraftSpawns = entities "reaperCrew_moduleAircraftSpawn";
 } forEach VehicleSpawns;
 
 {
+	// Get variable
+	_allowCapture = _x getVariable ["allowCapture", true];
+
 	// Outer Zone
 	_outerZone = createTrigger ["EmptyDetector", position _x, true];
 	_outerZone setTriggerArea [20000, 20000, 0, false, -1];
