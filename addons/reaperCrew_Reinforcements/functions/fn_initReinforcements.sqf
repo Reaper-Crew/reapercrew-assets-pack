@@ -20,15 +20,23 @@ enemyFireSupportHeavyArmour = reaperCrew_reinforcements_fireSupportHeavyArmour s
 enemyFireSupportLightArmour = reaperCrew_reinforcements_fireSupportLightArmour splitString ",";
 enemyFireSupportTechnicals = reaperCrew_reinforcements_fireSupportTechnicals splitString ",";
 
+enemyFireSupportLightRotary = reaperCrew_reinforcements_fireSupportLightRotary splitString ",";
+enemyFireSupportHeavyRotary = reaperCrew_reinforcements_fireSupportHeavyRotary splitString ",";
+enemyFireSupportFixedWing = reaperCrew_reinforcements_fireSupportFixedWing splitString ",";
+
 // Broadcast variables for use by the HCs
 // Infantry Reinforcement Settings
 publicVariable "rifleSection";
 publicVariable "enemyTransportGround";
 publicVariable "enemyTransportHelicopter";
-// Enemy Vehicle Settings
+// Enemy Vehicle Settings - Ground Vehicle
 publicVariable "enemyFireSupportHeavyArmour";
 publicVariable "enemyFireSupportLightArmour";
 publicVariable "enemyFireSupportTechnicals";
+// Enemy Vehicle Settings - Aircraft
+publicVariable "enemyFireSupportLightRotary";
+publicVariable "enemyFireSupportHeavyRotary";
+publicVariable "enemyFireSupportFixedWing";
 
 // Local Variables
 _triggerCheckArray = [];

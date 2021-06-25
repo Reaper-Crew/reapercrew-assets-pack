@@ -19,3 +19,7 @@
 ["reaperCrew_reinforcements_fireSupportHeavyArmour", "EDITBOX", ["Heavy Armour", "A comma seperated list of classnames to be used for enemy heavy armour threats"], ["Reaper Crew - Reinforcements", "AI Settings"], "O_MBT_02_cannon_F"] call cba_settings_fnc_init;
 ["reaperCrew_reinforcements_fireSupportLightArmour", "EDITBOX", ["Light Armour", "A comma seperated list of classnames to be used for enemy light armour threats"], ["Reaper Crew - Reinforcements", "AI Settings"], "O_APC_Tracked_02_cannon_F"] call cba_settings_fnc_init;
 ["reaperCrew_reinforcements_fireSupportTechnicals", "EDITBOX", ["Technicals", "A comma seperated list of classnames to be used for enemy technical threats"], ["Reaper Crew - Reinforcements", "AI Settings"], "O_G_Offroad_01_armed_F"] call cba_settings_fnc_init;
+
+["reaperCrew_reinforcements_fireSupportLightRotary", "EDITBOX", ["Light Rotary", "A comma seperated list of classnames to be used for enemy light rotary"], ["Reaper Crew - Reinforcements", "AI Settings"], "O_Heli_Light_02_dynamicLoadout_F"] call cba_settings_fnc_init;
+["reaperCrew_reinforcements_fireSupportHeavyRotary", "EDITBOX", ["Heavy Rotary", "A comma seperated list of classnames to be used for enemy heavy rotary"], ["Reaper Crew - Reinforcements", "AI Settings"], "O_Heli_Attack_02_F"] call cba_settings_fnc_init;
+["reaperCrew_reinforcements_fireSupportFixedWing", "EDITBOX", ["Fixed Wing", "A comma seperated list of classnames to be used for enemy fixed wing"], ["Reaper Crew - Reinforcements", "AI Settings"], "O_Plane_CAS_02_F"] call cba_settings_fnc_init;

@@ -51,10 +51,12 @@ class CfgFunctions
 			class spawnHeadlessInfantryVehicle{};
 			class spawnHeadlessInfantryHelicopter{};
 			class spawnHeadlessVehicle{};
+			class spawnHeadlessAircraft{};
 			class moduleSpawnHeadlessInfantry{};
 			class moduleSpawnHeadlessInfantryVehicle{};
 			class moduleSpawnHeadlessInfantryAircraft{};
 			class moduleSpawnHeadlessMaraudingVehicles{};
+			class moduleSpawnHeadlessMaraudingAircraft{};
 		};
 	};
 };
@@ -335,6 +337,53 @@ class CfgVehicles
 					class HeavyArmour	{name = "Heavy Armour"; value = 1; };
 					class LightArmour	{name = "Light Armour"; value = 2; };
 					class Technicals	{name = "Technicals"; value = 3; };
+				};
+			};
+		};
+	};
+	class reaperCrew_moduleReinforcementsHeadlessMaraudingAircrafts: reaperCrew_moduleReinforcementsBase
+	{
+		displayName = "Marauding Aircraft";
+		function = "reapercrew_reinforcements_fnc_moduleSpawnHeadlessMaraudingAircraft";
+		scope = 2;
+		class Attributes: AttributesBase {
+			class AircraftCount: Edit {
+				displayName = "Aircraft Count";
+				property = "AircraftCount";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = "25";
+			};
+			class AircraftFrequencyMin: Edit {
+				displayName = "Aircraft Frequency Min (seconds)";
+				property = "AircraftFrequencyMin";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = "180";
+			};
+			class AircraftFrequencyMax: Edit {
+				displayName = "Aircraft Frequency Max(seconds)";
+				property = "AircraftFrequencyMax";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = "240";
+			};
+			class AircraftType: Edit {
+				displayName = "Aircraft Types";
+				property = "AircraftType";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Combo";
+				defaultValue = "0";
+				class Values
+				{
+					class randomSelection	{name = "Random Mix";	value = 0;}; // Listbox item
+					class lightRotary	{name = "Light Rotary"; value = 1; };
+					class heavyRotary	{name = "Heavy Rotary"; value = 2; };
+					class fixedWing	{name = "Fixed Wing"; value = 3; };
 				};
 			};
 		};
