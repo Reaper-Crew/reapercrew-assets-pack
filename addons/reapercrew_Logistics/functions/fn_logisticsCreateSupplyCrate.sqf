@@ -6,10 +6,10 @@
  * 0: Object <OBJECT> 
  *
  * Return Value:
- * None
+ * _supplyCrate <OBJECT> 
  *
  * Example:
- * [_object] call reapercrew_logistics_fnc_logisticsCreateSupplyCrate
+ * [_object, "smallArms"] call reapercrew_logistics_fnc_logisticsCreateSupplyCrate
  *
  * Public: No
  */
@@ -41,3 +41,6 @@ _supplyCrate enableSimulationGlobal true;
 if (_crateType == "smallArms") then {
 	[_supplyCrate] call reapercrew_logistics_fnc_logisticsPopulateSupplyCrate;
 };
+
+// Return the created crate
+_supplyCrate;
