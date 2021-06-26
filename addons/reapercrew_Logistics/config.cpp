@@ -18,6 +18,8 @@ class CfgFunctions
 			file = "\reapercrew_Logistics\functions";
 			class logisticsCreateSupplyCrate{};
 			class logisticsPopulateSupplyCrate{};
+			class logisticsCreateFuelSource{};
+			class logisticsCreateAmmoSource{};
 			class logisticsAddActions{};
 			class logisticsModuleInit{};
 		};

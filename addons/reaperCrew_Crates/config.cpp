@@ -29,6 +29,8 @@ class CfgVehicles
 {
 	class Items_base_F;
 	class B_CargoNet_01_ammo_F;
+	class CargoNet_01_barrels_F;
+	class VirtualReammoBox_F;
 	class ReaperCrew_SupplyCrate: B_CargoNet_01_ammo_F {
 		author="Reaper Crew";
 		editorCategory = "reaperCrew";
@@ -211,5 +213,67 @@ class CfgVehicles
 		{
 			"reaperCrew_Crates\data\plasticcase_01_co_medical.paa"
 		};
+	};
+	class RC_CargoNet_01_barrels_F: CargoNet_01_barrels_F {
+		author="Reaper Crew";
+		editorCategory = "reaperCrew";
+        editorSubcategory = "reaperCrewStorageObjects";
+		displayName="Supply Crate (Vehicle Fuel)";
+		scope=2;
+		scopeCurator=2;
+		// Dragging
+        ace_dragging_canDrag = 1;
+        ace_dragging_dragPosition[] = {0, 1.2, 0};
+        ace_dragging_dragDirection = 0;
+		ace_maxWeightDrag = 9999;
+
+        // Carrying
+        ace_dragging_canCarry = 1;
+        ace_dragging_carryPosition[] = {0, 1.2, 0};
+        ace_dragging_carryDirection = 0;
+
+		// Cargo
+		ace_cargo_size = 8;
+        ace_cargo_canLoad = 1;
+
+		// Fuel
+		init = "[(_this select 0)] call reapercrew_logistics_fnc_logisticsCreateFuelSource";
+		ace_refuel_fuelCargo = 100;
+
+		class TransportItems{};
+		class TransportMagazines{};
+		class TransportWeapons{};
+	};
+	class RC_VirtualReammoBox_F: VirtualReammoBox_F {
+		author="Reaper Crew";
+		editorCategory = "reaperCrew";
+        editorSubcategory = "reaperCrewStorageObjects";
+		displayName="Supply Crate (Vehicle Ammo)";
+		scope=2;
+		scopeCurator=2;
+		// Dragging
+        ace_dragging_canDrag = 1;
+        ace_dragging_dragPosition[] = {0, 1.2, 0};
+        ace_dragging_dragDirection = 0;
+		ace_maxWeightDrag = 9999;
+
+        // Carrying
+        ace_dragging_canCarry = 1;
+        ace_dragging_carryPosition[] = {0, 1.2, 0};
+        ace_dragging_carryDirection = 0;
+
+		// Cargo
+		ace_cargo_size = 8;
+        ace_cargo_canLoad = 1;
+
+		// Ammo
+		ace_rearm_defaultSupply = 1000;
+
+		// Fuel Resupply
+		init = "[(_this select 0)] call reapercrew_logistics_fnc_logisticsCreateAmmoSource";
+
+		class TransportItems{};
+		class TransportMagazines{};
+		class TransportWeapons{};
 	};
 };
