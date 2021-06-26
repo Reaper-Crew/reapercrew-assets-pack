@@ -28,6 +28,12 @@ switch (_crateType) do {
 	case "82Mortar": {
 		_classname = "ReaperCrew_Shells82";
 	};
+	case "vehicleFuel": {
+		_classname = "RC_CargoNet_01_barrels_F";
+	};
+	case "vehicleAmmo": {
+		_classname = "RC_VirtualReammoBox_F";
+	};
 	case "emptyTransport": {
 		_classname = "Land_WoodenCrate_01_F";
 	};

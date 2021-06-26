@@ -35,5 +35,11 @@
 // Mortar
 ["reaperCrew_82mmCheckbox", "CHECKBOX", ["Add 82mm Mortar crate", "Should a 82mm mortar crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Logistics Settings"]] call cba_settings_fnc_init;
 
+// Vehicle Fuel
+["reaperCrew_VehicleFuelCheckbox", "CHECKBOX", ["Add Vehicle Fuel barrels", "Should a vehicle fuel crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Logistics Settings"]] call cba_settings_fnc_init;
+
+// Vehicle Ammo
+["reaperCrew_VehicleAmmoCheckbox", "CHECKBOX", ["Add Vehicle Ammo crates", "Should a vehicle ammo crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Logistics Settings"]] call cba_settings_fnc_init;
+
 // Misc
 ["reaperCrew_transportCheckbox", "CHECKBOX", ["Add empty crates", "Should players have the option to spawn empty wooden boxes for transport?"], ["Reaper Crew - Logistics", "Logistics Settings"]] call cba_settings_fnc_init;
