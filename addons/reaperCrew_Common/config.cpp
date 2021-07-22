@@ -164,9 +164,7 @@ class CfgFunctions
 			file = "\reaperCrew_Common\functions";
 			class CoverMap{};
 			class setACRESettings{
-				preInit = 1;
 				postInit = 1;
-				preStart = 1;
 			};
 			class setPersonalACRESettingsLocal{};
 			class setPersonalACRESettingsServer{
