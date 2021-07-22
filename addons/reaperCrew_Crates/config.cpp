@@ -11,7 +11,13 @@ class CfgPatches
 		units[]=
 		{
 			"ReaperCrew_PlasticCase_Medical",
-			"ReaperCrew_PlatoonAmmo_Base"
+			"ReaperCrew_PlatoonAmmo_Base",
+			"ReaperCrew_SupplyCrate",
+			"ReaperCrew_Shells82",
+			"ReaperCrew_PlasticCase_Base",
+			"ReaperCrew_PlasticCase_Medical",
+			"RC_CargoNet_01_barrels_F",
+			"RC_VirtualReammoBox_F"
 		};
 		weapons[]={};
 	};

@@ -39,31 +39,44 @@ if (hasInterface) then {
 		case "Section 2IC": {
 			[player, "ReaperCrew_2IC"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
 			player setRank "MAJOR";
+			player assignTeam "RED";
 		};
 		case "Medic": {
 			[player, "ReaperCrew_Medic"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
 			player setRank "CAPTAIN";
+			player assignTeam "BLUE";
 		};
 		case "Machine Gunner": {
 			[player, "ReaperCrew_Machinegunner"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+			player assignTeam "BLUE";
+		};
+		case "Assist. Machine Gunner": {
+			[player, "ReaperCrew_Machinegunner"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+			player assignTeam "BLUE";
 		};
 		case "Marksman": {
 			[player, "ReaperCrew_Marksman"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+			player assignTeam "BLUE";
 		};
 		case "Rifleman": {
 			[player, "ReaperCrew_Rifleman"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+			player assignTeam "RED";
 		};
 		case "Rifleman (AT)": {
 			[player, "ReaperCrew_AT"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+			player assignTeam "RED";
 		};
 		case "Rifleman (AA)": {
 			[player, "ReaperCrew_AA"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+			player assignTeam "RED";
 		};
 		case "Engineer": {
 			[player, "ReaperCrew_Engineer"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+			player assignTeam "RED";
 		};
 		case "Explosives Specialist": {
 			[player, "ReaperCrew_EOD"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+			player assignTeam "RED";
 		};
 		default {
 			[player, "reaperCrewInsignia"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
@@ -81,6 +94,7 @@ if (hasInterface) then {
 	if ( _isSectionCommander ) then {
 		[player, "ReaperCrew_SectionCommander"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
 		player setRank "COLONEL";
+		player assignTeam "BLUE";
 	};
 
 };
