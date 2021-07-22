@@ -12,6 +12,7 @@ Supported role names:
 * Section 2IC
 * Medic
 * Machine Gunner
+* Assist. Machine Gunner
 * Marksman
 * Rifleman
 * Rifleman (AT)
