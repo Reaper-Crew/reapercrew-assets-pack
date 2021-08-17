@@ -55,28 +55,28 @@ class CfgVehicles
 	class Items_base_F;
 	class Land_PowerGenerator_F;
 	class Land_Laptop_03_black_F;
-	class reaperCrew_TPQ_49_base: Items_base_F {
+	class reaperCrew_TPQ_49_base_no_colour: Items_base_F {
 		class ACE_Actions {
             class ACE_MainActions;
         };
 	};
-    class reaperCrew_TPQ_49: reaperCrew_TPQ_49_base
+
+
+    class reaperCrew_TPQ_49_base: reaperCrew_TPQ_49_base_no_colour
 	{
 		author="Xeenenta";
 		mapSize=0.01;
 		editorPreview="reaperCrew_lcmr\data\AN_TPQ_49\icon.paa";
-		// _generalMacro="Land_Tablet_02_F";
-		scope=2;
-		scopeCurator=2;
-		displayName="AN/TPQ-49";
-		model="reaperCrew_lcmr\data\AN_TPQ_49\an_tpq_49.p3d";
+		scope=0;
+		scopeCurator=0;
+
 		icon="iconObject_5x4";
 		editorCategory = "reaperCrew";
 		editorSubcategory="reaperCrewMortarObjects";
 
 		// Dragging
         ace_dragging_canDrag = 1;
-        ace_dragging_dragPosition[] = {0, 1.2, 0};
+        ace_dragging_dragPosition[] = {0, 0, 1};
         ace_dragging_dragDirection = 0;
 
 		// Loading
@@ -106,16 +106,19 @@ class CfgVehicles
 					distance = 20;
 				}
             };
-			// class danceParty {
-            //     displayName = "Attach Generator";
-            //     condition = "[player] call reaperCrew_fireSupport_fnc_isNearbyGenerator";
-            //     exceptions[] = {};
-            //     statement = "hint 'This was a test'";
-			// 	distance = 10;
-			// 	position = "[_target,  ace_interact_menu_cameraPosASL] call ace_interaction_fnc_getVehiclePosComplex";
-            //     // icon = "\z\dance.paa";
-			// };
         };
+	};
+	class reaperCrew_TPQ_49_woodland: reaperCrew_TPQ_49_base {
+		displayName="AN/TPQ-49 (Woodland)";
+		model="reaperCrew_lcmr\data\AN_TPQ_49\an_tpq_49_woodland.p3d";
+		scope=2;
+		scopeCurator=2;
+	};
+	class reaperCrew_TPQ_49_desert: reaperCrew_TPQ_49_base {
+		displayName="AN/TPQ-49 (Desert)";
+		model="reaperCrew_lcmr\data\AN_TPQ_49\an_tpq_49_desert.p3d";
+		scope=2;
+		scopeCurator=2;
 	};
 	class reaperCrew_TPQ_49_PowerUnit_base: Land_PowerGenerator_F {
 		class ACE_Actions {

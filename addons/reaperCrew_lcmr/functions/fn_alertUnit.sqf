@@ -44,8 +44,17 @@ if (_triggerType == "fresh") then {
 		diag_log format ["SCENARIO: Object variable should be: %1", _newValue];
 	};
 
-	// Play environmental alerting
-	playSound3D ["reaperCrew_lcmr\sounds\alert.ogg", _controllerObject, false, getPosASL _controllerObject, 3, 1, 250];
+	_isAlerting = _radarUnit getVariable ["isAlerting", false];
+	if (_isAlerting) then {
+		diag_log format ["SCENARIO: Unit %1 has an alerting lock, skipping audible alert", _radarUnit];
+	} else {
+		_radarUnit setVariable ["isAlerting", true];
+		diag_log format ["SCENARIO: Unit %1 not alerting, adding audio lock", _radarUnit];
+		// Play environmental alerting
+		playSound3D ["reaperCrew_lcmr\sounds\alert.ogg", _controllerObject, false, getPosASL _controllerObject, 3, 1, 250];
+		sleep 5;
+		diag_log format ["SCENARIO: Removed audio lock from unit %1", _radarUnit];
+	};
 
 	// Spawn a long running task to remove that unit after 5 mins
 	[_radarUnit,_enemyTurret] spawn {

@@ -33,7 +33,7 @@ counterBatterySystems = [];
 batteryPositioningData = [];
 
 // Get a list of all of the counter battery systems available
-counterBatterySystems = entities "reaperCrew_TPQ_49";
+counterBatterySystems = entities [["reaperCrew_TPQ_49_woodland", "reaperCrew_TPQ_49_desert"], [], false, true];
 // Assign all CB systems a blank alerted list
 {
 	_x setVariable ["alertedUnits", []];
@@ -45,7 +45,7 @@ counterBatterySystems = entities "reaperCrew_TPQ_49";
 	while { reaperCrew_fireSupport_ActivateSystem } do {
 
 		// Get a list of all of the counter battery systems available
-		counterBatterySystems = entities "reaperCrew_TPQ_49";
+		counterBatterySystems = entities [["reaperCrew_TPQ_49_woodland", "reaperCrew_TPQ_49_desert"], [], false, true];
 		{
 			_variableCheck = isNil { _x getVariable "alertedUnits" };
 			if (_variableCheck) then {
