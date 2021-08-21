@@ -36,7 +36,7 @@ batteryPositioningData = [];
 counterBatterySystems = entities [["reaperCrew_TPQ_49_woodland", "reaperCrew_TPQ_49_desert"], [], false, true];
 // Assign all CB systems a blank alerted list
 {
-	_x setVariable ["alertedUnits", []];
+	_x setVariable ["alertedUnits", [], true];
 } forEach counterBatterySystems;
 
 // Spawn a long running task to gather the list of enemy assets
@@ -49,7 +49,7 @@ counterBatterySystems = entities [["reaperCrew_TPQ_49_woodland", "reaperCrew_TPQ
 		{
 			_variableCheck = isNil { _x getVariable "alertedUnits" };
 			if (_variableCheck) then {
-				_x setVariable ["alertedUnits", []];
+				_x setVariable ["alertedUnits", [], true];
 			};
 		} forEach counterBatterySystems;
 
@@ -62,7 +62,7 @@ counterBatterySystems = entities [["reaperCrew_TPQ_49_woodland", "reaperCrew_TPQ
 				// Check if there is a detectedMarker variable
 				_variableCheck = isNil { _x getVariable "detectedMarker" };
 				if (_variableCheck) then {
-					_x setVariable ["detectedMarker", ""];
+					_x setVariable ["detectedMarker", "", true];
 				};
 			} forEach _discoveredAssets;
 		} forEach _assetsList;

@@ -35,7 +35,7 @@ if (_triggerType == "fresh") then {
 	// Get the current alerted list and append it
 	_alertedUnits = _radarUnit getVariable ["alertedUnits", []];
 	_newValue = _alertedUnits + [_enemyTurret];
-	_radarUnit setVariable ["alertedUnits", _newValue];
+	_radarUnit setVariable ["alertedUnits", _newValue, true];
 
 	// Debug information
 	if (reaperCrew_fireSupport_debugEventHandlers == true) then {
@@ -48,12 +48,16 @@ if (_triggerType == "fresh") then {
 	if (_isAlerting) then {
 		diag_log format ["SCENARIO: Unit %1 has an alerting lock, skipping audible alert", _radarUnit];
 	} else {
-		_radarUnit setVariable ["isAlerting", true];
-		diag_log format ["SCENARIO: Unit %1 not alerting, adding audio lock", _radarUnit];
-		// Play environmental alerting
-		playSound3D ["reaperCrew_lcmr\sounds\alert.ogg", _controllerObject, false, getPosASL _controllerObject, 3, 1, 250];
-		sleep 5;
-		diag_log format ["SCENARIO: Removed audio lock from unit %1", _radarUnit];
+		[_radarUnit, _controllerObject] spawn {
+			params ["_radarUnit", "_controllerObject"];
+
+			_radarUnit setVariable ["isAlerting", true, true];
+			diag_log format ["SCENARIO: Unit %1 not alerting, adding audio lock", _radarUnit];
+			// Play environmental alerting
+			playSound3D ["reaperCrew_lcmr\sounds\alert.ogg", _controllerObject, false, getPosASL _controllerObject, 3, 1, 250];
+			sleep 10;
+			diag_log format ["SCENARIO: Removed audio lock from unit %1", _radarUnit];
+		};
 	};
 
 	// Spawn a long running task to remove that unit after 5 mins
@@ -62,7 +66,7 @@ if (_triggerType == "fresh") then {
 		sleep 300;
 		_alertedUnits = _radarUnit getVariable ["alertedUnits", []];
 		_newValue = _alertedUnits - [_enemyTurret];
-		_radarUnit setVariable ["alertedUnits", _newValue];
+		_radarUnit setVariable ["alertedUnits", _newValue, true];
 	
 		if (reaperCrew_fireSupport_debugEventHandlers == true) then {
 			diag_log format ["SCENARIO: Alert block on %1 removed from %2", _enemyTurret, _radarUnit];
@@ -75,7 +79,7 @@ _markerName = format ["ArtilleryPosition%1", _enemyTurret];
 _markerText = format ["%1", [daytime, "HH:MM"] call BIS_fnc_timeToString];
 _markerPosition = [(getPos _enemyTurret) select 0, (getPos _enemyTurret) select 1, 0];
 
-_enemyTurret setVariable ["detectedMarker", _markerName];
+_enemyTurret setVariable ["detectedMarker", _markerName, true];
 
 // Get all players with a 20m radius of the control unit
 {

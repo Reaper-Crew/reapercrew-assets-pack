@@ -19,7 +19,7 @@ params ["_radarObject"];
 
 // Find the generator object
 _generatorObject = nearestObject [getPos _radarObject, "reaperCrew_TPQ_49_PowerUnit"];
-_radarObject setVariable ["attachedGenerator", _generatorObject];
+_radarObject setVariable ["attachedGenerator", _generatorObject, true];
 
 diag_log "Generator attached";
 
@@ -27,6 +27,6 @@ diag_log "Generator attached";
 [_radarObject, _generatorObject] spawn {
 	params ["_radarObject", "_generatorObject"];
 	waitUntil { sleep 15; (!alive _generatorObject) or ((_generatorObject distance _radarObject) > 10) };
-	_radarObject setVariable ["attachedGenerator", nil];
+	_radarObject setVariable ["attachedGenerator", nil, true];
 	diag_log "Generator detacted";
 }; 
