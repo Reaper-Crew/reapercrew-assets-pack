@@ -61,6 +61,7 @@ AircraftSpawns = entities "reaperCrew_moduleAircraftSpawn";
 	_outerZone = createTrigger ["EmptyDetector", position _x, true];
 	_outerZone setTriggerArea [2000, 2000, 0, false, -1];
 	_outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+	_outerZone setTriggerStatements ["this", "", ""];
 
 	// Inner Zone
 	_innerZone = createTrigger ["EmptyDetector", position _x, true];
@@ -109,6 +110,7 @@ AircraftSpawns = entities "reaperCrew_moduleAircraftSpawn";
 	_outerZone = createTrigger ["EmptyDetector", position _x, true];
 	_outerZone setTriggerArea [5000, 5000, 0, false, -1];
 	_outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+	_outerZone setTriggerStatements ["this", "", ""];
 
 	// Inner Zone
 	_innerZone = createTrigger ["EmptyDetector", position _x, true];
@@ -157,6 +159,7 @@ AircraftSpawns = entities "reaperCrew_moduleAircraftSpawn";
 	_outerZone = createTrigger ["EmptyDetector", position _x, true];
 	_outerZone setTriggerArea [20000, 20000, 0, false, -1];
 	_outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+	_outerZone setTriggerStatements ["this", "", ""];
 
 	// Inner Zone
 	_innerZone = createTrigger ["EmptyDetector", position _x, true];
