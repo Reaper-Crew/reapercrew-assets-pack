@@ -7,7 +7,7 @@ class CfgPatches
 		requiredVersion=0.1;
 		units[]=
 		{
-			"RC_LCMR"
+			"reaperCrew_TPQ_49_base","reaperCrew_TPQ_49_desert","reaperCrew_TPQ_49_PowerUnit_base","reaperCrew_TPQ_49_PowerUnit","reaperCrew_TPQ_49_ControlUnit_base","reaperCrew_TPQ_49_ControlUnit"
 		};
 		weapons[]={};
 	};
@@ -21,6 +21,7 @@ class CfgEditorSubcategories
 		scopeCurator=2;
 	};
 };
+
 class CfgFunctions
 {
 	class reapercrew_fireSupport
@@ -107,12 +108,6 @@ class CfgVehicles
 				}
             };
         };
-	};
-	class reaperCrew_TPQ_49_woodland: reaperCrew_TPQ_49_base {
-		displayName="AN/TPQ-49 (Woodland)";
-		model="reaperCrew_lcmr\data\AN_TPQ_49\an_tpq_49_woodland.p3d";
-		scope=2;
-		scopeCurator=2;
 	};
 	class reaperCrew_TPQ_49_desert: reaperCrew_TPQ_49_base {
 		displayName="AN/TPQ-49 (Desert)";
