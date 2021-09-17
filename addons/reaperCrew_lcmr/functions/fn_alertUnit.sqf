@@ -57,6 +57,7 @@ if (_triggerType == "fresh") then {
 			playSound3D ["reaperCrew_lcmr\sounds\alert.ogg", _controllerObject, false, getPosASL _controllerObject, 3, 1, 250];
 			sleep 10;
 			diag_log format ["SCENARIO: Removed audio lock from unit %1", _radarUnit];
+			_radarUnit setVariable ["isAlerting", false, true];
 		};
 	};
 
