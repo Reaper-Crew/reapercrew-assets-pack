@@ -54,9 +54,12 @@ class CfgFunctions
 			class spawnHeadlessAircraft{};
 			class moduleSpawnHeadlessInfantry{};
 			class moduleSpawnHeadlessInfantryVehicle{};
-			class moduleSpawnHeadlessInfantryAircraft{};
 			class moduleSpawnHeadlessMaraudingVehicles{};
 			class moduleSpawnHeadlessMaraudingAircraft{};
+
+			class moduleSpawnReinforcementsAirbourneInit{};
+			class moduleSpawnReinforcementsAirbourneTrigger{};
+			class moduleSpawnReinforcementsAirbourneRemote{};
 		};
 	};
 };
@@ -241,7 +244,7 @@ class CfgVehicles
 	class reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter: reaperCrew_moduleReinforcementsBase
 	{
 		displayName = "Reinforcements (Infantry - Helicopter)";
-		function = "reapercrew_reinforcements_fnc_moduleSpawnHeadlessInfantryAircraft";
+		function = "reapercrew_reinforcements_fnc_moduleSpawnReinforcementsAirbourneInit";
 		scope = 2;
 		class Attributes: AttributesBase {
 			class reinforcementCount: Edit {
