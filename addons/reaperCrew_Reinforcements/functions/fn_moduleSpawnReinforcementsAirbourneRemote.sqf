@@ -69,3 +69,5 @@ _waypoint setWaypointType "SCRIPTED";
 _waypoint setWaypointStatements ["true", "[this, 2000] spawn lambs_wp_fnc_taskRush;"];
 _waypoint setWaypointForceBehaviour true;
 _waypoint setWaypointBehaviour "AWARE";
+
+_infantryGroup
