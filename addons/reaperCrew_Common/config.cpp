@@ -76,12 +76,7 @@ class CfgEditorCategories
 		scope = 2;
 		scopeCurator = 2;
 	};
-	class reaperCrew_ModulesPlayers: NO_CATEGORY
-	{
-		displayName = "Reaper Crew - Players";
-		scope = 2;
-		scopeCurator = 2;
-	};
+	
 };
 class CfgVehicles
 {
@@ -115,15 +110,7 @@ class CfgVehicles
 		scopeCurator = 1;
 		functionPriority = 1;
 	};
-	class reaperCrew_moduleDisarmPlayers: reaperCrew_module_base
-	{
-		displayName = "Disarm all players";
-		function = "reaperCrew_fnc_disarmModuleInit";
-		category = "reaperCrew_ModulesPlayers";
-		scope = 1;
-		scopeCurator = 2;
-		isGlobal = 0;
-	};
+	
 	// class reaperCrew_moduleScanArea: reaperCrew_module_base
 	// {
 	// 	displayName = "Scan area";
@@ -163,17 +150,6 @@ class CfgFunctions
 		{
 			file = "\reaperCrew_Common\functions";
 			class CoverMap{};
-			class setACRESettings{
-				postInit = 1;
-			};
-			class setPersonalACRESettingsLocal{};
-			class setPersonalACRESettingsServer{
-				postInit = 1;
-			};
-			class setUnitInsigniaGlobal{
-				postInit = 1;
-			};
-			class setUnitInsigniaLocal{};
 		};
 	};
 };

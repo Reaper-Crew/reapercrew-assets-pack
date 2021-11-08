@@ -4,3 +4,4 @@ build_all.ps1
 changelog.txt
 todo_notes.txt
 *.p3d
+arc/*
