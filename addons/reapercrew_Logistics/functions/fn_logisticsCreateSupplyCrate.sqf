@@ -40,7 +40,7 @@ switch (_crateType) do {
 };
 
 // Crate Variables
-_supplyCrate = _classname createVehicle position player;
+_supplyCrate = _classname createVehicle [0,0,0];
 [_resupplyObject, _supplyCrate, [([-10,10] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;
 _supplyCrate enableSimulationGlobal true;
 

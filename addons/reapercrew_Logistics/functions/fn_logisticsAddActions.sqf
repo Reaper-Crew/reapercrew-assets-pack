@@ -16,24 +16,79 @@
 
 params ["_resupplyObject"];
 
+_actionsList = [];
+
 // Section Crate
-[_resupplyObject, "Spawn Section Crate", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "_this distance _target < 3", "_caller distance _target < 3", {}, {}, { [_target, "smallArms"] call reapercrew_logistics_fnc_logisticsCreateSupplyCrate }, {}, [], 5, 1, false, false, true] call BIS_fnc_holdActionAdd;
+_crateAction = ['Spawn Section Crate','Spawn Section Crate','', { 
+	["Spawning crate...", 5, {true}, {
+		_recievedParams = _this select 0;
+		_target = _recievedParams select 0;
+		_type = _recievedParams select 1;
+		[_target, _type] remoteExec ["reapercrew_logistics_fnc_logisticsCreateSupplyCrate", 2]
+	}, {}, [_target, "smallArms"]] call CBA_fnc_progressBar;
+},{true}] call ace_interact_menu_fnc_createAction;
+_actionsList pushBack _crateAction;
 
 // Medical Crate
-[_resupplyObject, "Spawn Medical Crate", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "_this distance _target < 3", "_caller distance _target < 3", {}, {}, { [_target, "medical"] call reapercrew_logistics_fnc_logisticsCreateSupplyCrate }, {}, [], 5, 1, false, false, true] call BIS_fnc_holdActionAdd;
+_crateAction = ['Spawn Medical Crate','Spawn Medical Crate','', { 
+	["Spawning crate...", 5, {true}, {
+		_recievedParams = _this select 0;
+		_target = _recievedParams select 0;
+		_type = _recievedParams select 1;
+		[_target, _type] remoteExec ["reapercrew_logistics_fnc_logisticsCreateSupplyCrate", 2]
+	}, {}, [_target, "medical"]] call CBA_fnc_progressBar; 
+},{true}] call ace_interact_menu_fnc_createAction;
+_actionsList pushBack _crateAction;
 
 if (reaperCrew_82mmCheckbox == true) then {
-	[_resupplyObject, "Spawn 82mm Mortar Crate", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "_this distance _target < 3", "_caller distance _target < 3", {}, {}, { [_target, "82Mortar"] call reapercrew_logistics_fnc_logisticsCreateSupplyCrate }, {}, [], 5, 1, false, false, true] call BIS_fnc_holdActionAdd;
+	_crateAction = ['Spawn 82mm Mortar Crate','Spawn 82mm Mortar Crate','', { 
+		["Spawning crate...", 5, {true}, {
+			_recievedParams = _this select 0;
+			_target = _recievedParams select 0;
+			_type = _recievedParams select 1;
+			[_target, _type] remoteExec ["reapercrew_logistics_fnc_logisticsCreateSupplyCrate", 2]
+		}, {}, [_target, "82Mortar"]] call CBA_fnc_progressBar; 
+	},{true}] call ace_interact_menu_fnc_createAction;
+	_actionsList pushBack _crateAction;
 };
 
 if (reaperCrew_VehicleFuelCheckbox == true) then {
-	[_resupplyObject, "Spawn Vehicle Fuel Crate", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "_this distance _target < 3", "_caller distance _target < 3", {}, {}, { [_target, "vehicleFuel"] call reapercrew_logistics_fnc_logisticsCreateSupplyCrate }, {}, [], 5, 1, false, false, true] call BIS_fnc_holdActionAdd;
+	_crateAction = ['Spawn Vehicle Fuel Crate','Spawn Vehicle Fuel Crate','', { 
+		["Spawning crate...", 5, {true}, {
+			_recievedParams = _this select 0;
+			_target = _recievedParams select 0;
+			_type = _recievedParams select 1;
+			[_target, _type] remoteExec ["reapercrew_logistics_fnc_logisticsCreateSupplyCrate", 2]
+		}, {}, [_target, "vehicleFuel"]] call CBA_fnc_progressBar; 
+	},{true}] call ace_interact_menu_fnc_createAction;
+	_actionsList pushBack _crateAction;
 };
 
 if (reaperCrew_VehicleAmmoCheckbox == true) then {
-	[_resupplyObject, "Spawn Vehicle Ammo Crate", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "_this distance _target < 3", "_caller distance _target < 3", {}, {}, { [_target, "vehicleAmmo"] call reapercrew_logistics_fnc_logisticsCreateSupplyCrate }, {}, [], 5, 1, false, false, true] call BIS_fnc_holdActionAdd;
+	_crateAction = ['Spawn Vehicle Ammo Crate','Spawn Vehicle Ammo Crate','', { 
+		["Spawning crate...", 5, {true}, {
+			_recievedParams = _this select 0;
+			_target = _recievedParams select 0;
+			_type = _recievedParams select 1;
+			[_target, _type] remoteExec ["reapercrew_logistics_fnc_logisticsCreateSupplyCrate", 2]
+		}, {}, [_target, "vehicleAmmo"]] call CBA_fnc_progressBar; 
+	},{true}] call ace_interact_menu_fnc_createAction;
+	_actionsList pushBack _crateAction;
 };
 
 if (reaperCrew_transportCheckbox == true) then {
-	[_resupplyObject, "Spawn Transport Crate", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa", "_this distance _target < 3", "_caller distance _target < 3", {}, {}, { [_target, "emptyTransport"] call reapercrew_logistics_fnc_logisticsCreateSupplyCrate }, {}, [], 5, 1, false, false, true] call BIS_fnc_holdActionAdd;
+	_crateAction = ['Spawn Transport Crate','Spawn Transport Crate','', { 
+		["Spawning crate...", 5, {true}, {
+			_recievedParams = _this select 0;
+			_target = _recievedParams select 0;
+			_type = _recievedParams select 1;
+			[_target, _type] remoteExec ["reapercrew_logistics_fnc_logisticsCreateSupplyCrate", 2]
+		}, {}, [_target, "emptyTransport"]] call CBA_fnc_progressBar; 
+	},{true}] call ace_interact_menu_fnc_createAction;
+	_actionsList pushBack _crateAction;
 };
+
+// Add actions to object
+{
+	[_resupplyObject, 0, ["ACE_MainActions"], _x] call ace_interact_menu_fnc_addActionToObject;
+} forEach _actionsList;
