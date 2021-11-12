@@ -2,11 +2,10 @@ class CfgPatches
 {
 	class ReaperCrew_Common
 	{
-		units[] = {"reaperCrew_moduleGarrison", "reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleScanArea", "reaperCrew_moduleResupplyPoint", "reaperCrew_modulePrimaryFix"};
+		units[] = {};
 		weapons[]={};
 		requiredVersion=1;
-		requiredAddons[]=
-		{};
+		requiredAddons[] = {"A3_Modules_F", "cba_settings"};
 	};
 };
 class CfgMods
@@ -23,6 +22,13 @@ class UniformSlotInfo
 {
 	slotType=0;
 	linkProxy="-";
+};
+class Extended_PreInit_EventHandlers
+{
+	class reaperCrew_Common_preInit
+	{
+		init="call compile preProcessFileLineNumbers '\reaperCrew_Common\cba\XEH_preInit.sqf'";
+	};
 };
 class cfgFactionClasses
 {
@@ -150,6 +156,9 @@ class CfgFunctions
 		{
 			file = "\reaperCrew_Common\functions";
 			class CoverMap{};
+			class sideChatMP{};
+			class monitorHeadlessClients{postInit = 1;};
+			class executeDistributed{};
 		};
 	};
 };

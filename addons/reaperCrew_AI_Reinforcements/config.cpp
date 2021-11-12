@@ -1,19 +1,19 @@
 class CfgPatches
 {
-	class reaperCrew_Reinforcements
+	class reaperCrew_AI_Reinforcements
 	{
 		units[] = {""};
 		weapons[] = {""};
 		vehicles[] = {""};
 		requiredVersion = 1.0;
-		requiredAddons[] = {"A3_Modules_F", "cba_settings", "ReaperCrew_Common"};
+		requiredAddons[] = {"A3_Modules_F", "cba_settings", "ReaperCrew_Common", "reaperCrew_AI_Common"};
 	};
 };
 class Extended_PreInit_EventHandlers
 {
-	class reaperCrew_reinforcements_preInit
+	class reaperCrew_AI_Reinforcements_preInit
 	{
-		init="call compile preProcessFileLineNumbers '\reaperCrew_Reinforcements\cba\XEH_preInit.sqf'";
+		init="call compile preProcessFileLineNumbers '\reaperCrew_AI_Reinforcements\cba\XEH_preInit.sqf'";
 	};
 };
 class cfgFactionClasses
@@ -42,24 +42,27 @@ class CfgFunctions
 	{
 		class Effects
 		{
-			file = "\reaperCrew_Reinforcements\functions";
-			class initReinforcements{
-				postInit = 1;
-			};
-			class cleanupVehicle{};
+			file = "\reaperCrew_AI_Reinforcements\functions";
+			class initReinforcementsSystem{postInit = 1;};
+			class initInfantrySpawnpoint {};
+			class initInfantryModuleFootMobile{};
+			class activateInfantryModuleFootMobile{};
 			class spawnHeadlessInfantry{};
-			class spawnHeadlessInfantryVehicle{};
-			class spawnHeadlessInfantryHelicopter{};
-			class spawnHeadlessVehicle{};
-			class spawnHeadlessAircraft{};
-			class moduleSpawnHeadlessInfantry{};
-			class moduleSpawnHeadlessInfantryVehicle{};
-			class moduleSpawnHeadlessMaraudingVehicles{};
-			class moduleSpawnHeadlessMaraudingAircraft{};
 
-			class moduleSpawnReinforcementsAirbourneInit{};
-			class moduleSpawnReinforcementsAirbourneTrigger{};
-			class moduleSpawnReinforcementsAirbourneRemote{};
+			// class cleanupVehicle{};
+			// class spawnHeadlessInfantry{};
+			// class spawnHeadlessInfantryVehicle{};
+			// class spawnHeadlessInfantryHelicopter{};
+			// class spawnHeadlessVehicle{};
+			// class spawnHeadlessAircraft{};
+			// class moduleSpawnHeadlessInfantry{};
+			// class moduleSpawnHeadlessInfantryVehicle{};
+			// class moduleSpawnHeadlessMaraudingVehicles{};
+			// class moduleSpawnHeadlessMaraudingAircraft{};
+
+			// class moduleSpawnReinforcementsAirbourneInit{};
+			// class moduleSpawnReinforcementsAirbourneTrigger{};
+			// class moduleSpawnReinforcementsAirbourneRemote{};
 		};
 	};
 };
@@ -102,14 +105,23 @@ class CfgVehicles
 		category = "reaperCrew_ModulesReinforcements";
 		scope = 2;
 		scopeCurator = 0;
+		function = "reapercrew_reinforcements_fnc_initInfantrySpawnpoint";
 		class Attributes: AttributesBase {
-			class allowCapture: Checkbox {
-				displayName = "Allow position to be captured";
-				property = "allowCapture";
-				typeName = "BOOL";
+			// class allowCapture: Checkbox {
+			// 	displayName = "Allow position to be captured";
+			// 	property = "allowCapture";
+			// 	typeName = "BOOL";
+			// 	tooltip = "";
+			// 	control = "Checkbox";
+			// 	defaultValue = "true";
+			// };
+			class additionalCondition: Edit {
+				displayName = "Additional condition";
+				property = "additionalCondition";
+				typeName = "STRING";
 				tooltip = "";
-				control = "Checkbox";
-				defaultValue = "true";
+				control = "Edit";
+				defaultValue = """true""";
 			};
 		};
 	};
@@ -160,6 +172,12 @@ class CfgVehicles
 		class AttributeValues {
             size3[] = {5, 5, -1};
         };
+	};
+	class reaperCrew_moduleReinforcementsHeadlessInfantry: reaperCrew_moduleReinforcementsBase
+	{
+		displayName = "Reinforcements (Infantry - Foot Mobile)";
+		function = "reapercrew_reinforcements_fnc_initInfantryModuleFootMobile";
+		scope = 2;
 		class Attributes: AttributesBase {
 			class reinforcementCount: Edit {
 				displayName = "Reinforcement Count";
@@ -177,13 +195,39 @@ class CfgVehicles
 				control = "Edit";
 				defaultValue = "20";
 			};
+			class regularTroops: Checkbox {
+				displayName = "Regular Troops";
+				property = "regularTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class eliteTroops: Checkbox {
+				displayName = "Elite Troops";
+				property = "eliteTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class specialTroops: Checkbox {
+				displayName = "Special Forces";
+				property = "specialTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class rushMode: Checkbox {
+				displayName = "Enable Rush Mode";
+				property = "rushMode";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
 		};
-	};
-	class reaperCrew_moduleReinforcementsHeadlessInfantry: reaperCrew_moduleReinforcementsBase
-	{
-		displayName = "Reinforcements (Infantry - Foot Mobile)";
-		function = "reapercrew_reinforcements_fnc_moduleSpawnHeadlessInfantry";
-		scope = 2;
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryMotorised: reaperCrew_moduleReinforcementsBase
 	{
