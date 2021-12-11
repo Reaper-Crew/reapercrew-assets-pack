@@ -1,9 +1,5 @@
 params ["_triggerObject"];
 
-diag_log "fn_activateInfantryModuleFootMobile activated";
-
-diag_log (allVariables _triggerObject);
-
 [_triggerObject] spawn {
 	params ["_triggerObject"];
 
