@@ -23,4 +23,6 @@
 // Aircraft Fire Support
 ["reaperCrew_reinforcements_fireSupportLightRotary", "EDITBOX", ["Light Rotary", "A comma seperated list of classnames to be used for enemy light rotary"], ["Reaper Crew - AI Common", "5. Fire Support (Air)"], "O_Heli_Light_02_dynamicLoadout_F"] call cba_settings_fnc_init;
 ["reaperCrew_reinforcements_fireSupportHeavyRotary", "EDITBOX", ["Heavy Rotary", "A comma seperated list of classnames to be used for enemy heavy rotary"], ["Reaper Crew - AI Common", "5. Fire Support (Air)"], "O_Heli_Attack_02_F"] call cba_settings_fnc_init;
-["reaperCrew_reinforcements_fireSupportFixedWing", "EDITBOX", ["Fixed Wing", "A comma seperated list of classnames to be used for enemy fixed wing"], ["Reaper Crew - AI Common", "5. Fire Support (Air)"], "O_Plane_CAS_02_F"] call cba_settings_fnc_init;
+
+["reaperCrew_reinforcements_fireSupportFixedWingFighters", "EDITBOX", ["Fixed Wing (Fighters)", "A comma seperated list of classnames to be used for enemy fixed wing"], ["Reaper Crew - AI Common", "5. Fire Support (Air)"], "O_Plane_CAS_02_F"] call cba_settings_fnc_init;
+["reaperCrew_reinforcements_fireSupportFixedWingBombers", "EDITBOX", ["Fixed Wing (Bombers)", "A comma seperated list of classnames to be used for enemy fixed wing"], ["Reaper Crew - AI Common", "5. Fire Support (Air)"], "O_Plane_CAS_02_F"] call cba_settings_fnc_init;
