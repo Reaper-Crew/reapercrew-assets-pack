@@ -43,26 +43,33 @@ class CfgFunctions
 		class Effects
 		{
 			file = "\reaperCrew_AI_Reinforcements\functions";
+
 			class initReinforcementsSystem{postInit = 1;};
+
 			class initInfantrySpawnpoint {};
-			class initInfantryModuleFootMobile{};
+			class initVehicleSpawnpoint {};
+			class initAircraftSpawnpoint {};
+
+			class initModuleInfantryFootMobile{};
+			class initModuleInfantryAirbourne{};
+			class initModuleInfantryMotorised{};
+
+			class initModuleMaraudingVehicles{};
+			class initModuleMaraudingAircraft{};
+			class activateMaraudingVehicles{};
+			class activateMaraudingAircraft{};
+
 			class activateInfantryModuleFootMobile{};
+			class activateInfantryModuleAirbourne{};
+			class activateInfantryModuleMotorised{};
+
 			class spawnHeadlessInfantry{};
+			class spawnHeadlessInfantryAirbourne{};
+			class spawnHeadlessInfantryVehicle{};
+			class spawnHeadlessVehicle{};
 
-			// class cleanupVehicle{};
-			// class spawnHeadlessInfantry{};
-			// class spawnHeadlessInfantryVehicle{};
-			// class spawnHeadlessInfantryHelicopter{};
-			// class spawnHeadlessVehicle{};
-			// class spawnHeadlessAircraft{};
-			// class moduleSpawnHeadlessInfantry{};
-			// class moduleSpawnHeadlessInfantryVehicle{};
-			// class moduleSpawnHeadlessMaraudingVehicles{};
-			// class moduleSpawnHeadlessMaraudingAircraft{};
-
-			// class moduleSpawnReinforcementsAirbourneInit{};
-			// class moduleSpawnReinforcementsAirbourneTrigger{};
-			// class moduleSpawnReinforcementsAirbourneRemote{};
+			class cleanupVehicle{};
+			
 		};
 	};
 };
@@ -98,23 +105,15 @@ class CfgVehicles
 		scope = 1;
 		scopeCurator = 1;
 		functionPriority = 1;
+		category = "reaperCrew_ModulesReinforcements";
 	};
 	class reaperCrew_moduleInfantrySpawn: reaperCrew_module_reinforcements_base
 	{
 		displayName = "Infantry Spawnpoint";
-		category = "reaperCrew_ModulesReinforcements";
 		scope = 2;
 		scopeCurator = 0;
 		function = "reapercrew_reinforcements_fnc_initInfantrySpawnpoint";
 		class Attributes: AttributesBase {
-			// class allowCapture: Checkbox {
-			// 	displayName = "Allow position to be captured";
-			// 	property = "allowCapture";
-			// 	typeName = "BOOL";
-			// 	tooltip = "";
-			// 	control = "Checkbox";
-			// 	defaultValue = "true";
-			// };
 			class additionalCondition: Edit {
 				displayName = "Additional condition";
 				property = "additionalCondition";
@@ -128,34 +127,37 @@ class CfgVehicles
     class reaperCrew_moduleVehicleSpawn: reaperCrew_module_reinforcements_base
 	{
 		displayName = "Vehicle Spawnpoint";
-		category = "reaperCrew_ModulesReinforcements";
 		scope = 2;
 		scopeCurator = 0;
+		function = "reapercrew_reinforcements_fnc_initVehicleSpawnpoint";
 		class Attributes: AttributesBase {
-			class allowCapture: Checkbox {
-				displayName = "Allow position to be captured";
-				property = "allowCapture";
-				typeName = "BOOL";
+			class additionalCondition: Edit {
+				displayName = "Additional condition";
+				property = "additionalCondition";
+				typeName = "STRING";
 				tooltip = "";
-				control = "Checkbox";
-				defaultValue = "true";
+				control = "Edit";
+				defaultValue = """true""";
 			};
 		};
 	};
+
+	
 	class reaperCrew_moduleAircraftSpawn: reaperCrew_module_reinforcements_base
 	{
 		displayName = "Aircraft Spawnpoint";
 		category = "reaperCrew_ModulesReinforcements";
 		scope = 2;
 		scopeCurator = 0;
+		function = "reapercrew_reinforcements_fnc_initAircraftSpawnpoint";
 		class Attributes: AttributesBase {
-			class allowCapture: Checkbox {
-				displayName = "Allow position to be captured";
-				property = "allowCapture";
-				typeName = "BOOL";
+			class additionalCondition: Edit {
+				displayName = "Additional condition";
+				property = "additionalCondition";
+				typeName = "STRING";
 				tooltip = "";
-				control = "Checkbox";
-				defaultValue = "true";
+				control = "Edit";
+				defaultValue = """true""";
 			};
 		};
 	};
@@ -232,7 +234,7 @@ class CfgVehicles
 	class reaperCrew_moduleReinforcementsHeadlessInfantryMotorised: reaperCrew_moduleReinforcementsBase
 	{
 		displayName = "Reinforcements (Infantry - Motorised)";
-		function = "reapercrew_reinforcements_fnc_moduleSpawnHeadlessInfantryVehicle";
+		function = "reapercrew_reinforcements_fnc_initModuleInfantryMotorised";
 		scope = 2;
 		class Attributes: AttributesBase {
 			class reinforcementCount: Edit {
@@ -283,12 +285,44 @@ class CfgVehicles
 				control = "Edit";
 				defaultValue = "800";
 			};
+			class regularTroops: Checkbox {
+				displayName = "Regular Troops";
+				property = "regularTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class eliteTroops: Checkbox {
+				displayName = "Elite Troops";
+				property = "eliteTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class specialTroops: Checkbox {
+				displayName = "Special Forces";
+				property = "specialTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class rushMode: Checkbox {
+				displayName = "Enable Rush Mode";
+				property = "rushMode";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter: reaperCrew_moduleReinforcementsBase
 	{
 		displayName = "Reinforcements (Infantry - Helicopter)";
-		function = "reapercrew_reinforcements_fnc_moduleSpawnReinforcementsAirbourneInit";
+		function = "reapercrew_reinforcements_fnc_initModuleInfantryAirbourne";
 		scope = 2;
 		class Attributes: AttributesBase {
 			class reinforcementCount: Edit {
@@ -339,19 +373,51 @@ class CfgVehicles
 				control = "Edit";
 				defaultValue = "800";
 			};
+			class regularTroops: Checkbox {
+				displayName = "Regular Troops";
+				property = "regularTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class eliteTroops: Checkbox {
+				displayName = "Elite Troops";
+				property = "eliteTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class specialTroops: Checkbox {
+				displayName = "Special Forces";
+				property = "specialTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class rushMode: Checkbox {
+				displayName = "Enable Rush Mode";
+				property = "rushMode";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessMaraudingVehicles: reaperCrew_moduleReinforcementsBase
 	{
 		displayName = "Marauding Vehicles";
-		function = "reapercrew_reinforcements_fnc_moduleSpawnHeadlessMaraudingVehicles";
+		function = "reapercrew_reinforcements_fnc_initModuleMaraudingVehicles";
 		scope = 2;
 		class Attributes: AttributesBase {
 			class vehicleCount: Edit {
 				displayName = "Vehicle Count";
 				property = "vehicleCount";
 				typeName = "NUMBER";
-				tooltip = "";
+				tooltip = "The total number of vehicles that this spawn point can produce";
 				control = "Edit";
 				defaultValue = "25";
 			};
@@ -371,27 +437,36 @@ class CfgVehicles
 				control = "Edit";
 				defaultValue = "240";
 			};
-			class vehicleType: Edit {
-				displayName = "Vehicle Types";
-				property = "vehicleType";
-				typeName = "NUMBER";
+			class heavyArmour: Checkbox {
+				displayName = "Heavy Armour";
+				property = "HeavyArmour";
+				typeName = "BOOL";
 				tooltip = "";
-				control = "Combo";
-				defaultValue = "0";
-				class Values
-				{
-					class randomSelection	{name = "Random Mix";	value = 0;}; // Listbox item
-					class HeavyArmour	{name = "Heavy Armour"; value = 1; };
-					class LightArmour	{name = "Light Armour"; value = 2; };
-					class Technicals	{name = "Technicals"; value = 3; };
-				};
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class lightArmour: Checkbox {
+				displayName = "Light Armour";
+				property = "LightArmour";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class technicals: Checkbox {
+				displayName = "Tehnicals";
+				property = "Technicals";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
 			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessMaraudingAircrafts: reaperCrew_moduleReinforcementsBase
 	{
 		displayName = "Marauding Aircraft";
-		function = "reapercrew_reinforcements_fnc_moduleSpawnHeadlessMaraudingAircraft";
+		function = "reapercrew_reinforcements_fnc_initModuleMaraudingAircraft";
 		scope = 2;
 		class Attributes: AttributesBase {
 			class AircraftCount: Edit {
@@ -418,21 +493,40 @@ class CfgVehicles
 				control = "Edit";
 				defaultValue = "240";
 			};
-			class AircraftType: Edit {
-				displayName = "Aircraft Types";
-				property = "AircraftType";
-				typeName = "NUMBER";
+
+			class fixedWingBombers: Checkbox {
+				displayName = "Fixed Wing (Bombers)";
+				property = "fixedWingBombers";
+				typeName = "BOOL";
 				tooltip = "";
-				control = "Combo";
-				defaultValue = "0";
-				class Values
-				{
-					class randomSelection	{name = "Random Mix";	value = 0;}; // Listbox item
-					class lightRotary	{name = "Light Rotary"; value = 1; };
-					class heavyRotary	{name = "Heavy Rotary"; value = 2; };
-					class fixedWing	{name = "Fixed Wing"; value = 3; };
-				};
+				control = "Checkbox";
+				defaultValue = "true";
 			};
+			class fixedWingFighters: Checkbox {
+				displayName = "Fixed Wing (Fighters)";
+				property = "fixedWingFighters";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class rotaryCASHeavy: Checkbox {
+				displayName = "Rotary CAS (Heavy)";
+				property = "rotaryCASHeavy";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class rotaryCASLight: Checkbox {
+				displayName = "Rotary CAS (Light)";
+				property = "rotaryCASLight";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+
 		};
 	};
 };

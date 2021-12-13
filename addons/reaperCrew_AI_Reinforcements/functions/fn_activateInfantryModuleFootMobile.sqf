@@ -1,5 +1,13 @@
 params ["_triggerObject"];
 
+// Don't run if the array isn't available
+while {isNil "activeInfantryTriggers"} do {
+	if (reaperCrew_InfantrySpawnCheckbox == true) then {
+		diag_log "SCENARIO: Infantry triggers undefined, sleeping";
+	};
+	sleep 15;
+};
+
 [_triggerObject] spawn {
 	params ["_triggerObject"];
 

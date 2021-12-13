@@ -16,6 +16,14 @@
 
 params ["_triggerObject"];
 
+// Don't run if the array isn't available
+while {isNil "activeAircraftTriggers"} do {
+	if (reaperCrew_AircraftSpawnCheckbox == true) then {
+		diag_log "SCENARIO: Aircraft triggers undefined, sleeping";
+	};
+	sleep 15;
+};
+
 // Get variables from the trigger
 _reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
 _zoneThreshold = _triggerObject getVariable ["zoneThreshold",20];

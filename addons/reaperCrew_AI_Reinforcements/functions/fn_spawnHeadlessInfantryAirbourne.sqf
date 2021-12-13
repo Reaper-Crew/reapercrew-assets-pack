@@ -9,7 +9,7 @@
  * None
  *
  * Example:
- * [] call reapercrew_reinforcements_fnc_moduleSpawnReinforcementsAirbourneRemote
+ * [] call reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne
  *
  * Public: No
  */
