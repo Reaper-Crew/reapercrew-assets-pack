@@ -37,7 +37,7 @@ if (_useSpecialForces) then {
 _activationTrigger = createTrigger ["EmptyDetector", (getPos _logic), false];
 _activationTrigger setTriggerArea [_logicArea select 0, _logicArea select 1, 0, false, -1];
 _activationTrigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_activationTrigger setTriggerStatements ["this && {isTouchingGround _x} count thisList > 0", "[thisTrigger] call reapercrew_reinforcements_fnc_activateInfantryModuleFootMobile", ""];
+_activationTrigger setTriggerStatements ["this && {isTouchingGround _x} count thisList > 0", "[thisTrigger] call reapercrew_reinforcements_fnc_activateInfantryModuleFootMobile;", ""];
 
 // Set trigger variables
 _activationTrigger setVariable ["troopArrays", _troopsArrays];

@@ -178,7 +178,7 @@ class CfgVehicles
 	class reaperCrew_moduleReinforcementsHeadlessInfantry: reaperCrew_moduleReinforcementsBase
 	{
 		displayName = "Reinforcements (Infantry - Foot Mobile)";
-		function = "reapercrew_reinforcements_fnc_initInfantryModuleFootMobile";
+		function = "reapercrew_reinforcements_fnc_initModuleInfantryFootMobile";
 		scope = 2;
 		class Attributes: AttributesBase {
 			class reinforcementCount: Edit {
