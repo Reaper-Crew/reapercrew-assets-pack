@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class ReaperCrew_Player_Management
 	{
-		units[] = {""};
+		units[] = {"reaperCrew_moduleDisarmPlayers"};
 		weapons[]={};
 		requiredVersion=1;
 		requiredAddons[]=
