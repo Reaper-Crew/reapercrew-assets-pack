@@ -11,7 +11,8 @@ class CfgPatches
 			"ReaperCrew_PlasticCase_Base",
 			"ReaperCrew_PlasticCase_Medical",
 			"RC_CargoNet_01_barrels_F",
-			"RC_VirtualReammoBox_F"
+			"RC_VirtualReammoBox_F",
+			"reaperCrew_moduleResupplyPoint"
 		};
 		weapons[] = {""};
 		vehicles[] = {""};
