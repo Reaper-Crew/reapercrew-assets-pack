@@ -28,8 +28,25 @@ class CfgWeapons
 	};
 	class U_B_CombatUniform_mcam_vest;
 	class U_B_CombatUniform_mcam;
+	class U_I_CombatUniform_shortsleeve;
+	class V_PlateCarrier1_rgr;
+	class V_PlateCarrier1_blk;
+	class V_PlateCarrier2_blk;
+	class H_HelmetIA;
+	class H_HelmetB;
+	class H_HelmetSpecB;
+	class B_Kitbag_tan;
+	class H_Booniehat_khk;
 	class Uniform_Base;
+	class HeadgearItem;
 	class UniformItem;
+	class VestItem;
+	class ItemCore;
+	class B_Radiobag_01_base_F;
+	class Vest_Camo_base: ItemCore
+	{
+		class ItemInfo;
+	};
 	class RC_MTP_Uniform: U_B_CombatUniform_mcam
 	{
 		scope=2;
