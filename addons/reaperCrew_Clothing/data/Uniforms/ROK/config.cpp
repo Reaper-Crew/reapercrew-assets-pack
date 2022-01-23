@@ -37,12 +37,12 @@ class cfgVehicles
 		author="Reaper Crew";
 		_generalMacro="SanRuckTrop23LLK";
 		scope=2;
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		maximumLoad=280;
 		displayName="[RC] Kitbag South Korea (Medic)";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Medic_Kitbag_1_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Medic_Kitbag_1_co.paa"
 		};
 	};
 	class SouthKorea_RC_Kitbag: B_Kitbag_tan
@@ -50,12 +50,12 @@ class cfgVehicles
 		author="Reaper Crew";
 		_generalMacro="SanRuckTrop23LLK";
 		scope=2;
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		maximumLoad=280;
 		displayName="[RC] Kitbag South Korea";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Kitbag_1_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Kitbag_1_co.paa"
 		};
 	};
 	class SouthKorea_RC_Radio: B_RadioBag_01_base_F
@@ -63,11 +63,11 @@ class cfgVehicles
 		author="Reaper Crew";
 		_generalMacro="SanRuckTrop23LLK";
 		scope=2;
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		displayName="[RC] Radio Pack South Korea";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Radio_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Radio_co.paa"
 		};
 	};
 	class SouthKorea_Soldier_2_F: I_G_Soldier_universal_F
@@ -85,7 +85,7 @@ class cfgVehicles
 		};
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Uniform_2_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Uniform_2_co.paa"
 		};
 	};
 	class SouthKorea_Soldier_2_Rolled_F: I_G_Soldier_universal_F
@@ -103,7 +103,7 @@ class cfgVehicles
 		};
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Uniform_2_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Uniform_2_co.paa"
 		};
 	};
 };
@@ -133,7 +133,7 @@ class cfgWeapons
 	{
 		scope=2;
 		displayName="[RC] Combat Fatigues (South Korea)";
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F";
 		class ItemInfo: UniformItem
 		{
@@ -147,7 +147,7 @@ class cfgWeapons
 	{
 		scope=2;
 		displayName="[RC] Combat Fatigues (South Korea) (Rolled-up)";
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F";
 		class ItemInfo: UniformItem
 		{
@@ -162,10 +162,10 @@ class cfgWeapons
 		author="ReaperCrew";
 		scope=2;
 		displayName="[RC] Carrier Lite (South Korea)";
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Vest_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Vest_1_co"
 		};
 	};
 	class RC_SouthKorea_Vest_2: V_PlateCarrier2_blk
@@ -173,10 +173,10 @@ class cfgWeapons
 		author="ReaperCrew";
 		scope=2;
 		displayName="[RC] Carrier Rig (South Korea)";
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Vest_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Vest_1_co"
 		};
 	};
 	class RC_SouthKorea_Helmet: H_HelmetB
@@ -185,10 +185,10 @@ class cfgWeapons
 		author="Reaper Crew";
 		weaponPoolAvailable=1;
 		displayName="[RC] Combat Helmet (South Korea)";
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Helmet_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Helmet_1_co"
 		};
 	};
 	class RC_SouthKorea_Enh_Helmet: H_HelmetSpecB
@@ -197,20 +197,20 @@ class cfgWeapons
 		author="Reaper Crew";
 		weaponPoolAvailable=1;
 		displayName="[RC] Enhanced Combat Helmet (South Korea)";
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Helmet_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Helmet_1_co"
 		};
 	};
 	class RC_SouthKorea_Boonie: H_Booniehat_khk
 	{
 		scope=2;
 		displayName="[RC] Booniehat (South Korea)";
-		picture="\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\UI\ROK_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Boonie_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\ROK\data\SouthKorea_RC_Boonie_1_co"
 		};
 	};
 };

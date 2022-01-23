@@ -15,7 +15,7 @@ class CfgFunctions
 	{
 		class Effects
 		{
-            file = "\reaperCrew_Training\functions";
+            file = "rc_assets_pack\addons\reaperCrew_Training\functions";
 			class startTraining{};
             class createPickupTroops{};
             class createLZSmoke{};
@@ -35,7 +35,7 @@ class CfgMissions
 
 			class TransportFlightTrainingLivonia
 			{
-				directory = "reaperCrew_Training\missions\TransportFlightTrainingLivonia.Enoch";
+				directory = "rc_assets_pack\addons\reaperCrew_Training\missions\TransportFlightTrainingLivonia.Enoch";
 			};
 		};
 	};

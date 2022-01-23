@@ -13,6 +13,6 @@ class Extended_PreInit_EventHandlers
 {
 	class ReaperCrew_AI_Common_preInit
 	{
-		init="call compile preProcessFileLineNumbers '\reaperCrew_AI_Common\cba\XEH_preInit.sqf'";
+		init="call compile preProcessFileLineNumbers 'rc_assets_pack\addons\reaperCrew_AI_Common\cba\XEH_preInit.sqf'";
 	};
 };

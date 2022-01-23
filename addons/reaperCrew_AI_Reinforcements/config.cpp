@@ -13,7 +13,7 @@ class Extended_PreInit_EventHandlers
 {
 	class reaperCrew_AI_Reinforcements_preInit
 	{
-		init="call compile preProcessFileLineNumbers '\reaperCrew_AI_Reinforcements\cba\XEH_preInit.sqf'";
+		init="call compile preProcessFileLineNumbers 'rc_assets_pack\addons\reaperCrew_AI_Reinforcements\cba\XEH_preInit.sqf'";
 	};
 };
 class cfgFactionClasses
@@ -42,7 +42,7 @@ class CfgFunctions
 	{
 		class Effects
 		{
-			file = "\reaperCrew_AI_Reinforcements\functions";
+			file = "rc_assets_pack\addons\reaperCrew_AI_Reinforcements\functions";
 
 			class initReinforcementsSystem{postInit = 1;};
 
@@ -96,7 +96,7 @@ class CfgVehicles
 	};
 	class reaperCrew_module_reinforcements_base: Module_F
 	{	
-		icon = "\reaperCrew_Common\data\insignia.paa";
+		icon = "RC_Assets_Pack\addons\reaperCrew_Common\data\insignia.paa";
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		isDisposable = 1;

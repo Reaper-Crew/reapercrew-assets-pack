@@ -32,7 +32,7 @@ class CfgMods
 	class Mod_Base;
 	class ReaperCrew_Mods: Mod_Base
 	{
-		logo="reaperCrew_Common\data\reaperLogo.paa";
+		logo="rc_assets_pack\addons\reaperCrew_Common\data\reaperLogo.paa";
 	};
 	author="Ernst";
 	timepacked="1607182564";
@@ -49,12 +49,12 @@ class CfgVehicles
 		author="Reaper Crew";
 		_generalMacro="SanRuckTrop23LLK";
 		scope=2;
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		maximumLoad=280;
 		displayName="[RC] Kitbag Australia (Medic)";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Medic_Kitbag_1_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Medic_Kitbag_1_co.paa"
 		};
 	};
 	class AUSCAM_RC_Kitbag: B_Kitbag_tan
@@ -62,12 +62,12 @@ class CfgVehicles
 		author="Reaper Crew";
 		_generalMacro="SanRuckTrop23LLK";
 		scope=2;
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		maximumLoad=280;
 		displayName="[RC] Kitbag Australia";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Kitbag_1_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Kitbag_1_co.paa"
 		};
 	};
 	class AUSCAM_RC_Radio: B_RadioBag_01_base_F
@@ -75,11 +75,11 @@ class CfgVehicles
 		author="Reaper Crew";
 		_generalMacro="SanRuckTrop23LLK";
 		scope=2;
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		displayName="[RC] Radio Pack Australia";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Radio_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Radio_co.paa"
 		};
 	};
 	class AUSCAM_Soldier_2_F: I_G_Soldier_universal_F
@@ -97,7 +97,7 @@ class CfgVehicles
 		};
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Uniform_2_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Uniform_2_co.paa"
 		};
 	};
 	class AUSCAM_Soldier_2_Rolled_F: I_G_Soldier_universal_F
@@ -115,7 +115,7 @@ class CfgVehicles
 		};
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Uniform_2_co.paa"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Uniform_2_co.paa"
 		};
 	};
 };
@@ -144,7 +144,7 @@ class cfgWeapons
 	{
 		scope=2;
 		displayName="[RC] Combat Fatigues (Australia)";
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F";
 		class ItemInfo: UniformItem
 		{
@@ -158,7 +158,7 @@ class cfgWeapons
 	{
 		scope=2;
 		displayName="[RC] Combat Fatigues (Australia) (Rolled-up)";
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		model="\A3\Characters_F\Common\Suitpacks\suitpack_original_F";
 		class ItemInfo: UniformItem
 		{
@@ -173,10 +173,10 @@ class cfgWeapons
 		author="ReaperCrew";
 		scope=2;
 		displayName="[RC] Carrier Lite (Australia)";
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Vest_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Vest_1_co"
 		};
 	};
 	class RC_AUSCAM_Vest_2: V_PlateCarrier2_blk
@@ -184,10 +184,10 @@ class cfgWeapons
 		author="ReaperCrew";
 		scope=2;
 		displayName="[RC] Carrier Rig (Australia)";
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Vest_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Vest_1_co"
 		};
 	};
 	class RC_AUSCAM_Helmet: H_HelmetB
@@ -196,10 +196,10 @@ class cfgWeapons
 		author="Reaper Crew";
 		weaponPoolAvailable=1;
 		displayName="[RC] Combat Helmet (Australia)";
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Helmet_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Helmet_1_co"
 		};
 	};
 	class RC_AUSCAM_Enh_Helmet: H_HelmetSpecB
@@ -208,20 +208,20 @@ class cfgWeapons
 		author="Reaper Crew";
 		weaponPoolAvailable=1;
 		displayName="[RC] Enhanced Combat Helmet (Australia)";
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Helmet_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Helmet_1_co"
 		};
 	};
 	class RC_A_Boonie: H_Booniehat_khk
 	{
 		scope=2;
 		displayName="[RC] Booniehat (Australia)";
-		picture="\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
+		picture="rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\UI\AUSCAM_Logo_co.paa";
 		hiddenSelectionsTextures[]=
 		{
-			"\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Boonie_1_co"
+			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\Australia\data\AUSCAM_RC_Boonie_1_co"
 		};
 	};
 };

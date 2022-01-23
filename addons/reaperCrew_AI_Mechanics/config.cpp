@@ -25,7 +25,7 @@ class CfgFunctions
 	{
 		class Effects
 		{
-			file = "\reaperCrew_AI_Mechanics\functions";
+			file = "rc_assets_pack\addons\reaperCrew_AI_Mechanics\functions";
 		};
 	};
 };

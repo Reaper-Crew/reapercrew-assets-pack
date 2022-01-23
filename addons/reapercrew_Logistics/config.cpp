@@ -24,7 +24,7 @@ class Extended_PreInit_EventHandlers
 {
 	class reaperCrew_logistics_preInit
 	{
-		init="call compile preProcessFileLineNumbers '\reapercrew_Logistics\cba\XEH_preInit.sqf'";
+		init="call compile preProcessFileLineNumbers 'rc_assets_pack\addons\reaperCrew_Logistics\cba\XEH_preInit.sqf'";
 	};
 };
 class CfgEditorSubcategories
@@ -42,7 +42,7 @@ class CfgFunctions
 	{
 		class Effects
 		{
-			file = "\reapercrew_Logistics\functions";
+			file = "rc_assets_pack\addons\reaperCrew_Logistics\functions";
 			class logisticsCreateSupplyCrate{};
 			class logisticsPopulateSupplyCrate{};
 			class logisticsCreateFuelSource{};
@@ -105,23 +105,23 @@ class CfgVehicles
             class HEGuided {
                 name = ACE_1Rnd_82mm_Mo_HE_Guided;
                 count = 50;
-            }
+            };
 			class HE {
                 name = ACE_1Rnd_82mm_Mo_HE;
                 count = 50;
-            }
+            };
 			class Illum {
                 name = ACE_1Rnd_82mm_Mo_Illum;
                 count = 50;
-            }
+            };
 			class HELaserGuided {
                 name = ACE_1Rnd_82mm_Mo_HE_LaserGuided;
                 count = 50;
-            }
+            };
 			class Smoke {
                 name = ACE_1Rnd_82mm_Mo_Smoke;
                 count = 50;
-            }
+            };
 		};
 	};
     class ReaperCrew_PlasticCase_Base: Items_base_F
@@ -199,47 +199,47 @@ class CfgVehicles
             class blood_1000 {
                 name = ACE_bloodIV;
                 count = 50;
-            }
+            };
             class blood_500 {
                 name = ACE_bloodIV_500;
                 count = 50;
-            }
+            };
             class elasticbandage {
                 name = ACE_elasticBandage;
                 count = 50;
-            }
+            };
             class quickclotbandage {
                 name = ACE_quikclot;
                 count = 50;
-            }
+            };
             class packingbandage {
                 name = ACE_packingBandage;
                 count = 50;
-            }
+            };
             class adenonsine {
                 name = ACE_adenosine;
                 count = 20;
-            }
+            };
             class epinephrine {
                 name = ACE_epinephrine;
                 count = 20;
-            }
+            };
             class morphine {
                 name = ACE_morphine;
                 count = 20;
-            }
+            };
             class tourniquet {
                 name = ACE_tourniquet;
                 count = 8;
-            }
+            };
             class splint {
                 name = ACE_splint;
                 count = 20;
-            }
+            };
             class pak {
                 name = ACE_personalAidKit;
                 count = 2;
-            }
+            };
 
 		};
 		class TransportMagazines {};
@@ -250,7 +250,7 @@ class CfgVehicles
 		};
 		hiddenselectionsTextures[]=
 		{
-			"\reapercrew_Logistics\data\PlasticCase_01_CO_medical.paa"
+			"rc_assets_pack\addons\reaperCrew_Logistics\data\PlasticCase_01_CO_medical.paa"
 		};
 	};
 	class RC_CargoNet_01_barrels_F: CargoNet_01_barrels_F {

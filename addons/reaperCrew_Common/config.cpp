@@ -13,7 +13,7 @@ class CfgMods
 	class Mod_Base;
 	class ReaperCrew_Common: Mod_Base
 	{
-		logo="reaperCrew_Common\data\reaperLogo.paa";
+		logo="rc_assets_pack\addons\reaperCrew_Common\data\reaperLogo.paa";
 	};
 	author="Reaper Crew";
 	timepacked="1618105293";
@@ -27,7 +27,7 @@ class Extended_PreInit_EventHandlers
 {
 	class reaperCrew_Common_preInit
 	{
-		init="call compile preProcessFileLineNumbers '\reaperCrew_Common\cba\XEH_preInit.sqf'";
+		init="call compile preProcessFileLineNumbers 'rc_assets_pack\addons\reaperCrew_Common\cba\XEH_preInit.sqf'";
 	};
 };
 class cfgFactionClasses
@@ -36,7 +36,7 @@ class cfgFactionClasses
     class reaperCrew //Faction Calling Name
     {
      displayName = "Reaper Crew"; //Faction name in-game
-     icon = "reaperCrew_Common\data\reaperLogo.paa"; //Path to texture next to the faction name in editor "PBOname\filename.paa"
+     icon = "rc_assets_pack\addons\reaperCrew_Common\data\reaperLogo.paa"; //Path to texture next to the faction name in editor "PBOname\filename.paa"
      priority = 1; //How far down it is on the menu
      side = 1; // 1 Blufor 2 opfor 3 independant i think.
      scope = 2;
@@ -106,7 +106,7 @@ class CfgVehicles
 	};
 	class reaperCrew_module_base: Module_F
 	{	
-		icon = "\reaperCrew_Common\data\insignia.paa";
+		icon = "rc_assets_pack\addons\reaperCrew_Common\data\insignia.paa";
 		isGlobal = 0;
 		isTriggerActivated = 0;
 		isDisposable = 1;
@@ -154,7 +154,7 @@ class CfgFunctions
 	{
 		class Effects
 		{
-			file = "\reaperCrew_Common\functions";
+			file = "rc_assets_pack\addons\reaperCrew_Common\functions";
 			class CoverMap{};
 			class sideChatMP{};
 			class monitorHeadlessClients{postInit = 1;};

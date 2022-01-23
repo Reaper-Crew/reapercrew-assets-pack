@@ -25,7 +25,7 @@ class CfgFunctions
 	{
 		class Effects
 		{
-			file = "\reaperCrew_Player_Management\functions";
+			file = "rc_assets_pack\addons\reaperCrew_Player_Management\functions";
 			class setACRESettings{postInit = 1;};
 			class setPersonalACRESettingsLocal{};
 			class setPersonalACRESettingsServer{postInit = 1;};
