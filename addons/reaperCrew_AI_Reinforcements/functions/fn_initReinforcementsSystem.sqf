@@ -3,6 +3,8 @@ activeInfantryTriggers = [];
 activeVehicleTriggers = [];
 activeAircraftTriggers = [];
 
+if (!isServer) exitWith {diag_log "SCENARIO: Server checked failed - skipping reinforcements system"};
+
 // Output debug information
 [] spawn {
 
