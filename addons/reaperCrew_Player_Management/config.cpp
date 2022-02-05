@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class ReaperCrew_Player_Management
 	{
-		units[] = {"reaperCrew_moduleDisarmPlayers"};
+		units[] = {"reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleSavePlayerLoadout"};
 		weapons[]={};
 		requiredVersion=1;
 		requiredAddons[]=
@@ -33,6 +33,8 @@ class CfgFunctions
 			class setUnitInsigniaLocal{};
             class disarmModuleInit{};
 			class disarmModuleKitChange{};
+			class savePlayerLoadoutGlobal{};
+			class savePlayerLoadoutLocal{};
 		};
 	};
 };
@@ -45,6 +47,15 @@ class CfgVehicles
 	{
 		displayName = "Disarm all players";
 		function = "reapercrew_player_management_fnc_disarmModuleInit";
+		category = "reaperCrew_ModulesPlayers";
+		scope = 1;
+		scopeCurator = 2;
+		isGlobal = 0;
+	};
+	class reaperCrew_moduleSavePlayerLoadout: reaperCrew_module_base
+	{
+		displayName = "Save player loadout";
+		function = "reapercrew_player_management_fnc_savePlayerLoadoutGlobal";
 		category = "reaperCrew_ModulesPlayers";
 		scope = 1;
 		scopeCurator = 2;
