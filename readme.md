@@ -16,3 +16,4 @@ This repository holds the sources files for the Reaper Crew Assets pack
 * [Reinforcements System](docs/reinforcements-system.md)
 * [Marauding Vehicles](docs/marauding-vehicles.md)
 * [Logistical System](docs/logistical-system.md)
+* [Counter Battery System](docs/counter-battery.md)

@@ -10,7 +10,8 @@
  * None
  *
  * Example:
- * [] call reapercrew_common_fnc_setUnitInsigniaLocal
+ * [] call reapercrew_player_management_fnc_setUnitInsigniaLocal
+ 
  *
  * Public: No
  */
