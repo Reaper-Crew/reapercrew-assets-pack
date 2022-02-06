@@ -2,10 +2,24 @@ class CfgPatches
 {
 	class RC_Headgear
 	{
-		weapons[]={"RC_Beret_01", "RC_MTP_Uniform", "RC_MTP_Medic_Uniform"};
+		author="Reaper Crew";
+		weapons[]=
+		{
+			"RC_Beret_01", 
+			"RC_MTP_Uniform", 
+			"RC_MTP_Medic_Uniform"
+		};
+		units[]=
+		{
+			"MTP_Soldier_F", 
+			"MTP_Soldier_F_Medic"
+		};
 		requiredVersion=0.100000;
-		requiredAddons[]={"ReaperCrew_Common", "A3_Data_F_Oldman_Loadorder"};
-		units[]={"MTP_Soldier_F", "MTP_Soldier_F_Medic"};
+		requiredAddons[]=
+		{
+			"ReaperCrew_Common", 
+			"A3_Data_F_Oldman_Loadorder"
+		};
 	};
 };
 class CfgWeapons
@@ -76,13 +90,14 @@ class CfgWeapons
 		};
 	};
 };
+
 class CfgVehicles
 {
 	class B_Soldier_base_F;
 	class MTP_Soldier_F: B_Soldier_base_F
 	{
 		_generalMacro="B_Soldier_F";
-		scope=2;
+		scope=1;
 		displayName="RC MTP Uniform";
 		model="\A3\characters_F\BLUFOR\b_soldier_01.p3d";
 		nakedUniform="U_BasicBody";
@@ -100,7 +115,7 @@ class CfgVehicles
 	class MTP_Soldier_F_Medic: B_Soldier_base_F
 	{
 		_generalMacro="B_Soldier_F";
-		scope=2;
+		scope=1;
 		displayName="RC MTP Uniform (Medic)";
 		model="\A3\characters_F\BLUFOR\b_soldier_03.p3d";
 		nakedUniform="U_BasicBody";
@@ -119,239 +134,854 @@ class CfgVehicles
 class CfgUnitInsignia
 {	
 
-	class ReaperCrew_PlatoonJTAC
+				// Zero / Platoon
+
+	class reaperCrew_PlatoonJTAC
 	{
 		displayName="[RC] Platoon JTAC";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\PLT_JTAC_1.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Zero1_JTAC.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_PlatoonCommander
+	class reaperCrew_PlatoonCommander
 	{
 		displayName="[RC] Platoon Commander";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\PLT_Command_1.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Zero1_CMD.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_PlatoonSergeant
+	class reaperCrew_PlatoonSergeant
 	{
 		displayName="[RC] Platoon Sergeant";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\PLT_Sgt_1.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Zero1_SGT.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_platoonMedic
+	class reaperCrew_platoonMedic
 	{
 		displayName="[RC] Platoon Medic";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Zero_Medic.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Zero1_Medic.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_platoonLogiCommand
+	class reaperCrew_platoonLogiCommand
 	{
 		displayName="[RC] Platoon Logistics Commander";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Logi_Command.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Zero1_Logi_CMD.paa";
 		textureVehicle="";
 	};
 
-				// Reaper 1-1 /  1-2 //
+				// Infantry / backup slots
 
-	class ReaperCrew_SectionCommander
+	class reaperCrew_SectionCommander
 	{
-		displayName="[RC] Section Commander";
+		displayName="[RC] Section Commander (Infantry)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\SquadLead_1.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_1IC.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_2IC
+	class reaperCrew_2IC
 	{
-		displayName="[RC] Section 2IC";
+		displayName="[RC] Section 2IC (Infantry) ";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\2IC_1.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_2IC.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Medic
+	class reaperCrew_Medic
 	{
-		displayName="[RC] Medic (White)";
+		displayName="[RC] Section Medic (Infantry)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Medic_2.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_Medic.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Medic_2
+	class reaperCrew_Machinegunner
 	{
-		displayName="[RC] Section Medic (Olive)";
+		displayName="[RC] Section Machine Gunner (Infantry)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Medic_3.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_mg.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Machinegunner
+	class reaperCrew_MG_ASSIST
 	{
-		displayName="[RC] Section Machine Gunner";
+		displayName="[RC] Section Asst. Machine Gunner (Infantry)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\MG.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_mgAssist.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_MG_ASSIST
+	class reaperCrew_Engineer
 	{
-		displayName="[RC] Assist. Machine Gunner";
+		displayName="[RC] Section Engineer (Infantry)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Assist_MG.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_Engineer.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Engineer
+	class reaperCrew_jtac
 	{
-		displayName="[RC] Section Engineer";
+		displayName="[RC] JTAC (WIP)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Engineer.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_Rifleman.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_EOD
+	class reaperCrew_Marksman
 	{
-		displayName="[RC] Section EOD";
+		displayName="[RC] Section Marksman (Infantry)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\EOD.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_Marksman.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_jtac
+	class reaperCrew_Rifleman
 	{
-		displayName="[RC] JTAC";
+		displayName="[RC] Section Rifleman (Infantry)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\JTAC_1.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_Rifleman.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Marksman
+	class reaperCrew_AA
 	{
-		displayName="[RC] Section Marksman";
+		displayName="[RC] Section AA (Infantry)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Marksman.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_AA.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Rifleman
+	class reaperCrew_AT
 	{
-		displayName="[RC] Section Rifleman";
+		displayName="[RC] Section AT (Infantry)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Rifleman.paa";
-		textureVehicle="";
-	};
-	class ReaperCrew_AA
-	{
-		displayName="[RC] Section AA";
-		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\AA.paa";
-		textureVehicle="";
-	};
-	class ReaperCrew_AT
-	{
-		displayName="[RC] Section AT";
-		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\AT.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Infantry_AT.paa";
 		textureVehicle="";
 	};
 
-	class ReaperCrew_Thunder_SL
+				// Reaper 1-1
+
+	class reaperCrew_section_11_1IC
+	{
+		displayName="[RC] Section Commander (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_11_2IC
+	{
+		displayName="[RC] Section 2IC (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_2IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_11_AA
+	{
+		displayName="[RC] Section AA (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_AA.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_11_AT
+	{
+		displayName="[RC] Section AT (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_AT.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_11_Engineer
+	{
+		displayName="[RC] Section Engineer (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_Engineer.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_11_Marksman
+	{
+		displayName="[RC] Section Marksman (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_Marksman.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_11_Medic
+	{
+		displayName="[RC] Section Medic (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_Medic.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_11_mg
+	{
+		displayName="[RC] Section Machine Gunner (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_MG.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_11_mgAssist
+	{
+		displayName="[RC] Section Asst. Machine Gunner (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_MG.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_11_rifleman
+	{
+		displayName="[RC] Section Rifleman (1-1)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_Rifleman.paa";
+		textureVehicle="";
+	};
+
+				// Reaper 1-2
+
+	class reaperCrew_section_12_1IC
+	{
+		displayName="[RC] Section Commander (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper2_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_12_2IC
+	{
+		displayName="[RC] Section 2IC (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper2_2IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_12_AA
+	{
+		displayName="[RC] Section AA (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper2_AA.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_12_AT
+	{
+		displayName="[RC] Section AT (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper2_AT.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_12_Engineer
+	{
+		displayName="[RC] Section Engineer (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_Engineer.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_12_Marksman
+	{
+		displayName="[RC] Section Marksman (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper2_Marksman.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_12_Medic
+	{
+		displayName="[RC] Section Medic (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper2_Medic.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_12_mg
+	{
+		displayName="[RC] Section Machine Gunner (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper2_MG.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_12_mgAssist
+	{
+		displayName="[RC] Section Asst. Machine Gunner (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper2_MG.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_12_rifleman
+	{
+		displayName="[RC] Section Rifleman (1-2)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper2_Rifleman.paa";
+		textureVehicle="";
+	};
+
+				// Reaper 1-3
+
+	class reaperCrew_section_13_1IC
+	{
+		displayName="[RC] Section Commander (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper3_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_13_2IC
+	{
+		displayName="[RC] Section 2IC (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper3_2IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_13_AA
+	{
+		displayName="[RC] Section AA (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper3_AA.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_13_AT
+	{
+		displayName="[RC] Section AT (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper3_AT.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_13_Engineer
+	{
+		displayName="[RC] Section Engineer (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper3_Engineer.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_13_Marksman
+	{
+		displayName="[RC] Section Marksman (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper3_Marksman.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_13_Medic
+	{
+		displayName="[RC] Section Medic (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_Medic.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_13_mg
+	{
+		displayName="[RC] Section Machine Gunner (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper3_MG.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_13_mgAssist
+	{
+		displayName="[RC] Section Asst. Machine Gunner (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper1_MG.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_section_13_rifleman
+	{
+		displayName="[RC] Section Rifleman (1-3)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper3_Rifleman.paa";
+		textureVehicle="";
+	};
+
+				// Thunder-1
+
+	class reaperCrew_Thunder_SL
 	{
 		displayName="[RC] Thunder Commander";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Thunder_SL.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Thunder1_1IC.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Thunder_2IC
+	class reaperCrew_Thunder_2IC
 	{
 		displayName="[RC] Thunder 2IC";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Thunder_2ic.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Thunder1_2IC.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Thunder_Grunt
+	class reaperCrew_Thunder_Grunt
 	{
 		displayName="[RC] Thunder Gunner";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Thunder_Grunt.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Thunder1_Rifleman.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Thunder_Medic
+	class reaperCrew_Thunder_Medic
 	{
 		displayName="[RC] Thunder Medic";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Thunder_Medic.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Thunder1_Medic.paa";
 		textureVehicle="";
 	};
 
-	class ReaperCrew_Artilleryman
+				// Hammer-1
+
+	class reaperCrew_Artilleryman
 	{
-		displayName="[RC] Artilleryman";
+		displayName="[RC] Hammer-1 Artilleryman";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Arty.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Hammer1_Rifleman.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Arty_2IC
+	class reaperCrew_Arty_2IC
 	{
-		displayName="[RC] Artilleryman (2IC)";
+		displayName="[RC] Hammer-1 2IC";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Arty 2IC.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Hammer1_2IC.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Arty_Commander
+	class reaperCrew_Arty_Commander
 	{
-		displayName="[RC] Artilleryman (Commander)";
+		displayName="[RC] Hammer-1 (Commander)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Arty SL.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Hammer1_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Arty_Medic
+	{
+		displayName="[RC] Hammer-1 Artilleryman (Medic)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Hammer1_1IC.paa";
 		textureVehicle="";
 	};
 
-	class ReaperCrew_Armoured_Medic
+				// Shadow-1
+
+	class reaperCrew_Shadow_1_1IC
 	{
-		displayName="[RC] Armoured Crewman (Medic)";
+		displayName="[RC] Shadow-1 Commander";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Armoured_Medic.paa";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow1_1IC.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Armoured_Crew
+	class reaperCrew_Shadow_1_2IC
+	{
+		displayName="[RC] Shadow-1 2IC";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow1_2IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_1_Rifleman
+	{
+		displayName="[RC] Shadow-1 Rifleman";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow1_Rifleman.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_1_Medic
+	{
+		displayName="[RC] Shadow-1 Medic";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow1_Medic.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_1_MG
+	{
+		displayName="[RC] Shadow-1 Machine Gunner";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow1_MG.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_1_MG_Assist
+	{
+		displayName="[RC] Shadow-1 Assistant Machine Gunner";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow1_mgAssist.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_1_Sniper
+	{
+		displayName="[RC] Shadow-1 Sniper";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow1_Sniper.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_1_Spotter
+	{
+		displayName="[RC] Shadow-1 Spotter";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow1_Spotter.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_1_JTAC
+	{
+		displayName="[RC] Shadow-1 JTAC";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow1_JTAC.paa";
+		textureVehicle="";
+	};
+
+				// Shadow-2
+
+	class reaperCrew_Shadow_2_1IC
+	{
+		displayName="[RC] Shadow-2 Commander";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow2_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_2_2IC
+	{
+		displayName="[RC] Shadow-2 2IC";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow2_2IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_2_Rifleman
+	{
+		displayName="[RC] Shadow-2 Rifleman";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow2_Rifleman.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_2_Medic
+	{
+		displayName="[RC] Shadow-2 Medic";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow2_Medic.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_2_MG
+	{
+		displayName="[RC] Shadow-2 Machine Gunner";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow2_MG.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_2_MG_Assist
+	{
+		displayName="[RC] Shadow-2 Assistant Machine Gunner";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow2_mgAssist.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_2_Sniper
+	{
+		displayName="[RC] Shadow-2 Sniper";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow2_Sniper.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_2_Spotter
+	{
+		displayName="[RC] Shadow-2 Spotter";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow2_Spotter.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Shadow_2_JTAC
+	{
+		displayName="[RC] Shadow-2 JTAC";
+		author="Reaper Crew";
+		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Shadow2_JTAC.paa";
+		textureVehicle="";
+	};
+
+				// Armoured / misc
+
+	class reaperCrew_Armoured_Commander
+	{
+		displayName="[RC] Armoured Commander";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Armoured_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Armoured_Crew
 	{
 		displayName="[RC] Armoured Crewman";
 		author="Reaper Crew";
 		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Armoured_Crew.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Armoured_Commander
+	class reaperCrew_Armoured_Medic
 	{
-		displayName="[RC] Armoured Crewman (Commander)";
+		displayName="[RC] Armoured Crewman (Medic)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Armoured_Commander.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Armoured_Medic.paa";
 		textureVehicle="";
 	};
 
-	class ReaperCrew_Pilot_Viper
+				// Fury-1
+
+	class reaperCrew_Fury_1_CMD
 	{
-		displayName="[RC] Pilot (Viper)";
+		displayName="[RC] Fury-1 Commander";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Pilot_Viper.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Fury1_1IC.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Pilot_Ugly
+	class reaperCrew_Fury_1_Crew
 	{
-		displayName="[RC] Pilot (Ugly)";
+		displayName="[RC] Fury-1 Crewman";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Pilot_Ugly.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Fury1_Crew.paa";
 		textureVehicle="";
 	};
-	class ReaperCrew_Pilot_Phantom
+	class reaperCrew_Fury_1_Medic
 	{
-		displayName="[RC] Pilot (Phantom)";
+		displayName="[RC] Fury-1 Crewman (Medic)";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Pilot_Phantom.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Fury1_Medic.paa";
 		textureVehicle="";
 	};
 
-	class ReaperCrew_Foxhound
+				// Fury-2
+
+	class reaperCrew_Fury_2_CMD
 	{
-		displayName="[RC] Logistics";
+		displayName="[RC] Fury-2 Commander";
 		author="Reaper Crew";
-		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Logi.paa";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Fury2_1IC.paa";
 		textureVehicle="";
 	};
-	
+	class reaperCrew_Fury_2_Crew
+	{
+		displayName="[RC] Fury-2 Crewman";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Fury2_Crew.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Fury_2_Medic
+	{
+		displayName="[RC] Fury-2 Crewman (Medic)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Fury2_Medic.paa";
+		textureVehicle="";
+	};
+
+				// Fury-3
+
+	class reaperCrew_Fury_3_CMD
+	{
+		displayName="[RC] Fury-3 Commander";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Fury3_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Fury_3_Crew
+	{
+		displayName="[RC] Fury-3 Crewman";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Fury3_Crew.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Fury_3_Medic
+	{
+		displayName="[RC] Fury-3 Crewman (Medic)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Fury3_Medic.paa";
+		textureVehicle="";
+	};
+
+				// Guardian-1
+
+	class reaperCrew_Guardian_1_CMD
+	{
+		displayName="[RC] Guardian-1 Commander";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Guardian1_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Guardian_1_Crew
+	{
+		displayName="[RC] Guardian-1 Crewman";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Guardian1_Crew.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Guardian_1_Medic
+	{
+		displayName="[RC] Guardian-1 Crewman (Medic)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Guardian1_Medic.paa";
+		textureVehicle="";
+	};
+
+				// Guardian-2
+
+	class reaperCrew_Guardian_2_CMD
+	{
+		displayName="[RC] Guardian-2 Commander";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Guardian2_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Guardian_2_Crew
+	{
+		displayName="[RC] Guardian-2 Crewman";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Guardian2_Crew.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Guardian_2_Medic
+	{
+		displayName="[RC] Guardian-2 Crewman (Medic)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Guardian2_Medic.paa";
+		textureVehicle="";
+	};
+
+				// Guardian-3
+
+	class reaperCrew_Guardian_3_CMD
+	{
+		displayName="[RC] Guardian-3 Commander";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Guardian3_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Guardian_3_Crew
+	{
+		displayName="[RC] Guardian-3 Crewman";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Guardian3_Crew.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Guardian_3_Medic
+	{
+		displayName="[RC] Guardian-3 Crewman (Medic)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Guardian3_Medic.paa";
+		textureVehicle="";
+	};
+		
+				// Sentinel-1
+
+	class reaperCrew_Sentinel_1_CMD
+	{
+		displayName="[RC] Sentinel-1 Commander";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Sentinel1_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Sentinel_1_Crew
+	{
+		displayName="[RC] Sentinel-1 Crewman";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Sentinel1_Crew.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Sentinel_1_Medic
+	{
+		displayName="[RC] Sentinel-1 Crewman (Medic)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Sentinel1_Medic.paa";
+		textureVehicle="";
+	};
+		
+				// Sentinel-2
+
+	class reaperCrew_Sentinel_2_CMD
+	{
+		displayName="[RC] Sentinel-2 Commander";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Sentinel2_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Sentinel_2_Crew
+	{
+		displayName="[RC] Sentinel-2 Crewman";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Sentinel2_Crew.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Sentinel_2_Medic
+	{
+		displayName="[RC] Sentinel-2 Crewman (Medic)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Sentinel2_Medic.paa";
+		textureVehicle="";
+	};
+		
+				// Sentinel-3
+
+	class reaperCrew_Sentinel_3_CMD
+	{
+		displayName="[RC] Sentinel-3 Commander";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Sentinel3_1IC.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Sentinel_3_Crew
+	{
+		displayName="[RC] Sentinel-3 Crewman";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Sentinel3_Crew.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Sentinel_3_Medic
+	{
+		displayName="[RC] Sentinel-3 Crewman (Medic)";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Sentinel3_Medic.paa";
+		textureVehicle="";
+	};
+
+				// Viper-1 / Viper-2
+
+	class reaperCrew_Pilot_Viper
+	{
+		displayName="[RC] Pilot Viper-1";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Viper1_Pilot.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Pilot_Viper2
+	{
+		displayName="[RC] Pilot Viper-2";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Viper2_Pilot.paa";
+		textureVehicle="";
+	};
+
+				// Ugly-1 / Ugly-2 / Ugly-3
+
+	class reaperCrew_Pilot_Ugly
+	{
+		displayName="[RC] Pilot Ugly-1";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Ugly1_Pilot.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Pilot_Ugly2
+	{
+		displayName="[RC] Pilot Ugly-2";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Ugly2_Pilot.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Pilot_Ugly3
+	{
+		displayName="[RC] Pilot Ugly-3";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Ugly3_Pilot.paa";
+		textureVehicle="";
+	};
+
+				// Phantom-1 / Phantom-2
+
+	class reaperCrew_Pilot_Phantom
+	{
+		displayName="[RC] Pilot Phantom-1";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Phantom1_Pilot.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Pilot_Phantom2
+	{
+		displayName="[RC] Pilot Phantom-2";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Phantom2_Pilot.paa";
+		textureVehicle="";
+	};
+
+				// Foxhound-1 / Foxhound-2
+
+	class reaperCrew_Foxhound
+	{
+		displayName="[RC] Logistics Foxhound-1";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Foxhound1_Driver.paa";
+		textureVehicle="";
+	};
+	class reaperCrew_Foxhound2
+	{
+		displayName="[RC] Logistics Foxhound-2";
+		author="Reaper Crew";
+		texture="rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Foxhound2_Driver.paa";
+		textureVehicle="";
+	};
+
+				// MISC
+
 	class reaperCrewInsignia
 	{
 		displayName="[RC] Reaper Crew Logo";
