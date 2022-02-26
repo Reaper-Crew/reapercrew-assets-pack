@@ -237,6 +237,14 @@ class CfgVehicles
 				control = "EditCodeMulti5";
 				defaultValue = """true""";
 			};
+			class waveDelay: Edit {
+				displayName = "Wave Delay (seconds)";
+				property = "waveDelay";
+				typeName = "STRING";
+				tooltip = "";
+				control = "SliderTimeRespawn";
+				defaultValue = 60;
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryMotorised: reaperCrew_moduleReinforcementsBase
@@ -333,6 +341,14 @@ class CfgVehicles
 				control = "EditCodeMulti5";
 				defaultValue = """true""";
 			};
+			class waveDelay: Edit {
+				displayName = "Wave Delay (seconds)";
+				property = "waveDelay";
+				typeName = "STRING";
+				tooltip = "";
+				control = "SliderTimeRespawn";
+				defaultValue = 60;
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter: reaperCrew_moduleReinforcementsBase
@@ -428,6 +444,14 @@ class CfgVehicles
 				tooltip = "";
 				control = "EditCodeMulti5";
 				defaultValue = """true""";
+			};
+			class waveDelay: Edit {
+				displayName = "Wave Delay (seconds)";
+				property = "waveDelay";
+				typeName = "STRING";
+				tooltip = "";
+				control = "SliderTimeRespawn";
+				defaultValue = 60;
 			};
 		};
 	};

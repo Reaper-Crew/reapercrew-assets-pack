@@ -40,6 +40,7 @@ while {isNil "activeVehicleTriggers"} do {
 	_rushMode = _triggerObject getVariable ["rushMode",false];
 	_reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
+	_waveDelay = _triggerObject getVariable ["waveDelay",60];
 
 	// Run code only while the trigger is activated
 	while { triggerActivated _triggerObject } do {
@@ -101,7 +102,7 @@ while {isNil "activeVehicleTriggers"} do {
 			_triggerObject setVariable ["reinforcementCount",_reinforcementsCount];
 
 		};
-		sleep 60;
+		sleep _waveDelay;
 	};
 	diag_log "SCENARIO: vehicle spawning has ended";
 

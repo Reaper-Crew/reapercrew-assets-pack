@@ -34,6 +34,7 @@ _distanceMax = _triggerObject getVariable ["distanceMax",800];
 _rushMode = _triggerObject getVariable ["rushMode",false];
 _reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 _codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
+_waveDelay = _triggerObject getVariable ["waveDelay",60];
 
 // Run code only while the trigger is activated
 while { triggerActivated _triggerObject } do {
@@ -90,6 +91,6 @@ while { triggerActivated _triggerObject } do {
 		_triggerObject setVariable ["reinforcementCount",_reinforcementsCount];
 
 	};
-	sleep 60;
+	sleep _waveDelay;
 };
 diag_log "SCENARIO: Helicopter spawning has ended";

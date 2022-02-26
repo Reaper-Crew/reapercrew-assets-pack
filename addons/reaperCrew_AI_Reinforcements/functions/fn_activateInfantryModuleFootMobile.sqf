@@ -17,6 +17,7 @@ while {isNil "activeInfantryTriggers"} do {
 	_reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 	_rushMode = _triggerObject getVariable ["rushMode",false];
 	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
+	_waveDelay = _triggerObject getVariable ["waveDelay",60];
 
 	// Do for as long as trigger is active
 	while { triggerActivated _triggerObject } do {
@@ -56,7 +57,7 @@ while {isNil "activeInfantryTriggers"} do {
 
 		};
 
-		sleep 60;
+		sleep _waveDelay;
 	};
 
 
