@@ -229,6 +229,14 @@ class CfgVehicles
 				control = "Checkbox";
 				defaultValue = "false";
 			};
+			class codeOnSpawnGroup: Edit {
+				displayName = "Code on spawn";
+				property = "codeOnSpawn";
+				typeName = "STRING";
+				tooltip = "";
+				control = "EditCodeMulti5";
+				defaultValue = """true""";
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryMotorised: reaperCrew_moduleReinforcementsBase
@@ -317,6 +325,14 @@ class CfgVehicles
 				control = "Checkbox";
 				defaultValue = "false";
 			};
+			class codeOnSpawnGroup: Edit {
+				displayName = "Code on spawn";
+				property = "codeOnSpawn";
+				typeName = "STRING";
+				tooltip = "";
+				control = "EditCodeMulti5";
+				defaultValue = """true""";
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter: reaperCrew_moduleReinforcementsBase
@@ -404,6 +420,14 @@ class CfgVehicles
 				tooltip = "";
 				control = "Checkbox";
 				defaultValue = "false";
+			};
+			class codeOnSpawnGroup: Edit {
+				displayName = "Code on spawn";
+				property = "codeOnSpawn";
+				typeName = "STRING";
+				tooltip = "";
+				control = "EditCodeMulti5";
+				defaultValue = """true""";
 			};
 		};
 	};

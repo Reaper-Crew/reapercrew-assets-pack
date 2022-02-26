@@ -17,10 +17,10 @@
  * Public: No
  */
 
-params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode"];
+params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup"];
 
-[_spawnPoint, _squadArray, _squadSkill, _rushMode] spawn {
-	params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode"];
+[_spawnPoint, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup] spawn {
+	params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup"];
 	diag_log "SCENARIO: Running reinforcement spawn script";
 	// Spawn the group
 	_spawnedGroup = [_spawnPoint, reaperCrew_reinforcements_side, _squadArray, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
@@ -42,6 +42,11 @@ params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode"];
 
 	// Make them rush
 	[_spawnedGroup, 2000] spawn lambs_wp_fnc_taskRush;
+
+	// Run extra code
+	_extraCodeString = format ['params ["_thisGroup"]; %1', _codeOnSpawnGroup];
+	_codeCompile = compile _extraCodeString;
+	[_spawnedGroup] call _codeCompile;
 };
 
 

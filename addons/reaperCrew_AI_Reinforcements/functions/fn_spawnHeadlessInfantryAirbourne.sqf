@@ -14,7 +14,7 @@
  * Public: No
  */
 
-params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill"];
+params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup"];
 
 diag_log "SCENARIO: Running reinforcements script";
 
@@ -74,4 +74,9 @@ _waypoint setWaypointStatements ["true", "[this, 2000] spawn lambs_wp_fnc_taskRu
 _waypoint setWaypointForceBehaviour true;
 _waypoint setWaypointBehaviour "AWARE";
 
-_infantryGroup
+_infantryGroup;
+
+// Run extra code
+_extraCodeString = format ['params ["_thisGroup"]; %1', _codeOnSpawnGroup];
+_codeCompile = compile _extraCodeString;
+[_infantryGroup] call _codeCompile;

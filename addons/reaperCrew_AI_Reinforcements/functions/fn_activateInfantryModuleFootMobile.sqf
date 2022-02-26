@@ -16,6 +16,7 @@ while {isNil "activeInfantryTriggers"} do {
 	_zoneThreshold = _triggerObject getVariable ["zoneThreshold",20];
 	_reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 	_rushMode = _triggerObject getVariable ["rushMode",false];
+	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 
 	// Do for as long as trigger is active
 	while { triggerActivated _triggerObject } do {
@@ -42,7 +43,7 @@ while {isNil "activeInfantryTriggers"} do {
 			_randomSpawn = (selectRandom activeInfantryTriggers);
 
 			// Send the command to spawn units
-			[[getPos _randomSpawn, _squadArray, _squadSkill, _rushMode], "reapercrew_reinforcements_fnc_spawnHeadlessInfantry"] call reapercrew_common_fnc_executeDistributed;
+			[[getPos _randomSpawn, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantry"] call reapercrew_common_fnc_executeDistributed;
 
 			// Reduce the number of available reinforcements
 			_reinforcementsCount = (_reinforcementsCount - _squadCount);

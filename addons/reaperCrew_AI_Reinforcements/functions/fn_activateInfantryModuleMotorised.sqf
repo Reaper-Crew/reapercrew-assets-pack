@@ -39,6 +39,7 @@ while {isNil "activeVehicleTriggers"} do {
 	_distanceMax = _triggerObject getVariable ["distanceMax",800];
 	_rushMode = _triggerObject getVariable ["rushMode",false];
 	_reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
+	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 
 	// Run code only while the trigger is activated
 	while { triggerActivated _triggerObject } do {
@@ -93,7 +94,7 @@ while {isNil "activeVehicleTriggers"} do {
 				diag_log format ["SCENARIO: Search complete, found position of %1", _landingPosition];
 			};
 
-			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
+			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
 
 			// Adjust the number of available reinforcements
 			_reinforcementsCount = _reinforcementsCount - _unitCount;

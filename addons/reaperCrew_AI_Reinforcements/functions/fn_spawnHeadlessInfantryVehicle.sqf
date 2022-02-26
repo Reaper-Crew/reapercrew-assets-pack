@@ -14,7 +14,7 @@
  * Public: No
  */
 
-params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill"];
+params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup"];
 
 diag_log "SCENARIO: Running reinforcements script";
 
@@ -60,3 +60,8 @@ _waypoint setWaypointForceBehaviour true;
 _waypoint setWaypointBehaviour "AWARE";
 
 driver _vehicle setSkill 1; // Always get the driver to high skill for better driving
+
+// Run extra code
+_extraCodeString = format ['params ["_thisGroup"]; %1', _codeOnSpawnGroup];
+_codeCompile = compile _extraCodeString;
+[_spawnedGroup] call _codeCompile;

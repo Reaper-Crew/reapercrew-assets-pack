@@ -20,6 +20,7 @@ _useRegularTroops = _logic getVariable ["regularTroops",true];
 _useEliteTroops = _logic getVariable ["eliteTroops",false];
 _useSpecialForces = _logic getVariable ["specialTroops",false];
 _rushMode = _logic getVariable ["rushMode",false];
+_codeOnSpawnGroup = _logic getVariable ["codeOnSpawnGroup",""];
 
 // Build array of available squads
 _troopsArrays = [];
@@ -45,6 +46,7 @@ _activationTrigger setVariable ["reinforcementCount", _reinforcementsCount];
 _activationTrigger setVariable ["zoneThreshold", _zoneThreshold];
 _activationTrigger setVariable ["logicArea2D", _logicArea2D];
 _activationTrigger setVariable ["rushMode", _rushMode];
+_activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];
 
 diag_log "SCENARIO: Run init";
 
