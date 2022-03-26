@@ -3,7 +3,7 @@ params ["_triggerObject"];
 // Don't run if the array isn't available
 while {isNil "activeInfantryTriggers"} do {
 	if (reaperCrew_InfantrySpawnCheckbox == true) then {
-		diag_log "SCENARIO: Infantry triggers undefined, sleeping";
+		diag_log "[REINFORCEMENTS]: Infantry triggers undefined, sleeping";
 	};
 	sleep 15;
 };
@@ -27,8 +27,8 @@ while {isNil "activeInfantryTriggers"} do {
 
 		// Output debug information
 		if (reaperCrew_ReinforcementsCheckbox == true) then {
-			diag_log format ["SCENARIO: Reinforcements module is active, found %1 enemies within the zone", _opforCount];
-			diag_log format ["SCENARIO: Available squad choices: %1", _reinforcementGroups];
+			diag_log format ["[REINFORCEMENTS]: Reinforcements module is active, found %1 enemies within the zone", _opforCount];
+			diag_log format ["[REINFORCEMENTS]: Available squad choices: %1", _reinforcementGroups];
 		};
 
 		// Select a random squad
@@ -52,7 +52,7 @@ while {isNil "activeInfantryTriggers"} do {
 
 			// Output debug information
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["SCENARIO: Reinforcements created, %1 infantry remain", _reinforcementsCount];
+				diag_log format ["[REINFORCEMENTS]: Reinforcements created, %1 infantry remain", _reinforcementsCount];
 			};
 
 		};

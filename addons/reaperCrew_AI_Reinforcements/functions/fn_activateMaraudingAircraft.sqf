@@ -23,7 +23,7 @@ diag_log (_triggerObject getVariable ["AircraftsArray",[]]);
 
 			// Output debug information
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["SCENARIO: Marauding Aircrafts are active, %1 remain", _AircraftCount];
+				diag_log format ["[REINFORCEMENTS]: Marauding Aircrafts are active, %1 remain", _AircraftCount];
 			};
 
 			_randomSpawn = (selectRandom activeAircraftTriggers);
@@ -34,7 +34,7 @@ diag_log (_triggerObject getVariable ["AircraftsArray",[]]);
 
 		} else {
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log "SCENARIO: Module alive but conditions not met";
+				diag_log "[REINFORCEMENTS]: Module alive but conditions not met";
 			};
 		};
 		_sleepTimer = [_AircraftFrequencyMin,_AircraftFrequencyMax] call BIS_fnc_randomInt;

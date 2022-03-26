@@ -21,7 +21,7 @@ params ["_spawnPoint", "_vehicleClassname", "_vehicleSkill", "_destination"];
 
 [_spawnPoint, _vehicleClassname, _vehicleSkill, _destination] spawn {
 	params ["_spawnPoint", "_vehicleClassname", "_vehicleSkill", "_destination"];
-	diag_log "SCENARIO: Running vehicle reinforcement spawn script";
+	diag_log "[REINFORCEMENTS]: Running vehicle reinforcement spawn script";
 	// Spawn the group
 	_spawnedVehicle = [_spawnPoint, 0, _vehicleClassname, reaperCrew_reinforcements_side] call BIS_fnc_spawnVehicle;
 	_spawnedGroup = _spawnedVehicle select 2;

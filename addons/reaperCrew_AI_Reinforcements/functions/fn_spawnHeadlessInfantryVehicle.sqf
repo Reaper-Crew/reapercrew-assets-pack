@@ -16,7 +16,7 @@
 
 params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup"];
 
-diag_log "SCENARIO: Running reinforcements script";
+diag_log "[REINFORCEMENTS]: Running reinforcements script";
 
 // Create the transport vehicle
 _vehicle = createVehicle [_vehicleClass, _spawnPosition];

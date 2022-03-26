@@ -6,7 +6,7 @@ _activated = param [2,true,[true]];
 // Don't run if the array isn't available
 while {isNil "activeInfantryTriggers"} do {
 	if (reaperCrew_ReinforcementsCheckbox == true) then {
-		diag_log "SCENARIO: Infantry triggers undefined, sleeping";
+		diag_log "[REINFORCEMENTS]: Infantry triggers undefined, sleeping";
 	};
 	sleep 60;
 };
@@ -50,7 +50,7 @@ _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];
 _activationTrigger setVariable ["waveDelay", _waveDelay];
 
-diag_log "SCENARIO: Run init";
+diag_log "[REINFORCEMENTS]: Run init";
 
 
 
@@ -70,8 +70,8 @@ diag_log "SCENARIO: Run init";
 
 // 	// Output debug information if enabled
 // 	if (reaperCrew_ReinforcementsCheckbox == true) then {
-// 		diag_log format ["SCENARIO: Reinforcements logic area is: %1", _logicArea];
-// 		diag_log format ["SCENARIO: Reinforcements logic area 2D is: %1", _logicArea2D];
+// 		diag_log format ["[REINFORCEMENTS]: Reinforcements logic area is: %1", _logicArea];
+// 		diag_log format ["[REINFORCEMENTS]: Reinforcements logic area 2D is: %1", _logicArea2D];
 // 	};
 
 // 	while { triggerActivated _activationTrigger } do {
@@ -82,7 +82,7 @@ diag_log "SCENARIO: Run init";
 // 		_opforCounter = count _opforUnits;
 // 		// Output debug information
 		// if (reaperCrew_ReinforcementsCheckbox == true) then {
-		// 	diag_log format ["SCENARIO: Reinforcements module is active, found %1 enemies within the zone", _opforCounter];
+		// 	diag_log format ["[REINFORCEMENTS]: Reinforcements module is active, found %1 enemies within the zone", _opforCounter];
 		// };
 
 // 		// Change to IF statements to prevent loop getting into stuck state
@@ -98,30 +98,30 @@ diag_log "SCENARIO: Run init";
 //     			[_triggerPos] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessInfantry", _selectedClient];
 // 				// Output debug information
 // 				if (reaperCrew_ReinforcementsCheckbox == true) then {
-// 					diag_log format ["SCENARIO: Spawning reinforcements on client %1 at grid %2", name(_selectedClient), (mapGridPosition _randomTrigger)];
+// 					diag_log format ["[REINFORCEMENTS]: Spawning reinforcements on client %1 at grid %2", name(_selectedClient), (mapGridPosition _randomTrigger)];
 // 				};
 
 // 			} else {
 // 				// If no HCs are available, spawn it on the server
 // 				[_triggerPos] remoteExecCall ["reapercrew_reinforcements_fnc_spawnHeadlessInfantry", 2];
 // 				if (reaperCrew_ReinforcementsCheckbox == true) then {
-// 					diag_log format ["SCENARIO: Spawning reinforcements at grid %1", (mapGridPosition _randomTrigger)];
+// 					diag_log format ["[REINFORCEMENTS]: Spawning reinforcements at grid %1", (mapGridPosition _randomTrigger)];
 // 				};
 // 			};
 
 			// // Reduce the number of available reinforcements
 			// _reinforcementsCount = _reinforcementsCount - _unitCount;
 			// if (reaperCrew_ReinforcementsCheckbox == true) then {
-			// 	diag_log format ["SCENARIO: Reinforcements created, %1 infantry remain", _reinforcementsCount];
+			// 	diag_log format ["[REINFORCEMENTS]: Reinforcements created, %1 infantry remain", _reinforcementsCount];
 			// };
 // 		} else {
 // 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-// 				diag_log format ["SCENARIO: Zone above threshold, spawning paused or no spawnpoints available - not spawning reinforcements"];
+// 				diag_log format ["[REINFORCEMENTS]: Zone above threshold, spawning paused or no spawnpoints available - not spawning reinforcements"];
 // 			};
 // 		};
 // 		sleep 60;
 // 	};
-// 	diag_log format ["SCENARIO: Trigger has been deactivated"];
+// 	diag_log format ["[REINFORCEMENTS]: Trigger has been deactivated"];
 // };
 
 // true

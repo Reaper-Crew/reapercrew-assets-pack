@@ -19,7 +19,7 @@ params ["_triggerObject"];
 // Don't run if the array isn't available
 while {isNil "activeAircraftTriggers"} do {
 	if (reaperCrew_AircraftSpawnCheckbox == true) then {
-		diag_log "SCENARIO: Aircraft triggers undefined, sleeping";
+		diag_log "[REINFORCEMENTS]: Aircraft triggers undefined, sleeping";
 	};
 	sleep 15;
 };
@@ -57,7 +57,7 @@ while { triggerActivated _triggerObject } do {
 
 		// Output debug information if enabled
 		if (reaperCrew_ReinforcementsCheckbox == true) then {
-			diag_log format ["SCENARIO: Spawning a group of %1 units using helicopter of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount];
+			diag_log format ["[REINFORCEMENTS]: Spawning a group of %1 units using helicopter of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount];
 		};
 
 		// Find landing position
@@ -75,13 +75,13 @@ while { triggerActivated _triggerObject } do {
 			_landingPosition = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsAircraft];
 
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["SCENARIO: Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius];
+				diag_log format ["[REINFORCEMENTS]: Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius];
 			};
 
 		};
 
 		if (reaperCrew_ReinforcementsCheckbox == true) then {
-			diag_log format ["SCENARIO: Search complete, found position of %1", _landingPosition];
+			diag_log format ["[REINFORCEMENTS]: Search complete, found position of %1", _landingPosition];
 		};
 
 		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
@@ -93,4 +93,4 @@ while { triggerActivated _triggerObject } do {
 	};
 	sleep _waveDelay;
 };
-diag_log "SCENARIO: Helicopter spawning has ended";
+diag_log "[REINFORCEMENTS]: Helicopter spawning has ended";

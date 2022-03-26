@@ -3,7 +3,7 @@ activeInfantryTriggers = [];
 activeVehicleTriggers = [];
 activeAircraftTriggers = [];
 
-if (!isServer) exitWith {diag_log "SCENARIO: Server checked failed - skipping reinforcements system"};
+if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - skipping reinforcements system"};
 
 // Output debug information
 [] spawn {
@@ -11,7 +11,7 @@ if (!isServer) exitWith {diag_log "SCENARIO: Server checked failed - skipping re
 	// Infantry Spawns
 	while { true } do {
 		if (reaperCrew_InfantrySpawnCheckbox == true) then {
-			diag_log format ["SCENARIO: Found the following active infantry triggers: %1", activeInfantryTriggers];
+			diag_log format ["[REINFORCEMENTS]: Found the following active infantry triggers: %1", activeInfantryTriggers];
 		};
 		sleep 15;
 	};
@@ -23,7 +23,7 @@ if (!isServer) exitWith {diag_log "SCENARIO: Server checked failed - skipping re
 	// Vehicle Spawns
 	while { true } do {
 		if (reaperCrew_VehicleSpawnCheckbox == true) then {
-			diag_log format ["SCENARIO: Found the following active vehicle triggers: %1", activeVehicleTriggers];
+			diag_log format ["[REINFORCEMENTS]: Found the following active vehicle triggers: %1", activeVehicleTriggers];
 		};
 		sleep 15;
 	};
@@ -35,7 +35,7 @@ if (!isServer) exitWith {diag_log "SCENARIO: Server checked failed - skipping re
 	// Aircraft Spawns
 	while { true } do {
 		if (reaperCrew_AircraftSpawnCheckbox == true) then {
-			diag_log format ["SCENARIO: Found the following active aircraft triggers: %1", activeAircraftTriggers];
+			diag_log format ["[REINFORCEMENTS]: Found the following active aircraft triggers: %1", activeAircraftTriggers];
 		};
 		sleep 15;
 	};

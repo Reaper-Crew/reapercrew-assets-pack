@@ -22,7 +22,7 @@ diag_log (allVariables _triggerObject);
 // Don't run if the array isn't available
 while {isNil "activeVehicleTriggers"} do {
 	if (reaperCrew_VehicleSpawnCheckbox == true) then {
-		diag_log "SCENARIO: Vehicle triggers undefined, sleeping";
+		diag_log "[REINFORCEMENTS]: Vehicle triggers undefined, sleeping";
 	};
 	sleep 15;
 };
@@ -68,7 +68,7 @@ while {isNil "activeVehicleTriggers"} do {
 
 			// Output debug information if enabled
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["SCENARIO: Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsVehicle, _reinforcementsCount];
+				diag_log format ["[REINFORCEMENTS]: Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsVehicle, _reinforcementsCount];
 			};
 
 			// Find landing position
@@ -86,13 +86,13 @@ while {isNil "activeVehicleTriggers"} do {
 				_landingPosition = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsVehicle];
 
 				if (reaperCrew_ReinforcementsCheckbox == true) then {
-					diag_log format ["SCENARIO: Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius];
+					diag_log format ["[REINFORCEMENTS]: Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius];
 				};
 
 			};
 
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["SCENARIO: Search complete, found position of %1", _landingPosition];
+				diag_log format ["[REINFORCEMENTS]: Search complete, found position of %1", _landingPosition];
 			};
 
 			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
@@ -104,6 +104,6 @@ while {isNil "activeVehicleTriggers"} do {
 		};
 		sleep _waveDelay;
 	};
-	diag_log "SCENARIO: vehicle spawning has ended";
+	diag_log "[REINFORCEMENTS]: vehicle spawning has ended";
 
 };

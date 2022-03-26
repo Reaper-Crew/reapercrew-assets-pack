@@ -4,17 +4,17 @@ _units = param [1,[],[[]]];
 _activated = param [2,true,[true]];
 
 // Only run on the server
-if (!isServer) exitWith {diag_log "SCENARIO: Server checked failed - Not initialising init for infantry spawns"};
+if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - Not initialising init for infantry spawns"};
 
 // Don't run if the array isn't available
 while {isNil "activeInfantryTriggers"} do {
 	if (reaperCrew_InfantrySpawnCheckbox == true) then {
-		diag_log "SCENARIO: Infantry triggers undefined, sleeping";
+		diag_log "[REINFORCEMENTS]: Infantry triggers undefined, sleeping";
 	};
 	sleep 15;
 };
 
-diag_log "SCENARIO: Initialising infantry spawnpoint module";
+diag_log "[REINFORCEMENTS]: Initialising infantry spawnpoint module";
 
 // Get variables
 _additionalCondition = _logic getVariable ["additionalCondition", "true"];
@@ -27,7 +27,7 @@ _outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _outerZone setTriggerStatements [_triggerCondition, " activeInfantryTriggers pushBack thisTrigger; ", " activeInfantryTriggers = activeInfantryTriggers - [thisTrigger]; "];
 
 if (reaperCrew_InfantrySpawnCheckbox == true) then {
-	diag_log format ["SCENARIO: Trigger condition is: %1", _triggerCondition];
+	diag_log format ["[REINFORCEMENTS]: Trigger condition is: %1", _triggerCondition];
 };
 
 

@@ -4,17 +4,17 @@ _units = param [1,[],[[]]];
 _activated = param [2,true,[true]];
 
 // Only run on the server
-if (!isServer) exitWith {diag_log "SCENARIO: Server checked failed - Not initialising init for Vehicle spawns"};
+if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - Not initialising init for Vehicle spawns"};
 
 // Don't run if the array isn't available
 while {isNil "activeVehicleTriggers"} do {
 	if (reaperCrew_VehicleSpawnCheckbox == true) then {
-		diag_log "SCENARIO: Vehicle triggers undefined, sleeping";
+		diag_log "[REINFORCEMENTS]: Vehicle triggers undefined, sleeping";
 	};
 	sleep 15;
 };
 
-diag_log "SCENARIO: Initialising Vehicle spawnpoint module";
+diag_log "[REINFORCEMENTS]: Initialising Vehicle spawnpoint module";
 
 // Get variables
 _additionalCondition = _logic getVariable ["additionalCondition", "true"];
@@ -27,7 +27,7 @@ _outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _outerZone setTriggerStatements [_triggerCondition, " activeVehicleTriggers pushBack thisTrigger; ", " activeVehicleTriggers = activeVehicleTriggers - [thisTrigger]; "];
 
 if (reaperCrew_VehicleSpawnCheckbox == true) then {
-	diag_log format ["SCENARIO: Trigger condition is: %1", _triggerCondition];
+	diag_log format ["[REINFORCEMENTS]: Trigger condition is: %1", _triggerCondition];
 };
 
 

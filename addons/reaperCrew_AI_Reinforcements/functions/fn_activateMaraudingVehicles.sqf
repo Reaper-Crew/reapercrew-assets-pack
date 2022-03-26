@@ -24,7 +24,7 @@ diag_log (_triggerObject getVariable ["vehiclesArray",[]]);
 
 			// Output debug information
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["SCENARIO: Marauding vehicles are active, %1 remain", _vehicleCount];
+				diag_log format ["[REINFORCEMENTS]: Marauding vehicles are active, %1 remain", _vehicleCount];
 			};
 
 			_randomSpawn = (selectRandom activeVehicleTriggers);
@@ -35,7 +35,7 @@ diag_log (_triggerObject getVariable ["vehiclesArray",[]]);
 
 		} else {
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log "SCENARIO: Module alive but conditions not met";
+				diag_log "[REINFORCEMENTS]: Module alive but conditions not met";
 			};
 		};
 		_sleepTimer = [_vehicleFrequencyMin,_vehicleFrequencyMax] call BIS_fnc_randomInt;
