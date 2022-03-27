@@ -258,6 +258,10 @@ class CfgVehicles
                 name = ACE_bloodIV_500;
                 count = 50;
             };
+            class blood_250 {
+                name = ACE_bloodIV_250;
+                count = 50;
+            };
             class elasticbandage {
                 name = ACE_elasticBandage;
                 count = 50;
