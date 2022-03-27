@@ -17,18 +17,26 @@
 
 params ["_callParams", "_functionName"];
 
+// Don't run if the array isn't available
+while {isNil "HeadlessClients"} do {
+	if (reaperCrew_ReinforcementsCheckbox == true) then {
+		diag_log "[COMMON]: Headless client data not available - queuing command";
+	};
+	sleep 15;
+};
+
 // Check if HC is available
 if (count HeadlessClients > 0) then {
 	//If yes, execute on random HC
 	_selectedClient = selectRandom HeadlessClients;
 	_callParams remoteExecCall [_functionName, _selectedClient];
 	if (reaperCrew_ReinforcementsCheckbox == true) then {
-		diag_log format ["SCENARIO: Headless client is available, sending request to %1", _selectedClient];
+		diag_log format ["[COMMON]: Headless client is available, sending request to %1", _selectedClient];
 	};
 } else {
 	//If no, execute on server
 	_callParams remoteExecCall [_functionName, 2];
 	if (reaperCrew_ReinforcementsCheckbox == true) then {
-		diag_log "SCENARIO: No headless clients available, executing request on server";
+		diag_log "[COMMON]: No headless clients available, executing request on server";
 	};
 };
