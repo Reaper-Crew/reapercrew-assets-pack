@@ -35,6 +35,12 @@
 // Mortar
 ["reaperCrew_82mmCheckbox", "CHECKBOX", ["Add 82mm Mortar crate", "Should a 82mm mortar crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Logistics Settings"]] call cba_settings_fnc_init;
 
+// Artillery - 105mm CUP
+["reaperCrew_105mmCUPCheckbox", "CHECKBOX", ["105mm Shells (requires CUP)", "Should a 105mm shells crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Logistics Settings"]] call cba_settings_fnc_init;
+
+// Artillery - 122mm CUP
+["reaperCrew_122mmCUPCheckbox", "CHECKBOX", ["122mm Shells (requires CUP)", "Should a 122mm shells crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Logistics Settings"]] call cba_settings_fnc_init;
+
 // Vehicle Fuel
 ["reaperCrew_VehicleFuelCheckbox", "CHECKBOX", ["Add Vehicle Fuel barrels", "Should a vehicle fuel crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Logistics Settings"]] call cba_settings_fnc_init;
 

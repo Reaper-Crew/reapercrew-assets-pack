@@ -12,7 +12,9 @@ class CfgPatches
 			"ReaperCrew_PlasticCase_Medical",
 			"RC_CargoNet_01_barrels_F",
 			"RC_VirtualReammoBox_F",
-			"reaperCrew_moduleResupplyPoint"
+			"reaperCrew_moduleResupplyPoint",
+			"ReaperCrew_Shells105CUP",
+			"ReaperCrew_Shells122CUP"
 		};
 		weapons[] = {""};
 		vehicles[] = {""};
@@ -120,6 +122,58 @@ class CfgVehicles
             };
 			class Smoke {
                 name = ACE_1Rnd_82mm_Mo_Smoke;
+                count = 50;
+            };
+		};
+	};
+	class ReaperCrew_Shells105CUP: ReaperCrew_SupplyCrate {	
+		displayName="Supply Crate (105mm Shells)";
+		scope=2;
+		scopeCurator=2;
+		class TransportItems
+		{
+            class HE {
+                name = CUP_compats_105mm_he;
+                count = 50;
+            };
+			class WP {
+                name = CUP_compats_105mm_wp;
+                count = 50;
+            };
+			class Illum {
+                name = CUP_compats_105mm_illum;
+                count = 50;
+            };
+			class HELaserGuided {
+                name = CUP_compats_105mm_laser;
+                count = 50;
+            };
+			class Smoke {
+                name = CUP_compats_105mm_smoke;
+                count = 50;
+            };
+		};
+	};
+	class ReaperCrew_Shells122CUP: ReaperCrew_SupplyCrate {	
+		displayName="Supply Crate (122mm Shells)";
+		scope=2;
+		scopeCurator=2;
+		class TransportItems
+		{
+            class HE {
+                name = CUP_compats_122mm_he;
+                count = 50;
+            };
+			class Illum {
+                name = CUP_compats_122mm_illum;
+                count = 50;
+            };
+			class HELaserGuided {
+                name = CUP_compats_122mm_laser;
+                count = 50;
+            };
+			class Smoke {
+                name = CUP_compats_122mm_smoke;
                 count = 50;
             };
 		};

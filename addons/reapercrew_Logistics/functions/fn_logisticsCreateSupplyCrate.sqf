@@ -28,6 +28,12 @@ switch (_crateType) do {
 	case "82Mortar": {
 		_classname = "ReaperCrew_Shells82";
 	};
+	case "105CUP": {
+		_classname = "ReaperCrew_Shells105CUP";
+	};
+	case "122CUP": {
+		_classname = "ReaperCrew_Shells122CUP";
+	};
 	case "vehicleFuel": {
 		_classname = "RC_CargoNet_01_barrels_F";
 	};
