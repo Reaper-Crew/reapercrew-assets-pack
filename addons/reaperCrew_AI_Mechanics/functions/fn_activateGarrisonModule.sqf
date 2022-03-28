@@ -20,7 +20,7 @@
 */
 
 // Variables
-params ["_maxCount", "_logic", "_logicAreaData", "_troopArrays", "_codeOnSpawn"];
+params ["_maxCount", "_logic", "_logicAreaData", "_troopArrays", "_codeOnSpawn", "_groupSide"];
 
 // Extract Position data
 _logicPosition = getPos _logic;
@@ -53,6 +53,6 @@ _buildingsListUnique = [];
 } forEach _buildingsData;
 
 // Call spawn script
-[[_logicPosition, _buildingsListUnique, _maxCount, _troopArrays, _codeOnSpawn], "reapercrew_ai_mechanics_fnc_remoteGarrisonSpawn"] call reapercrew_common_fnc_executeDistributed;
+[[_logicPosition, _buildingsListUnique, _maxCount, _troopArrays, _codeOnSpawn, _groupSide], "reapercrew_ai_mechanics_fnc_remoteGarrisonSpawn"] call reapercrew_common_fnc_executeDistributed;
 
 

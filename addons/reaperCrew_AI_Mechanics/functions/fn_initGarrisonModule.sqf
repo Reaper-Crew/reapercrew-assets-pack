@@ -49,5 +49,6 @@ if (_useSpecialForces) then {
   _logic,
   _logicArea,
   _troopsArrays,
-  _codeOnSpawnGroup
+  _codeOnSpawnGroup,
+  reaperCrew_reinforcements_side
 ] call reapercrew_ai_mechanics_fnc_activateGarrisonModule;

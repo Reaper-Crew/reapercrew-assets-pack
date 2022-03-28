@@ -18,7 +18,7 @@
 * Public: No
 */
 
-params ["_centerPosition", "_positions", "_totalCount", "_unitsArray", "_codeOnSpawn"];
+params ["_centerPosition", "_positions", "_totalCount", "_unitsArray", "_codeOnSpawn", "_groupSide"];
 
 _totalIterations = 0;
 _garrisonUnits = [];
@@ -37,7 +37,7 @@ for "_i" from 1 to _totalIterations do {
 };
 
 // Spawn a group of that size
-_spawnedGroup = [_centerPosition, reaperCrew_reinforcements_side, _garrisonUnits, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
+_spawnedGroup = [_centerPosition, _groupSide, _garrisonUnits, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
 _spawnedGroup enableDynamicSimulation true;
 
 _spawnUnitsArray = units _spawnedGroup;
