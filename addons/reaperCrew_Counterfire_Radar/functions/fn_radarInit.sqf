@@ -30,6 +30,9 @@ while {isNil "playerCounterBatterySystems"} do {
 	sleep 15;
 };
 
+// Lock the vehicle
+_radarUnit setVehicleLock "LOCKED";
+
 // Register asset in the pool
 playerCounterBatterySystems pushback _radarUnit;
 // playerCounterBatterySystems = playerCounterBatterySystems + _radarUnit;
@@ -43,12 +46,52 @@ _randomName = [100000000,99999999] call BIS_fnc_randomInt;
 _randomMarkerName = format ["RadarZone%1", _randomName];
 
 _radarZone = createMarker [_randomMarkerName, (getPos _radarUnit)];
-_radarZone setMarkerColor "ColorRed";
+_radarZone setMarkerColor "ColorOrange";
 _radarZone setMarkerShape "ELLIPSE";
 _radarZone setMarkerSize [_detectionZone, _detectionZone];
 _radarZone setMarkerBrush "Border";
-_radarZone setMarkerAlpha 0;
+// _radarZone setMarkerAlpha 0;
 
 // Save variables to object namespace
 _radarUnit setVariable ["_radarZone", _radarZone, true];
 _radarUnit setVariable ["_radarKnowledge", [], true];
+
+// Add Actions
+[
+	_radarUnit,
+	["Switch Generator On",
+	{ params ["_target", "_caller", "_actionId", "_arguments"]; _target engineOn true; },
+	nil,
+	1.5,
+	false,
+	false,
+	"",
+	"_this distance _target < 5 && (isEngineOn _target) == false",
+	5]
+] remoteExec ["addAction", 0, true];
+
+[
+	_radarUnit,
+	["Switch Generator Off",
+	{ params ["_target", "_caller", "_actionId", "_arguments"]; _target engineOn false; },
+	nil,
+	1.5,
+	false,
+	false,
+	"",
+	"_this distance _target < 5 && (isEngineOn _target) == true",
+	5]
+] remoteExec ["addAction", 0, true];
+
+[
+	_radarUnit,
+	["Check fuel level",
+	{ params ["_target", "_caller", "_actionId", "_arguments"]; hint format ["Generator has %1 % fuel", ((fuel _target) * 100)]; },
+	nil,
+	1.5,
+	false,
+	false,
+	"",
+	"_this distance _target < 5",
+	5]
+] remoteExec ["addAction", 0, true];

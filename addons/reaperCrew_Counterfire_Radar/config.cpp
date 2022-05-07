@@ -30,19 +30,25 @@ class CfgFunctions
 		{
 			file = "rc_assets_pack\addons\reaperCrew_counterfire_radar\functions";
 
+			// Container Management
 			class containerDeploy{};
 			class clientContainerDeploy{};
 
+			// Initialisation
+			class systemInit{postInit = 1;};
+			class playerCBAEventHandlers {postInit = 1;};
 			class radarInit{};
 
+			// Events
 			class eventFired{};
-			class eventGetIn{};
-			class eventGetOut{};
+			class MarkerAdd {};
+			class MarkerUpdate {};
 
-			class systemInit{
-				postInit = 1;
-			};
+			// Long Running Tasks
 			class systemScheduledTasks{};
+
+			// Validation
+			class validateNotification{};
 		};
 	};
 };
@@ -61,13 +67,13 @@ class CfgVehicles
         };
 		class EventHandlers {};
 	};
-	class Land_Cargo20_military_green_F {
+	class B_Slingload_01_Cargo_F {
 		class ACE_Actions {
             class ACE_MainActions{};
         };
 	};
 
-	class reaperCrew_TPQ_50_Static_Container: Land_Cargo20_military_green_F {
+	class reaperCrew_TPQ_50_Static_Container: B_Slingload_01_Cargo_F {
 		editorCategory = "reaperCrew";
 		editorSubcategory="reaperCrewMortarObjects";
 		displayName="TPQ-50 Transport Container";
@@ -94,20 +100,21 @@ class CfgVehicles
 		scope=0;
 		scopeCurator=0;
 
+		hasDriver = false;
 		hasGunner = false;
 		hasCommander =false;
 
 		class EventHandlers : EventHandlers {
 			init = "[(_this select 0)] call reapercrew_counterBattery_fnc_radarInit";
-			getIn = "diag_log _this; [(_this select 0)] remoteExec ['reapercrew_counterBattery_fnc_eventGetIn', (_this select 2)];";
-			getOut = "diag_log _this; [(_this select 0)] remoteExec ['reapercrew_counterBattery_fnc_eventGetOut', (_this select 2)];";
+			// getIn = "diag_log _this; [(_this select 0)] remoteExec ['reapercrew_counterBattery_fnc_eventGetIn', (_this select 2)];";
+			// getOut = "diag_log _this; [(_this select 0)] remoteExec ['reapercrew_counterBattery_fnc_eventGetOut', (_this select 2)];";
 		};
 		
 		class counterBattery {
 			detectionRadius = 6180; // 30km2 radius
+			transmissionDistance = 250;
 		};
 
-		driverAction = "gunner_offroad01";
 
 		class TransportItems{};
 		class TransportMagazines{};
@@ -144,6 +151,34 @@ class CfgVehicles
 					statement = "['reaperCrew_TPQ_50_Static_Container', _target] call reapercrew_counterBattery_fnc_clientContainerDeploy";
 				};
 			};
+		};
+	};
+
+
+
+};
+class CfgWeapons
+{
+	class Default;
+	class ItemCore: Default {};
+	class InventoryItem_Base_F {};
+	class ToolKitItem: InventoryItem_Base_F {};
+	class ToolKit: ItemCore {};
+	class DataTabletItem: ToolKitItem {};
+
+	class DataLinkTablet: ItemCore
+	{
+		author="$STR_A3_Bohemia_Interactive";
+		_generalMacro="ToolKit";
+		scope=2;
+		displayName="Data Link Tablet";
+		descriptionShort="Tablet allows you to retrieve information";
+		picture="\A3\Drones_F\Weapons_F_Gamma\Items\data\UI\gear_UAV_controller_rgr_CA.paa";
+		model="\a3\Drones_F\Weapons_F_Gamma\Items\UAV_controller_F";
+		class ItemInfo: DataTabletItem
+		{
+			mass=20;
+			uniformModel="\A3\Weapons_F\Items\GPS";
 		};
 	};
 };
