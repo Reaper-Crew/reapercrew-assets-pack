@@ -14,7 +14,9 @@ class CfgPatches
 			"RC_VirtualReammoBox_F",
 			"reaperCrew_moduleResupplyPoint",
 			"ReaperCrew_Shells105CUP",
-			"ReaperCrew_Shells122CUP"
+			"ReaperCrew_Shells122CUP",
+			"reaperCrew_FOB_Crate",
+			"reaperCrew_ConstructionSupplies500"
 		};
 		weapons[] = {""};
 		vehicles[] = {""};
@@ -51,6 +53,7 @@ class CfgFunctions
 			class logisticsCreateAmmoSource{};
 			class logisticsAddActions{};
 			class logisticsModuleInit{};
+			class logisticsConsolidateSupplies{};
 		};
 	};
 };
@@ -373,4 +376,6 @@ class CfgVehicles
 		class TransportMagazines{};
 		class TransportWeapons{};
 	};
+	class B_Slingload_01_Cargo_F;
+	#include "cfgVehiclesFOB.hpp"
 };
