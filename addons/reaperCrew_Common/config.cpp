@@ -116,37 +116,6 @@ class CfgVehicles
 		scopeCurator = 1;
 		functionPriority = 1;
 	};
-	
-	// class reaperCrew_moduleScanArea: reaperCrew_module_base
-	// {
-	// 	displayName = "Scan area";
-	// 	function = "reaperCrew_fnc_scanAreaModuleInit";
-	// 	category = "reaperCrew_ModulesAI";
-	// 	scope = 1;
-	// 	scopeCurator = 2;
-	// 	isGlobal = 1;
-	// 	isTriggerActivated = 0;
-	// 	curatorCanAttach = 1;
-	// };
-	// class reaperCrew_moduleGarrison: reaperCrew_module_base
-	// {
-	// 	displayName = "Garrison Area (5 per building, 50m radius)";
-	// 	function = "reaperCrew_fnc_garrisonModuleInit";
-	// 	category = "reaperCrew_ModulesAI";
-	// 	scope = 1;
-	// 	scopeCurator = 2;
-	// };
-	// class reaperCrew_modulePrimaryFix: reaperCrew_module_base
-	// {
-	// 	displayName = "Primary Weapon Fix";
-	// 	function = "reaperCrew_fnc_primaryWeaponFix";
-	// 	category = "reaperCrew_ModulesAI";
-	// 	scope = 2;
-	// 	scopeCurator = 2;
-	// 	isGlobal = 1;
-	// 	isTriggerActivated = 0;
-	// 	curatorCanAttach = 1;
-	// };
 };
 class CfgFunctions
 {
@@ -159,6 +128,7 @@ class CfgFunctions
 			class sideChatMP{};
 			class monitorHeadlessClients{postInit = 1;};
 			class executeDistributed{};
+			class randomGear{};
 		};
 	};
 };
