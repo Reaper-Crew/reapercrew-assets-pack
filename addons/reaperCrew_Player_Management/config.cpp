@@ -6,7 +6,7 @@ class CfgPatches
 		weapons[]={};
 		requiredVersion=1;
 		requiredAddons[]=
-		{"ReaperCrew_Common"};
+		{"ReaperCrew_Common", "acre_sys_sounds"};
 	};
 };
 class CfgEditorCategories
@@ -61,4 +61,13 @@ class CfgVehicles
 		scopeCurator = 2;
 		isGlobal = 0;
 	};
+};
+class CfgAcreSounds {
+    class Acre_GenericBeep {
+        sound = "rc_assets_pack\addons\reaperCrew_Player_Management\sounds\TetraSquawkOn.b64";
+    };
+
+    class Acre_GenericClickOff {
+        sound = "rc_assets_pack\addons\reaperCrew_Player_Management\sounds\TetraSquawkOff.b64";
+    };
 };
