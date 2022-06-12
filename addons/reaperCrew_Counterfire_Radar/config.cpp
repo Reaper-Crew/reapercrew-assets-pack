@@ -77,6 +77,11 @@ class CfgVehicles
 		editorCategory = "reaperCrew";
 		editorSubcategory="reaperCrewMortarObjects";
 		displayName="TPQ-50 Transport Container";
+		ace_cargo_size = 8;
+		// ace_cargo_canLoad = 1;
+		// ace_cargo_hasCargo = 0;
+		ace_dragging_canDrag = 1;
+
 		class ACE_Actions: ACE_Actions {
             class ACE_MainActions: ACE_MainActions {
                 condition = "true";
@@ -103,11 +108,10 @@ class CfgVehicles
 		hasDriver = false;
 		hasGunner = false;
 		hasCommander =false;
+		ace_cargo_hasCargo = 0;
 
 		class EventHandlers : EventHandlers {
 			init = "[(_this select 0)] call reapercrew_counterBattery_fnc_radarInit";
-			// getIn = "diag_log _this; [(_this select 0)] remoteExec ['reapercrew_counterBattery_fnc_eventGetIn', (_this select 2)];";
-			// getOut = "diag_log _this; [(_this select 0)] remoteExec ['reapercrew_counterBattery_fnc_eventGetOut', (_this select 2)];";
 		};
 		
 		class counterBattery {
