@@ -23,9 +23,13 @@ _nearestObjects = nearestObjects [_cargoContainer, ["ReaperCrew_PlasticCase_Medi
 {
 	// Get a list of supplies
 	_itemsList = itemCargo _x;
+	_weaponsList = weaponCargo _x;
+	_magazineList = magazineCargo _x;
 
 	// Add them to the cargo container
 	{_cargoContainer addItemCargoGlobal [_x, 1]; } forEach _itemsList;
+	{_cargoContainer addWeaponCargoGlobal [_x, 1]; } forEach _weaponsList;
+	{_cargoContainer addMagazineCargoGlobal [_x, 1]; } forEach _magazineList;
 
 	// Delete the old vehicle
 	deleteVehicle _x;
