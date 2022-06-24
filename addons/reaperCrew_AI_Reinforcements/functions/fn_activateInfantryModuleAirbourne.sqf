@@ -58,6 +58,7 @@ while { triggerActivated _triggerObject } do {
 		// Output debug information if enabled
 		if (reaperCrew_ReinforcementsCheckbox == true) then {
 			diag_log format ["[REINFORCEMENTS]: Spawning a group of %1 units using helicopter of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount];
+			diag_log format ["[REINFORCEMENTS]: Threshold is %1 and the current number of units in the area is %2", _zoneThreshold, _opforCounter];
 		};
 
 		// Find landing position
