@@ -84,6 +84,14 @@ class CfgEditorCategories
 	};
 	
 };
+class CfgHintCategories
+{
+	class CampaignInfo
+	{
+		displayName="Campaign Information";
+		logicalOrder=0;
+	};
+};
 class CfgVehicles
 {
 	class Logic;
