@@ -78,8 +78,6 @@ class CfgVehicles
 		editorSubcategory="reaperCrewMortarObjects";
 		displayName="TPQ-50 Transport Container";
 		ace_cargo_size = 8;
-		// ace_cargo_canLoad = 1;
-		// ace_cargo_hasCargo = 0;
 		ace_dragging_canDrag = 1;
 
 		class ACE_Actions: ACE_Actions {
