@@ -14,6 +14,8 @@
 * Public: No
 */
 
+if (isServer) exitWith {diag_log "[COUNTER BATTERY]: Pre-check failed, this is running on a server - exiting"};
+
 _markerUpdate = ["playerCBMarkerUpdate", 
 	{  
 		[_this] call reapercrew_counterBattery_fnc_MarkerUpdate; 
