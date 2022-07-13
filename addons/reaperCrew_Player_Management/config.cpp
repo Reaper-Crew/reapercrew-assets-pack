@@ -63,11 +63,11 @@ class CfgVehicles
 	};
 };
 class CfgAcreSounds {
-    class Acre_GenericBeep {
+    class Acre_TetraOn {
         sound = "rc_assets_pack\addons\reaperCrew_Player_Management\sounds\TetraSquawkOn.b64";
     };
 
-    class Acre_GenericClickOff {
+    class Acre_TetraOff {
         sound = "rc_assets_pack\addons\reaperCrew_Player_Management\sounds\TetraSquawkOff.b64";
     };
 };
