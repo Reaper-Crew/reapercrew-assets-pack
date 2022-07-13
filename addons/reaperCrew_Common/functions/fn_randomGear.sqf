@@ -16,6 +16,8 @@
 
 params ["_unit"];
 
+if (!local _unit) exitWith {};
+
 removeAllWeapons _unit;
 removeAllItems _unit;
 removeAllAssignedItems _unit;
