@@ -16,7 +16,7 @@
 
 params ["_triggerObject"];
 
-diag_log "fn_activateInfantryModuleFootMobile activated";
+diag_log "reapercrew_reinforcements_fnc_activateInfantryModuleMotorised activated";
 diag_log (allVariables _triggerObject);
 
 // Don't run if the array isn't available
