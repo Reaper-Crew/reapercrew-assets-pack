@@ -46,6 +46,7 @@ _spawnUnitsArray = units _spawnedGroup;
 	doStop _x;
 	_x setUnitPos "UP";
 	_x disableAI "PATH";
+	_x triggerDynamicSimulation false;
 } forEach _spawnUnitsArray;
 
 // Move the units into position
