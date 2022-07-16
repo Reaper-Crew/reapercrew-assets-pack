@@ -25,41 +25,8 @@ _outerZone = createTrigger ["EmptyDetector", position _logic, true];
 _outerZone setTriggerArea [2000, 2000, 0, false, -1];
 _outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _outerZone setTriggerStatements [_triggerCondition, " activeInfantryTriggers pushBack thisTrigger; ", " activeInfantryTriggers = activeInfantryTriggers - [thisTrigger]; "];
+_outerZone setTriggerInterval 30;
 
 if (reaperCrew_InfantrySpawnCheckbox == true) then {
 	diag_log format ["[REINFORCEMENTS]: Trigger condition is: %1", _triggerCondition];
 };
-
-
-
-
-
-
-
-// Global Variables
-// activeInfantryTriggers = [];
-
-// // Variables
-// _infantrySpawnModules = entities "reaperCrew_moduleInfantrySpawn";
-
-// {
-// 	// Get Variable
-// 	_additionalCondition = _x getVariable ["additionalCondition", "true"];
-
-// 	_triggerCondition = format ["(this && { [objNull, 'VIEW'] checkVisibility [eyePos _x, getPosASL thisTrigger] == 0 } count thisList > 0) && {isTouchingGround _x} count thisList > 0 && %1", _additionalCondition];
-
-// 	// Create detection trigger
-// 	_outerZone = createTrigger ["EmptyDetector", position _x, true];
-// 	_outerZone setTriggerArea [2000, 2000, 0, false, -1];
-// 	_outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-// 	_outerZone setTriggerStatements [_triggerCondition, " activeInfantryTriggers pushBack thisTrigger; ", " activeInfantryTriggers = activeInfantryTriggers - [thisTrigger]; "];
-
-// 	diag_log format ["Trigger condition is: %1", _triggerCondition];
-
-// } forEach _infantrySpawnModules;
-
-// [] spawn {
-
-
-
-// };
