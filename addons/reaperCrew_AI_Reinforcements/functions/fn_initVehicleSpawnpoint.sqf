@@ -21,7 +21,7 @@ _additionalCondition = _logic getVariable ["additionalCondition", "true"];
 _triggerCondition = format ["(this && { [objNull, 'VIEW'] checkVisibility [eyePos _x, getPosASL thisTrigger] == 0 } count thisList > 0) && {isTouchingGround _x} count thisList > 0 && %1", _additionalCondition];
 
 // Create detection trigger
-_outerZone = createTrigger ["EmptyDetector", position _logic, true];
+_outerZone = createTrigger ["EmptyDetector", position _logic, false];
 _outerZone setTriggerArea [5000, 5000, 0, false, -1];
 _outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _outerZone setTriggerStatements [_triggerCondition, " activeVehicleTriggers pushBack thisTrigger; ", " activeVehicleTriggers = activeVehicleTriggers - [thisTrigger]; "];
