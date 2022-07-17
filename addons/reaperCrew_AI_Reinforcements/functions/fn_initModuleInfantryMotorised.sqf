@@ -52,6 +52,7 @@ if (_useSpecialForces) then {
 _activationTrigger = createTrigger ["EmptyDetector", (getPos _logic), false];
 _activationTrigger setTriggerArea [_logicArea select 0, _logicArea select 1, 0, false, -1];
 _activationTrigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+_activationTrigger setTriggerInterval 5;
 
 // Assign required variable to trigger
 _activationTrigger setVariable ["reinforcementCount", _reinforcementsCount];

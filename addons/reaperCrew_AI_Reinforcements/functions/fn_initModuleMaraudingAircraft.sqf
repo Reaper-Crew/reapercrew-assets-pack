@@ -36,6 +36,7 @@ _activationTrigger = createTrigger ["EmptyDetector", (getPos _logic), false];
 _activationTrigger setTriggerArea [_logicArea select 0, _logicArea select 1, 0, false, -1];
 _activationTrigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _activationTrigger setTriggerStatements ["this && {isTouchingGround _x} count thisList > 0", "[thisTrigger] call reapercrew_reinforcements_fnc_activateMaraudingAircraft;", ""];
+_activationTrigger setTriggerInterval 5;
 
 // Set trigger variables
 _activationTrigger setVariable ["AircraftCount",_AircraftCount];
