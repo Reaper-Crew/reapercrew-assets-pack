@@ -107,20 +107,20 @@ class CfgVehicles
 		scopeCurator=2;
 		class TransportItems
 		{
-            class HEGuided {
-                name = ACE_1Rnd_82mm_Mo_HE_Guided;
+            class HighExplosiveGuided {
+                name = ACE_1Rnd_82mm_Mo_HighExplosive_Guided;
                 count = 50;
             };
-			class HE {
-                name = ACE_1Rnd_82mm_Mo_HE;
+			class HighExplosive {
+                name = ACE_1Rnd_82mm_Mo_HighExplosive;
                 count = 50;
             };
 			class Illum {
                 name = ACE_1Rnd_82mm_Mo_Illum;
                 count = 50;
             };
-			class HELaserGuided {
-                name = ACE_1Rnd_82mm_Mo_HE_LaserGuided;
+			class HighExplosiveLaserGuided {
+                name = ACE_1Rnd_82mm_Mo_HighExplosive_LaserGuided;
                 count = 50;
             };
 			class Smoke {
@@ -135,11 +135,11 @@ class CfgVehicles
 		scopeCurator=2;
 		class TransportItems
 		{
-            class HE {
+            class HighExplosive {
                 name = CUP_compats_105mm_he;
                 count = 50;
             };
-			class WP {
+			class WhitePhosphorus {
                 name = CUP_compats_105mm_wp;
                 count = 50;
             };
@@ -147,7 +147,7 @@ class CfgVehicles
                 name = CUP_compats_105mm_illum;
                 count = 50;
             };
-			class HELaserGuided {
+			class HighExplosiveLaserGuided {
                 name = CUP_compats_105mm_laser;
                 count = 50;
             };
@@ -163,7 +163,7 @@ class CfgVehicles
 		scopeCurator=2;
 		class TransportItems
 		{
-            class HE {
+            class HighExplosive {
                 name = CUP_compats_122mm_he;
                 count = 50;
             };
@@ -171,7 +171,7 @@ class CfgVehicles
                 name = CUP_compats_122mm_illum;
                 count = 50;
             };
-			class HELaserGuided {
+			class HighExplosiveLaserGuided {
                 name = CUP_compats_122mm_laser;
                 count = 50;
             };
