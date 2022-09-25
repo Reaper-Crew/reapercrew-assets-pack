@@ -1,6 +1,6 @@
 /*
 * Author: Xeenenta
-* This function will execute a function on the remote client to save their loadout
+* This function will execute a function on the remote client to reset their fatigue status
 *
 * Arguments:
 * 0: Attached Player <OBJECT>
@@ -9,7 +9,7 @@
 * None
 *
 * Example:
-* [] call reapercrew_player_management_fnc_savePlayerLoadoutGlobal
+* [] call reapercrew_player_management_fnc_fixPlayerFatigueGlobal
 *
 * Public: No
 */
@@ -36,8 +36,8 @@ if (count _units == 0) exitWith {
 };
 
 {
-	diag_log format ["[PLAYER MANAGEMENT]: Executing save script on %1", name(_x)];
-	remoteExec ["reapercrew_player_management_fnc_savePlayerLoadoutLocal", _x];
+	diag_log format ["[PLAYER MANAGEMENT]: Executing fatigue fix script on %1", name(_x)];
+	remoteExec ["reapercrew_player_management_fnc_fixPlayerFatigueLocal", _x];
 } forEach _units;
 
 deleteVehicle _logic;

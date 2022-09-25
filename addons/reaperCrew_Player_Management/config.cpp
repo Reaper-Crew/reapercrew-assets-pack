@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class ReaperCrew_Player_Management
 	{
-		units[] = {"reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleSavePlayerLoadout"};
+		units[] = {"reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleSavePlayerLoadout", "reaperCrew_moduleFixFatigue"};
 		weapons[]={};
 		requiredVersion=1;
 		requiredAddons[]=
@@ -35,6 +35,8 @@ class CfgFunctions
 			class disarmModuleKitChange{};
 			class savePlayerLoadoutGlobal{};
 			class savePlayerLoadoutLocal{};
+			class fixPlayerFatigueGlobal{};
+			class fixPlayerFatigueLocal{};
 		};
 	};
 };
@@ -56,6 +58,15 @@ class CfgVehicles
 	{
 		displayName = "Save player loadout";
 		function = "reapercrew_player_management_fnc_savePlayerLoadoutGlobal";
+		category = "reaperCrew_ModulesPlayers";
+		scope = 1;
+		scopeCurator = 2;
+		isGlobal = 0;
+	};
+	class reaperCrew_moduleFixFatigue: reaperCrew_module_base
+	{
+		displayName = "Fix Fatigue";
+		function = "reapercrew_player_management_fnc_fixPlayerFatigueGlobal";
 		category = "reaperCrew_ModulesPlayers";
 		scope = 1;
 		scopeCurator = 2;
