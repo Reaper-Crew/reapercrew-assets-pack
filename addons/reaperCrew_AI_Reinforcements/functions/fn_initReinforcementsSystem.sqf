@@ -2,6 +2,7 @@
 activeInfantryTriggers = [];
 activeVehicleTriggers = [];
 activeAircraftTriggers = [];
+activeMarineTriggers = [];
 
 if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - skipping reinforcements system"};
 
@@ -36,6 +37,18 @@ if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - ski
 	while { true } do {
 		if (reaperCrew_AircraftSpawnCheckbox == true) then {
 			diag_log format ["[REINFORCEMENTS]: Found the following active aircraft triggers: %1", activeAircraftTriggers];
+		};
+		sleep 15;
+	};
+
+};
+
+[] spawn {
+
+	// Aircraft Spawns
+	while { true } do {
+		if (reaperCrew_MarineSpawnCheckbox == true) then {
+			diag_log format ["[REINFORCEMENTS]: Found the following active marine triggers: %1", activeMarineTriggers];
 		};
 		sleep 15;
 	};

@@ -14,6 +14,7 @@
 // Transport Fire Support
 ["reaperCrew_reinforcements_transportGround", "EDITBOX", ["Transport Vehicles", "A comma seperated list of classnames to be used for transport vehicles"], ["Reaper Crew - AI Common", "3. Transport Settings"], "O_G_Offroad_01_F"] call cba_settings_fnc_init;
 ["reaperCrew_reinforcements_transportHelicopter", "EDITBOX", ["Transport Helicopters", "A comma seperated list of classnames to be used for transport helicopters"], ["Reaper Crew - AI Common", "3. Transport Settings"], "O_Heli_Light_02_unarmed_F"] call cba_settings_fnc_init;
+["reaperCrew_reinforcements_transportBoat", "EDITBOX", ["Transport Boats", "A comma seperated list of classnames to be used for transport boats"], ["Reaper Crew - AI Common", "3. Transport Settings"], "I_C_Boat_Transport_02_F"] call cba_settings_fnc_init;
 
 // Ground Fire Support
 ["reaperCrew_reinforcements_fireSupportHeavyArmour", "EDITBOX", ["Heavy Armour", "A comma seperated list of classnames to be used for enemy heavy armour threats"], ["Reaper Crew - AI Common", "4. Fire Support (Ground)"], "O_MBT_02_cannon_F"] call cba_settings_fnc_init;

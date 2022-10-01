@@ -8,6 +8,7 @@
 ["reaperCrew_HCDiscoveryCheckbox", "CHECKBOX", ["DEBUG: Log HC Discovery", "Log HC discovery to console?"], ["Reaper Crew - AI Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
 ["reaperCrew_InfantrySpawnCheckbox", "CHECKBOX", ["DEBUG: Log infantry spawn discovery", "Log Infantry Spawn discovery to console?"], ["Reaper Crew - AI Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
 ["reaperCrew_VehicleSpawnCheckbox", "CHECKBOX", ["DEBUG: Log vehicle spawn discovery", "Log Vehicle Spawn discovery to console?"], ["Reaper Crew - AI Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
+["reaperCrew_MarineSpawnCheckbox", "CHECKBOX", ["DEBUG: Log Marine spawn discovery", "Log Marine Spawn discovery to console?"], ["Reaper Crew - AI Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
 ["reaperCrew_AircraftSpawnCheckbox", "CHECKBOX", ["DEBUG: Log aircraft spawn discovery", "Log Aircraft Spawn discovery to console?"], ["Reaper Crew - AI Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
 ["reaperCrew_ReinforcementsCheckbox", "CHECKBOX", ["DEBUG: Log reinforcement output", "Log reinforcements output to console?"], ["Reaper Crew - AI Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;
 ["reaperCrew_SpawnpointsMapMarkers", "CHECKBOX", ["DEBUG: Show spawnpoints on map", "Show the location of spawnpoints and their zones on the map?"], ["Reaper Crew - AI Reinforcements", "Debug Settings"]] call cba_settings_fnc_init;

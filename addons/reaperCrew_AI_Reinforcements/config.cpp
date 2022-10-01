@@ -46,13 +46,16 @@ class CfgFunctions
 
 			class initReinforcementsSystem{postInit = 1;};
 
+			// Spawnpoints
 			class initInfantrySpawnpoint {};
 			class initVehicleSpawnpoint {};
 			class initAircraftSpawnpoint {};
+			class initMarineSpawnpoint {};
 
 			class initModuleInfantryFootMobile{};
 			class initModuleInfantryAirbourne{};
 			class initModuleInfantryMotorised{};
+			class initModuleInfantryMarine{};
 
 			class initModuleMaraudingVehicles{};
 			class initModuleMaraudingAircraft{};
@@ -62,6 +65,7 @@ class CfgFunctions
 			class activateInfantryModuleFootMobile{};
 			class activateInfantryModuleAirbourne{};
 			class activateInfantryModuleMotorised{};
+			class activateInfantryModuleMarine{};
 
 			class spawnHeadlessInfantry{};
 			class spawnHeadlessInfantryAirbourne{};
@@ -161,6 +165,33 @@ class CfgVehicles
 			};
 		};
 	};
+	class reaperCrew_moduleMarineSpawn: reaperCrew_module_reinforcements_base
+	{
+		displayName = "Marine Spawnpoint";
+		category = "reaperCrew_ModulesReinforcements";
+		scope = 2;
+		scopeCurator = 0;
+		function = "reapercrew_reinforcements_fnc_initMarineSpawnpoint";
+		class Attributes: AttributesBase {
+			class additionalCondition: Edit {
+				displayName = "Additional condition";
+				property = "additionalCondition";
+				typeName = "STRING";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = """true""";
+			};
+		};
+	};
+	class reaperCrew_moduleMarineLZ: reaperCrew_module_reinforcements_base
+	{
+		displayName = "Marine LZ";
+		category = "reaperCrew_ModulesReinforcements";
+		scope = 2;
+		scopeCurator = 0;
+	};
+
+
 	class reaperCrew_moduleReinforcementsBase: reaperCrew_module_reinforcements_base
 	{
 		//displayName = "Reinforcements (Infantry - Foot Mobile)";
@@ -404,6 +435,78 @@ class CfgVehicles
 				tooltip = "";
 				control = "Edit";
 				defaultValue = "800";
+			};
+			class regularTroops: Checkbox {
+				displayName = "Regular Troops";
+				property = "regularTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class eliteTroops: Checkbox {
+				displayName = "Elite Troops";
+				property = "eliteTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class specialTroops: Checkbox {
+				displayName = "Special Forces";
+				property = "specialTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class rushMode: Checkbox {
+				displayName = "Enable Rush Mode";
+				property = "rushMode";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class codeOnSpawnGroup: Edit {
+				displayName = "Code on spawn";
+				property = "codeOnSpawn";
+				typeName = "STRING";
+				tooltip = "";
+				control = "EditCodeMulti5";
+				defaultValue = """true""";
+			};
+			class waveDelay: Edit {
+				displayName = "Wave Delay (seconds)";
+				property = "waveDelay";
+				typeName = "STRING";
+				tooltip = "";
+				control = "SliderTimeRespawn";
+				defaultValue = 60;
+			};
+		};
+	};
+	class reaperCrew_moduleReinforcementsHeadlessInfantryMarine: reaperCrew_moduleReinforcementsBase
+	{
+		displayName = "Reinforcements (Infantry - Marine)";
+		function = "reapercrew_reinforcements_fnc_initModuleInfantryMarine";
+		scope = 2;
+		class Attributes: AttributesBase {
+			class reinforcementCount: Edit {
+				displayName = "Reinforcement Count";
+				property = "reinforcementCount";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = "50";
+			};
+			class zoneThreshold: Edit {
+				displayName = "Zone Threshold";
+				property = "zoneThreshold";
+				typeName = "NUMBER";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = "20";
 			};
 			class regularTroops: Checkbox {
 				displayName = "Regular Troops";
