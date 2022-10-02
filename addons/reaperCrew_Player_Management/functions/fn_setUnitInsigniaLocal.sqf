@@ -19,96 +19,22 @@
 if (hasInterface) then {
 
 	_roleDesc = roleDescription player;
+	_groupName = groupId (group player);
 
-	diag_log format ["[Reaper Crew]: Setting role insignia. Current role is: %1", _roleDesc];
+	diag_log format ["[PLAYER MANAGEMENT]: Setting role insignia. Current role is: %1 and group is %2", _roleDesc, _groupName];
 
-	switch (_roleDesc) do {
-		// Zero
-		case "Platoon Sergeant": {
-			[player, "ReaperCrew_PlatoonSergeant"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player setRank "MAJOR";
-		};
-		case "Logistics Commander": {
-			[player, "ReaperCrew_platoonLogiCommand"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-		};
-		case "Platoon JTAC": {
-			[player, "ReaperCrew_jtac"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-		};
-		case "Platoon Medic": {
-			[player, "ReaperCrew_platoonMedic"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-		};
-		// Section Roles
-		// Yellow
-		case "Medic": {
-			[player, "ReaperCrew_Medic"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player setRank "CAPTAIN";
-			player assignTeam "YELLOW";
-		};
-		// BLUE
-		case "Section 2IC": {
-			[player, "ReaperCrew_2IC"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player setRank "MAJOR";
-			player assignTeam "RED";
-		};
-		case "Machine Gunner": {
-			[player, "ReaperCrew_Machinegunner"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "BLUE";
-		};
-		case "Assist. Machine Gunner": {
-			[player, "ReaperCrew_MG_ASSIST"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "BLUE";
-		};
-		case "Sharpshooter": {
-			[player, "ReaperCrew_Marksman"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "BLUE";
-		};
-		// RED
-		case "Section 3IC": {
-			[player, "ReaperCrew_2IC"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player setRank "MAJOR";
-			player assignTeam "BLUE";
-		};
-		case "Rifleman": {
-			[player, "ReaperCrew_Rifleman"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "RED";
-		};
-		case "Rifleman (AT)": {
-			[player, "ReaperCrew_AT"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "RED";
-		};
-		case "AT Specialist": {
-			[player, "ReaperCrew_AT"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "RED";
-		};
-		case "Assist. AT Specialist": {
-			[player, "ReaperCrew_AT"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "RED";
-		};
-		case "Rifleman (AA)": {
-			[player, "ReaperCrew_AA"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "RED";
-		};
-		case "Engineer": {
-			[player, "ReaperCrew_Engineer"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "RED";
-		};
-		case "Explosives Specialist": {
-			[player, "ReaperCrew_EOD"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "RED";
-		};
-		case "Vehicle Crew": {
-			[player, "ReaperCrew_Armoured_Crew"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "GREEN";
-		};
-		case "Battery Gunner": {
-			[player, "ReaperCrew_Artilleryman"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-			player assignTeam "GREEN";
-		};
-		default {
-			[player, "reaperCrewInsignia"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
-		};
-	};
+	// Create classname
+	// Remove invalid characters
+	_characterDict = [
+		["-","_"],
+		[" ",""]
+	];
+	{
+		_roleDesc = (_roleDesc regexReplace [_x select 0, _x select 1]);
+		_groupName = (_groupName regexReplace [_x select 0, _x select 1]); 
+	} forEach _characterDict;
 
+	// Overwrite group leaders role names
 	_isPlatoonCommander = ["Platoon Commander", _roleDesc] call BIS_fnc_inString;
 	_isSectionCommander = ["Section Commander", _roleDesc] call BIS_fnc_inString;
 	_isVehicleCommander = ["Vehicle Commander", _roleDesc] call BIS_fnc_inString;
@@ -116,20 +42,35 @@ if (hasInterface) then {
 
 	// Role names with extensions
 	if ( _isPlatoonCommander ) then {
-		[player, "ReaperCrew_PlatoonCommander"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+		_roleDesc = "PlatoonCommander";
 		player setRank "COLONEL";
 	};
 	if ( _isSectionCommander ) then {
-		[player, "ReaperCrew_SectionCommander"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+		_roleDesc = "SectionCommander";
 		player setRank "COLONEL";
 		player assignTeam "YELLOW";
 	};
 	if ( _isVehicleCommander ) then {
-		[player, "ReaperCrew_Armoured_Commander"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+		_roleDesc = "VehicleCommander";
 		player setRank "COLONEL";
 	};
 	if ( _isBatteryCommander ) then {
-		[player, "ReaperCrew_Arty_Commander"] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+		_roleDesc = "BatteryCommander";
 		player setRank "COLONEL";
+	};	
+
+	// Build String
+	_constructClass = format ["reaperCrew_%1_%2", _groupName, _roleDesc];
+
+	_classCheck = isClass (configFile >> "CfgUnitInsignia" >> _constructClass);
+
+	if !(_classCheck) then {
+		// If not found, set to default
+		_constructClass = "reaperCrew_default_insignia";
+		diag_log "[PLAYER MANAGEMENT]: Classname not found, using default signature";
 	};
+	diag_log format ["[PLAYER MANAGEMENT]: Using constructed classname %1", _constructClass];
+	
+	[player, _constructClass] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+
 };
