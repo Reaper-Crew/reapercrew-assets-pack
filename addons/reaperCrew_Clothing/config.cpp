@@ -24,30 +24,14 @@ class CfgPatches
 };
 class CfgWeapons
 {
-	class H_Beret_Colonel;
-	class RC_Beret_01: H_Beret_Colonel
-	{
-		author="Reaper Crew";
-		scope=2;
-		displayName="Beret (Reaper Crew)";
-		picture="rc_assets_pack\addons\reaperCrew_Common\data\reaperLogo.paa";
-		hiddenSelections[]=
-		{
-			"Camo"
-		};
-		hiddenSelectionsTextures[]=
-		{
-			"rc_assets_pack\addons\reaperCrew_Clothing\data\Beret\headgear_beret02_reapercrew_co.paa"
-		};
-	};
+
 	class U_B_CombatUniform_mcam_vest;
 	class U_B_CombatUniform_mcam;
 	class U_I_CombatUniform_shortsleeve;
-	class V_PlateCarrier1_rgr;
 	class V_PlateCarrier1_blk;
 	class V_PlateCarrier2_blk;
 	class H_HelmetIA;
-	class H_HelmetB;
+	// class H_HelmetB;
 	class H_HelmetSpecB;
 	class B_Kitbag_tan;
 	class H_Booniehat_khk;
@@ -61,74 +45,50 @@ class CfgWeapons
 	{
 		class ItemInfo;
 	};
-	class RC_MTP_Uniform: U_B_CombatUniform_mcam
-	{
-		scope=2;
-		displayName="RC MTP Uniform";
-		picture="\A3\characters_f\data\ui\icon_U_B_CombatUniform_mcam_ca.paa";
-		model="\A3\Characters_F\Common\Suitpacks\suitpack_blufor_soldier";
+	class U_I_CombatUniform;
+	class xeen_reaperCrew_uniform_RangerGreen: U_I_CombatUniform {
+	scope=2;
+	displayName="Combat Uniform (RangerGreen)";
+	picture="rc_assets_pack\addons\reaperCrew_Common\data\insignia.paa";
 		class ItemInfo: UniformItem
 		{
 			uniformModel="-";
-			uniformClass="MTP_Soldier_F";
+			uniformClass="xeen_reaperCrew_uniform_RangerGreen";
 			containerClass="Supply40";
 			mass=40;
 		};
 	};
-	class RC_MTP_Medic_Uniform: U_B_CombatUniform_mcam_vest
-	{
-		scope=2;
-		displayName="RC MTP Uniform (Medic)";
-		picture="rc_assets_pack\addons\reaperCrew_Common\data\insignia.paa";
-		model="\A3\Characters_F\Common\Suitpacks\suitpack_blufor_soldier";
+	class xeen_reaperCrew_uniform_RangerGreenTrainer: U_I_CombatUniform {
+	scope=2;
+	displayName="Combat Uniform (RangerGreen - Trainer)";
+	picture="rc_assets_pack\addons\reaperCrew_Common\data\insignia.paa";
 		class ItemInfo: UniformItem
 		{
 			uniformModel="-";
-			uniformClass="MTP_Soldier_F_Medic";
+			uniformClass="xeen_reaperCrew_uniform_RangerGreenTrainer";
 			containerClass="Supply40";
 			mass=40;
 		};
 	};
+
+	#include "data\Vests\V_PlateCarrier1_rgr\V_PlateCarrier1_rgr.hpp"
+	#include "data\Helmets\H_HelmetB\headgear_b_helmet_plain.hpp"
+	#include "data\Helmets\H_Beret_Colonel\H_Beret_Colonel.hpp"
 };
 
 class CfgVehicles
 {
 	class B_Soldier_base_F;
-	class MTP_Soldier_F: B_Soldier_base_F
-	{
-		_generalMacro="B_Soldier_F";
-		scope=1;
-		displayName="RC MTP Uniform";
-		model="\A3\characters_F\BLUFOR\b_soldier_01.p3d";
-		nakedUniform="U_BasicBody";
-		uniformClass="RC_MTP_Uniform";
-		hiddenSelections[]=
-		{
-			"Camo",
-			"Insignia"
-		};
-		hiddenSelectionsTextures[]=
-		{
-			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\mtp_ReaperCrewUniform_01_co"
-		};
+	class I_soldier_F;
+	class xeen_reaperCrew_I_soldier_F_Uniform_Base: I_soldier_F {
+		side = 1;
+		// scope = 0;
 	};
-	class MTP_Soldier_F_Medic: B_Soldier_base_F
-	{
-		_generalMacro="B_Soldier_F";
-		scope=1;
-		displayName="RC MTP Uniform (Medic)";
-		model="\A3\characters_F\BLUFOR\b_soldier_03.p3d";
-		nakedUniform="U_BasicBody";
-		uniformClass="U_B_CombatUniform_mcam_vest";
-		hiddenSelections[]=
-		{
-			"Camo",
-			"Insignia"
-		};
-		hiddenSelectionsTextures[]=
-		{
-			"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\mtp_ReaperCrewMedicUniform_01_co.paa"
-		};
+	class xeen_reaperCrew_uniform_RangerGreen: xeen_reaperCrew_I_soldier_F_Uniform_Base {
+		hiddenSelectionsTextures[]={"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\U_I_CombatUniform\RangerGreen\data\ia_soldier_01_clothing_CO.paa"};
+	};
+	class xeen_reaperCrew_uniform_RangerGreenTrainer: xeen_reaperCrew_I_soldier_F_Uniform_Base {
+		hiddenSelectionsTextures[]={"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\U_I_CombatUniform\RangerGreenTrainer\data\ia_soldier_01_clothing_CO.paa"};
 	};
 };
 class CfgUnitInsignia
@@ -307,7 +267,7 @@ class CfgUnitInsignia
 		author="Reaper Crew";
 		texture="\rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\Reaper-1-2\AssistAutorifleman.paa";
 		textureVehicle="";
-	};1_1
+	};
 	class reaperCrew_Reaper_1_2_ATSpecialist
 	{
 		displayName="[RC] AT Specialist (Reaper-1-2)";
