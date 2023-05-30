@@ -137,6 +137,7 @@ class CfgFunctions
 			class monitorHeadlessClients{postInit = 1;};
 			class executeDistributed{};
 			class randomGear{};
+			class remoteLog{};
 		};
 	};
 };
