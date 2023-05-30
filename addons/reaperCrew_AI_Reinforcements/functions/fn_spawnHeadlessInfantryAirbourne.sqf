@@ -14,12 +14,19 @@
  * Public: No
  */
 
-params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup"];
+params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []]];
 
 diag_log "[REINFORCEMENTS]: Running reinforcements script";
 
 // Create Helipad
 _helipad = "Land_HelipadEmpty_F" createVehicle _landingPosition;
+
+// Delete helipad after 10 mins
+[_helipad] spawn {
+	params ["_helipad"];
+	sleep 600;
+	deleteVehicle _helipad;
+};
 
 // Create Helicopter
 // Create vehicle
@@ -38,11 +45,40 @@ _helicopter flyInHeight 250;
 driver _helicopter setSkill 1;
 
 // Add Waypoints
+
+// If a pathway is defined, use that instead of random
+if (count _waypointsList > 0) then {
+	_arrayLength = (count _waypointsList) - 1;
+	_landingPosition = _waypointsList select _arrayLength;
+
+	{
+		// MOVE
+		_waypoint =_helicopterCrew addWaypoint [_x, -1];
+		_waypoint setWaypointType "MOVE";
+		_waypoint setWaypointForceBehaviour true;
+		_waypoint setWaypointBehaviour "CARELESS";
+	} forEach _waypointsList;
+};
+
 // Transport Unload
-_waypoint = _helicopterCrew addWaypoint [_landingPosition, -1];
+_waypoint = _helicopterCrew addWaypoint [_landingPosition, 50];
 _waypoint setWaypointType "TR UNLOAD";
 _waypoint waypointAttachVehicle _helipad;
+
 // Return to base
+if (count _waypointsList > 0) then {
+	_egressWaypoints = _waypointsList;
+	reverse _egressWaypoints;
+
+	{
+		// MOVE
+		_waypoint =_helicopterCrew addWaypoint [_x, -1];
+		_waypoint setWaypointType "MOVE";
+		_waypoint setWaypointForceBehaviour true;
+		_waypoint setWaypointBehaviour "CARELESS";
+	} forEach _egressWaypoints;
+};
+
 _waypoint = _helicopterCrew addWaypoint [_spawnPosition, -1];
 _waypoint setWaypointStatements ["true", "deleteVehicle vehicle this; {deleteVehicle _x} forEach thisList"];
  _waypoint setWaypointTimeout [5, 7.5, 10];

@@ -27,6 +27,8 @@ _outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _outerZone setTriggerStatements [_triggerCondition, " activeAircraftTriggers pushBack thisTrigger; ", " activeAircraftTriggers = activeAircraftTriggers - [thisTrigger]; "];
 _outerZone setTriggerInterval 30;
 
+[_logic, _outerZone] call reapercrew_reinforcements_fnc_getPathway;
+
 if (reaperCrew_AircraftSpawnCheckbox == true) then {
 	diag_log format ["[REINFORCEMENTS]: Trigger condition is: %1", _triggerCondition];
 };

@@ -24,9 +24,12 @@ _triggerCondition = format ["(this && { [objNull, 'VIEW'] checkVisibility [eyePo
 _outerZone = createTrigger ["EmptyDetector", position _logic, false];
 _outerZone setTriggerArea [5000, 5000, 0, false, -1];
 _outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_outerZone setTriggerStatements [_triggerCondition, " activeVehicleTriggers pushBack thisTrigger; ", " activeVehicleTriggers = activeVehicleTriggers - [thisTrigger]; "];
+_outerZone setTriggerStatements [_triggerCondition, " activeVehicleTriggers pushBack thisTrigger; ", " activeVehicleTriggers = activeVehicleTriggers - [thisTrigger];"];
 _outerZone setTriggerInterval 30;
+
+[_logic, _outerZone] call reapercrew_reinforcements_fnc_getPathway;
 
 if (reaperCrew_VehicleSpawnCheckbox == true) then {
 	diag_log format ["[REINFORCEMENTS]: Trigger condition is: %1", _triggerCondition];
 };
+

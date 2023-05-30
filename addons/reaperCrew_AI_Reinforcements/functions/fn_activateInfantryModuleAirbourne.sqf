@@ -9,7 +9,7 @@
  * None
  *
  * Example:
- * [_logic] call reapercrew_reinforcements_fnc_moduleSpawnReinforcementsAirbourneTrigger
+ * [_logic] call reapercrew_reinforcements_fnc_activateInfantryModuleAirbourne
  *
  * Public: No
  */
@@ -18,8 +18,8 @@ params ["_triggerObject"];
 
 // Don't run if the array isn't available
 while {isNil "activeAircraftTriggers"} do {
-	if (reaperCrew_AircraftSpawnCheckbox == true) then {
-		diag_log "[REINFORCEMENTS]: Aircraft triggers undefined, sleeping";
+	if (reaperCrew_debugReinforcementsSpawning == true) then {
+		["REINFORCEMENTS", "activateInfantryModuleAirbourne", "Vehicle triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
@@ -56,9 +56,8 @@ while { triggerActivated _triggerObject } do {
 	if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count activeAircraftTriggers) > 0 )) then {
 
 		// Output debug information if enabled
-		if (reaperCrew_ReinforcementsCheckbox == true) then {
-			diag_log format ["[REINFORCEMENTS]: Spawning a group of %1 units using helicopter of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount];
-			diag_log format ["[REINFORCEMENTS]: Threshold is %1 and the current number of units in the area is %2", _zoneThreshold, _opforCounter];
+		if (reaperCrew_debugReinforcementsSpawning == true) then {
+			["REINFORCEMENTS", "activateInfantryModuleAirbourne", (format ["Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 		};
 
 		// Find landing position
@@ -75,17 +74,26 @@ while { triggerActivated _triggerObject } do {
 			_searchRadius = _searchRadius + 100;
 			_landingPosition = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsAircraft];
 
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["[REINFORCEMENTS]: Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius];
+			if (reaperCrew_debugWaypointMechanics == true) then {
+				["REINFORCEMENTS", "activateInfantryModuleAirbourne", (format ["Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius])] call reapercrew_common_fnc_remoteLog;
+			};
+
+			if (_searchRadius > 500) then {
+				_landingPosition pushBack _searchCenterPos;
+				if (reaperCrew_debugWaypointMechanics == true) then {
+					["REINFORCEMENTS", "activateInfantryModuleAirbourne", "Search radius exceeded, defaulting to center point"] call reapercrew_common_fnc_remoteLog;
+				};
+			};
+
+			if (reaperCrew_debugWaypointMechanics == true) then {
+				["REINFORCEMENTS", "activateInfantryModuleAirbourne", (format ["Search complete, found position of %1", _landingPosition])] call reapercrew_common_fnc_remoteLog;
 			};
 
 		};
 
-		if (reaperCrew_ReinforcementsCheckbox == true) then {
-			diag_log format ["[REINFORCEMENTS]: Search complete, found position of %1", _landingPosition];
-		};
+		_reinforcementsPathway = _spawnTrigger getVariable ["_reinforcementsPathway", []];
 
-		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
+		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
 
 		// Adjust the number of available reinforcements
 		_reinforcementsCount = _reinforcementsCount - _unitCount;
@@ -94,4 +102,6 @@ while { triggerActivated _triggerObject } do {
 	};
 	sleep _waveDelay;
 };
-diag_log "[REINFORCEMENTS]: Helicopter spawning has ended";
+if (reaperCrew_debugReinforcementsSpawning == true) then {
+	["REINFORCEMENTS", "activateInfantryModuleAirbourne", "Helicopter spawning has ended"] call reapercrew_common_fnc_remoteLog;
+};

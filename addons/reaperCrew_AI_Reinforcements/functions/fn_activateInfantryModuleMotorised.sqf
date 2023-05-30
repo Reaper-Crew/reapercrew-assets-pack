@@ -16,13 +16,12 @@
 
 params ["_triggerObject"];
 
-diag_log "reapercrew_reinforcements_fnc_activateInfantryModuleMotorised activated";
-diag_log (allVariables _triggerObject);
+["REINFORCEMENTS", "activateInfantryModuleMotorised", "Function activated"] call reapercrew_common_fnc_remoteLog;
 
 // Don't run if the array isn't available
 while {isNil "activeVehicleTriggers"} do {
-	if (reaperCrew_VehicleSpawnCheckbox == true) then {
-		diag_log "[REINFORCEMENTS]: Vehicle triggers undefined, sleeping";
+	if (reaperCrew_debugReinforcementsSpawning == true) then {
+		["REINFORCEMENTS", "activateInfantryModuleMotorised", "Vehicle triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
@@ -60,15 +59,12 @@ while {isNil "activeVehicleTriggers"} do {
 		
 		_unitCount = count _reinforcementsGroup;
 
-		diag_log _reinforcementGroups;
-		diag_log _reinforcementsGroup;
-
 		// Only run if; Zone above threshold, Reinforcements remain and spawn points are available
 		if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count activeVehicleTriggers) > 0 )) then {
 
 			// Output debug information if enabled
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["[REINFORCEMENTS]: Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsVehicle, _reinforcementsCount];
+			if (reaperCrew_debugReinforcementsSpawning == true) then {
+				["REINFORCEMENTS", "activateInfantryModuleMotorised", (format ["Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsVehicle, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 			};
 
 			// Find landing position
@@ -85,17 +81,26 @@ while {isNil "activeVehicleTriggers"} do {
 				_searchRadius = _searchRadius + 100;
 				_landingPosition = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsVehicle];
 
-				if (reaperCrew_ReinforcementsCheckbox == true) then {
-					diag_log format ["[REINFORCEMENTS]: Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius];
+				if (reaperCrew_debugWaypointMechanics == true) then {
+					["REINFORCEMENTS", "activateInfantryModuleMotorised", (format ["Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius])] call reapercrew_common_fnc_remoteLog;
+				};
+
+				if (_searchRadius > 200) then {
+					_landingPosition pushBack _searchCenterPos;
+					if (reaperCrew_debugWaypointMechanics == true) then {
+						["REINFORCEMENTS", "activateInfantryModuleMotorised", "Search radius exceeded, defaulting to center point"] call reapercrew_common_fnc_remoteLog;
+					};
 				};
 
 			};
 
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["[REINFORCEMENTS]: Search complete, found position of %1", _landingPosition];
+			if (reaperCrew_debugWaypointMechanics == true) then {
+				["REINFORCEMENTS", "activateInfantryModuleMotorised", (format ["Search complete, found position of %1", _landingPosition])] call reapercrew_common_fnc_remoteLog;
 			};
 
-			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
+			_reinforcementsPathway = _spawnTrigger getVariable ["_reinforcementsPathway", []];
+
+			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
 
 			// Adjust the number of available reinforcements
 			_reinforcementsCount = _reinforcementsCount - _unitCount;
@@ -104,6 +109,7 @@ while {isNil "activeVehicleTriggers"} do {
 		};
 		sleep _waveDelay;
 	};
-	diag_log "[REINFORCEMENTS]: vehicle spawning has ended";
-
+	if (reaperCrew_debugReinforcementsSpawning == true) then {
+		["REINFORCEMENTS", "activateInfantryModuleMotorised", "Vehicle spawning has ended"] call reapercrew_common_fnc_remoteLog;
+	};
 };
