@@ -75,6 +75,16 @@ while {isNil "activeVehicleTriggers"} do {
 			_landingPosition = [];
 			_spawnTrigger = (selectRandom activeVehicleTriggers);
 
+			// Add cooldown to spawnpoint to prevent overlap
+			_cooldownTime = _waveDelay + 2;
+			[_spawnTrigger, _cooldownTime] spawn {
+				params ["_triggerObject", "_cooldownTime"];
+				activeVehicleTriggers = activeVehicleTriggers - [_triggerObject];
+				sleep _cooldownTime;
+				activeVehicleTriggers pushBack _triggerObject;
+				["REINFORCEMENTS", "activateInfantryModuleMotorised", (format ["Removing cooldown for position %1", _triggerObject])] call reapercrew_common_fnc_remoteLog;
+			};
+
 			while { (count _landingPosition) == 0 } do {
 
 				// Increment search criteria
