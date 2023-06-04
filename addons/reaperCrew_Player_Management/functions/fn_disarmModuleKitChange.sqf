@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call reaperCrew_fnc_disarmModuleKitChange
+ * [] call reapercrew_player_management_fnc_disarmModuleKitChange
  *
  * Public: No
  */

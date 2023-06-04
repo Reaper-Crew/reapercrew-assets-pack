@@ -42,34 +42,50 @@ if (hasInterface) then {
 		case "Reaper-1-3": {
 			[_personalRadio, 3] call acre_api_fnc_setRadioChannel;
 		};
-		case "Reaper-1-4": {
+		case "Thunder": {
 			[_personalRadio, 4] call acre_api_fnc_setRadioChannel;
 		};
-		case "Reaper-1-5": {
+		case "Hammer": {
 			[_personalRadio, 5] call acre_api_fnc_setRadioChannel;
 		};
-		case "Reaper-1-6": {
+		// Fury
+		case "Fury": {
 			[_personalRadio, 6] call acre_api_fnc_setRadioChannel;
 		};
-		case "Hammer-1": {
+		case "Fury-1": {
+			[_personalRadio, 6] call acre_api_fnc_setRadioChannel;
+		};
+		case "Fury-2": {
+			[_personalRadio, 6] call acre_api_fnc_setRadioChannel;
+		};
+		// Foxhound
+		case "Foxhound-1": {
 			[_personalRadio, 7] call acre_api_fnc_setRadioChannel;
 		};
-		case "Fury-1": {
+		case "Foxhound-2": {
+			[_personalRadio, 7] call acre_api_fnc_setRadioChannel;
+		};
+		case "Foxhound-3": {
+			[_personalRadio, 7] call acre_api_fnc_setRadioChannel;
+		};
+		case "Shadow": {
 			[_personalRadio, 8] call acre_api_fnc_setRadioChannel;
 		};
-		case "Foxhound-1": {
+		case "Viper": {
 			[_personalRadio, 9] call acre_api_fnc_setRadioChannel;
 		};
-		case "Shadow-1": {
+		case "Phantom": {
 			[_personalRadio, 10] call acre_api_fnc_setRadioChannel;
 		};
-		case "Viper-1": {
-			[_personalRadio, 11] call acre_api_fnc_setRadioChannel;
-		};
-		case "Phantom-1": {
-			[_personalRadio, 11] call acre_api_fnc_setRadioChannel;
-		};
+		// Ugly
 		case "Ugly-1": {
+			[_personalRadio, 11] call acre_api_fnc_setRadioChannel;
+		};
+		case "Ugly-2": {
+			[_personalRadio, 11] call acre_api_fnc_setRadioChannel;
+		};
+		// Sentinel
+		case "Sentinel": {
 			[_personalRadio, 13] call acre_api_fnc_setRadioChannel;
 		};
 	};

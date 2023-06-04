@@ -17,9 +17,11 @@
 
 params ["_logic"];
 
-_result = ["Are you sure?", "Please confirm that you wish to disarm all players", "Yes I'm sure", "Cancel"] call BIS_fnc_guiMessage;
+// diag_log "[DISARM MODULE]: Launching UI";
 
-if (_result) then {
+// _result = ["Are you sure?", "Please confirm that you wish to disarm all players", "Yes I'm sure", "Cancel"] spawn BIS_fnc_guiMessage;
+
+// if (_result) then {
 	diag_log "[DISARM MODULE]: Function Started";
 
 	// Variables
@@ -35,5 +37,5 @@ if (_result) then {
 	deleteVehicle _logic;
 
 	diag_log "[DISARM MODULE]: Function Complete";
-};
+// };
 
