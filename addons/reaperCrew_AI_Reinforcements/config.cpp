@@ -135,12 +135,6 @@ class CfgVehicles
 		scope = 2;
 		scopeCurator = 0;
 	};
-	class reaperCrew_modulePathEnd: reaperCrew_moduleReinforcementsBase
-	{
-		displayName = "Path End";
-		scope = 2;
-		scopeCurator = 0;
-	};
     class reaperCrew_moduleVehicleSpawn: reaperCrew_moduleReinforcementsBase
 	{
 		displayName = "Vehicle Spawnpoint";

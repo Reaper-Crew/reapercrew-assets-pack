@@ -20,7 +20,7 @@ This repository holds the sources files for the Reaper Crew Assets pack
 
 #### Reinforcements
 
-* [Reinforcements System](docs/reinforcements-system.md)
+* [Reinforcements System](docs/systems/reinforcements/reinforcements-system.md)
 * [Marauding Vehicles](docs/marauding-vehicles.md)
 
 #### Other Systems
