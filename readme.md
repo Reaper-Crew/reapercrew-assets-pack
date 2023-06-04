@@ -15,8 +15,8 @@ This repository holds the sources files for the Reaper Crew Assets pack
 
 #### SABRE System
 
-* [Sabre Core](docs\systems\sabre\sabreCore.md)
-* [Sabre Counter Battery](docs\systems\sabre\sabreCounterBattery.md)
+* [Sabre Core](docs/systems/sabre/sabreCore.md)
+* [Sabre Counter Battery](docs/systems/sabre/sabreCounterBattery.md)
 
 #### Reinforcements
 
