@@ -16,6 +16,9 @@
 
 params ["_supplyCrate"];
 
+// Only run when object local
+if !(isServer) exitWith {diag_log "[LOGISTICS]: Server check failed - skipping crate init"};
+
 // Small Arms
 _rifleMagazines = reaperCrew_rifleMagazines splitString ",";
 _grenadierAmmo = reaperCrew_grenadierAmmo splitString ",";

@@ -40,38 +40,15 @@ _crateAction = ['Spawn Medical Crate','Spawn Medical Crate','', {
 },{true}] call ace_interact_menu_fnc_createAction;
 _actionsList pushBack _crateAction;
 
-if (reaperCrew_82mmCheckbox == true) then {
-	_crateAction = ['Spawn 82mm Mortar Crate','Spawn 82mm Mortar Crate','', { 
+// Indirect Fires Crate
+if (reaperCrew_IDFCrate == true) then {
+	_crateAction = ['Spawn IDF Crate','Spawn IDF Crate','', { 
 		["Spawning crate...", 5, {true}, {
 			_recievedParams = _this select 0;
 			_target = _recievedParams select 0;
 			_type = _recievedParams select 1;
 			[_target, _type] remoteExec ["reapercrew_logistics_fnc_logisticsCreateSupplyCrate", 2]
-		}, {}, [_target, "82Mortar"]] call CBA_fnc_progressBar; 
-	},{true}] call ace_interact_menu_fnc_createAction;
-	_actionsList pushBack _crateAction;
-};
-
-if (reaperCrew_105mmCUPCheckbox == true) then {
-	_crateAction = ['Spawn 105mm Mortar Crate','Spawn 105mm Mortar Crate','', { 
-		["Spawning crate...", 5, {true}, {
-			_recievedParams = _this select 0;
-			_target = _recievedParams select 0;
-			_type = _recievedParams select 1;
-			[_target, _type] remoteExec ["reapercrew_logistics_fnc_logisticsCreateSupplyCrate", 2]
-		}, {}, [_target, "105CUP"]] call CBA_fnc_progressBar; 
-	},{true}] call ace_interact_menu_fnc_createAction;
-	_actionsList pushBack _crateAction;
-};
-
-if (reaperCrew_122mmCUPCheckbox == true) then {
-	_crateAction = ['Spawn 122mm Mortar Crate','Spawn 122mm Mortar Crate','', { 
-		["Spawning crate...", 5, {true}, {
-			_recievedParams = _this select 0;
-			_target = _recievedParams select 0;
-			_type = _recievedParams select 1;
-			[_target, _type] remoteExec ["reapercrew_logistics_fnc_logisticsCreateSupplyCrate", 2]
-		}, {}, [_target, "122CUP"]] call CBA_fnc_progressBar; 
+		}, {}, [_target, "indirectFires"]] call CBA_fnc_progressBar; 
 	},{true}] call ace_interact_menu_fnc_createAction;
 	_actionsList pushBack _crateAction;
 };

@@ -7,14 +7,13 @@ class CfgPatches
 			"ReaperCrew_PlasticCase_Medical",
 			"ReaperCrew_PlatoonAmmo_Base",
 			"ReaperCrew_SupplyCrate",
-			"ReaperCrew_Shells82",
+			"ReaperCrew_SupplyCrateSmallArms",
+			"ReaperCrew_SupplyCrateIDF",
 			"ReaperCrew_PlasticCase_Base",
 			"ReaperCrew_PlasticCase_Medical",
 			"RC_CargoNet_01_barrels_F",
 			"RC_VirtualReammoBox_F",
 			"reaperCrew_moduleResupplyPoint",
-			"ReaperCrew_Shells105CUP",
-			"ReaperCrew_Shells122CUP",
 			"reaperCrew_FOB_Crate",
 			"reaperCrew_ConstructionSupplies500"
 		};
@@ -48,7 +47,8 @@ class CfgFunctions
 		{
 			file = "rc_assets_pack\addons\reaperCrew_Logistics\functions";
 			class logisticsCreateSupplyCrate{};
-			class logisticsPopulateSupplyCrate{};
+			class logisticsInitCrateSmallArms{};
+			class logisticsInitCrateIDF{};
 			class logisticsCreateFuelSource{};
 			class logisticsCreateAmmoSource{};
 			class logisticsAddActions{};
@@ -96,91 +96,24 @@ class CfgVehicles
 		class TransportMagazines{};
 		class TransportWeapons{};
 	};
-	class ReaperCrew_PlatoonAmmo_Base: ReaperCrew_SupplyCrate {	
+	class ReaperCrew_SupplyCrateSmallArms: ReaperCrew_SupplyCrate {
 		displayName="Supply Crate (Small Arms)";
 		scope=2;
 		scopeCurator=2;
-	};
-	class ReaperCrew_Shells82: ReaperCrew_SupplyCrate {	
-		displayName="Supply Crate (82mm Mortar)";
-		scope=2;
-		scopeCurator=2;
-		class TransportItems
-		{
-            class HighExplosiveGuided {
-                name = ACE_1Rnd_82mm_Mo_HighExplosive_Guided;
-                count = 50;
-            };
-			class HighExplosive {
-                name = ACE_1Rnd_82mm_Mo_HighExplosive;
-                count = 50;
-            };
-			class Illum {
-                name = ACE_1Rnd_82mm_Mo_Illum;
-                count = 50;
-            };
-			class HighExplosiveLaserGuided {
-                name = ACE_1Rnd_82mm_Mo_HighExplosive_LaserGuided;
-                count = 50;
-            };
-			class Smoke {
-                name = ACE_1Rnd_82mm_Mo_Smoke;
-                count = 50;
-            };
+		class EventHandlers{
+			init = "[(_this select 0)] call reapercrew_logistics_fnc_logisticsInitCrateSmallArms;";
 		};
 	};
-	class ReaperCrew_Shells105CUP: ReaperCrew_SupplyCrate {	
-		displayName="Supply Crate (105mm Shells)";
+	class ReaperCrew_SupplyCrateIDF: ReaperCrew_SupplyCrate {
+		displayName="Supply Crate (Indirect Fires)";
 		scope=2;
 		scopeCurator=2;
-		class TransportItems
-		{
-            class HighExplosive {
-                name = CUP_compats_105mm_he;
-                count = 50;
-            };
-			class WhitePhosphorus {
-                name = CUP_compats_105mm_wp;
-                count = 50;
-            };
-			class Illum {
-                name = CUP_compats_105mm_illum;
-                count = 50;
-            };
-			class HighExplosiveLaserGuided {
-                name = CUP_compats_105mm_laser;
-                count = 50;
-            };
-			class Smoke {
-                name = CUP_compats_105mm_smoke;
-                count = 50;
-            };
+		model = "\A3\Supplies_F_Heli\CargoNets\CargoNet_01_box_F.p3d";
+		class EventHandlers{
+			init = "[(_this select 0)] call reapercrew_logistics_fnc_logisticsInitCrateIDF;";
 		};
 	};
-	class ReaperCrew_Shells122CUP: ReaperCrew_SupplyCrate {	
-		displayName="Supply Crate (122mm Shells)";
-		scope=2;
-		scopeCurator=2;
-		class TransportItems
-		{
-            class HighExplosive {
-                name = CUP_compats_122mm_he;
-                count = 50;
-            };
-			class Illum {
-                name = CUP_compats_122mm_illum;
-                count = 50;
-            };
-			class HighExplosiveLaserGuided {
-                name = CUP_compats_122mm_laser;
-                count = 50;
-            };
-			class Smoke {
-                name = CUP_compats_122mm_smoke;
-                count = 50;
-            };
-		};
-	};
+
     class ReaperCrew_PlasticCase_Base: Items_base_F
 	{
 		author="Reaper Crew";

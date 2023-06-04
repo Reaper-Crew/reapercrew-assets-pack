@@ -20,19 +20,13 @@ _classname = "";
 
 switch (_crateType) do {
 	case "smallArms": {
-		_classname = "ReaperCrew_PlatoonAmmo_Base";
+		_classname = "ReaperCrew_SupplyCrateSmallArms";
 	};
 	case "medical": {
 		_classname = "ReaperCrew_PlasticCase_Medical";
 	};
-	case "82Mortar": {
-		_classname = "ReaperCrew_Shells82";
-	};
-	case "105CUP": {
-		_classname = "ReaperCrew_Shells105CUP";
-	};
-	case "122CUP": {
-		_classname = "ReaperCrew_Shells122CUP";
+	case "indirectFires": {
+		_classname = "ReaperCrew_SupplyCrateIDF";
 	};
 	case "vehicleFuel": {
 		_classname = "RC_CargoNet_01_barrels_F";
@@ -50,9 +44,31 @@ _supplyCrate = _classname createVehicle [0,0,0];
 [_resupplyObject, _supplyCrate, [([-10,10] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;
 _supplyCrate enableSimulationGlobal true;
 
-if (_crateType == "smallArms") then {
-	[_supplyCrate] call reapercrew_logistics_fnc_logisticsPopulateSupplyCrate;
+switch (_crateType) do {
+	case "smallArms": {
+		[_supplyCrate] call reapercrew_logistics_fnc_logisticsInitCrateSmallArms;
+	};
+	case "medical": {
+		_classname = "ReaperCrew_PlasticCase_Medical";
+	};
+	case "indirectFires": {
+		_classname = "ReaperCrew_SupplyCrateIDF";
+		[_supplyCrate] call reapercrew_logistics_fnc_logisticsInitCrateIDF;
+	};
+	case "vehicleFuel": {
+		_classname = "RC_CargoNet_01_barrels_F";
+	};
+	case "vehicleAmmo": {
+		_classname = "RC_VirtualReammoBox_F";
+	};
+	case "emptyTransport": {
+		_classname = "Land_WoodenCrate_01_F";
+	};
 };
+
+// if (_crateType == "smallArms") then {
+// 	[_supplyCrate] call reapercrew_logistics_fnc_logisticsPopulateSupplyCrate;
+// };
 
 // Return the created crate
 _supplyCrate;
