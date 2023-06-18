@@ -65,19 +65,17 @@ _waypoint = _helicopterCrew addWaypoint [_landingPosition, 50];
 _waypoint setWaypointType "TR UNLOAD";
 _waypoint waypointAttachVehicle _helipad;
 
-// Return to base
-if (count _waypointsList > 0) then {
-	_egressWaypoints = _waypointsList;
-	reverse _egressWaypoints;
-
-	{
-		// MOVE
-		_waypoint =_helicopterCrew addWaypoint [_x, -1];
-		_waypoint setWaypointType "MOVE";
-		_waypoint setWaypointForceBehaviour true;
-		_waypoint setWaypointBehaviour "CARELESS";
-	} forEach _egressWaypoints;
-};
+// // Return to base - REMOVED TEMPORARILY DUE TO BUG
+// if (count _waypointsList > 0) then {
+//     reverse _waypointsList;
+// 	{
+// 		// MOVE
+// 		_waypoint =_helicopterCrew addWaypoint [_x, -1];
+// 		_waypoint setWaypointType "MOVE";
+// 		_waypoint setWaypointForceBehaviour true;
+// 		_waypoint setWaypointBehaviour "CARELESS";
+// 	} forEach _waypointsList;
+// };
 
 _waypoint = _helicopterCrew addWaypoint [_spawnPosition, -1];
 _waypoint setWaypointStatements ["true", "deleteVehicle vehicle this; {deleteVehicle _x} forEach thisList"];

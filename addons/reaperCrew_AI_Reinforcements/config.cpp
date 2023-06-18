@@ -230,6 +230,7 @@ class CfgVehicles
 		scope = 2;
 		class Attributes: AttributesBase {
 			#include "attributes.hpp"
+			#include "randomLZAttributes.hpp"
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter: reaperCrew_moduleReinforcementsSpawnerBase
@@ -239,6 +240,7 @@ class CfgVehicles
 		scope = 2;
 		class Attributes: AttributesBase {
 			#include "attributes.hpp"
+			#include "randomLZAttributes.hpp"
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryMarine: reaperCrew_moduleReinforcementsSpawnerBase
