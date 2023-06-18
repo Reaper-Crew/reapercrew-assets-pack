@@ -27,6 +27,7 @@ class CfgFunctions
 		{
 			file = "rc_assets_pack\addons\reaperCrew_Player_Management\functions";
 			class setACRESettings{postInit = 1;};
+			class addACEActions{postInit = 1;};
 			class setPersonalACRESettingsLocal{};
 			class setPersonalACRESettingsServer{postInit = 1;};
 			class setUnitInsigniaGlobal{postInit = 1;};
@@ -37,6 +38,22 @@ class CfgFunctions
 			class savePlayerLoadoutLocal{};
 			class fixPlayerFatigueGlobal{};
 			class fixPlayerFatigueLocal{};
+		};
+	};
+	class reapercrew_player_groups
+	{
+		class Effects
+		{
+			file = "rc_assets_pack\addons\reaperCrew_Player_Management\listAllGroups";
+			class getGroupListST{};
+			class getRole{};
+			class getUnitInfoST{};
+			class getUnitRole{};
+			class getUnitWeightST{};
+            class getWeight{};
+			class getWeightColour{};
+			class listAllGroups{};
+			class listPlayerInfo{};
 		};
 	};
 };
