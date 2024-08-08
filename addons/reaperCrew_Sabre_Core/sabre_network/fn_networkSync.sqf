@@ -14,14 +14,14 @@
 * Public: No
 */
 
-if !(hasInterface) exitWith {["SABRE", "NETWORK", "Player check failed - Not starting SABRE sync task", (name player)] call reapercrew_common_fnc_remoteLog;};
+if !(hasInterface) exitWith {["Player check failed - Not starting SABRE sync task", (name player)] call reapercrew_common_fnc_remoteLog;};
 
-if !(canSuspend) exitWith {["SABRE", "NETWORK", "canSuspend check failed - not running network sync", (name player)] call reapercrew_common_fnc_remoteLog;};
+if !(canSuspend) exitWith {["canSuspend check failed - not running network sync", (name player)] call reapercrew_common_fnc_remoteLog;};
 
 _hasInit = [currentNamespace, "DataLinkSystemStarted", false] call BIS_fnc_getServerVariable;
 while {_hasInit == false} do {
 	_hasInit = [currentNamespace, "DataLinkSystemStarted", false] call BIS_fnc_getServerVariable;
-	["SABRE", "NETWORK", "System not started, pausing scheduled task init", (name player)] call reapercrew_common_fnc_remoteLog;
+	["System not started, pausing scheduled task init", (name player)] call reapercrew_common_fnc_remoteLog;
 	sleep 15;
 };
 
@@ -40,13 +40,13 @@ _validSyncCheck = [] call reapercrew_sabre_network_fnc_validateSync;
 
 // If valid sync target, add data
 if (_validSyncCheck) then {
-	["SABRE", "NETWORK", (format ["TASK: Running SABRE network sync on client %1", _playerName]), (name player)] call reapercrew_common_fnc_remoteLog;
+	[(format ["TASK: Running SABRE network sync on client %1", _playerName]), (name player)] call reapercrew_common_fnc_remoteLog;
 	_action = "SYNC";
 	player setVariable ["_sabreHasSync", true];
 };
 if (!(_hasSynced) && !(_validSyncCheck)) exitWith { diag_log "SABRE: No sync action required - terminating"; };
 if !(_validSyncCheck) then {
-	["SABRE", "NETWORK", (format ["TASK: Running SABRE network cleanup on client %1", _playerName]), (name player)] call reapercrew_common_fnc_remoteLog;
+	[(format ["TASK: Running SABRE network cleanup on client %1", _playerName]), (name player)] call reapercrew_common_fnc_remoteLog;
 	_action = "OFFLOAD";
 	player setVariable ["_sabreHasSync", false];
 };
@@ -55,17 +55,17 @@ switch (side player) do {
 	case west: { 
 		_LCMRDiscoveryData append ([currentNamespace, "DatalinkBluForDiscoverableFires", []] call BIS_fnc_getServerVariable);
 		_RadarUnits append ([currentNamespace, "DatalinkBluForCounterBatteryElements", []] call BIS_fnc_getServerVariable);
-		["SABRE", "NETWORK", format ["Using %1 data for client %2", _playerSide, _playerName], (name player)] call reapercrew_common_fnc_remoteLog;
+		[format ["Using %1 data for client %2", _playerSide, _playerName], (name player)] call reapercrew_common_fnc_remoteLog;
 	};
 	case east: {
 		_LCMRDiscoveryData append ([currentNamespace, "DatalinkOpForDiscoverableFires", []] call BIS_fnc_getServerVariable);
 		_RadarUnits append ([currentNamespace, "DatalinkOpForCounterBatteryElements", []] call BIS_fnc_getServerVariable);
-		["SABRE", "NETWORK", format ["Using %1 data for client %2", _playerSide, _playerName], (name player)] call reapercrew_common_fnc_remoteLog;
+		[format ["Using %1 data for client %2", _playerSide, _playerName], (name player)] call reapercrew_common_fnc_remoteLog;
 	};
 	case independent: { 
 		_LCMRDiscoveryData append ([currentNamespace, "DatalinkIndForDiscoverableFires", []] call BIS_fnc_getServerVariable);
 		_RadarUnits append ([currentNamespace, "DatalinkIndForCounterBatteryElements", []] call BIS_fnc_getServerVariable);
-		["SABRE", "NETWORK", format ["Using %1 data for client %2", _playerSide, _playerName], (name player)] call reapercrew_common_fnc_remoteLog;
+		[format ["Using %1 data for client %2", _playerSide, _playerName], (name player)] call reapercrew_common_fnc_remoteLog;
 	};
 };
 
@@ -95,5 +95,5 @@ if (_action == "SYNC" && _syncCounterBattery) then {
 };
 		
 if ( _action == "SYNC" && _RecordsCount > 0 ) then {
-	["SABRE", "NETWORK", format ["Alerting on %1 markers for %2", _RecordsCount, _playerName]] call reapercrew_common_fnc_remoteLog;
+	[format ["Alerting on %1 markers for %2", _RecordsCount, _playerName]] call reapercrew_common_fnc_remoteLog;
 };

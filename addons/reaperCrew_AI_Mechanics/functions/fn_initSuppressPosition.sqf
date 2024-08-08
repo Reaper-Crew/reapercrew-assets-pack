@@ -25,7 +25,7 @@ _logicArea2D = [getPos _logic, _logicArea select 0, _logicArea select 1];
 _additionalCondition = _logic getVariable ["ActivationCode", "true"];
 
 // Only run on the server
-if (!isServer) exitWith {["AI_MECHANICS", "initSuppressPosition", "Server checked failed - Not running suppress init"] call reapercrew_common_fnc_remoteLog;};
+if (!isServer) exitWith {["Server check failed - Not running suppress init"] call reapercrew_common_fnc_remoteLog;};
 
 // Create a trigger
 _activationTrigger = createTrigger ["EmptyDetector", (getPos _logic), false];

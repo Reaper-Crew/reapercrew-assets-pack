@@ -24,7 +24,7 @@ if (count DatalinkBluForCounterBatteryElements > 0) then {
 			_deletedCount = _deletedCount + 1;
 		};
 	} forEach DatalinkBluForCounterBatteryElements;
-	["SABRE", "COUNTER BATTERY", (format ["TASK OUTPUT: Cleared %1 old radars for WEST", _deletedCount])] call reapercrew_common_fnc_remoteLog;
+	[(format ["TASK OUTPUT: Cleared %1 old radars for WEST", _deletedCount])] call reapercrew_common_fnc_remoteLog;
 };
 
 // Opfor
@@ -36,7 +36,7 @@ if (count DatalinkOpForCounterBatteryElements > 0) then {
 			_deletedCount = _deletedCount + 1;
 		};
 	} forEach DatalinkOpForCounterBatteryElements;
-	["SABRE", "COUNTER BATTERY", (format ["TASK OUTPUT: Cleared %1 old radars for EAST", _deletedCount])] call reapercrew_common_fnc_remoteLog;
+	[(format ["TASK OUTPUT: Cleared %1 old radars for EAST", _deletedCount])] call reapercrew_common_fnc_remoteLog;
 };
 
 // Independent
@@ -48,5 +48,5 @@ if (count DatalinkIndForCounterBatteryElements > 0) then {
 			_deletedCount = _deletedCount + 1;
 		};
 	} forEach DatalinkIndForCounterBatteryElements;
-	["SABRE", "COUNTER BATTERY", (format ["TASK OUTPUT: Cleared %1 old radars for INDEPENDENT", _deletedCount])] call reapercrew_common_fnc_remoteLog;
+	[(format ["TASK OUTPUT: Cleared %1 old radars for INDEPENDENT", _deletedCount])] call reapercrew_common_fnc_remoteLog;
 };

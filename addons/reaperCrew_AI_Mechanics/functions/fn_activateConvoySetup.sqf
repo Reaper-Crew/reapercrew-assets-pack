@@ -66,8 +66,11 @@ _allConvoyUnits = [];
 
 // Event handlers to vehicles
 { 
-	_x addEventHandler ["Explosion", {
-		params ["_unit", "_damage", "_source"];
+	_x addEventHandler ["Hit", {
+		params ["_unit", "_source", "_damage", "_instigator"];
+
+		if (side _unit == side _instigator) exitWith {};
+		if (_damage < 0.25) exitWith {};
 
 		_convoyContactConditionVariableName = _unit getVariable ["convoyContactConditionVariableName", ""];
 		_convoyContactConditionTrigger = format ["%1 = true;", _convoyContactConditionVariableName];
@@ -75,13 +78,14 @@ _allConvoyUnits = [];
 		call _convoyContactConditionTriggerCode;
 
 		_unit removeAllEventHandlers "Explosion";
+		["Convoy event handler activated"] call reapercrew_common_fnc_remoteLog;
 	}];
 	_x setVariable ["convoyContactConditionVariableName", _convoyContactConditionVariableName, true];
 } forEach _allConvoyUnits;
 
 // Wait until activated
 waitUntil _convoyActivateCode;
-["CONVOY", "activateConvoySetup", "Convoy Activated"] call reapercrew_common_fnc_remoteLog;
+["Convoy Activated"] call reapercrew_common_fnc_remoteLog;
 
 // Enable sim on all vehicles
 {
@@ -91,7 +95,7 @@ waitUntil _convoyActivateCode;
 } forEach _allConvoyVehicles;
 
 waitUntil _convoyContactConditionCheckCode;
-["CONVOY", "activateConvoySetup", "Convoy Contacted"] call reapercrew_common_fnc_remoteLog;
+["Convoy Contacted"] call reapercrew_common_fnc_remoteLog;
 
 {
 	_vehicleUnit = _x;
@@ -143,7 +147,7 @@ _allConvoyGroups = [];
 } forEach _allConvoyUnits;
 
 sleep 120;
-["CONVOY", "activateConvoySetup", "Rushing units"] call reapercrew_common_fnc_remoteLog;
+["Rushing units"] call reapercrew_common_fnc_remoteLog;
 
 {
 	[_x, 2000] spawn lambs_wp_fnc_taskRush;

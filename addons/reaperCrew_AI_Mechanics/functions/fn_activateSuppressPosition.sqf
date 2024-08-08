@@ -17,7 +17,7 @@
 
 params ["_triggerObject"];
 
-["AI_MECHANICS", "activateSuppressPosition", "Activated position suppression mechanic"] call reapercrew_common_fnc_remoteLog;
+["Activated position suppression mechanic"] call reapercrew_common_fnc_remoteLog;
 
 _syncGunners = _triggerObject getVariable ["_syncGunners", []];
 
@@ -34,7 +34,7 @@ sleep 10;
 			// Select one at random
 			_randomPlayer = selectRandom _allPlayersinZone;
 
-			["AI_MECHANICS", "activateSuppressPosition", format ["Suppressing player %1", (name _randomPlayer)]] call reapercrew_common_fnc_remoteLog;
+			[format ["Suppressing player %1", (name _randomPlayer)]] call reapercrew_common_fnc_remoteLog;
 
 			// Begin Supression
 			[_gunner, (getPosATL _randomPlayer), ([1,10] call BIS_fnc_randomInt), 5, (UnitPos _gunner)] call zen_ai_fnc_suppressiveFire;

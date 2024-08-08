@@ -14,11 +14,11 @@
 * Public: No
 */
 
-if (!isServer) exitWith {["SABRE", "MAIN", "Server checked failed - not starting scheduled task launcher"] call reapercrew_common_fnc_remoteLog;};
+if (!isServer) exitWith {["Server checked failed - not starting scheduled task launcher"] call reapercrew_common_fnc_remoteLog;};
 
 while {isNil "DataLinkSystemStarted"} do {
 	// if (reaperCrew_sabreCounterBattery_DebugTasks) then {
-		["SABRE", "SCHEDULE", "System not started, pausing scheduled task init"] call reapercrew_common_fnc_remoteLog;
+		["System not started, pausing scheduled task init"] call reapercrew_common_fnc_remoteLog;
 	// };
 	sleep 15;
 };

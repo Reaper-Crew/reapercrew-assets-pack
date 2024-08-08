@@ -4,12 +4,12 @@ _units = param [1,[],[[]]];
 _activated = param [2,true,[true]];
 
 // Only run on the server
-if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - Not initialising init for infantry spawns"};
+if (!isServer) exitWith {["Server checked failed - Not initialising init for infantry spawns"] call reapercrew_common_fnc_remoteLog;};
 
 // Don't run if the array isn't available
 while {isNil "activeInfantryTriggers"} do {
 	if (reaperCrew_InfantrySpawnCheckbox == true) then {
-		diag_log "[REINFORCEMENTS]: Infantry triggers undefined, sleeping";
+		["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };

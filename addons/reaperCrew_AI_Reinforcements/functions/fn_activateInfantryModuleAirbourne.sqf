@@ -19,7 +19,7 @@ params ["_triggerObject"];
 // Don't run if the array isn't available
 while {isNil "activeAircraftTriggers"} do {
 	if (reaperCrew_debugReinforcementsSpawning == true) then {
-		["REINFORCEMENTS", "activateInfantryModuleAirbourne", "Vehicle triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
+		["Vehicle triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
@@ -57,7 +57,7 @@ while { triggerActivated _triggerObject } do {
 
 		// Output debug information if enabled
 		if (reaperCrew_debugReinforcementsSpawning == true) then {
-			["REINFORCEMENTS", "activateInfantryModuleAirbourne", (format ["Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
+			[(format ["Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 		};
 
 		// Find landing position
@@ -75,18 +75,18 @@ while { triggerActivated _triggerObject } do {
 			_landingPosition = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsAircraft];
 
 			if (reaperCrew_debugWaypointMechanics == true) then {
-				["REINFORCEMENTS", "activateInfantryModuleAirbourne", (format ["Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius])] call reapercrew_common_fnc_remoteLog;
+				[(format ["Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius])] call reapercrew_common_fnc_remoteLog;
 			};
 
 			if (_searchRadius > 500) then {
 				_landingPosition pushBack _searchCenterPos;
 				if (reaperCrew_debugWaypointMechanics == true) then {
-					["REINFORCEMENTS", "activateInfantryModuleAirbourne", "Search radius exceeded, defaulting to center point"] call reapercrew_common_fnc_remoteLog;
+					["Search radius exceeded, defaulting to center point"] call reapercrew_common_fnc_remoteLog;
 				};
 			};
 
 			if (reaperCrew_debugWaypointMechanics == true) then {
-				["REINFORCEMENTS", "activateInfantryModuleAirbourne", (format ["Search complete, found position of %1", _landingPosition])] call reapercrew_common_fnc_remoteLog;
+				[(format ["Search complete, found position of %1", _landingPosition])] call reapercrew_common_fnc_remoteLog;
 			};
 
 		};
@@ -103,5 +103,5 @@ while { triggerActivated _triggerObject } do {
 	sleep _waveDelay;
 };
 if (reaperCrew_debugReinforcementsSpawning == true) then {
-	["REINFORCEMENTS", "activateInfantryModuleAirbourne", "Helicopter spawning has ended"] call reapercrew_common_fnc_remoteLog;
+	["Helicopter spawning has ended"] call reapercrew_common_fnc_remoteLog;
 };

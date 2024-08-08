@@ -21,7 +21,7 @@
 	_markerTimeBelow = (diag_tickTime - 1800);
 
 	if (_markerTime < _markerTimeBelow) then {
-		["SABRE", "COUNTER BATTERY", format ["Removing stale marker %1", _markerReference]] call reapercrew_common_fnc_remoteLog;
+		[format ["Removing stale marker %1", _markerReference]] call reapercrew_common_fnc_remoteLog;
 		deleteMarker _markerReference;
 	};
 

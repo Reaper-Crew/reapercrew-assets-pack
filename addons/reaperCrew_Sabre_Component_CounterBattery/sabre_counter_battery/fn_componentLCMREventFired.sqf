@@ -17,7 +17,7 @@
 params ["_artilleryUnit"];
 
 // Only execute on the server
-if (!isServer) exitWith {["SABRE", "COUNTER BATTERY", "Server checked failed - not running event handler"] call reapercrew_common_fnc_remoteLog;};
+if (!isServer) exitWith {["Server checked failed - not running event handler"] call reapercrew_common_fnc_remoteLog;};
 
 // Only go through radar systems that aren't on the side
 _radarSystems = [];
@@ -42,15 +42,15 @@ diag_log _radarSystems;
 {
 
 	// Check that unit is alive
-	if (!alive _x) exitWith {["SABRE", "COUNTER BATTERY", "Unit not alive, skipping EH trigger"] call reapercrew_common_fnc_remoteLog;};
+	if (!alive _x) exitWith {["Unit not alive, skipping EH trigger"] call reapercrew_common_fnc_remoteLog;};
 
 	// Check that unit is active
-	if (!isEngineOn _x) exitWith {["SABRE", "COUNTER BATTERY", "Unit is not active, skipping EH trigger"] call reapercrew_common_fnc_remoteLog;};
+	if (!isEngineOn _x) exitWith {["Unit is not active, skipping EH trigger"] call reapercrew_common_fnc_remoteLog;};
 	
 	// Check that unit is within radar range
 	_radarZone = _x getVariable ["_radarZone", ""];
 	_isInArea = _artilleryUnit inArea _radarZone;
-	if (!_isInArea) exitWith {["SABRE", "COUNTER BATTERY", "Unit not in radar zone skipping EH trigger"] call reapercrew_common_fnc_remoteLog;};
+	if (!_isInArea) exitWith {["Unit not in radar zone skipping EH trigger"] call reapercrew_common_fnc_remoteLog;};
 	
 	// Determine if the asset is already known on the network
 	_dataLinkKnowledge = [];

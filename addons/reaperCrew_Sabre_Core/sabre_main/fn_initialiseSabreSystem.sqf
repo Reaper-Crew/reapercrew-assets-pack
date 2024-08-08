@@ -14,12 +14,12 @@
 * Public: No
 */
 
-if (!isServer) exitWith {["SABRE", "MAIN", "Server checked failed - not running SABRE init"] call reapercrew_common_fnc_remoteLog;};
+if (!isServer) exitWith {["Server checked failed - not running SABRE init"] call reapercrew_common_fnc_remoteLog;};
 
 // TODO replace with CBA variable
-if !( true ) exitWith { ["SABRE", "MAIN", "System disabled - not running SABRE init"] call reapercrew_common_fnc_remoteLog; };
+if !( true ) exitWith { ["System disabled - not running SABRE init"] call reapercrew_common_fnc_remoteLog; };
 
-["SABRE", "MAIN", "Initialising system"] call reapercrew_common_fnc_remoteLog;
+["Initialising system"] call reapercrew_common_fnc_remoteLog;
 
 // Declare variables
 // DiscoverableFires FORMAT [ArtilleryUnit, markerName, Marker Time]

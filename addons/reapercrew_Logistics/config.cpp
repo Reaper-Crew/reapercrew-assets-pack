@@ -57,6 +57,7 @@ class CfgFunctions
 		};
 	};
 };
+class ACE_Actions;
 class CfgVehicles
 {
 	class reaperCrew_module_base;
@@ -72,7 +73,12 @@ class CfgVehicles
 		curatorCanAttach = 1;
 	};
 	class Items_base_F;
-	class B_CargoNet_01_ammo_F;
+	class CargoNet_01_ammo_base_F;
+	class B_CargoNet_01_ammo_F: CargoNet_01_ammo_base_F {
+		class ACE_Actions {
+            class ACE_MainActions{};
+        };
+	};
 	class CargoNet_01_barrels_F;
 	class VirtualReammoBox_F;
 	class ReaperCrew_SupplyCrate: B_CargoNet_01_ammo_F {
@@ -82,19 +88,34 @@ class CfgVehicles
 		scope=0;
 		scopeCurator=0;
 		// Dragging
-        ace_dragging_canDrag = 1;
+        // ace_dragging_canDrag = 1;
         ace_dragging_dragPosition[] = {0, 1.2, 0};
-        ace_dragging_dragDirection = 0;
-		ace_maxWeightDrag = 9999;
+        // ace_dragging_dragDirection = 0;
+		// ace_maxWeightDrag = 9999;
 
         // Carrying
-        ace_dragging_canCarry = 1;
+        // ace_dragging_canCarry = 1;
         ace_dragging_carryPosition[] = {0, 1.2, 0};
-        ace_dragging_carryDirection = 0;
+        // ace_dragging_carryDirection = 0;
 
 		class TransportItems{};
 		class TransportMagazines{};
 		class TransportWeapons{};
+		class ACE_Actions: ACE_Actions {
+            class ACE_MainActions {
+                condition = "true";
+				displayName = "Interactions";
+				distance = 10;
+				position = "[_target,  ace_interact_menu_cameraPosASL] call ace_interaction_fnc_getVehiclePosComplex";
+				selection = "";
+            	class PickUp {
+            	    displayName = "Pick Up";
+            	    condition = "true";
+            	    exceptions[] = {};
+            	    statement = "[_player, _target] call ace_dragging_fnc_carryObject;";
+            	};
+			};
+		};
 	};
 	class ReaperCrew_SupplyCrateSmallArms: ReaperCrew_SupplyCrate {
 		displayName="Supply Crate (Small Arms)";
@@ -137,15 +158,15 @@ class CfgVehicles
         ace_cargo_canLoad = 1;
 
 		// Dragging
-        ace_dragging_canDrag = 1;
+        // ace_dragging_canDrag = 1;
         ace_dragging_dragPosition[] = {0, 1.2, 0};
-        ace_dragging_dragDirection = 0;
-		ace_maxWeightDrag = 9999;
+        // ace_dragging_dragDirection = 0;
+		// ace_maxWeightDrag = 9999;
 
         // Carrying
-        ace_dragging_canCarry = 1;
+        // ace_dragging_canCarry = 1;
         ace_dragging_carryPosition[] = {0, 1.2, 0};
-        ace_dragging_carryDirection = 0;
+        // ace_dragging_carryDirection = 0;
 		class TransportItems
 		{
 		};
@@ -159,6 +180,10 @@ class CfgVehicles
 		{
 			"camo"
 		};
+		class ACE_Actions {
+            class ACE_MainActions{};
+        };
+
 		// hiddenselectionsTextures[]=
 		// {
 		// 	"\reapercrew_Logistics\data\PlasticCase_01_CO_medical.paa"
@@ -184,6 +209,21 @@ class CfgVehicles
 		displayName="Supply Crate (Medical)";
 		model="\A3\Structures_F_Heli\Items\Luggage\PlasticCase_01_large_F.p3d";
 		icon="iconObject_1x2";
+		class ACE_Actions: ACE_Actions {
+            class ACE_MainActions {
+                condition = "true";
+				displayName = "Interactions";
+				distance = 10;
+				position = "[_target,  ace_interact_menu_cameraPosASL] call ace_interaction_fnc_getVehiclePosComplex";
+				selection = "";
+            	class PickUp {
+            	    displayName = "Pick Up";
+            	    condition = "true";
+            	    exceptions[] = {};
+            	    statement = "[_player, _target] call ace_dragging_fnc_carryObject;";
+            	};
+			};
+		};
         class TransportItems
 		{
             class blood_1000 {

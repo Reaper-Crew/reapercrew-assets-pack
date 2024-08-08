@@ -21,7 +21,7 @@ if (hasInterface) then {
 	_roleDesc = roleDescription player;
 	_groupName = groupId (group player);
 
-	["PLAYER MANAGEMENT", "setUnitInsigniaLocal", (format ["Current role is: %1 and group is %2", _roleDesc, _groupName]), (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
+	[(format ["Current role is: %1 and group is %2", _roleDesc, _groupName]), (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 
 	// Create classname
 	// Remove invalid characters
@@ -61,14 +61,14 @@ if (hasInterface) then {
 
 	// Build String
 	_constructClass = format ["reaperCrew_%1_%2", _groupName, _roleDesc];
-	["PLAYER MANAGEMENT", "setUnitInsigniaLocal", (format ["Using constructed classname %1", _constructClass]), (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
+	[(format ["Using constructed classname %1", _constructClass])] call reapercrew_common_fnc_remoteLog;
 
 	_classCheck = isClass (configFile >> "CfgUnitInsignia" >> _constructClass);
 
 	if !(_classCheck) then {
 		// If not found, set to default
 		_constructClass = "reaperCrew_default_insignia";
-		["PLAYER MANAGEMENT", "setUnitInsigniaLocal", "Classname not found, using default signature", (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
+		["Classname not found, using default signature"] call reapercrew_common_fnc_remoteLog;
 	};
 	
 	// First set to nothing, then to insignia

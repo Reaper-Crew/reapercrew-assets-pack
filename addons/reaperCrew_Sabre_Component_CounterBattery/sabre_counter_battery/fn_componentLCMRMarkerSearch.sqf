@@ -1,7 +1,7 @@
 params ["_knowledgeData", "_side", "_artilleryUnit"];
 
 // diag_log format ["[COUNTER BATTERY]: Running search and update for %1", _side];
-["SABRE", "COUNTER BATTERY", format ["Running search and update for %1", _side]] call reapercrew_common_fnc_remoteLog;
+[format ["Running search and update for %1", _side]] call reapercrew_common_fnc_remoteLog;
 
 // Search Records
 _isFound = false;
@@ -12,9 +12,9 @@ _mapMarker = "";
 _mapTime = 0;
 {
 	_parentObject = _x;
-	["SABRE", "COUNTER BATTERY", format ["Searching record %1", _parentObject]] call reapercrew_common_fnc_remoteLog;
+	[format ["Searching record %1", _parentObject]] call reapercrew_common_fnc_remoteLog;
 	_artilleryObjectReference = _x select 0;
-	if (_artilleryObjectReference == _artilleryUnit) exitWith {_foundRecord = _x; _isFound = true; _isFoundIndex = _forEachIndex; ["SABRE", "COUNTER BATTERY", "Found match"] call reapercrew_common_fnc_remoteLog;};
+	if (_artilleryObjectReference == _artilleryUnit) exitWith {_foundRecord = _x; _isFound = true; _isFoundIndex = _forEachIndex; ["Found match"] call reapercrew_common_fnc_remoteLog;};
 } forEach _knowledgeData;
 
 // If record was found: Check is the unit is still within the marked zone
@@ -34,7 +34,7 @@ if (_isFound) then {
 	// If isFound and _isInArea, then update existing
 	if (_isInArea) then {
 		if ( reaperCrew_sabreCounterBattery_DebugEvents ) then {
-			["SABRE", "COUNTER BATTERY", format ["Association with %1 and %2 exists - updating entry", _x, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
+			[format ["Association with %1 and %2 exists - updating entry", _x, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
 			// Update Marker in the global space
     		[(getPos _artilleryUnit), _mapMarker] call reapercrew_sabre_counterBattery_fnc_componentLCMRMarkerSetup;
 
@@ -44,7 +44,7 @@ if (_isFound) then {
 	} else {
 		// If isFound but NOT _isInArea, add a new icon
 		if ( reaperCrew_sabreCounterBattery_DebugEvents ) then {
-			["SABRE", "COUNTER BATTERY", format ["Association with %1 and %2 exists, but _isInArea false - Disassociating", _x, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
+			[format ["Association with %1 and %2 exists, but _isInArea false - Disassociating", _x, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
 		};
 		// Loop through and remove any entries with a reference to that object
 		diag_log _knowledgeData;
@@ -73,7 +73,7 @@ if (_isFound) then {
 
 } else {
 	// Not found at all, create a new marker
-	["SABRE", "COUNTER BATTERY", format ["No association with %1 and %2 exists - creating", _x, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
+	[format ["No association with %1 and %2 exists - creating", _x, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
 	// Generate a new marker
 	_markerName = [(getPos _artilleryUnit)] call reapercrew_sabre_counterBattery_fnc_componentLCMRMarkerSetup;
 	// Add to data

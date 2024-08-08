@@ -16,23 +16,23 @@
 
 params ["_radarUnit"];
 
-// ["SABRE", "COUNTER BATTERY", "Testing remote logging"] call reapercrew_common_fnc_remoteLog;
+// ["Testing remote logging"] call reapercrew_common_fnc_remoteLog;
 
 // Server Check
-if (!isServer) exitWith {["SABRE", "COUNTER BATTERY", "isServer check failed - not running radar init"] call reapercrew_common_fnc_remoteLog;};
+if (!isServer) exitWith {["isServer check failed - not running radar init"] call reapercrew_common_fnc_remoteLog;};
 
 //3Den check
-if (is3DEN) exitWith {["SABRE", "COUNTER BATTERY", "is3DEN check failed - not running radar init"] call reapercrew_common_fnc_remoteLog;};
+if (is3DEN) exitWith {["is3DEN check failed - not running radar init"] call reapercrew_common_fnc_remoteLog;};
 
 // Suspend Check
-if !(canSuspend) exitWith {["SABRE", "COUNTER BATTERY", "canSuspend check failed - not running radar init"] call reapercrew_common_fnc_remoteLog;};
+if !(canSuspend) exitWith {["canSuspend check failed - not running radar init"] call reapercrew_common_fnc_remoteLog;};
 
 // Don't init if system is disabled
-if !(reaperCrew_sabreCounterBattery_ActivateSystem) exitWith { ["SABRE", "COUNTER BATTERY", "System disabled - not running radar init"] call reapercrew_common_fnc_remoteLog; };
+if !(reaperCrew_sabreCounterBattery_ActivateSystem) exitWith { ["System disabled - not running radar init"] call reapercrew_common_fnc_remoteLog; };
 
 while {isNil "DataLinkSystemStarted"} do {
 	if (reaperCrew_sabreCounterBattery_DebugTasks) then {
-		["SABRE", "COUNTER BATTERY", "System not started, pausing radar init"] call reapercrew_common_fnc_remoteLog;
+		["System not started, pausing radar init"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
@@ -66,7 +66,7 @@ switch (side _radarUnit) do {
 	};
 };
 
-["SABRE", "COUNTER BATTERY", (format ["Registered radar unit: %1", _radarUnit])] call reapercrew_common_fnc_remoteLog;
+[(format ["Registered radar unit: %1", _radarUnit])] call reapercrew_common_fnc_remoteLog;
 
 // _radarZone setMarkerColor "ColorOrange";
 _radarZone setMarkerShape "ELLIPSE";
@@ -88,7 +88,7 @@ _radarUnit setVariable ["_radarKnowledge", [], true];
 		_radarUnitPosAdjusted = [_radarUnitPos select 0, _radarUnitPos select 1, 0];
 		if (_radarMarkerPos != _radarUnitPosAdjusted) then {
 			// Adjust Pos
-			["SABRE", "COUNTER BATTERY", (format ["Adjusted marker position for: %1", _radarUnit])] call reapercrew_common_fnc_remoteLog;
+			[(format ["Adjusted marker position for: %1", _radarUnit])] call reapercrew_common_fnc_remoteLog;
 			_radarMarker setMarkerPos _radarUnitPosAdjusted;
 		};
 	};

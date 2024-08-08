@@ -24,7 +24,7 @@ _totalEntitiesList = [];
 
 _totalExistingRegisters = DatalinkBluForFiresElements + DatalinkOpForFiresElements + DatalinkIndForFiresElements;
 if (reaperCrew_sabreCounterBattery_DebugTasks) then {
-	["COUNTER BATTERY", "taskGatherFires", (format ["Classnames to register: %1", _totalEntitiesList])] call reapercrew_common_fnc_remoteLog;
+	[(format ["Classnames to register: %1", _totalEntitiesList])] call reapercrew_common_fnc_remoteLog;
 };
 
 // Register each unit
@@ -49,8 +49,8 @@ if (reaperCrew_sabreCounterBattery_DebugTasks) then {
 			};
 			default {  };
 		};
-		["COUNTER BATTERY", "taskGatherFires", (format ["Registered fires %1 for side %2", _x, _unitSide])] call reapercrew_common_fnc_remoteLog;
+		[(format ["Registered fires %1 for side %2", _x, _unitSide])] call reapercrew_common_fnc_remoteLog;
 	} else {
-		["COUNTER BATTERY", "taskGatherFires", (format ["Skipping register of %1 - already registered", _x])] call reapercrew_common_fnc_remoteLog;
+		[(format ["Skipping register of %1 - already registered", _x])] call reapercrew_common_fnc_remoteLog;
 	};
 } ForEach _totalEntitiesList;

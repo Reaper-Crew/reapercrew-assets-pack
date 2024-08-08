@@ -14,10 +14,19 @@
 * Public: No
 */
 
-params ["_mainSys", "_subSys", "_logMessage", ["_clientName", "[SERVER]"]];
+params ["_logMessage"];
+
+_name = "";
+if (name player == "") then {
+	_name = "SERVER";
+} else {
+	_name = name player;
+};
+
+call BIS_fnc_log;
 
 // Determine the message
-_fullMessage = format ["[%1] - [%2]%4: %3", _mainSys, _subSys, _logMessage, _clientName];
+_fullMessage = format ["[%1](%2): %3", _fnc_scriptNameParent, _name, _logMessage];
 
 // If isMultiplayer == false then we are local, put the output to systemChat
 if (isMultiplayer == false) then {

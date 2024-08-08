@@ -17,7 +17,7 @@
 params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []]];
 
 if (reaperCrew_debugReinforcementsSpawning == true) then {
-	["REINFORCEMENTS", "spawnHeadlessInfantryVehicle", "Running spawnHeadlessInfantryVehicle", (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
+	[(format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 };
 
 // Create the transport vehicle
@@ -44,7 +44,7 @@ _spawnedGroup setBehaviour "AWARE";
 [_vehicle, _spawnedGroup, "FULL"] call reapercrew_reinforcements_fnc_adjustGroupToVehicle;
 
 if (reaperCrew_debugWaypointMechanics == true) then {
-	["REINFORCEMENTS", "spawnHeadlessInfantryVehicle", format ["List of available waypoints: %1", _waypointsList], (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
+	[format ["List of available waypoints: %1", _waypointsList], (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 };
 
 // Add Waypoints

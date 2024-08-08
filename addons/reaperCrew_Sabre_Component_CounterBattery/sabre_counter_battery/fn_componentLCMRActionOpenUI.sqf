@@ -1,1 +1,1 @@
-["SABRE", "COUNTER BATTERY", "Opening UI for CB system"] call reapercrew_common_fnc_remoteLog;
+["Opening UI for CB system"] call reapercrew_common_fnc_remoteLog;
