@@ -22,12 +22,12 @@ diag_log "[Reaper Crew]: Running client ACRE configuration";
 
 if (hasInterface) then {
 	_personalRadio = [];
-	_handheldRadio = [];
-	_manpackRadio = [];
+	_interteamRadio = [];
+	_longRangeRadio = [];
+
 	// Add the radios to variables
 	_personalRadio = ["ACRE_PRC343"] call acre_api_fnc_getRadioByType;
-	_handheldRadio = ["ACRE_PRC152"] call acre_api_fnc_getRadioByType;
-	_manpackRadio = ["ACRE_PRC117F"] call acre_api_fnc_getRadioByType;
+
 	// Set the radio channels for the short range
 	switch (groupId (group player)) do {
 		case "Zero": {
@@ -91,12 +91,24 @@ if (hasInterface) then {
 	};
 
 	// Assign the PTT values
+	_interteamRadio = ["ACRE_PRC148"] call acre_api_fnc_getRadioByType;
+	_longRangeRadio = ["ACRE_PRC152"] call acre_api_fnc_getRadioByType;
+
+
 	// Check for LRR
-	if (!isNil "_handheldRadio") then {
-		_success = [ [ _personalRadio, _handheldRadio] ] call acre_api_fnc_setMultiPushToTalkAssignment;
+	// If just team radio
+	if (!isNil "_interteamRadio") then {
+		_success = [ [ _personalRadio, _interteamRadio] ] call acre_api_fnc_setMultiPushToTalkAssignment;
 	};
-	if (!isNil "_manpackRadio") then {
-		_success = [ [ _personalRadio, _manpackRadio] ] call acre_api_fnc_setMultiPushToTalkAssignment;
+	// If team radio and LRR (Officer most likely)
+	if (!isNil "_longRangeRadio" && !isNil "_interteamRadio") then {
+		_success = [ [ _personalRadio, _interteamRadio, _longRangeRadio] ] call acre_api_fnc_setMultiPushToTalkAssignment;
+		[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
+	};
+	// IF LRR but no team radio, pilot most likely
+	if (!isNil "_longRangeRadio" && isNil "_interteamRadio") then {
+		_success = [ [ _personalRadio, _longRangeRadio] ] call acre_api_fnc_setMultiPushToTalkAssignment;
+		[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
 	};
 	
 };

@@ -74,6 +74,8 @@ class CfgFunctions
 
 			class cleanupVehicle{};
 			class getPathway{};
+			class adjustGroupToVehicle{};
+			class adjustGroupLeader{};
 			
 		};
 	};

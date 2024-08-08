@@ -74,6 +74,15 @@ class CfgWeapons
 	#include "data\Vests\V_PlateCarrier1_rgr\V_PlateCarrier1_rgr.hpp"
 	#include "data\Helmets\H_HelmetB\headgear_b_helmet_plain.hpp"
 	#include "data\Helmets\H_Beret_Colonel\H_Beret_Colonel.hpp"
+	class V_Rangemaster_belt: Vest_Camo_base {
+		class ItemInfo;
+	};
+	class reaperCrew_V_Rangemaster_belt: V_Rangemaster_belt {
+		displayName="Battle Belt";
+		class ItemInfo: ItemInfo {
+			containerClass="Supply250";
+		};
+	};
 };
 
 class CfgVehicles

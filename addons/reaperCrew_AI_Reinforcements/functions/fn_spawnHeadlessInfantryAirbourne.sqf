@@ -93,6 +93,9 @@ _infantryGroup allowFleeing 0;
 	};
 } forEach units _infantryGroup;
 
+// FAILSAFE: Adjust group to match vehicle size
+[_helicopter, _infantryGroup, "CARGO"] call reapercrew_reinforcements_fnc_adjustGroupToVehicle;
+
 // Form Up
 _waypoint =_infantryGroup addWaypoint [_landingPosition, -1];
 _waypoint setWaypointType "MOVE";
@@ -104,7 +107,7 @@ _waypoint setWaypointTimeout [10, 10, 10];
 // Task Rush
 _waypoint = _infantryGroup addWaypoint [_landingPosition, -1];
 _waypoint setWaypointType "SCRIPTED";
-_waypoint setWaypointStatements ["true", "[this, 2000] spawn lambs_wp_fnc_taskRush;"];
+_waypoint setWaypointStatements ["true", "[this, 2000] spawn lambs_wp_fnc_taskRush; [leader this] call reapercrew_reinforcements_fnc_adjustGroupLeader;"];
 _waypoint setWaypointForceBehaviour true;
 _waypoint setWaypointBehaviour "AWARE";
 

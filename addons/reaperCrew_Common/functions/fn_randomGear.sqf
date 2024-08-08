@@ -18,14 +18,14 @@ params ["_unit"];
 
 if (!local _unit) exitWith {};
 
-removeAllWeapons _unit;
-removeAllItems _unit;
-removeAllAssignedItems _unit;
-removeUniform _unit;
-removeVest _unit;
-removeBackpack _unit;
-removeHeadgear _unit;
-removeGoggles _unit;
+// removeAllWeapons _unit;
+// removeAllItems _unit;
+// removeAllAssignedItems _unit;
+// removeUniform _unit;
+// removeVest _unit;
+// removeBackpack _unit;
+// removeHeadgear _unit;
+// removeGoggles _unit;
 
 // Randomise the uniform
 private _uniformList = (configFile >> "CfgVehicles" >> typeOf _unit >> "uniformList") call BIS_fnc_getCfgDataArray;

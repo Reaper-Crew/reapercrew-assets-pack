@@ -78,5 +78,28 @@ class CfgVehicles
 		model="rc_assets_pack\addons\reaperCrew_SimpleObjects\data\UndergroundTemplate1\UnderGroundTemplate1.p3d";
 	};
 	#include "data\ServerRack\ServerRack.hpp"
-
+	class reaperCrew_25x50mTunnel: reaperCrew_BuildingBlock_Base {
+		displayName="25 x 50m Tunnel";
+		model="rc_assets_pack\addons\reaperCrew_SimpleObjects\data\25x50mTunnel\25x50mTunnel.p3d";
+	};
+	class reaperCrew_12x50mTunnel: reaperCrew_BuildingBlock_Base {
+		displayName="12 x 50m Tunnel";
+		model="rc_assets_pack\addons\reaperCrew_SimpleObjects\data\12x50mTunnel\12x50mTunnel.p3d";
+	};
+	class reaperCrew_6x50mTunnel: reaperCrew_BuildingBlock_Base {
+		displayName="6 x 50m Tunnel";
+		model="rc_assets_pack\addons\reaperCrew_SimpleObjects\data\6x50mTunnel\6x50mTunnel.p3d";
+	};
+	class reaperCrew_3x50mTunnel: reaperCrew_BuildingBlock_Base {
+		displayName="3 x 50m Tunnel";
+		model="rc_assets_pack\addons\reaperCrew_SimpleObjects\data\3x50mTunnel\3x50mTunnel.p3d";
+	};
+	class reaperCrew_TunnelConnector: reaperCrew_BuildingBlock_Base {
+		displayName="Tunnel Connector";
+		model="rc_assets_pack\addons\reaperCrew_SimpleObjects\data\TunnelConnector\TunnelConnector.p3d";
+	};
+	class reaperCrew_TunnelSplitter: reaperCrew_BuildingBlock_Base {
+		displayName="Tunnel Splitter";
+		model="rc_assets_pack\addons\reaperCrew_SimpleObjects\data\TunnelSplitter\TunnelSplitter.p3d";
+	};
 };

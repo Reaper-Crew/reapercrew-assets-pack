@@ -27,3 +27,24 @@
 
 ["reaperCrew_reinforcements_fireSupportFixedWingFighters", "EDITBOX", ["Fixed Wing (Fighters)", "A comma seperated list of classnames to be used for enemy fixed wing"], ["Reaper Crew - AI Common", "5. Fire Support (Air)"], "O_Plane_CAS_02_F"] call cba_settings_fnc_init;
 ["reaperCrew_reinforcements_fireSupportFixedWingBombers", "EDITBOX", ["Fixed Wing (Bombers)", "A comma seperated list of classnames to be used for enemy fixed wing"], ["Reaper Crew - AI Common", "5. Fire Support (Air)"], "O_Plane_CAS_02_F"] call cba_settings_fnc_init;
+
+// Advanced AI
+// Airborne Infantry
+["reaperCrew_reinforcements_airborneInfantry", "EDITBOX", ["Airborne Infantry", "A comma seperated list of classnames to be used for the Airborne Infantry"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], "O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F"] call cba_settings_fnc_init;
+["reaperCrew_reinforcements_airborneInfantryDifficulty", "SLIDER",   ["Airborne Infantry Skill",   "What skill % should the airborneInfantry be?"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], [20, 100, 50, 0]] call cba_settings_fnc_init;
+
+// Naval Infantry
+["reaperCrew_reinforcements_navalInfantry", "EDITBOX", ["Naval Infantry", "A comma seperated list of classnames to be used for the Naval Infantry"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], "O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F"] call cba_settings_fnc_init;
+["reaperCrew_reinforcements_navalInfantryDifficulty", "SLIDER",   ["Naval Infantry Skill",   "What skill % should the navalInfantry be?"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], [20, 100, 50, 0]] call cba_settings_fnc_init;
+
+// Mechanised Infantry
+// ["reaperCrew_reinforcements_mechanisedInfantry", "EDITBOX", ["Mechanised Infantry", "A comma seperated list of classnames to be used for the Mechanised Infantry"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], "O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F"] call cba_settings_fnc_init;
+// ["reaperCrew_reinforcements_mechanisedInfantryDifficulty", "SLIDER",   ["Mechanised Infantry Skill",   "What skill % should the mechanisedInfantry be?"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], [20, 100, 50, 0]] call cba_settings_fnc_init;
+
+// Territorial Defence
+["reaperCrew_reinforcements_territorialDefence", "EDITBOX", ["Territorial Defence", "A comma seperated list of classnames to be used for the Territorial Defence"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], "O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F"] call cba_settings_fnc_init;
+["reaperCrew_reinforcements_territorialDefenceDifficulty", "SLIDER",   ["Territorial Defence Skill",   "What skill % should the territorialDefence be?"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], [20, 100, 50, 0]] call cba_settings_fnc_init;
+
+// Irregular Infantry
+["reaperCrew_reinforcements_irregularInfantry", "EDITBOX", ["Irregular Infantry", "A comma seperated list of classnames to be used for the Irregular Infantry"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], "O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F,O_Soldier_F,O_Soldier_AR_F"] call cba_settings_fnc_init;
+["reaperCrew_reinforcements_irregularInfantryDifficulty", "SLIDER",   ["Irregular Infantry Skill",   "What skill % should the irregularInfantry be?"], ["Reaper Crew - AI Detailed Orbat", "1. Infantry Settings"], [20, 100, 50, 0]] call cba_settings_fnc_init;

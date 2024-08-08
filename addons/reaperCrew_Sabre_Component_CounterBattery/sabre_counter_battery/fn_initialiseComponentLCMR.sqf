@@ -78,3 +78,18 @@ _radarZone setMarkerAlpha 0;
 // Save variables to object namespace
 _radarUnit setVariable ["_radarZone", _radarZone, true];
 _radarUnit setVariable ["_radarKnowledge", [], true];
+
+// Update the zone every 60 seconds
+[_radarUnit] spawn {
+	_radarMarker = _radarUnit getVariable "_radarZone";
+	while { alive _radarUnit } do {
+		_radarMarkerPos = getMarkerPos _radarMarker;
+		_radarUnitPos = getPos _radarUnit;
+		_radarUnitPosAdjusted = [_radarUnitPos select 0, _radarUnitPos select 1, 0];
+		if (_radarMarkerPos != _radarUnitPosAdjusted) then {
+			// Adjust Pos
+			["SABRE", "COUNTER BATTERY", (format ["Adjusted marker position for: %1", _radarUnit])] call reapercrew_common_fnc_remoteLog;
+			_radarMarker setMarkerPos _radarUnitPosAdjusted;
+		};
+	};
+};

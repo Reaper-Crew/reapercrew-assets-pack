@@ -33,9 +33,10 @@
 ["reaperCrew_explosives", "EDITBOX", ["Explosives", "A comma seperated list of all Explovies that should be available from the logistics crate"], ["Reaper Crew - Logistics", "Small Arms"], "DemoCharge_Remote_Mag"] call cba_settings_fnc_init;
 
 // Mortar
-["reaperCrew_IDFCrate", "CHECKBOX", ["Add IDF Crate", "Should a vehicle fuel crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Indirect Fires"]] call cba_settings_fnc_init;
-["reaperCrew_IDFExplosiveRounds", "EDITBOX", ["IDF Explosive Rounds", "A comma seperated list of all offensive IDF rounds"], ["Reaper Crew - Logistics", "Indirect Fires"], "ACE_1Rnd_82mm_Mo_HighExplosive"] call cba_settings_fnc_init;
-["reaperCrew_IDFUtility", "EDITBOX", ["IDF Utility Rounds", "A comma seperated list of all utility IDF rounds"], ["Reaper Crew - Logistics", "Indirect Fires"], "ACE_1Rnd_82mm_Mo_Illum"] call cba_settings_fnc_init;
+["reaperCrew_IDFCrate", "CHECKBOX", ["Add IDF Crate", "Should an IDF ammo crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Indirect Fires"]] call cba_settings_fnc_init;
+["reaperCrew_IDFExplosiveRounds", "EDITBOX", ["IDF Explosive Rounds", "A comma seperated list of all offensive IDF rounds"], ["Reaper Crew - Logistics", "Indirect Fires"], "ACE_1Rnd_82mm_Mo_HE,ACE_1Rnd_82mm_Mo_HE_Guided,ACE_1Rnd_82mm_Mo_HE_LaserGuided"] call cba_settings_fnc_init;
+["reaperCrew_IDFUtility", "EDITBOX", ["IDF Utility Rounds", "A comma seperated list of all utility IDF rounds"], ["Reaper Crew - Logistics", "Indirect Fires"], "ACE_1Rnd_82mm_Mo_Smoke,ACE_1Rnd_82mm_Mo_Illum"] call cba_settings_fnc_init;
+["reaperCrew_IDFItems", "EDITBOX", ["IDF Items", "A comma seperated list of items to be added to the IDF crate"], ["Reaper Crew - Logistics", "Indirect Fires"], "ACE_UAVBattery,ACE_MapTools,ACE_RangeTable_82mm,ACE_artilleryTable"] call cba_settings_fnc_init;
 
 // Vehicle Fuel
 ["reaperCrew_VehicleFuelCheckbox", "CHECKBOX", ["Add Vehicle Fuel barrels", "Should a vehicle fuel crate be added to the list of available crates?"], ["Reaper Crew - Logistics", "Vehicle Armaments"]] call cba_settings_fnc_init;

@@ -3,10 +3,21 @@ class CfgPatches
 	class reaperCrew_Weapons
 	{
 		addonRootClass="A3_Props_F_Exp_A";
-		requiredAddons[] = {"ReaperCrew_Common"};
+		requiredAddons[] = {"ReaperCrew_Common", "cba_jr"};
 		requiredVersion=0.1;
 		units[]={};
 		weapons[]={};
+	};
+};
+class asdg_OpticRail;
+class asdg_OpticRail1913: asdg_OpticRail
+{
+	class compatibleItems
+	{
+		optic_ico_01_black_f = 1;
+		optic_ico_01_camo_f = 1;
+		optic_ico_01_f = 1;
+		optic_ico_01_sand_f = 1;
 	};
 };
 class cfgWeapons {
@@ -92,7 +103,32 @@ class cfgWeapons {
 			"rc_assets_pack\addons\reaperCrew_Weapons\L85A3\anims\handAnim.rtm"
 		};
 
-	};	
+	};
+	// Combat Shotgun
+	class sgun_HunterShotgun_01_base_F;
+	class sgun_HunterShotgun_01_F: sgun_HunterShotgun_01_base_F {
+		class WeaponSlotsInfo;
+	};
+	class xeen_reaperCrew_BenelliM4Tactical_Black: sgun_HunterShotgun_01_F {
+		displayName = "Benelli M4 Tactical (Black)";
+		model = "rc_assets_pack\addons\reaperCrew_Weapons\M4Shotgun\M4Shotgun.p3d";
+		selectionFireAnim = "muzzleFlash";
+		cartridgePos="cartridgePos";
+		cartridgeVel="cartridgeVel";
+		handAnim[] = {"OFP2_ManSkeleton","\A3\Weapons_F_Mark\LongRangeRifles\DMR_05\data\Anim\DMR_05.rtm"};
+		magazines[] = {"7rnd_12Gauge_Slug"};
+		picture="\rc_assets_pack\addons\reaperCrew_Weapons\M4Shotgun\M4ShotgunInventory.paa";
+		class WeaponSlotsInfo: WeaponSlotsInfo {
+			class CowsSlot: asdg_OpticRail1913 {};
+		};
+	};
+};
+class cfgMagazines {
+	class 2Rnd_12Gauge_Slug;
+	class 7rnd_12Gauge_Slug: 2Rnd_12Gauge_Slug {
+		displayName = "12 Gauge 7Rnd Slug";
+		count = 7;
+	};
 };
 class CfgMovesBasic
 {

@@ -14,7 +14,7 @@
  * Public: No
  */
 
-params ["_resupplyObject", "_crateType"];
+params ["_resupplyObject", "_crateType", ["_spawningPlayer", objNull]];
 
 _classname = "";
 
@@ -66,9 +66,9 @@ switch (_crateType) do {
 	};
 };
 
-// if (_crateType == "smallArms") then {
-// 	[_supplyCrate] call reapercrew_logistics_fnc_logisticsPopulateSupplyCrate;
-// };
+if !(isNull _spawningPlayer) then {
+	[_spawningPlayer, _supplyCrate] remoteExec ["ace_dragging_fnc_carryObject", _spawningPlayer]
+};
 
 // Return the created crate
 _supplyCrate;

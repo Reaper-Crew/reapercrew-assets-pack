@@ -28,7 +28,17 @@ diag_log (_triggerObject getVariable ["vehiclesArray",[]]);
 			};
 
 			_randomSpawn = (selectRandom activeVehicleTriggers);
-			[[getPos _randomSpawn, (selectRandom _vehiclesArray), 50, getPos _triggerObject], "reapercrew_reinforcements_fnc_spawnHeadlessVehicle"] call reapercrew_common_fnc_executeDistributed;
+
+			// Get nearest player position
+			_playersInTrigger = (allPlayers inAreaArray _triggerObject);
+			_nearestPlayer=([_playersInTrigger,[],{_randomSpawn distance _x},"ASCEND"]call BIS_fnc_sortBy) select 0; 
+
+			if (_playersInTrigger == 0) exitWith {
+				diag_log "[REINFORCEMENTS]: No players within the trigger zone";
+			};
+
+
+			[[getPos _randomSpawn, (selectRandom _vehiclesArray), 50, getPos _nearestPlayer], "reapercrew_reinforcements_fnc_spawnHeadlessVehicle"] call reapercrew_common_fnc_executeDistributed;
 
 			_vehicleCount = _vehicleCount - 1;
 			_triggerObject setVariable ["vehicleCount",_vehicleCount];

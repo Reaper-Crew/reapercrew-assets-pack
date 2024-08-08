@@ -1,0 +1,19 @@
+Add different types of specialised infantry to reinforcements module "Airbourne", "Mechanised", "Naval"
+Add Mechanics to allow AI to randomly target counter battery data
+Adjust Maurding vehicles/aircraft to attack nearest player
+Add earth texture to bunker walls
+Add support for "items" to the IDF crate
+
+Modules:
+* Ambient Music
+* Consolidation Vehicle
+* Limited Arsenal
+* Save Loadout
+
+Equipment:
+* G3 Multicam uniform
+* Multicam DCS
+
+Fix bug with falling through bunker parts/walls
+Update Medical crate to new values
+Save loadout laptop module

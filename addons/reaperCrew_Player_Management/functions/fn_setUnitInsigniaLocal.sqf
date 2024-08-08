@@ -42,20 +42,20 @@ if (hasInterface) then {
 
 	// Role names with extensions
 	if ( _isPlatoonCommander ) then {
-		_roleDesc = "PlatoonCommander";
+		_roleDesc = "platoonCommander";
 		player setRank "COLONEL";
 	};
 	if ( _isSectionCommander ) then {
-		_roleDesc = "SectionCommander";
+		_roleDesc = "sectionCommander";
 		player setRank "COLONEL";
 		player assignTeam "YELLOW";
 	};
 	if ( _isVehicleCommander ) then {
-		_roleDesc = "VehicleCommander";
+		_roleDesc = "vehicleCommander";
 		player setRank "COLONEL";
 	};
 	if ( _isBatteryCommander ) then {
-		_roleDesc = "BatteryCommander";
+		_roleDesc = "batteryCommander";
 		player setRank "COLONEL";
 	};	
 
@@ -71,6 +71,10 @@ if (hasInterface) then {
 		["PLAYER MANAGEMENT", "setUnitInsigniaLocal", "Classname not found, using default signature", (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 	};
 	
+	// First set to nothing, then to insignia
+	[player, ""] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
 	[player, _constructClass] remoteExecCall ["BIS_fnc_setUnitInsignia", 0, true];
+	
+	[player, ["clan", "rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\ReaperCrewLogoPatch.paa"]] remoteExec ["setObjectTexture", 0, true];
 
 };

@@ -188,27 +188,27 @@ class CfgVehicles
 		{
             class blood_1000 {
                 name = ACE_bloodIV;
-                count = 50;
+                count = 15;
             };
             class blood_500 {
                 name = ACE_bloodIV_500;
-                count = 50;
+                count = 12;
             };
             class blood_250 {
                 name = ACE_bloodIV_250;
-                count = 50;
+                count = 4;
             };
             class elasticbandage {
                 name = ACE_elasticBandage;
-                count = 50;
+                count = 100;
             };
             class quickclotbandage {
                 name = ACE_quikclot;
-                count = 50;
+                count = 100;
             };
             class packingbandage {
                 name = ACE_packingBandage;
-                count = 50;
+                count = 100;
             };
             class adenonsine {
                 name = ACE_adenosine;
@@ -216,7 +216,7 @@ class CfgVehicles
             };
             class epinephrine {
                 name = ACE_epinephrine;
-                count = 20;
+                count = 50;
             };
             class morphine {
                 name = ACE_morphine;
@@ -224,7 +224,7 @@ class CfgVehicles
             };
             class tourniquet {
                 name = ACE_tourniquet;
-                count = 8;
+                count = 20;
             };
             class splint {
                 name = ACE_splint;

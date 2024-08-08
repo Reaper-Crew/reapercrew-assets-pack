@@ -21,6 +21,7 @@ if (!local _supplyCrate) exitWith {diag_log "[LOGISTICS]: Local check failed - s
 
 _IDFOffensive = reaperCrew_IDFExplosiveRounds splitString ",";
 _IDFUtility = reaperCrew_IDFUtility splitString ",";
+_IDFItems = reaperCrew_IDFItems splitString ",";
 
 clearItemCargoGlobal _supplyCrate;
 clearWeaponCargoGlobal _supplyCrate;
@@ -29,3 +30,4 @@ clearBackpackCargoGlobal _supplyCrate;
 
 {_supplyCrate addMagazineCargoGlobal [_x, 50];} forEach _IDFOffensive;
 {_supplyCrate addMagazineCargoGlobal [_x, 25];} forEach _IDFUtility;
+{_supplyCrate addItemCargoGlobal [_x, 10];} forEach _IDFItems;

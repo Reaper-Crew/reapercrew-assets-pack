@@ -15,6 +15,11 @@
 
 diag_log "[Reaper Crew]: Configuring ACRE channel names";
 
+["ACRE_PRC148", "default", 1, "description", "Command Net"] call acre_api_fnc_setPresetChannelField;
+["ACRE_PRC148", "default", 2, "description", "Logistics Net"] call acre_api_fnc_setPresetChannelField;
+["ACRE_PRC148", "default", 3, "description", "Fire Control Net"] call acre_api_fnc_setPresetChannelField;
+["ACRE_PRC148", "default", 4, "description", "Operations Room"] call acre_api_fnc_setPresetChannelField;
+
 ["ACRE_PRC152", "default", 1, "description", "Command Net"] call acre_api_fnc_setPresetChannelField;
 ["ACRE_PRC152", "default", 2, "description", "Logistics Net"] call acre_api_fnc_setPresetChannelField;
 ["ACRE_PRC152", "default", 3, "description", "Fire Control Net"] call acre_api_fnc_setPresetChannelField;

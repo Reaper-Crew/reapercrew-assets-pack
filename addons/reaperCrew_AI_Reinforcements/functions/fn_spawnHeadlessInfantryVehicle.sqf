@@ -40,8 +40,11 @@ _spawnedGroup addVehicle _vehicle;
 
 _spawnedGroup setBehaviour "AWARE";
 
+// FAILSAFE: Adjust group to match vehicle size
+[_vehicle, _spawnedGroup, "FULL"] call reapercrew_reinforcements_fnc_adjustGroupToVehicle;
+
 if (reaperCrew_debugWaypointMechanics == true) then {
-	["REINFORCEMENTS", "activateInfantryModuleMotorised", format ["List of available waypoints: %1", _waypointsList], (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
+	["REINFORCEMENTS", "spawnHeadlessInfantryVehicle", format ["List of available waypoints: %1", _waypointsList], (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 };
 
 // Add Waypoints
@@ -51,6 +54,8 @@ _waypoint setWaypointType "GETIN";
 _waypoint waypointAttachVehicle _vehicle;
 _waypoint setWaypointForceBehaviour true;
 _waypoint setWaypointBehaviour "CARELESS";
+
+{ _x moveInAny _vehicle } forEach (units _spawnedGroup);
 
 // If a pathway is defined, use that instead of random
 if (count _waypointsList > 0) then {
@@ -74,7 +79,7 @@ _dismountPos = waypointPosition _waypoint;
 // Rush
 _waypoint =_spawnedGroup addWaypoint [_dismountPos, -1];
 _waypoint setWaypointType "SCRIPTED";
-_waypoint setWaypointStatements ["true", " [this, 2000] spawn lambs_wp_fnc_taskRush; [(assignedVehicle leader this)] call reapercrew_reinforcements_fnc_cleanupVehicle; thisList apply { _x leaveVehicle (assignedVehicle _x) };"];
+_waypoint setWaypointStatements ["true", " [this, 2000] spawn lambs_wp_fnc_taskRush; [(assignedVehicle leader this)] call reapercrew_reinforcements_fnc_cleanupVehicle; thisList apply { _x leaveVehicle (assignedVehicle _x) }; [leader this] call reapercrew_reinforcements_fnc_adjustGroupLeader;"];
 _waypoint setWaypointForceBehaviour true;
 _waypoint setWaypointBehaviour "AWARE";
 

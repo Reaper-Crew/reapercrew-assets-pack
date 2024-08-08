@@ -17,7 +17,7 @@
 params ["_cargoContainer"];
 
 // Get all nearby containers of a specific type
-_nearestObjects = nearestObjects [_cargoContainer, ["ReaperCrew_PlasticCase_Medical", "ReaperCrew_SupplyCrate", "ReaperCrew_Shells82", "ReaperCrew_Shells105CUP", "ReaperCrew_Shells122CUP"], 250];
+_nearestObjects = nearestObjects [_cargoContainer, ["ReaperCrew_PlasticCase_Medical", "ReaperCrew_SupplyCrateSmallArms", "ReaperCrew_SupplyCrateIDF"], 50];
 
 // Loop through each container
 {

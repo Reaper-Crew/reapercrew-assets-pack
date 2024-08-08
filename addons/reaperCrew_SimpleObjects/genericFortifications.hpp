@@ -22,7 +22,63 @@ class Land_DragonsTeeth_01_1x1_old_redwhite_F;
 class Land_CzechHedgehog_01_new_F;
 class Land_CzechHedgehog_01_old_F;
 class Land_Pier_F;
+class Land_ConcreteWall_01_l_8m_F;
+class CargoPlaftorm_01_brown_F;
+class Land_Canal_Dutch_01_bridge_F;
+class Land_BackAlley_01_l_1m_F;
 
+class RC_Land_BackAlley_01_l_1m_F: Land_BackAlley_01_l_1m_F {
+    editorCategory = "reaperCrew";
+    editorSubcategory = "reaperCrewFortificationsGeneric";
+    class SimpleObject
+	{
+		eden=1;
+		animate[]={};
+		hide[]={};
+		verticalOffset=0.382000;
+		verticalOffsetWorld=0;
+		init="''";
+	};
+};
+class RC_Land_Canal_Dutch_01_bridge_F: Land_Canal_Dutch_01_bridge_F {
+    editorCategory = "reaperCrew";
+    editorSubcategory = "reaperCrewFortificationsGeneric";
+    class SimpleObject
+	{
+		eden=1;
+		animate[]={};
+		hide[]={};
+		verticalOffset=0.382000;
+		verticalOffsetWorld=0;
+		init="''";
+	};
+};
+class RC_CargoPlaftorm_01_brown_F: CargoPlaftorm_01_brown_F {
+    editorCategory = "reaperCrew";
+    editorSubcategory = "reaperCrewFortificationsGeneric";
+    class SimpleObject
+	{
+		eden=1;
+		animate[]={};
+		hide[]={};
+		verticalOffset=0.382000;
+		verticalOffsetWorld=0;
+		init="''";
+	};
+};
+class RC_Land_ConcreteWall_01_l_8m_F: Land_ConcreteWall_01_l_8m_F {
+    editorCategory = "reaperCrew";
+    editorSubcategory = "reaperCrewFortificationsGeneric";
+    class SimpleObject
+	{
+		eden=1;
+		animate[]={};
+		hide[]={};
+		verticalOffset=0.382000;
+		verticalOffsetWorld=0;
+		init="''";
+	};
+};
 class RC_Land_ConcreteHedgehog_01_F: Land_ConcreteHedgehog_01_F {
     editorCategory = "reaperCrew";
     editorSubcategory = "reaperCrewFortificationsGeneric";
