@@ -54,6 +54,10 @@ class CfgFunctions
 			class logisticsAddActions{};
 			class logisticsModuleInit{};
 			class logisticsConsolidateSupplies{};
+			
+			class logisticsVehicleDeliveryLocalActions {postInit = 1;};
+			class logisticsVehicleDeliveryLocalTrigger {};
+			class logisticsVehicleDeliveryServer {};
 		};
 	};
 };
@@ -71,6 +75,12 @@ class CfgVehicles
 		isGlobal = 1;
 		isTriggerActivated = 0;
 		curatorCanAttach = 1;
+	};
+	class reaperCrew_moduleResupplyVehicleSpawnpoint: reaperCrew_module_base
+	{
+		displayName = "Vehicle Resupply Spawn";
+		category = "reaperCrew_ModulesLogistics";
+		scope = 2;
 	};
 	class Items_base_F;
 	class CargoNet_01_ammo_base_F;

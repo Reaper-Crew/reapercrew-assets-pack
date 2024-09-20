@@ -46,3 +46,8 @@
 
 // Misc
 ["reaperCrew_transportCheckbox", "CHECKBOX", ["Add empty crates", "Should players have the option to spawn empty wooden boxes for transport?"], ["Reaper Crew - Logistics", "Misc"]] call cba_settings_fnc_init;
+
+// Vehicle Delivery settings
+["reaperCrew_vehicleResupplyDeliveryClasses", "EDITBOX", ["Deliverable Vehicles", "A comma seperated list of all Vehicles that should be available to have delivered"], ["Reaper Crew - Logistics", "Vehicle Delivery"], "CUP_C_Datsun,C_Van_01_fuel_F,CUP_C_Golf4_green_Civ"] call cba_settings_fnc_init;
+
+["reaperCrew_vehicleResupplyDeliveryGroups", "EDITBOX", ["Permitted Groups", "A comma seperated list of all callsigns that are allowed to request new vehicles"], ["Reaper Crew - Logistics", "Vehicle Delivery"], "Zero"] call cba_settings_fnc_init;

@@ -21,3 +21,18 @@ The settings for this resupply module can be found in the addon settings under '
 ![](https://imgur.com/5GlZ3tx.png)
 
 Make sure to save these settings under the 'mission' settings, rather than the server or client settings.
+
+## Vehicle Deliveries
+
+The Vehicle Delivery system is designed to allow players to replenish vehicles lost during operations. It is particularly necessary when dealing with assets that cannot be loaded into other vehicles, such as tanks, SPGs and some cars. 
+
+Once requested, the vehicle will be driven by AI to the players location. During this time it will be immune from all damage, this is to prevent vehicles accidently becoming broken or damaged owing to the AI's love for smashing into trees and other objects. This immunity from damage is removed once the the waypoint is reached, and the AI driver will be automatically deleted. It is important to wait for the waypoint to complete fully to avoid any issues with vehicles being immunue to damage.
+
+The settings for this system are defined under 'Reaper Crew - Logistics'.
+
+* Deliverable Vehicles - A comma seperated list of vehicles that can be requested
+* Permitted Groups - A comma seperated list of group callsigns that can request vehicles
+
+Once configured, vehicles can be requested by ACE Self Interact > Equipment > Select vehicle
+
+![Imgur](https://imgur.com/1Le3H6U.png)
