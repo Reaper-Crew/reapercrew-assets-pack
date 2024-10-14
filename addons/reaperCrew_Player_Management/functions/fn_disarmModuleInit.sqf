@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [_logic] call reaperCrew_fnc_moduleDisarmPlayers
+ * [_logic] call reaperCrew_fnc_disarmModuleInit
  *
  * Public: No
  */
