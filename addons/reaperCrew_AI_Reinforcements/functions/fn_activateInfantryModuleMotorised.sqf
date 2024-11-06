@@ -16,8 +16,6 @@
 
 params ["_triggerObject"];
 
-["Function activated"] call reapercrew_common_fnc_remoteLog;
-
 // Don't run if the array isn't available
 while {isNil "activeVehicleTriggers"} do {
 	if (reaperCrew_debugReinforcementsSpawning == true) then {
@@ -40,6 +38,7 @@ while {isNil "activeVehicleTriggers"} do {
 	_reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 	_waveDelay = _triggerObject getVariable ["waveDelay",60];
+	_moduleObject = _triggerObject getVariable ["moduleObject", objnull];
 
 	// Run code only while the trigger is activated
 	while { triggerActivated _triggerObject } do {
@@ -59,8 +58,11 @@ while {isNil "activeVehicleTriggers"} do {
 		
 		_unitCount = count _reinforcementsGroup;
 
+		// Get the available spawnpoints
+		_availableSpawnpoints = [_moduleObject, activeVehicleTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
+
 		// Only run if; Zone above threshold, Reinforcements remain and spawn points are available
-		if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count activeVehicleTriggers) > 0 )) then {
+		if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count _availableSpawnpoints) > 0 )) then {
 
 			// Output debug information if enabled
 			if (reaperCrew_debugReinforcementsSpawning == true) then {
@@ -73,7 +75,7 @@ while {isNil "activeVehicleTriggers"} do {
 			_searchCenterPos = _triggerObject getPos [_distance, _direction];
 			_searchRadius = 0;
 			_landingPosition = [];
-			_spawnTrigger = (selectRandom activeVehicleTriggers);
+			_spawnTrigger = (selectRandom _availableSpawnpoints);
 
 			// Add cooldown to spawnpoint to prevent overlap
 			_cooldownTime = _waveDelay + 2;

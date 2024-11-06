@@ -4,17 +4,17 @@ _units = param [1,[],[[]]];
 _activated = param [2,true,[true]];
 
 // Only run on the server
-if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - Not initialising init for Aircraft spawns"};
+if (!isServer) exitWith {["Server checked failed - Not initialising init for Aircraft spawns"] call reapercrew_common_fnc_remoteLog;};
 
 // Don't run if the array isn't available
 while {isNil "activeAircraftTriggers"} do {
 	if (reaperCrew_AircraftSpawnCheckbox == true) then {
-		diag_log "[REINFORCEMENTS]: Aircraft triggers undefined, sleeping";
+		["Aircraft triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
 
-diag_log "[REINFORCEMENTS]: Initialising Aircraft spawnpoint module";
+["Initialising Aircraft spawnpoint module"] call reapercrew_common_fnc_remoteLog;
 
 // Get variables
 _additionalCondition = _logic getVariable ["additionalCondition", "true"];
@@ -30,5 +30,8 @@ _outerZone setTriggerInterval 30;
 [_logic, _outerZone] call reapercrew_reinforcements_fnc_getPathway;
 
 if (reaperCrew_AircraftSpawnCheckbox == true) then {
-	diag_log format ["[REINFORCEMENTS]: Trigger condition is: %1", _triggerCondition];
+	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 };
+
+// Associate the created trigger with the module that created it
+_logic setVariable ["spawnpointTrigger", _outerZone, true];

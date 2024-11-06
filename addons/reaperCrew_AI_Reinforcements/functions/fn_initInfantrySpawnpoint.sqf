@@ -14,7 +14,7 @@ while {isNil "activeInfantryTriggers"} do {
 	sleep 15;
 };
 
-diag_log "[REINFORCEMENTS]: Initialising infantry spawnpoint module";
+["Initialising infantry spawnpoint module"] call reapercrew_common_fnc_remoteLog;
 
 // Get variables
 _additionalCondition = _logic getVariable ["additionalCondition", "true"];
@@ -28,5 +28,8 @@ _outerZone setTriggerStatements [_triggerCondition, " activeInfantryTriggers pus
 _outerZone setTriggerInterval 30;
 
 if (reaperCrew_InfantrySpawnCheckbox == true) then {
-	diag_log format ["[REINFORCEMENTS]: Trigger condition is: %1", _triggerCondition];
+	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 };
+
+// Associate the created trigger with the module that created it
+_logic setVariable ["spawnpointTrigger", _outerZone, true];

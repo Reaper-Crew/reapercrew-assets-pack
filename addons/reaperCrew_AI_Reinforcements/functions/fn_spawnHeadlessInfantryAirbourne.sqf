@@ -16,7 +16,7 @@
 
 params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []]];
 
-diag_log "[REINFORCEMENTS]: Running reinforcements script";
+["Running reinforcements script"] call reapercrew_common_fnc_remoteLog;
 
 // Create Helipad
 _helipad = "Land_HelipadEmpty_F" createVehicle _landingPosition;

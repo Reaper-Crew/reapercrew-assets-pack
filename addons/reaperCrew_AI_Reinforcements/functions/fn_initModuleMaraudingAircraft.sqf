@@ -43,3 +43,4 @@ _activationTrigger setVariable ["AircraftCount",_AircraftCount];
 _activationTrigger setVariable ["AircraftFrequencyMin",_AircraftFrequencyMin];
 _activationTrigger setVariable ["AircraftFrequencyMax",_AircraftFrequencyMax];
 _activationTrigger setVariable ["AircraftsArray",_AircraftsArray];
+_activationTrigger setVariable ["moduleObject", _logic];

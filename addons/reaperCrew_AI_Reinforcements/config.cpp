@@ -76,6 +76,7 @@ class CfgFunctions
 			class getPathway{};
 			class adjustGroupToVehicle{};
 			class adjustGroupLeader{};
+			class getAvailableSpawnpoints{};
 			
 		};
 	};

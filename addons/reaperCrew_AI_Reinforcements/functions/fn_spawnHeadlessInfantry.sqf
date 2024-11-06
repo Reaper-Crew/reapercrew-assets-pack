@@ -21,7 +21,7 @@ params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnG
 
 [_spawnPoint, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup] spawn {
 	params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup"];
-	diag_log "[REINFORCEMENTS]: Running reinforcement spawn script";
+	["Running reinforcement spawn script"] call reapercrew_common_fnc_remoteLog;
 	// Spawn the group
 	_spawnedGroup = [_spawnPoint, reaperCrew_reinforcements_side, _squadArray, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
 	{

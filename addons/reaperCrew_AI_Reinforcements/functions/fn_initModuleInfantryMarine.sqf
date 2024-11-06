@@ -57,6 +57,7 @@ _activationTrigger setVariable ["troopArrays", _troopsArrays];
 _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];
 _activationTrigger setVariable ["waveDelay", _waveDelay];
+_activationTrigger setVariable ["moduleObject", _logic];
 
-_activationTrigger setTriggerStatements ["(this && {isTouchingGround _x} count thisList > 0)", "[thisTrigger] spawn reapercrew_reinforcements_fnc_activateInfantryModuleMarine;", "diag_log '[REINFORCEMENTS]: The trigger has been deactivated'"];
+_activationTrigger setTriggerStatements ["(this && {isTouchingGround _x} count thisList > 0)", "[thisTrigger] spawn reapercrew_reinforcements_fnc_activateInfantryModuleMarine;", "diag_log 'The trigger has been deactivated'"];
 

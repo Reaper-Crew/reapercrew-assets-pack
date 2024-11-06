@@ -4,7 +4,7 @@ activeVehicleTriggers = [];
 activeAircraftTriggers = [];
 activeMarineTriggers = [];
 
-if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - skipping reinforcements system"};
+if (!isServer) exitWith {["Server checked failed - skipping reinforcements system"] call reapercrew_common_fnc_remoteLog;};
 
 // Output debug information
 [] spawn {
@@ -12,7 +12,7 @@ if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - ski
 	// Infantry Spawns
 	while { true } do {
 		if (reaperCrew_InfantrySpawnCheckbox == true) then {
-			diag_log format ["[REINFORCEMENTS]: Found the following active infantry triggers: %1", activeInfantryTriggers];
+			[(format ["Found the following active infantry triggers: %1", activeInfantryTriggers])] call reapercrew_common_fnc_remoteLog;
 		};
 		sleep 15;
 	};
@@ -24,7 +24,7 @@ if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - ski
 	// Vehicle Spawns
 	while { true } do {
 		if (reaperCrew_VehicleSpawnCheckbox == true) then {
-			diag_log format ["[REINFORCEMENTS]: Found the following active vehicle triggers: %1", activeVehicleTriggers];
+			[(format ["Found the following active vehicle triggers: %1", activeVehicleTriggers])] call reapercrew_common_fnc_remoteLog;
 		};
 		sleep 15;
 	};
@@ -36,7 +36,7 @@ if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - ski
 	// Aircraft Spawns
 	while { true } do {
 		if (reaperCrew_AircraftSpawnCheckbox == true) then {
-			diag_log format ["[REINFORCEMENTS]: Found the following active aircraft triggers: %1", activeAircraftTriggers];
+			[(format ["Found the following active aircraft triggers: %1", activeAircraftTriggers])] call reapercrew_common_fnc_remoteLog;
 		};
 		sleep 15;
 	};
@@ -48,7 +48,7 @@ if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - ski
 	// Aircraft Spawns
 	while { true } do {
 		if (reaperCrew_MarineSpawnCheckbox == true) then {
-			diag_log format ["[REINFORCEMENTS]: Found the following active marine triggers: %1", activeMarineTriggers];
+			[(format ["Found the following active marine triggers: %1", activeMarineTriggers])] call reapercrew_common_fnc_remoteLog;
 		};
 		sleep 15;
 	};

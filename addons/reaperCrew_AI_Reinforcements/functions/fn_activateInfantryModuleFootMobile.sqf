@@ -3,7 +3,7 @@ params ["_triggerObject"];
 // Don't run if the array isn't available
 while {isNil "activeInfantryTriggers"} do {
 	if (reaperCrew_InfantrySpawnCheckbox == true) then {
-		diag_log "[REINFORCEMENTS]: Infantry triggers undefined, sleeping";
+		["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
@@ -18,6 +18,7 @@ while {isNil "activeInfantryTriggers"} do {
 	_rushMode = _triggerObject getVariable ["rushMode",false];
 	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 	_waveDelay = _triggerObject getVariable ["waveDelay",60];
+	_moduleObject = _triggerObject getVariable ["moduleObject", objnull];
 
 	// Do for as long as trigger is active
 	while { triggerActivated _triggerObject } do {
@@ -27,8 +28,8 @@ while {isNil "activeInfantryTriggers"} do {
 
 		// Output debug information
 		if (reaperCrew_ReinforcementsCheckbox == true) then {
-			diag_log format ["[REINFORCEMENTS]: Reinforcements module is active, found %1 enemies within the zone", _opforCount];
-			diag_log format ["[REINFORCEMENTS]: Available squad choices: %1", _reinforcementGroups];
+			[(format ["Reinforcements module is active, found %1 enemies within the zone", _opforCount])] call reapercrew_common_fnc_remoteLog;
+			[(format ["Available squad choices: %1", _reinforcementGroups])] call reapercrew_common_fnc_remoteLog;
 		};
 
 		// Select a random squad
@@ -37,11 +38,14 @@ while {isNil "activeInfantryTriggers"} do {
 		_squadSkill = _randomSquad select 1;
 		_squadCount = count _squadArray;
 
+		// Get the available spawnpoints
+		_availableSpawnpoints = [_moduleObject, activeInfantryTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
+
 		// Only spawn if the following conditions are met
-		if ((_opforCount < _zoneThreshold) and (_reinforcementsCount > _squadCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count activeInfantryTriggers) > 0 )) then {
+		if ((_opforCount < _zoneThreshold) and (_reinforcementsCount > _squadCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count _availableSpawnpoints) > 0 )) then {
 			
 			// Select a random spawnpoint
-			_randomSpawn = (selectRandom activeInfantryTriggers);
+			_randomSpawn = (selectRandom _availableSpawnpoints);
 
 			// Send the command to spawn units
 			[[getPos _randomSpawn, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantry"] call reapercrew_common_fnc_executeDistributed;
@@ -52,7 +56,7 @@ while {isNil "activeInfantryTriggers"} do {
 
 			// Output debug information
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
-				diag_log format ["[REINFORCEMENTS]: Reinforcements created, %1 infantry remain", _reinforcementsCount];
+				[(format ["Reinforcements created, %1 infantry remain", _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 			};
 
 		};

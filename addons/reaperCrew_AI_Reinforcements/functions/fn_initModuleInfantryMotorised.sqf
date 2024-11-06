@@ -66,6 +66,7 @@ _activationTrigger setVariable ["troopArrays", _troopsArrays];
 _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];
 _activationTrigger setVariable ["waveDelay", _waveDelay];
+_activationTrigger setVariable ["moduleObject", _logic];
 
 _triggerCondition = format ["(this && {isTouchingGround _x} count thisList > 0) && %1", _additionalCondition];
 

@@ -4,17 +4,17 @@ _units = param [1,[],[[]]];
 _activated = param [2,true,[true]];
 
 // Only run on the server
-if (!isServer) exitWith {diag_log "[REINFORCEMENTS]: Server checked failed - Not initialising init for Marine spawns"};
+if (!isServer) exitWith {["Server checked failed - Not initialising init for marine spawns"] call reapercrew_common_fnc_remoteLog;};
 
 // Don't run if the array isn't available
 while {isNil "activeMarineTriggers"} do {
 	if (reaperCrew_MarineSpawnCheckbox == true) then {
-		diag_log "[REINFORCEMENTS]: Marine triggers undefined, sleeping";
+		["Marine triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
 
-diag_log "[REINFORCEMENTS]: Initialising Marine spawnpoint module";
+["Initialising Marine spawnpoint module"] call reapercrew_common_fnc_remoteLog;
 
 // Get variables
 _additionalCondition = _logic getVariable ["additionalCondition", "true"];
@@ -28,7 +28,7 @@ _outerZone setTriggerStatements [_triggerCondition, " activeMarineTriggers pushB
 _outerZone setTriggerInterval 30;
 
 if (reaperCrew_MarineSpawnCheckbox == true) then {
-	diag_log format ["[REINFORCEMENTS]: Trigger condition is: %1", _triggerCondition];
+	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 };
 
 // Save connected LZs as variable
@@ -42,3 +42,6 @@ _syncLZs = [];
 } forEach _syncObjects;
 
 _outerZone setVariable ["connectedLZs", _syncLZs];
+
+// Associate the created trigger with the module that created it
+_logic setVariable ["spawnpointTrigger", _outerZone, true];

@@ -35,6 +35,7 @@ _rushMode = _triggerObject getVariable ["rushMode",false];
 _reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 _codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 _waveDelay = _triggerObject getVariable ["waveDelay",60];
+_moduleObject = _triggerObject getVariable ["moduleObject", objnull];
 
 // Run code only while the trigger is activated
 while { triggerActivated _triggerObject } do {
@@ -52,8 +53,11 @@ while { triggerActivated _triggerObject } do {
 	_reinforcementsGroupSkill = _reinforcementsGroupSelection select 1;
 	_unitCount = count _reinforcementsGroup;
 
+	// Get the available spawnpoints
+	_availableSpawnpoints = [_moduleObject, activeAircraftTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
+
 	// Only run if; Zone above threshold, Reinforcements remain and spawn points are available
-	if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count activeAircraftTriggers) > 0 )) then {
+	if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count _availableSpawnpoints) > 0 )) then {
 
 		// Output debug information if enabled
 		if (reaperCrew_debugReinforcementsSpawning == true) then {
@@ -66,7 +70,7 @@ while { triggerActivated _triggerObject } do {
 		_searchCenterPos = _triggerObject getPos [_distance, _direction];
 		_searchRadius = 0;
 		_landingPosition = [];
-		_spawnTrigger = (selectRandom activeAircraftTriggers);
+		_spawnTrigger = (selectRandom _availableSpawnpoints);
 		
 		while { (count _landingPosition) == 0 } do {
 
