@@ -58,17 +58,46 @@ class CfgFunctions
 			class logisticsVehicleDeliveryLocalActions {postInit = 1;};
 			class logisticsVehicleDeliveryLocalTrigger {};
 			class logisticsVehicleDeliveryServer {};
+
+			class logisticsRespawnVehicleInitServer {};
+			class logisticsRespawnVehicleInitPlayer {};
+			class logisticsRespawnVehicleRecallPlayer {};
+			class logisticsRespawnVehicleRecallServer {};
 		};
 	};
 };
 class ACE_Actions;
 class CfgVehicles
 {
+	class Man;
+    class CAManBase: Man {
+        class ACE_SelfActions {
+            class reapercrew_ACE_Logistics {
+                displayName = "Logistics";
+                condition = "true";
+                exceptions[] = {};
+                statement = "";
+                icon = "\a3\ui_f\data\igui\cfg\simpletasks\types\car_ca.paa";
+            };
+        };
+    };
+
 	class reaperCrew_module_base;
 	class reaperCrew_moduleResupplyPoint: reaperCrew_module_base
 	{
 		displayName = "Resupply Point";
 		function = "reapercrew_logistics_fnc_logisticsModuleInit";
+		category = "reaperCrew_ModulesLogistics";
+		scope = 2;
+		scopeCurator = 2;
+		isGlobal = 1;
+		isTriggerActivated = 0;
+		curatorCanAttach = 1;
+	};
+	class reaperCrew_moduleRespawnVehicle: reaperCrew_module_base
+	{
+		displayName = "Respawn Vehicle";
+		function = "reapercrew_logistics_fnc_logisticsRespawnVehicleInitServer";
 		category = "reaperCrew_ModulesLogistics";
 		scope = 2;
 		scopeCurator = 2;

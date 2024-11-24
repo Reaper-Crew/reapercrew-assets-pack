@@ -48,6 +48,10 @@
 ["reaperCrew_transportCheckbox", "CHECKBOX", ["Add empty crates", "Should players have the option to spawn empty wooden boxes for transport?"], ["Reaper Crew - Logistics", "Misc"]] call cba_settings_fnc_init;
 
 // Vehicle Delivery settings
-["reaperCrew_vehicleResupplyDeliveryClasses", "EDITBOX", ["Deliverable Vehicles", "A comma seperated list of all Vehicles that should be available to have delivered"], ["Reaper Crew - Logistics", "Vehicle Delivery"], "CUP_C_Datsun,C_Van_01_fuel_F,CUP_C_Golf4_green_Civ"] call cba_settings_fnc_init;
+["reaperCrew_vehicleResupplyDeliveryClasses", "EDITBOX", ["Deliverable Vehicles", "A comma seperated list of all Vehicles that should be available to have delivered"], ["Reaper Crew - Logistics", "Vehicle Delivery"], "B_Truck_01_mover_F,B_MRAP_01_F,B_LSV_01_unarmed_F,B_Quadbike_01_F"] call cba_settings_fnc_init;
 
 ["reaperCrew_vehicleResupplyDeliveryGroups", "EDITBOX", ["Permitted Groups", "A comma seperated list of all callsigns that are allowed to request new vehicles"], ["Reaper Crew - Logistics", "Vehicle Delivery"], "Zero"] call cba_settings_fnc_init;
+
+// Resupply Vehicle
+["reaperCrew_respawnVehicleRefreshSupplies", "CHECKBOX", ["Refresh Supplies", "Should supplies be refreshed in the respawn vehicle?"], ["Reaper Crew - Logistics", "Respawn Vehicle"], true] call cba_settings_fnc_init;
+["reaperCrew_respawnVehicleRefreshSuppliesFrequency", "SLIDER",   ["Refresh Supplies Frequency (Minutes)",   "How often should supplies be refreshed?"], ["Reaper Crew - Logistics", "Respawn Vehicle"], [30, 120, 30, 0]] call cba_settings_fnc_init;

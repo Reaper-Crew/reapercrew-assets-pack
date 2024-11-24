@@ -66,9 +66,10 @@ switch (_crateType) do {
 	};
 };
 
-if !(isNull _spawningPlayer) then {
-	[_spawningPlayer, _supplyCrate] remoteExec ["ace_dragging_fnc_carryObject", _spawningPlayer]
-};
+// Removing because code temporarily broken
+// if !(isNull _spawningPlayer) then {
+// 	[_spawningPlayer, _supplyCrate] remoteExec ["ace_dragging_fnc_carryObject", _spawningPlayer]
+// };
 
 // Return the created crate
 _supplyCrate;
