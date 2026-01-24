@@ -2,133 +2,463 @@
 
 ## Overview
 
-The objective of this system is to provide a way for mission makers to programatically create reinforcements (or the appearance of a more densely populated area), in a way that is performance (more specifically client FPS) friendly and does not require an scripting in order to make work. 
+The Reinforcements System provides mission makers with a way to programmatically create dynamic AI reinforcements without requiring any scripting. The system is designed to be performance-friendly and fully headless client compatible, making it ideal for large-scale operations.
 
-A key feature of this system is that it is fully headless client compatible, therefore it should be the preferred method for reinforcements, since it's able to make full use of available resources. That said - this system will function without HCs for the purpose of local testing. 
+This system leverages the LAMBS Rush module for AI behavior and complements existing tools like Zeus Enhanced.
 
-This is not designed to be a full replacement for LAMBS or Zeus Enhanced (and in fact it leverages the LAMBS Rush module quite heavily), but is deisnged to compliment some of the already present features.
+## Quick Start
 
-## Settings
+1. Configure AI Common settings (faction, unit pools) in CBA Settings
+2. Place one or more **Spawnpoint** modules where you want units to spawn
+3. Place a **Reinforcement Module** in the area you want defended
+4. Synchronize the reinforcement module to specific spawnpoints (optional)
+5. Configure module attributes as needed
 
-All of the settings for this system can be managed from the CBA settings menu.
+## CBA Settings
 
-### AI Common
+### AI Common Settings
 
-![CBA Settings](/docs/systems/reinforcements/settings-common-preview.jpg)
+Configure under `Options > Addon Options > Reaper Crew - AI Common`:
+- Opposition Faction (EAST/WEST/INDEPENDENT)
+- Unit pools (Regular, Elite, Special Forces)
+- Skill levels for each troop type
+- Transport and fire support vehicle classes
 
-The AI Common settings are primarily leveraged by the reinforcements sytems, but can be utilised either directly in scripts if required, or by some of the other miscellaneous systems such as the Garrison module.
+See [AI Common Documentation](../ai/ai-common.md) for details.
 
-Please note: the "opposition faction" is the side that the AI will be spawned as, and should be one that is hostile to the players.
+### AI Reinforcements Settings
 
-![CBA Settings](/docs/systems/reinforcements/settings-reinforcements-preview.jpg)
+Configure under `Options > Addon Options > Reaper Crew - AI Reinforcements`:
 
-The "AI reinforcements" settings focus specifically on the reinforcements system, and contains various debugging options, as well the the ability to toggle live misson settings (eg: to pause reinforcements in an ongoing mission).
+**Live Mission Settings:**
+| Setting | Variable | Description |
+|---------|----------|-------------|
+| Pause Infantry Reinforcements | `reaperCrew_pauseInfantryReinforcements` | Stop infantry spawning |
+| Pause Marauding Vehicles | `reaperCrew_pauseVehicleReinforcements` | Stop vehicle spawning |
+| Pause Marauding Aircraft | `reaperCrew_pauseAircraftReinforcements` | Stop aircraft spawning |
 
-## Spawnpoints
+**Debug Settings:**
+| Setting | Variable | Description |
+|---------|----------|-------------|
+| Debug Spawning Mechanics | `reaperCrew_debugReinforcementsSpawning` | Log unit spawns |
+| Debug Waypoint Mechanics | `reaperCrew_debugWaypointMechanics` | Log waypoint configuration |
+| Log HC Discovery | `reaperCrew_HCDiscoveryCheckbox` | Debug headless client discovery |
+| Log Infantry Spawn Discovery | `reaperCrew_InfantrySpawnCheckbox` | Debug infantry spawnpoints |
+| Log Vehicle Spawn Discovery | `reaperCrew_VehicleSpawnCheckbox` | Debug vehicle spawnpoints |
+| Log Marine Spawn Discovery | `reaperCrew_MarineSpawnCheckbox` | Debug marine spawnpoints |
+| Log Aircraft Spawn Discovery | `reaperCrew_AircraftSpawnCheckbox` | Debug aircraft spawnpoints |
 
-The spawnpoints determine where units relating to different types of reinforcements can spawn. For anything that utilises vehicles, spawnpoints should be placed in relatively clear areas, free from debris and obstructions (owing to ArmA AI's questionable pathfinding ability.). Infantry spawnpoints are far less constrained and can be placed in thick forrest or vegetation if required.
+---
 
-### Spawnpoint Activation
+## Spawnpoint Modules
 
-Spawnpoints are considered active when certain conditions are met:
+Spawnpoints determine where reinforcement units can spawn. All spawnpoints are found in Eden Editor under: `Systems (F5) > Modules > Reaper Crew - Reinforcements`
 
-* Players are inside of a maximum activation distance (differs per spawnpoint, outlined below).
-* Players cannot directly see the spawnpoint (to hopefully stop any game-breaking AI spawning right in front of you)
-* Any additional conditions specified have been achieved (more on this later)
+### Spawnpoint Types & Activation Distances
 
-#### Distances
+| Module | Classname | Distance | Best Used For |
+|--------|-----------|----------|---------------|
+| Infantry Spawnpoint | `reaperCrew_moduleInfantrySpawn` | 2km | Foot mobile infantry |
+| Vehicle Spawnpoint | `reaperCrew_moduleVehicleSpawn` | 5km | Motorised infantry, marauding vehicles |
+| Aircraft Spawnpoint | `reaperCrew_moduleAircraftSpawn` | 25km | Airborne infantry, marauding aircraft |
+| Marine Spawnpoint | `reaperCrew_moduleMarineSpawn` | 7.5km | Marine/amphibious infantry |
 
-| Spawnpoint Type     | Outer Zone |
-|---------------------|------------|
-| Infantry Spawnpoint | 2km        |
-| Vehicle Spawnpoint  | 5km        |
-| Marine Spawnpoint   | 7.5km        |
-| Aircraft Spawnpoint | 25km       |
+### Spawnpoint Activation Conditions
 
-### Default behavior
+A spawnpoint becomes active when ALL conditions are met:
+1. **Player proximity** - At least one player is within the activation distance
+2. **Line of sight** - Players cannot directly see the spawnpoint location
+3. **Ground contact** - At least one player is touching the ground (not in aircraft)
+4. **Additional condition** - Any custom condition specified returns true
 
-#### Infantry
+### Spawnpoint Attributes
 
-The behavior of foot mobile AI is very simple. They will spawn and then attempt to rush to the players position directly, so the following explanations of pathing behavior will not apply to them.
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Additional Condition | String | `"true"` | Custom SQF condition code |
 
-#### Ground vehicles & aircraft
+### Spawnpoint Modes of Operation
 
-When no custom path is specified, assets spawned will pick a random position between the minimum and maximum distances as specified in the relevent reinforcements module. The system will perform a basic check to see if it can find the best suitable landing spot in a given area, but will limit this search to the immediately vicinity in the interests of time and performance. 
+There are two ways spawnpoints can be linked to reinforcement modules:
 
-For example, the system will prefer to attempt to land a helicopter in a clearing, rather than just into a cluster of tree if it can help it - However if a valid position cannot be determined, the system will just default to the specified position and the AI will make it's best effort to get there. 
+**Automatic Mode (Unsynchronized)**
+- Leave spawnpoints unsynchronized from reinforcement modules
+- The reinforcement module will automatically use the nearest active compatible spawnpoint
+- Example: Foot Mobile module uses the nearest active Infantry Spawnpoint
 
-#### Marine
+**Manual Mode (Synchronized)**
+- Synchronize specific spawnpoints to a reinforcement module
+- The module will only use those specific synchronized spawnpoints
+- Spawnpoints must still be active (meet activation conditions) to be usable
+- Useful for controlling exact spawn locations per objective
 
-Since the areas for landing boats must be a little bit more precisely defined, marine reinforcements can only be mapped to specific landing points using the "Marine LZ" module, and cannot automatically calcuate a landing position like the other modules can.
+**Important:** In both modes, spawnpoint activation conditions still apply. A synchronized spawnpoint that isn't active (players too far, line of sight blocked, custom condition false) will not be used.
 
-### Custom Conditions
+### Supporting Modules
 
-In addition to the built-in behavior of spawnpoints, the modules allow you to specify a custom condition. This condition just uses the normal ArmA scripting syntax and could be used to, for example, check if a variable is set to true like so:
+**Path Waypoint** (`reaperCrew_modulePathWaypoint`)
+- Used when you want vehicle-based reinforcements to follow a specific waypoint path to their destination
+- Commonly used to navigate difficult terrain in a specific way
+- Synchronize to spawnpoints in traversal order
 
-```townCaptured == true```
+**Marine LZ** (`reaperCrew_moduleMarineLZ`)
+- Defines landing zones for marine reinforcements
+- Required for marine spawnpoints to function
+- Can be linked to multiple spawnpoints - all linked spawnpoints will be able to use that LZ
+- Doesn't have to be 1:1
 
-or to see if a trigger is activated:
-
-```triggerActivated myTownTrigger```
-
-The condition of each spawnpoint is assessed every 30 seconds, rather than the default 0.5 seconds, since the queries are relatively demanding.
-
-### Custom Pathing
-
-![CBA Settings](/docs/systems/reinforcements/custom-path.jpg)
-
-If you'd like the AI to travel in a very specific path to the dismount position, then you can use the "Path Waypoint" module to achieve this. Simply place down the modules on the route to the dismount position and then syncronise them to the spawnpoint **in the order that you'd like them to be traversed in** (This bit is very important!). The last waypoint in the chain will be treated as the end position.
-
-There will be a small drift on the final position (by up to 50m) to help mitigate a situation where multiple helicopters or vehicles attempt to place themselves into exactly the same position - resulting in either explosions, or a contribution to the ArmA space program.
-
-### Cooldowns
-
-Once used, a vehicle spawnpoint will be deactived as to stop multiple units spawning on the same position in rapid succession. The cooldown period will the "wave delay" + 2 seconds, at which point the spawnpoint will be marked as available for use again.
-
-### Additional spawnpoint considerations
-
-When placing spawnpoints as a mission maker, ensure that they are well out of the players view - in compounds and terrain features like defilades or the reverse slopes of hills - Since having AI spawn directly in view is generally considering a game-breaking experience.
+---
 
 ## Reinforcement Modules
 
-TBC
+### Common Attributes
 
-### Module Configuration
+All infantry reinforcement modules share these attributes:
 
-### Common Settings
-
-<!-- | Attribute
-|---
-| Reinforcment Count
-| Zone Threshold
-| Unit types
-| Enable Rush Mode
-| Wave delay
-| Additional Condition
-| Code on Spawn -->
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Reinforcement Count | Number | 50 | Total units to spawn over time |
+| Zone Threshold | Number | 20 | Stop spawning when enemy count exceeds this - prevents overpopulating the area |
+| Regular Troops | Checkbox | true | Include regular troops from unit pool |
+| Elite Troops | Checkbox | false | Include elite troops from unit pool |
+| Special Forces | Checkbox | false | Include special forces from unit pool |
+| Rush Mode | Checkbox | false | Makes AI more prone to aggressively pushing player positions irrespective of the amount of contact |
+| Wave Delay | Number | 60 | Seconds between spawn waves |
+| Additional Condition | String | `"true"` | Custom spawn condition |
+| Code on Spawn | String | `"true"` | SQF code executed when group spawns |
 
 ### Infantry - Foot Mobile
 
+| Editor Name | Classname |
+|-------------|-----------|
+| Infantry - Foot Mobile | `reaperCrew_moduleReinforcementsHeadlessInfantry` |
+
+Infantry spawn and immediately rush toward enemy positions on foot.
+
+**Behavior:**
+1. Spawns infantry group at available spawnpoint
+2. Group immediately executes LAMBS `taskRush` with 2km radius
+3. No waypoints - direct engagement
+
+**Best for:** Close-range defense, urban areas, dense terrain
+
+**Associated Spawnpoint:** Infantry Spawnpoint
+
 ### Infantry - Motorised
 
-### Infantry - Airbourne
+| Editor Name | Classname |
+|-------------|-----------|
+| Infantry - Motorised | `reaperCrew_moduleReinforcementsHeadlessInfantryMotorised` |
+
+Infantry spawn with a transport vehicle and drive to a dismount position, then rush. They will either drive to randomly calculated dismount positions based on the module variables, or drive to path waypoint positions if configured.
+
+**Additional Attributes:**
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Direction Min | Number | 90 | Minimum approach direction (degrees) |
+| Direction Max | Number | 180 | Maximum approach direction (degrees) |
+| Distance Min | Number | 500 | Minimum dismount distance (meters) |
+| Distance Max | Number | 800 | Maximum dismount distance (meters) |
+
+**Behavior:**
+1. Spawns infantry group at spawnpoint
+2. Creates transport vehicle (from AI Common settings)
+3. Group boards vehicle (size adjusted to vehicle capacity)
+4. Vehicle drives to dismount position (path waypoints if defined)
+5. Group dismounts and executes `taskRush`
+6. Vehicle is cleaned up
+
+**Best for:** Mid-range reinforcement, roads, open terrain
+
+**Associated Spawnpoint:** Vehicle Spawnpoint
+
+### Infantry - Airborne (Helicopter)
+
+| Editor Name | Classname |
+|-------------|-----------|
+| Infantry - Airborne | `reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter` |
+
+Infantry are delivered by helicopter to a landing zone, then rush.
+
+**Additional Attributes:**
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Direction Min | Number | 90 | Minimum approach direction (degrees) |
+| Direction Max | Number | 180 | Maximum approach direction (degrees) |
+| Distance Min | Number | 500 | Minimum landing distance (meters) |
+| Distance Max | Number | 800 | Maximum landing distance (meters) |
+
+**Behavior:**
+1. Creates helipad at landing position (auto-deleted after 10 minutes)
+2. Spawns helicopter at spawnpoint (flies at 250m altitude)
+3. Spawns infantry group in helicopter cargo (size adjusted to capacity)
+4. Helicopter flies path waypoints (if defined)
+5. Helicopter performs transport unload
+6. Infantry form up then execute `taskRush`
+7. Helicopter returns to spawn and is deleted
+
+**Best for:** Rapid deployment, bypassing terrain, long-range reinforcement
+
+**Associated Spawnpoint:** Aircraft Spawnpoint
 
 ### Infantry - Marine
 
-<!-- | Module Name | Description | Associated Spawnpoint | Notes |
-|-------------|-------------|-----------------------|-------|
-| Reinforcements (Infantry - Foot Mobile) | This module will spawn infantry groups who will then move on foot towards the enemy | Infantry Spawnpoint | These units will immediately execute the TaskRush function and therefore won't appear to have any waypoints. These reinforcements won't function correctly unless hostile units are within the rush radius. |
-| Reinforcements (Infantry - Motorised) | This will spawn a group of infantry with an empty vehicle which they will use to move towards their dismount position | Vehicle Spawnpoint | Once the units have reached their dismount marker, they'll execute a TaskRush. The vehicle does not have it's own crew, it's crewed exclusively by the spawned group.
-| Reinforcements (Infantry - Airbourne) | Used to create helicopter-mounted troops | Aircraft Spawnpoint | Due to the complexities of trying to make two independent units cooporate, once dismounted, the infantry squad will need to walk to a form up position before executing a task rush. It's advisable to make sure the module configuration drops these troops far from players, and preferably out of sight since the form up phase is visually unappealing. |
-| Reinforcements (Infantry - Marine) | Troops will spawn with an empty boat, once mounted they will make their way to one of the predefined Marine LZs and dismount. On dismount, infantry will perform a TaskRush with a maximum range of 2km | -->
+| Editor Name | Classname |
+|-------------|-----------|
+| Infantry - Marine | `reaperCrew_moduleReinforcementsHeadlessInfantryMarine` |
 
+Infantry spawn with a boat and land at predefined Marine LZ locations.
 
+**Behavior:**
+1. Spawns infantry group with boat at marine spawnpoint
+2. Group boards boat
+3. Boat travels to synchronized Marine LZ
+4. Group dismounts and executes `taskRush` (2km radius)
 
+**Requirements:**
+- Marine Spawnpoint must have Marine LZ modules synchronized
 
+**Best for:** Amphibious operations, coastal objectives, island terrain
 
+**Associated Spawnpoint:** Marine Spawnpoint + Marine LZ
 
+**Troubleshooting:**
+- Verify Marine LZ modules are synchronized → Marine Spawnpoint
+- Ensure LZ positions are accessible by boat (water/beach)
 
+---
 
+## Marauding Modules
 
+Marauding modules provide a persistent flow of enemy vehicles or aircraft into an area, creating constant contact for fire support teams.
 
+### Marauding Vehicles
 
+| Editor Name | Classname |
+|-------------|-----------|
+| Marauding Vehicles | `reaperCrew_moduleReinforcementsHeadlessMaraudingVehicles` |
+
+**Attributes:**
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Vehicle Count | Number | 25 | Total vehicles to spawn |
+| Frequency Min | Number | 180 | Minimum seconds between spawns |
+| Frequency Max | Number | 240 | Maximum seconds between spawns |
+| Heavy Armour | Checkbox | true | Include heavy armour (MBTs) |
+| Light Armour | Checkbox | true | Include light armour (APCs/IFVs) |
+| Technicals | Checkbox | true | Include technicals |
+
+**Behavior:**
+1. Waits for players to enter module area
+2. Spawns vehicle with crew at available vehicle spawnpoint
+3. Vehicle receives SAD (Search And Destroy) waypoint - automatically moves to a player location rather than just the centre of the module
+4. Continues spawning until vehicle count reached
+
+**Associated Spawnpoint:** Vehicle Spawnpoint
+
+**Troubleshooting:**
+- Place spawnpoints in clear areas away from obstacles
+- Ensure path waypoints avoid obstacles if used
+
+### Marauding Aircraft
+
+| Editor Name | Classname |
+|-------------|-----------|
+| Marauding Aircraft | `reaperCrew_moduleReinforcementsHeadlessMaraudingAircrafts` |
+
+**Attributes:**
+
+| Attribute | Type | Default | Description |
+|-----------|------|---------|-------------|
+| Aircraft Count | Number | 25 | Total aircraft to spawn |
+| Frequency Min | Number | 180 | Minimum seconds between spawns |
+| Frequency Max | Number | 240 | Maximum seconds between spawns |
+| Fixed Wing Bombers | Checkbox | true | Include bomber aircraft |
+| Fixed Wing Fighters | Checkbox | true | Include fighter aircraft |
+| Rotary CAS Heavy | Checkbox | true | Include attack helicopters |
+| Rotary CAS Light | Checkbox | true | Include light helicopters |
+
+**Associated Spawnpoint:** Aircraft Spawnpoint
+
+**Troubleshooting:**
+- Place aircraft spawnpoints in clear areas with sufficient altitude clearance
+- Ensure flight paths avoid mountains and tall structures
+
+---
+
+## Zone Threshold & Wave Mechanics
+
+### Zone Threshold
+
+The zone threshold prevents over-spawning. The system counts enemy units in the reinforcement module's trigger area:
+
+```
+_opforCount = count ((allUnits select {side _x == reaperCrew_reinforcements_side}) inAreaArray _triggerObject)
+```
+
+- Spawning pauses when `opforCount >= zoneThreshold`
+- Spawning resumes when enemy count drops below threshold
+- Default threshold: 20 units
+
+### Wave Delay & Cooldowns
+
+**Wave Delay:** Time between spawn attempts (default: 60 seconds)
+
+**Spawnpoint Cooldown:**
+- After spawning, spawnpoint is temporarily disabled
+- Cooldown duration: `waveDelay + 2` seconds
+- Prevents multiple units spawning at same location rapidly
+
+### Spawn Conditions
+
+For spawning to occur, ALL conditions must be true:
+1. Enemy count < Zone threshold
+2. Reinforcements remaining > 0
+3. Pause setting is OFF
+4. At least one spawnpoint is available
+5. Additional condition returns true
+
+---
+
+## Custom Pathing
+
+### Path Waypoint Setup
+
+1. Place Path Waypoint modules along desired route
+2. Select all waypoints and the spawnpoint
+3. Synchronize waypoints to spawnpoint in order (first synced = first waypoint)
+4. The last waypoint becomes the final destination
+
+**Important:** Synchronization order determines traversal order.
+
+### Position Drift
+
+A random drift of up to 50m is applied to final positions to prevent:
+- Multiple vehicles/helicopters landing at exact same location
+- Collisions and explosions
+- "Arma space program" incidents
+
+---
+
+## Code Examples
+
+### Custom Spawn Code
+
+The `codeOnSpawn` parameter executes when a group spawns. The spawned group is available as `_thisGroup`.
+
+**Add Equipment:**
+```sqf
+{
+    _x addItem "ACE_CableTie";
+    _x addMagazine "SmokeShellGreen";
+} forEach (units _thisGroup);
+```
+
+**Set Behavior:**
+```sqf
+_thisGroup setBehaviour "STEALTH";
+_thisGroup setSpeedMode "LIMITED";
+```
+
+**Disable Fleeing:**
+```sqf
+_thisGroup allowFleeing 0;
+```
+
+**Custom Skill:**
+```sqf
+{ _x setSkill 0.95 } forEach (units _thisGroup);
+```
+
+### Additional Conditions
+
+**Variable Check:**
+```sqf
+townAttacked
+```
+
+**Trigger Activation:**
+```sqf
+triggerActivated myTrigger
+```
+
+**Time-Based:**
+```sqf
+time > 600
+```
+
+**Player Count:**
+```sqf
+count allPlayers > 10
+```
+
+**Combined Conditions:**
+```sqf
+(townAttacked) && (time > 300)
+```
+
+### Runtime Control
+
+**Pause Reinforcements:**
+```sqf
+// Pause all infantry
+reaperCrew_pauseInfantryReinforcements = true;
+
+// Resume
+reaperCrew_pauseInfantryReinforcements = false;
+```
+
+**Check Active Spawnpoints:**
+```sqf
+// View active triggers in debug
+diag_log format ["Active Infantry: %1", activeInfantryTriggers];
+diag_log format ["Active Vehicle: %1", activeVehicleTriggers];
+diag_log format ["Active Aircraft: %1", activeAircraftTriggers];
+diag_log format ["Active Marine: %1", activeMarineTriggers];
+```
+
+---
+
+## Synchronization
+
+### Dedicated Spawnpoints
+
+To restrict a reinforcement module to specific spawnpoints:
+1. Place the reinforcement module
+2. Place desired spawnpoints
+3. Synchronize spawnpoints → reinforcement module
+
+Without synchronization, the module uses ALL available spawnpoints of the appropriate type.
+
+### Marine LZ Synchronization
+
+Marine spawnpoints require synchronized Marine LZ modules:
+1. Place Marine Spawnpoint
+2. Place Marine LZ modules at desired beach landing locations
+3. Synchronize Marine LZ modules → Marine Spawnpoint
+
+---
+
+## General Troubleshooting
+
+### Units Not Spawning
+
+- **Check faction:** Ensure `reaperCrew_reinforcements_side` is correctly set
+- **Check classnames:** Verify unit classnames in AI Common settings are valid and ensure there are no spaces
+- **Check pause settings:** Ensure pause checkboxes are unchecked
+- **Check conditions:** Verify additional condition code returns true
+- **Check spawnpoints:** Ensure spawnpoints are placed and within range
+
+### Wrong Units Spawning
+
+- Verify troop type checkboxes match desired unit pools
+- Check AI Common settings for correct classnames
+
+### Performance Issues
+
+- Reduce reinforcement count
+- Increase wave delay
+- Use fewer simultaneous modules
