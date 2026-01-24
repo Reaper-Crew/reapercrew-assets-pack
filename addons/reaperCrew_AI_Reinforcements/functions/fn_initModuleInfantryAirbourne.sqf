@@ -70,5 +70,5 @@ _activationTrigger setVariable ["moduleObject", _logic];
 
 _triggerCondition = format ["(this && {isTouchingGround _x} count thisList > 0) && %1", _additionalCondition];
 
-_activationTrigger setTriggerStatements [_triggerCondition, "[thisTrigger] spawn reapercrew_reinforcements_fnc_activateInfantryModuleAirbourne;", "diag_log 'The trigger has been deactivated'"];
+_activationTrigger setTriggerStatements [_triggerCondition, "[thisTrigger] spawn reapercrew_reinforcements_fnc_activateInfantryModuleAirbourne;", ""];
 

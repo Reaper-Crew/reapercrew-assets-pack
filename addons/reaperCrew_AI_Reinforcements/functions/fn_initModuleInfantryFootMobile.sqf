@@ -22,6 +22,7 @@ _useSpecialForces = _logic getVariable ["specialTroops",false];
 _rushMode = _logic getVariable ["rushMode",false];
 _codeOnSpawnGroup = _logic getVariable ["codeOnSpawnGroup",""];
 _waveDelay = _logic getVariable ["waveDelay",60];
+_additionalCondition = _logic getVariable ["additionalCondition",true];
 
 // Build array of available squads
 _troopsArrays = [];
@@ -39,7 +40,6 @@ if (_useSpecialForces) then {
 _activationTrigger = createTrigger ["EmptyDetector", (getPos _logic), false];
 _activationTrigger setTriggerArea [_logicArea select 0, _logicArea select 1, 0, false, -1];
 _activationTrigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_activationTrigger setTriggerStatements ["this && {isTouchingGround _x} count thisList > 0", "[thisTrigger] call reapercrew_reinforcements_fnc_activateInfantryModuleFootMobile;", ""];
 _activationTrigger setTriggerInterval 5;
 
 // Set trigger variables
@@ -51,5 +51,9 @@ _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];
 _activationTrigger setVariable ["waveDelay", _waveDelay];
 _activationTrigger setVariable ["moduleObject", _logic];
+
+_triggerCondition = format ["(this && {isTouchingGround _x} count thisList > 0) && %1", _additionalCondition];
+
+_activationTrigger setTriggerStatements [_triggerCondition, "[thisTrigger] call reapercrew_reinforcements_fnc_activateInfantryModuleFootMobile;", ""];
 
 ["Initialised foot mobile infantry module"] call reapercrew_common_fnc_remoteLog;

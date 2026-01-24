@@ -14,7 +14,13 @@ _mapTime = 0;
 	_parentObject = _x;
 	[format ["Searching record %1", _parentObject]] call reapercrew_common_fnc_remoteLog;
 	_artilleryObjectReference = _x select 0;
-	if (_artilleryObjectReference == _artilleryUnit) exitWith {_foundRecord = _x; _isFound = true; _isFoundIndex = _forEachIndex; ["Found match"] call reapercrew_common_fnc_remoteLog;};
+	if (_artilleryObjectReference == _artilleryUnit) then {
+		_foundRecord = _x;
+		_isFound = true;
+		_isFoundIndex = _forEachIndex;
+		["Found match"] call reapercrew_common_fnc_remoteLog;
+		break;
+	};
 } forEach _knowledgeData;
 
 // If record was found: Check is the unit is still within the marked zone

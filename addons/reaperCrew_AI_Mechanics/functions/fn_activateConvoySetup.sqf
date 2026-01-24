@@ -77,7 +77,7 @@ _allConvoyUnits = [];
 		_convoyContactConditionTriggerCode = compile _convoyContactConditionTrigger;
 		call _convoyContactConditionTriggerCode;
 
-		_unit removeAllEventHandlers "Explosion";
+		_unit removeAllEventHandlers "Hit";
 		["Convoy event handler activated"] call reapercrew_common_fnc_remoteLog;
 	}];
 	_x setVariable ["convoyContactConditionVariableName", _convoyContactConditionVariableName, true];
@@ -100,11 +100,13 @@ waitUntil _convoyContactConditionCheckCode;
 {
 	_vehicleUnit = _x;
 	_allVehicleOccupants = crew _vehicleUnit;
+	[(format ["Found vehicle occupants %1", _allVehicleOccupants])] call reapercrew_common_fnc_remoteLog;
 	// Deplete all fuel to stop movement
 	_vehicleUnit setFuel 0;
 
 	[_allVehicleOccupants, _vehicleUnit] spawn {
 		params ["_allVehicleOccupants", "_vehicleUnit"];
+		[(format ["Running on vehicle %1", _vehicleUnit])] call reapercrew_common_fnc_remoteLog;
 		{
 
 			_vehicleMember = _x;
@@ -118,6 +120,7 @@ waitUntil _convoyContactConditionCheckCode;
 			if (assignedGunner _vehicleUnit == _vehicleMember) then {
 				// Do nothing
 			} else {
+				[(format ["Dismounting unit %1", _vehicleMember])] call reapercrew_common_fnc_remoteLog;
 				(group _vehicleMember) setBehaviour "AWARE";
 				doStop _vehicleMember;
 				[_vehicleMember] orderGetIn false;

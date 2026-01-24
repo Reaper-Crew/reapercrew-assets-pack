@@ -26,6 +26,7 @@ _outerZone setTriggerArea [25000, 25000, 0, false, -1];
 _outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _outerZone setTriggerStatements [_triggerCondition, " activeAircraftTriggers pushBack thisTrigger; ", " activeAircraftTriggers = activeAircraftTriggers - [thisTrigger]; "];
 _outerZone setTriggerInterval 30;
+_outerZone setVehicleVarName (format ["AircraftSpawn_%1_%2", (mapGridPosition _logic), ([10,99] call BIS_fnc_randomInt)]);
 
 [_logic, _outerZone] call reapercrew_reinforcements_fnc_getPathway;
 
@@ -34,4 +35,4 @@ if (reaperCrew_AircraftSpawnCheckbox == true) then {
 };
 
 // Associate the created trigger with the module that created it
-_logic setVariable ["spawnpointTrigger", _outerZone, true];
+_logic setVariable ["spawnpointTrigger", _outerZone, false];

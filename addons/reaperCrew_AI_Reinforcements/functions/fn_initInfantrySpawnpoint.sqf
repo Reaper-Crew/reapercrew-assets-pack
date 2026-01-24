@@ -26,10 +26,11 @@ _outerZone setTriggerArea [2000, 2000, 0, false, -1];
 _outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _outerZone setTriggerStatements [_triggerCondition, " activeInfantryTriggers pushBack thisTrigger; ", " activeInfantryTriggers = activeInfantryTriggers - [thisTrigger]; "];
 _outerZone setTriggerInterval 30;
+_outerZone setVehicleVarName (format ["InfantrySpawn_%1_%2", (mapGridPosition _logic), ([10,99] call BIS_fnc_randomInt)]);
 
 if (reaperCrew_InfantrySpawnCheckbox == true) then {
 	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 };
 
 // Associate the created trigger with the module that created it
-_logic setVariable ["spawnpointTrigger", _outerZone, true];
+_logic setVariable ["spawnpointTrigger", _outerZone, false];

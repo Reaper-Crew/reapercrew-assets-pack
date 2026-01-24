@@ -17,13 +17,11 @@
 params ["_logMessage"];
 
 _name = "";
-if (name player == "") then {
+if (name player == "" or isNull player) then {
 	_name = "SERVER";
 } else {
 	_name = name player;
 };
-
-call BIS_fnc_log;
 
 // Determine the message
 _fullMessage = format ["[%1](%2): %3", _fnc_scriptNameParent, _name, _logMessage];

@@ -16,4 +16,4 @@
 
 _loadout = [player] call acre_api_fnc_filterUnitLoadout;
 [] call reapercrew_player_management_fnc_setUnitInsigniaLocal;
-player setVariable["Saved_Loadout",getUnitLoadout player];
+player setVariable["Saved_Loadout", _loadout];

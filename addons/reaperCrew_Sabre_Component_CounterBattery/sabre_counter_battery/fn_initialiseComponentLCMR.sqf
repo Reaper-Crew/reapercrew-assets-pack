@@ -81,6 +81,7 @@ _radarUnit setVariable ["_radarKnowledge", [], true];
 
 // Update the zone every 60 seconds
 [_radarUnit] spawn {
+	params ["_radarUnit"];
 	_radarMarker = _radarUnit getVariable "_radarZone";
 	while { alive _radarUnit } do {
 		_radarMarkerPos = getMarkerPos _radarMarker;

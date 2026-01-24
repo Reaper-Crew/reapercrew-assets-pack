@@ -56,8 +56,8 @@ _selectedUnit allowDamage false;
 missionNamespace setVariable ["reaperCrew_respawn_vehicle", _selectedUnit];
 
 [_selectedUnit] spawn {
-	params ["_respawnVehicle"];
 	while {reaperCrew_respawnVehicleRefreshSupplies} do {
+		_respawnVehicle = [missionNamespace, "reaperCrew_respawn_vehicle", objNull] call BIS_fnc_getServerVariable;
 		// Small Arms
 		[_respawnVehicle] call reapercrew_logistics_fnc_logisticsInitCrateSmallArms;
 		// Medical
