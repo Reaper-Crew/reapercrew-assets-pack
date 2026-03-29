@@ -57,7 +57,7 @@ All systems are configured through CBA Settings (`Options > Addon Options`) unde
 
 Modules are found under `Systems (F5) > Modules`:
 
-- **Reaper Crew - AI** - AI behavior modules (Garrison, Suppress, Convoy)
+- **Reaper Crew - AI** - AI behaviour modules (Garrison, Suppress, Convoy)
 - **Reaper Crew - Reinforcements** - Spawnpoints and reinforcement modules
 - **Reaper Crew - Logistics** - Resupply and vehicle management
 - **Reaper Crew - Player Management** - Player utility modules

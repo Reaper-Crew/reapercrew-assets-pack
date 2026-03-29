@@ -3,9 +3,9 @@
 ## Version 5.7
 
 ### Added
-- **MISSION MECHANICS:** New addon — reaperCrew_Mission_Mechanics with Interaction Objective module (hold action on synced objects that publishes a global variable on completion)
-- **MISSION MECHANICS:** Added Timed Task module — configurable timer with start/in-progress/completed variables and optional progress broadcasts via side chat
-- **AMBIENCE:** New addon — reaperCrew_Ambience with Ambient CAS module
+- **MISSION MECHANICS:** New addon - reaperCrew_Mission_Mechanics with Interaction Objective module (hold action on synced objects that publishes a global variable on completion)
+- **MISSION MECHANICS:** Added Timed Task module - configurable timer with start/in-progress/completed variables and optional progress broadcasts via side chat
+- **AMBIENCE:** New addon - reaperCrew_Ambience with Ambient CAS module
 - **AMBIENCE:** Ambient CAS module supports configurable aircraft, strike type/direction, delay range, player proximity gating, and player-avoidance for strike positions
 - **MECHANICS:** Added per-building min/max unit limits to Garrison module
 - **MECHANICS:** Added minimum position distance attribute to Garrison module to prevent AI clustering
@@ -42,11 +42,17 @@
 - **LOGISTICS:** Removed duplicate switch statement with dead classname assignments in supply crate creation
 - **LOGISTICS:** Fixed misleading comment in small arms crate init
 - **REINFORCEMENTS:** Fixed airborne waypoint positions being set at sea level instead of terrain level (affected both helicopter and infantry waypoints)
-- **REINFORCEMENTS:** Fixed fastrope waypoint using incorrect altitude calculation — now uses getTerrainHeightASL for correct hover position on hilly terrain
+- **REINFORCEMENTS:** Fixed fastrope waypoint using incorrect altitude calculation - now uses getTerrainHeightASL for correct hover position on hilly terrain
 - **REINFORCEMENTS:** Added helicopter position hold during fastrope deployment to prevent drift causing ACE to detach units mid-rope
 - **REINFORCEMENTS:** Added pilot MOVE AI suppression during deployment to prevent premature flyaway while last units are still descending
 - **REINFORCEMENTS:** Fastrope script now gracefully exits with a logged warning if helicopter lacks ACE fastroping config
 - **REINFORCEMENTS:** Airborne landing position search now rejects positions with trees or buildings within 25m to prevent helicopter collisions with canopy
+- **REINFORCEMENTS:** Added sleep to airborne landing position search loop to prevent tight looping
+- **REINFORCEMENTS:** Fixed airborne module debug log incorrectly saying "Vehicle triggers" instead of "Aircraft triggers"
+- **MECHANICS:** Added sleep to Convoy contact detection waitUntil to prevent per-frame polling
+- **AMBIENCE:** Added re-entry guard to prevent duplicate CAS loops when players leave and re-enter the trigger area
+- **PLAYER MANAGEMENT:** Moved hasInterface check before ACRE init sleep to avoid needless delay on headless clients
+- **PLAYER MANAGEMENT:** Fixed ACRE radio presence check using isNil instead of empty string comparison
 
 ### Removed
 - N/A

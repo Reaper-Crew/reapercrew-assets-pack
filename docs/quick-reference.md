@@ -33,7 +33,7 @@ Before starting, configure these in `Options > Addon Options`:
 
 ## Common Module Setups
 
-### Dynamic AI Defense
+### Dynamic AI Defence
 
 **Goal:** Enemies reinforce an area as players approach.
 
@@ -51,7 +51,7 @@ Before starting, configure these in `Options > Addon Options`:
 3. Configure dismount distance/direction
 4. (Optional) Place **Path Waypoint** modules for specific routes
 
-### Air Assault Defense
+### Air Assault Defence
 
 **Goal:** Helicopter-delivered reinforcements.
 
@@ -105,7 +105,7 @@ Before starting, configure these in `Options > Addon Options`:
 2. Place **Convoy** module
 3. Synchronize vehicles → module (order = convoy order)
 4. Set activation condition variable
-5. Configure speed, separation, contact behavior
+5. Configure speed, separation, contact behaviour
 
 ---
 
@@ -269,7 +269,7 @@ myMissionVariable
 3. Place Resupply Point at player start
 4. (Optional) Add Marauding Vehicles for flanking threat
 
-### Defense Mission
+### Defence Mission
 1. Place player defensive positions
 2. Configure Infantry Foot Mobile reinforcements
 3. Add Marauding Vehicles/Aircraft for pressure

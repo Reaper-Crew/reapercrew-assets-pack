@@ -37,11 +37,12 @@ private _delayMax = _triggerObject getVariable ["delayMax", 180];
 
 private _triggerPos = getPos _triggerObject;
 
-[(format ["Ambient CAS active — aircraft: %1, proximity: %2 (%3m), avoidPlayers: %4 (%5m), delay: %6-%7s", _aircraftClass, _proximityEnabled, _proximityRange, _avoidPlayers, _avoidRadius, _delayMin, _delayMax])] call reapercrew_common_fnc_remoteLog;
+// Log configuration summary
+[(format ["Ambient CAS active - aircraft: %1, proximity: %2 (%3m), avoidPlayers: %4 (%5m), delay: %6-%7s", _aircraftClass, _proximityEnabled, _proximityRange, _avoidPlayers, _avoidRadius, _delayMin, _delayMax])] call reapercrew_common_fnc_remoteLog;
 
 while {triggerActivated _triggerObject} do {
 
-	// Per-strike proximity check — skip if no players are within range
+	// Per-strike proximity check - skip if no players are within range
 	if (_proximityEnabled && {allPlayers findIf {_x distance2D _triggerPos < _proximityRange} == -1}) then {
 		["No players within proximity range, skipping strike"] call reapercrew_common_fnc_remoteLog;
 		sleep ([_delayMin, _delayMax] call BIS_fnc_randomInt);
@@ -51,7 +52,7 @@ while {triggerActivated _triggerObject} do {
 	// Generate strike position
 	private _strikePos = [_triggerObject] call BIS_fnc_randomPosTrigger;
 
-	// Avoid-players check — try to find a position away from all players
+	// Avoid-players check - try to find a position away from all players
 	if (_avoidPlayers) then {
 		private _attempts = 0;
 		while {_attempts < 5} do {
@@ -66,9 +67,11 @@ while {triggerActivated _triggerObject} do {
 
 	// Execute strike
 	[(format ["Executing air strike at %1", mapGridPosition _strikePos])] call reapercrew_common_fnc_remoteLog;
+	// Fire-and-forget: create a dummy target, run CAS, then clean up
 	[_strikePos, _strikeDir, _aircraftClass, _strikeType] spawn {
 		params ["_pos", "_dir", "_class", "_type"];
 
+		// Create an invisible laser target as the CAS aim point
 		private _dummy = "LaserTargetCBase" createVehicle _pos;
 		_dummy enableSimulation false;
 		_dummy hideObject true;
@@ -76,13 +79,19 @@ while {triggerActivated _triggerObject} do {
 		_dummy setVariable ["type", _type];
 		_dummy setDir _dir;
 
+		// Execute the CAS strike via the vanilla module function
 		[_dummy, nil, true] call BIS_fnc_moduleCAS;
 
+		// Wait for the strike to complete, then remove the dummy object
 		sleep 10;
 		deleteVehicle _dummy;
 	};
 
+	// Wait a random interval before the next strike
 	sleep ([_delayMin, _delayMax] call BIS_fnc_randomInt);
 };
 
-["Ambient CAS deactivated — trigger no longer active"] call reapercrew_common_fnc_remoteLog;
+// Clean up re-entry guard so the trigger can fire again
+_triggerObject setVariable ["cas_active", nil];
+
+["Ambient CAS deactivated - trigger no longer active"] call reapercrew_common_fnc_remoteLog;

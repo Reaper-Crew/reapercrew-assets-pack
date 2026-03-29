@@ -15,12 +15,12 @@
  * Public: No
  */
 
+if (!hasInterface) exitWith {};
+
 // Wait for ACRE to finish initialising
 sleep 15;
 
-diag_log "[Reaper Crew]: Running client ACRE configuration";
-
-if (!hasInterface) exitWith {};
+["Running client ACRE configuration"] call reapercrew_common_fnc_remoteLog;
 
 // Group name to PRR channel mapping
 private _groupChannelMap = createHashMap;
@@ -46,7 +46,8 @@ _groupChannelMap set ["Sentinel", 13];
 // Set PRR channel based on group
 private _personalRadio = ["ACRE_PRC343"] call acre_api_fnc_getRadioByType;
 
-if (!isNil "_personalRadio") then {
+// acre_api_fnc_getRadioByType returns "" if the player has no radio of that type
+if (_personalRadio != "") then {
 	private _groupName = groupId (group player);
 	private _channel = _groupChannelMap getOrDefault [_groupName, -1];
 	if (_channel > 0) then {
@@ -58,17 +59,17 @@ if (!isNil "_personalRadio") then {
 private _interteamRadio = ["ACRE_PRC148"] call acre_api_fnc_getRadioByType;
 private _longRangeRadio = ["ACRE_PRC152"] call acre_api_fnc_getRadioByType;
 
-if (!isNil "_longRangeRadio" && {!isNil "_interteamRadio"}) then {
+if (_longRangeRadio != "" && {_interteamRadio != ""}) then {
 	// All three radios (officer)
 	[[ _personalRadio, _interteamRadio, _longRangeRadio]] call acre_api_fnc_setMultiPushToTalkAssignment;
 	[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
 } else {
-	if (!isNil "_longRangeRadio") then {
+	if (_longRangeRadio != "") then {
 		// PRR + long range (pilot)
 		[[ _personalRadio, _longRangeRadio]] call acre_api_fnc_setMultiPushToTalkAssignment;
 		[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
 	} else {
-		if (!isNil "_interteamRadio") then {
+		if (_interteamRadio != "") then {
 			// PRR + inter-team
 			[[ _personalRadio, _interteamRadio]] call acre_api_fnc_setMultiPushToTalkAssignment;
 		};

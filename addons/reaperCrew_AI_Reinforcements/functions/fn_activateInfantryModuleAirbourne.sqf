@@ -19,7 +19,7 @@ params ["_triggerObject"];
 // Don't run if the array isn't available
 while {isNil "activeAircraftTriggers"} do {
 	if (reaperCrew_debugReinforcementsSpawning == true) then {
-		["Vehicle triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
+		["Aircraft triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
@@ -78,6 +78,7 @@ while { triggerActivated _triggerObject } do {
 		_spawnTrigger = (selectRandom _availableSpawnpoints);
 		
 		while { (count _landingPosition) == 0 } do {
+			sleep 0.1; // Yield each iteration to avoid blocking the scheduler
 
 			// Increment search criteria
 			_searchRadius = _searchRadius + 100;

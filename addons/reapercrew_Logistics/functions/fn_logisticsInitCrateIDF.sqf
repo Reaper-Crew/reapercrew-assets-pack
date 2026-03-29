@@ -17,7 +17,7 @@
 params ["_supplyCrate"];
 
 // Only run when object local
-if (!local _supplyCrate) exitWith {diag_log "[LOGISTICS]: Local check failed - skipping crate init"};
+if (!local _supplyCrate) exitWith {["Local check failed - skipping crate init"] call reapercrew_common_fnc_remoteLog};
 
 _IDFOffensive = reaperCrew_IDFExplosiveRounds splitString ",";
 _IDFUtility = reaperCrew_IDFUtility splitString ",";

@@ -44,7 +44,7 @@ if (_validSyncCheck) then {
 	_action = "SYNC";
 	player setVariable ["_sabreHasSync", true];
 };
-if (!(_hasSynced) && !(_validSyncCheck)) exitWith { diag_log "SABRE: No sync action required - terminating"; };
+if (!(_hasSynced) && !(_validSyncCheck)) exitWith { ["No sync action required - terminating"] call reapercrew_common_fnc_remoteLog; };
 if !(_validSyncCheck) then {
 	[(format ["TASK: Running SABRE network cleanup on client %1", _playerName]), (name player)] call reapercrew_common_fnc_remoteLog;
 	_action = "OFFLOAD";

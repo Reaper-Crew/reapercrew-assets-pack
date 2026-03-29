@@ -4,7 +4,7 @@
 
 The Reinforcements System provides mission makers with a way to programmatically create dynamic AI reinforcements without requiring any scripting. The system is designed to be performance-friendly and fully headless client compatible, making it ideal for large-scale operations.
 
-This system leverages the LAMBS Rush module for AI behavior and complements existing tools like Zeus Enhanced.
+This system leverages the LAMBS Rush module for AI behaviour and complements existing tools like Zeus Enhanced.
 
 ## Quick Start
 
@@ -135,12 +135,12 @@ All infantry reinforcement modules share these attributes:
 
 Infantry spawn and immediately rush toward enemy positions on foot.
 
-**Behavior:**
+**Behaviour:**
 1. Spawns infantry group at available spawnpoint
 2. Group immediately executes LAMBS `taskRush` with 2km radius
 3. No waypoints - direct engagement
 
-**Best for:** Close-range defense, urban areas, dense terrain
+**Best for:** Close-range defence, urban areas, dense terrain
 
 **Associated Spawnpoint:** Infantry Spawnpoint
 
@@ -161,7 +161,7 @@ Infantry spawn with a transport vehicle and drive to a dismount position, then r
 | Distance Min | Number | 500 | Minimum dismount distance (meters) |
 | Distance Max | Number | 800 | Maximum dismount distance (meters) |
 
-**Behavior:**
+**Behaviour:**
 1. Spawns infantry group at spawnpoint
 2. Creates transport vehicle (from AI Common settings)
 3. Group boards vehicle (size adjusted to vehicle capacity)
@@ -191,7 +191,7 @@ Infantry are delivered by helicopter to a landing zone, then rush. Supports two 
 | Distance Min | Number | 500 | Minimum landing distance (meters) |
 | Distance Max | Number | 800 | Maximum landing distance (meters) |
 
-**Behavior (LAND mode):**
+**Behaviour (LAND mode):**
 1. Creates helipad at landing position (auto-deleted after 10 minutes)
 2. Spawns helicopter at spawnpoint (flies at 250m altitude)
 3. Spawns infantry group in helicopter cargo (size adjusted to capacity)
@@ -200,7 +200,7 @@ Infantry are delivered by helicopter to a landing zone, then rush. Supports two 
 6. Infantry form up then execute `taskRush`
 7. Helicopter returns to spawn and is deleted
 
-**Behavior (FASTROPE mode):**
+**Behaviour (FASTROPE mode):**
 1. Spawns helicopter at spawnpoint (flies at 250m altitude)
 2. Spawns infantry group in helicopter cargo (size adjusted to capacity)
 3. Helicopter flies path waypoints (if defined)
@@ -213,7 +213,7 @@ Infantry are delivered by helicopter to a landing zone, then rush. Supports two 
 
 **Fastrope Requirements:**
 - ACE Fastroping must be loaded
-- The helicopter must have `ace_fastroping_enabled` in its config (vanilla and most major mod helicopters have this via ACE compat patches — RHS, CUP, 3CB, etc.)
+- The helicopter must have `ace_fastroping_enabled` in its config (vanilla and most major mod helicopters have this via ACE compat patches - RHS, CUP, 3CB, etc.)
 - If the helicopter does not have ACE fastroping config, the waypoint completes immediately and troops remain aboard. A warning is logged to RPT
 
 **Known Issues (Fastrope):**
@@ -232,7 +232,7 @@ Infantry are delivered by helicopter to a landing zone, then rush. Supports two 
 
 Infantry spawn with a boat and land at predefined Marine LZ locations.
 
-**Behavior:**
+**Behaviour:**
 1. Spawns infantry group with boat at marine spawnpoint
 2. Group boards boat
 3. Boat travels to synchronized Marine LZ
@@ -272,7 +272,7 @@ Marauding modules provide a persistent flow of enemy vehicles or aircraft into a
 | Light Armour | Checkbox | true | Include light armour (APCs/IFVs) |
 | Technicals | Checkbox | true | Include technicals |
 
-**Behavior:**
+**Behaviour:**
 1. Waits for players to enter module area
 2. Spawns vehicle with crew at available vehicle spawnpoint
 3. Vehicle receives SAD (Search And Destroy) waypoint - automatically moves to a player location rather than just the centre of the module
@@ -378,7 +378,7 @@ The `codeOnSpawn` parameter executes when a group spawns. The spawned group is a
 } forEach (units _thisGroup);
 ```
 
-**Set Behavior:**
+**Set Behaviour:**
 ```sqf
 _thisGroup setBehaviour "STEALTH";
 _thisGroup setSpeedMode "LIMITED";

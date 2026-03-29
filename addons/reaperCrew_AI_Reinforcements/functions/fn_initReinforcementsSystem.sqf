@@ -17,6 +17,8 @@
  */
 
 // Global arrays that track active spawnpoint triggers per type
+// Declared before the server check so isNil guards in activation functions
+// resolve on all machines (HC scripts check these before proceeding)
 activeInfantryTriggers = [];
 activeVehicleTriggers = [];
 activeAircraftTriggers = [];

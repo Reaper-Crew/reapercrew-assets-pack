@@ -16,7 +16,7 @@ All modules are found in Eden Editor under: `Systems (F5) > Modules > Reaper Cre
 
 Strips all equipment from players and assigns parade/ceremonial uniforms based on role.
 
-**Behavior:**
+**Behaviour:**
 1. Removes all weapons, items, uniform, vest, backpack, headgear, goggles
 2. Assigns base uniform: `U_BG_Guerilla2_1`
 3. Assigns headgear: `RC_Beret_01`
@@ -47,7 +47,7 @@ Strips all equipment from players and assigns parade/ceremonial uniforms based o
 
 Captures and stores player loadouts for later restoration.
 
-**Behavior:**
+**Behaviour:**
 1. Uses ACRE API to filter loadout (excludes ACRE radios)
 2. Stores loadout in player variable: `Saved_Loadout`
 3. Also triggers insignia setup
@@ -72,7 +72,7 @@ if (count _savedLoadout > 0) then {
 
 Used to fix bugs that sometimes occur with player fatigue not being properly reset.
 
-**Behavior:**
+**Behaviour:**
 - Executes `player setFatigue 0` on all players
 
 **Usage:** Place module and activate when needed.

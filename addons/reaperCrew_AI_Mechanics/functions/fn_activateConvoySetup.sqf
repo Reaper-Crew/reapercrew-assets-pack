@@ -19,6 +19,7 @@ params ["_triggerObject"];
 
 // Read module attributes
 _convoyActivateCondition = _triggerObject getVariable ["ActivationCode","true"];
+// Prepend sleep so the waitUntil polls every 5 seconds instead of every frame
 _convoyActivateCode = compile (format ["sleep 5; %1", _convoyActivateCondition]);
 
 // Generate a unique variable name so multiple convoys don't clash
@@ -89,7 +90,8 @@ waitUntil _convoyActivateCode;
 } forEach _allConvoyVehicles;
 
 // Wait for contact (Hit EH sets the variable to true)
-waitUntil _convoyContactConditionCheckCode;
+// Uses compiled check code without sleep -- add sleep to avoid per-frame polling
+waitUntil { sleep 1; call _convoyContactConditionCheckCode };
 ["Convoy Contacted"] call reapercrew_common_fnc_remoteLog;
 
 // Dismount sequence - stop vehicles and order non-gunner crew out

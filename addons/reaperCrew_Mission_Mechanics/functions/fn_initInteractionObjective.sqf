@@ -16,7 +16,7 @@
  * Public: No
  */
 
-_logic = param [0, objNull, [objNull]];
+private _logic = param [0, objNull, [objNull]];
 
 if (!isServer) exitWith {
 	["Server check failed - not running interaction objective init"] call reapercrew_common_fnc_remoteLog;
@@ -28,13 +28,14 @@ private _actionDuration = _logic getVariable ["actionDuration", 5];
 private _actionCondition = _logic getVariable ["actionCondition", "true"];
 private _completionVariable = _logic getVariable ["completionVariable", ""];
 
-// Validate
+// Validate — require at least one synced object and a completion variable name
 private _syncedObjects = synchronizedObjects _logic;
 
 if (count _syncedObjects == 0) exitWith {
 	["ERROR: Interaction Objective module has no synchronised objects"] call reapercrew_common_fnc_remoteLog;
 };
 
+// Check for empty string or 0 (Eden can return 0 for unset string attributes)
 if (_completionVariable isEqualTo "" || _completionVariable isEqualTo 0) exitWith {
 	["ERROR: Interaction Objective module has no completion variable defined"] call reapercrew_common_fnc_remoteLog;
 };
@@ -45,26 +46,27 @@ missionNamespace setVariable [_completionVariable, false, true];
 // Add hold action to each synchronised object on all clients (with JIP)
 {
 	[
-		_x,
-		_actionText,
-		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",
-		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",
-		_actionCondition,
-		"_caller distance _target < 3",
-		{},
-		{},
+		_x,                                                                  // target object
+		_actionText,                                                         // action title
+		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",      // idle icon
+		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_connect_ca.paa",      // progress icon
+		_actionCondition,                                                    // condition (show)
+		"_caller distance _target < 3",                                      // condition (progress)
+		{},                                                                  // code (start)
+		{},                                                                  // code (progress)
 		{
+			// Completion — broadcast the variable globally via setVariable [name, value, true]
 			params ["_target", "_caller", "_actionId", "_arguments"];
 			_arguments params ["_variableName"];
 			missionNamespace setVariable [_variableName, true, true];
 			[(format ["Interaction objective complete: %1 (by %2)", _variableName, name _caller])] call reapercrew_common_fnc_remoteLog;
 		},
-		{},
-		[_completionVariable],
-		_actionDuration,
-		0,
-		true,
-		false
+		{},                                                                  // code (interrupted)
+		[_completionVariable],                                               // arguments
+		_actionDuration,                                                     // duration
+		0,                                                                   // priority
+		true,                                                                // remove on completion
+		false                                                                // show unconscious
 	] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 } forEach _syncedObjects;
 

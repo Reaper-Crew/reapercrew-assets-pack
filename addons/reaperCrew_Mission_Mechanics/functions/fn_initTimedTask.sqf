@@ -16,7 +16,7 @@
  * Public: No
  */
 
-_logic = param [0, objNull, [objNull]];
+private _logic = param [0, objNull, [objNull]];
 
 if (!isServer) exitWith {
 	["Server check failed - not running timed task init"] call reapercrew_common_fnc_remoteLog;
@@ -30,7 +30,7 @@ private _taskDuration = _logic getVariable ["taskDuration", 300];
 private _broadcastProgress = _logic getVariable ["broadcastProgress", true];
 private _broadcastMessage = _logic getVariable ["broadcastMessage", "Task progress"];
 
-// Validate — all three variable names are required
+// Validate — all three variable names are required (check for empty string or 0 from unset Eden attributes)
 if (_startVariable isEqualTo "" || _inProgressVariable isEqualTo "" || _completedVariable isEqualTo "" || _startVariable isEqualTo 0 || _inProgressVariable isEqualTo 0 || _completedVariable isEqualTo 0) exitWith {
 	[(format ["ERROR: Timed Task module has empty variable names — start: '%1', inProgress: '%2', completed: '%3'", _startVariable, _inProgressVariable, _completedVariable])] call reapercrew_common_fnc_remoteLog;
 };
@@ -48,10 +48,11 @@ waitUntil {
 	!isNil _startVariable && {missionNamespace getVariable [_startVariable, false]}
 };
 
-// Task started
+// Task started — broadcast in-progress state to all machines
 missionNamespace setVariable [_inProgressVariable, true, true];
 [(format ["Timed Task started: %1 (%2s)", _startVariable, _taskDuration])] call reapercrew_common_fnc_remoteLog;
 
+// Notify all players via side chat
 if (_broadcastProgress) then {
 	(format ["%1: Started", _broadcastMessage]) remoteExec ["systemChat", 0];
 };
@@ -68,6 +69,7 @@ private _startTime = CBA_missionTime;
 		// Check again after sleep in case task completed during the wait
 		if !(missionNamespace getVariable [_inProgressVariable, false]) exitWith {};
 
+		// Calculate elapsed time and derive percentage (capped at 100)
 		private _elapsed = CBA_missionTime - _startTime;
 		private _percentage = ((_elapsed / _taskDuration) * 100) min 100;
 		private _percentageRounded = round _percentage;
@@ -88,12 +90,13 @@ waitUntil {
 	(CBA_missionTime - _startTime) >= _taskDuration
 };
 
-// Task completed — setting inProgress to false kills the progress reporter thread
+// Task completed — setting inProgress to false terminates the progress reporter thread
 missionNamespace setVariable [_inProgressVariable, false, true];
 missionNamespace setVariable [_completedVariable, true, true];
 
 [(format ["Timed Task completed: %1", _completedVariable])] call reapercrew_common_fnc_remoteLog;
 
+// Final broadcast to all players
 if (_broadcastProgress) then {
 	(format ["%1: Complete", _broadcastMessage]) remoteExec ["systemChat", 0];
 };

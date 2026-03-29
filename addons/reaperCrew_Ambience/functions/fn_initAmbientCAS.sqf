@@ -51,8 +51,9 @@ _activationTrigger setVariable ["avoidRadius", _avoidRadius];
 _activationTrigger setVariable ["delayMin", _delayMin];
 _activationTrigger setVariable ["delayMax", _delayMax];
 
+// Activate the strike loop when players enter; guard against re-entry
 _activationTrigger setTriggerStatements [
-	"this",
-	"[thisTrigger] spawn reapercrew_ambience_fnc_activateAmbientCAS;",
-	""
+	"this && {isNil {thisTrigger getVariable 'cas_active'}}",
+	"thisTrigger setVariable ['cas_active', true]; [thisTrigger] spawn reapercrew_ambience_fnc_activateAmbientCAS;",
+	"thisTrigger setVariable ['cas_active', nil];"
 ];

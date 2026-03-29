@@ -19,7 +19,7 @@
 params ["_logic"];
 
 // Only run on the server
-if (!isServer) exitWith {diag_log "[GARRISON]: Server checked failed - Not running garrison init"};
+if (!isServer) exitWith {["Server checked failed - Not running garrison init"] call reapercrew_common_fnc_remoteLog};
 
 // Get logic variables
 _maxCount = _logic getVariable ["maxCount",50];

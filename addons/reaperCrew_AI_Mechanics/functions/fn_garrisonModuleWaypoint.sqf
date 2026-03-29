@@ -19,7 +19,7 @@
 
 params ["_group", "_position", "_target"];
 
-diag_log format ["GARRISON MODULE: Running waypoint function for group %1", str(_group)];
+[(format ["Running waypoint function for group %1", str(_group)])] call reapercrew_common_fnc_remoteLog;
 
 {
 	_x setUnitPos (selectRandom ["UP", "MIDDLE"]);

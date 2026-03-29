@@ -24,7 +24,7 @@ _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];
 _activated = param [2,true,[true]];
 
-if (count (synchronizedObjects _logic) == 0) exitWith { diag_log "Nothing sync'd" };
+if (count (synchronizedObjects _logic) == 0) exitWith { ["Nothing sync'd"] call reapercrew_common_fnc_remoteLog };
 
 [_logic, (synchronizedObjects _logic)] call myTag_fnc_initConvoy;
 

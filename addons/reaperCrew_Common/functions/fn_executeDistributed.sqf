@@ -20,7 +20,7 @@ params ["_callParams", "_functionName"];
 // Don't run if the array isn't available
 while {isNil "HeadlessClients"} do {
 	if (reaperCrew_ReinforcementsCheckbox == true) then {
-		diag_log "[COMMON]: Headless client data not available - queuing command";
+		["Headless client data not available - queuing command"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
@@ -31,12 +31,12 @@ if (count HeadlessClients > 0) then {
 	_selectedClient = selectRandom HeadlessClients;
 	_callParams remoteExecCall [_functionName, _selectedClient];
 	if (reaperCrew_ReinforcementsCheckbox == true) then {
-		diag_log format ["[COMMON]: Headless client is available, sending request to %1", _selectedClient];
+		[(format ["Headless client is available, sending request to %1", _selectedClient])] call reapercrew_common_fnc_remoteLog;
 	};
 } else {
 	//If no, execute on server
 	_callParams remoteExecCall [_functionName, 2];
 	if (reaperCrew_ReinforcementsCheckbox == true) then {
-		diag_log "[COMMON]: No headless clients available, executing request on server";
+		["No headless clients available, executing request on server"] call reapercrew_common_fnc_remoteLog;
 	};
 };

@@ -266,7 +266,7 @@ _radar engineOn true;
 
 ## Known Issues
 
-- **Single Player:** System requires multiplayer; server-only functions do not initialize properly in SP
+- **Single Player:** System requires multiplayer; server-only functions do not initialise properly in SP
 - **Marker Locality:** Markers may occasionally disappear due to Arma's locality handling
 
 ---

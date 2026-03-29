@@ -36,8 +36,8 @@ class CfgFunctions
 		class Effects
 		{
 			file = "rc_assets_pack\addons\reaperCrew_Ambience\functions";
-			class initAmbientCAS {};
-			class activateAmbientCAS {};
+			class initAmbientCAS {}; // reapercrew_ambience_fnc_initAmbientCAS
+			class activateAmbientCAS {}; // reapercrew_ambience_fnc_activateAmbientCAS
 		};
 	};
 };

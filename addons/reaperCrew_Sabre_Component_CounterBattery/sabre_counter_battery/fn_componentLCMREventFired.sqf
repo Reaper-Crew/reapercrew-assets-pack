@@ -36,7 +36,7 @@ switch (side _artilleryUnit) do {
 	};
 	default { _radarSystems = []; };
 };
-diag_log _radarSystems;
+[(str _radarSystems)] call reapercrew_common_fnc_remoteLog;
 
 // Loop through the radar systems
 {

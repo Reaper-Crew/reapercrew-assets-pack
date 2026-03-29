@@ -33,7 +33,7 @@ class CfgFunctions
 {
 	class reapercrew_mission_mechanics
 	{
-		class Effects
+		class MissionMechanics
 		{
 			file = "rc_assets_pack\addons\reaperCrew_Mission_Mechanics\functions";
 			class initInteractionObjective {}; // reapercrew_mission_mechanics_fnc_initInteractionObjective
@@ -108,7 +108,7 @@ class CfgVehicles
 				displayName = "Completion Variable";
 				property = "completionVariable";
 				typeName = "STRING";
-				tooltip = "Global variable name that will be set to true and broadcast via publicVariable when the interaction is completed. Required. Must not clash with engine commands.";
+				tooltip = "Global variable name that will be set to true and broadcast globally when the interaction is completed. Required. Must not clash with engine commands.";
 				control = "Edit";
 				defaultValue = "";
 			};

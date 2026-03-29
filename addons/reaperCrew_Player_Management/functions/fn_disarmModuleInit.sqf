@@ -22,20 +22,20 @@ params ["_logic"];
 // _result = ["Are you sure?", "Please confirm that you wish to disarm all players", "Yes I'm sure", "Cancel"] spawn BIS_fnc_guiMessage;
 
 // if (_result) then {
-	diag_log "[DISARM MODULE]: Function Started";
+	["Function Started"] call reapercrew_common_fnc_remoteLog;
 
 	// Variables
 	_allPlayers = call BIS_fnc_listPlayers;
 	_moduleLocation = (getPos _logic);
 
 	{
-		diag_log format ["Disarming player %1", name(_x)];
+		[(format ["Disarming player %1", name(_x)])] call reapercrew_common_fnc_remoteLog;
 		remoteExecCall ["reapercrew_player_management_fnc_disarmModuleKitChange", _x, false];	
 
 	} forEach _allPlayers;
 
 	deleteVehicle _logic;
 
-	diag_log "[DISARM MODULE]: Function Complete";
+	["Function Complete"] call reapercrew_common_fnc_remoteLog;
 // };
 

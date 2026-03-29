@@ -146,7 +146,7 @@ Place this module to mark where delivery vehicles will spawn.
 ### Delivery Mechanics
 
 - **Damage Immunity:** Vehicle is invulnerable during transit (prevents AI collision damage)
-- **Driver:** Civilian AI with careless behavior, deleted on arrival
+- **Driver:** Civilian AI with careless behaviour, deleted on arrival
 - **Important:** Wait for full waypoint completion before taking vehicle
 
 ### CBA Settings

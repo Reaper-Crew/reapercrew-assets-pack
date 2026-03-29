@@ -92,7 +92,7 @@ garrisonActive = true;
 - Units use dynamic simulation for performance optimisation
 - Each building spawns as a separate group, distributed across headless clients
 - Use the activation condition to defer spawning and reduce mission startup load
-- Garrison units will not trigger other dynamically simulated units to activate — only players can
+- Garrison units will not trigger other dynamically simulated units to activate - only players can
 - Skill levels are inherited from the CBA AI Common settings for each troop type
 
 ### Troubleshooting
@@ -205,7 +205,7 @@ The Convoy module creates a convoy system where vehicles maintain proper spacing
 1. Place the **Convoy** module in Eden Editor
 2. Place vehicles with crews (driver + passengers)
 3. Synchronize vehicles to the module in order (first = lead vehicle)
-4. Configure convoy behavior and activation condition
+4. Configure convoy behaviour and activation condition
 5. Create a variable trigger or set activation code
 
 ### Attributes
@@ -221,7 +221,7 @@ The Convoy module creates a convoy system where vehicles maintain proper spacing
 | Path Update Frequency | `reaperCrew_moduleAwesomeConvoy_pathFrequecy` | Number | 0.05 | How often path updates (seconds) |
 | Speed Control Frequency | `reaperCrew_moduleAwesomeConvoy_speedFrequecy` | Number | 0.2 | How often speed adjusts (seconds) |
 | Speed Mode | `reaperCrew_moduleAwesomeConvoy_speedMode` | Combo | NORMAL | Speed restriction mode |
-| Behaviour | `reaperCrew_moduleAwesomeConvoy_behaviourConv` | Combo | pushThroughContact | Contact response behavior |
+| Behaviour | `reaperCrew_moduleAwesomeConvoy_behaviourConv` | Combo | pushThroughContact | Contact response behaviour |
 | Debug Visualization | `reaperCrew_moduleAwesomeConvoy_debug` | Checkbox | false | Show path visualization |
 | Activation Code | `ActivationCode` | String | `activateConvoy == true;` | Condition to start convoy |
 | Contact Code | `ContactCode` | String | `"true"` | Code executed on contact |
@@ -235,7 +235,7 @@ The Convoy module creates a convoy system where vehicles maintain proper spacing
 
 ### Behaviour Modes
 
-- **AWARE** - Standard aware behavior
+- **AWARE** - Standard aware behaviour
 - **pushThroughContact** - Attempt to push through when engaged
 
 ### How It Works
@@ -346,11 +346,11 @@ The Unlimited Ammo module gives synchronised vehicles infinite ammunition. Ammo 
 2. Iterates all synchronised vehicles
 3. Adds a `Fired` event handler to each vehicle on all machines (JIP-safe)
 4. The event handler resets vehicle ammo to full after every shot
-5. Handles locality transfers automatically — the EH fires wherever the vehicle is local
+5. Handles locality transfers automatically - the EH fires wherever the vehicle is local
 
 ### Tips
 
-- Sync any vehicle type — works with static weapons, armour, aircraft, etc.
+- Sync any vehicle type - works with static weapons, armour, aircraft, etc.
 - Multiple vehicles can be synced to a single module
 - The EH persists through locality changes (e.g. headless client transfers)
 
@@ -358,4 +358,4 @@ The Unlimited Ammo module gives synchronised vehicles infinite ammunition. Ammo 
 
 **Vehicle runs out of ammo:**
 - Verify the vehicle is synchronised to the module (check sync line in Eden)
-- Ensure the vehicle is not a `Man` unit — only vehicles are processed
+- Ensure the vehicle is not a `Man` unit - only vehicles are processed

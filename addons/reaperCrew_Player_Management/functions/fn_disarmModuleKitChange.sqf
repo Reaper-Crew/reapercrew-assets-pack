@@ -39,13 +39,13 @@ _isSectionLeader = ["Section Commander", _roleDesc] call BIS_fnc_inString;
 _isSection2IC = ["Section 2IC", _roleDesc] call BIS_fnc_inString;
 _isSection3IC = ["Section 3IC", _roleDesc] call BIS_fnc_inString;
 
-diag_log format ["Role description is %1", _roleDesc];
-diag_log format ["Is platoon commander: %1", _isPlatoonCommander];
-diag_log format ["Is platoon sergeant: %1", _isPlatoonSergeant];
+[(format ["Role description is %1", _roleDesc])] call reapercrew_common_fnc_remoteLog;
+[(format ["Is platoon commander: %1", _isPlatoonCommander])] call reapercrew_common_fnc_remoteLog;
+[(format ["Is platoon sergeant: %1", _isPlatoonSergeant])] call reapercrew_common_fnc_remoteLog;
 
-diag_log format ["Is section commander: %1", _isSectionLeader];
-diag_log format ["Is section 2IC: %1", _isSection2IC];
-diag_log format ["Is section 3IC: %1", _isSection3IC];
+[(format ["Is section commander: %1", _isSectionLeader])] call reapercrew_common_fnc_remoteLog;
+[(format ["Is section 2IC: %1", _isSection2IC])] call reapercrew_common_fnc_remoteLog;
+[(format ["Is section 3IC: %1", _isSection3IC])] call reapercrew_common_fnc_remoteLog;
 
 if (_isPlatoonCommander or _isPlatoonSergeant) then {
 	removeUniform player;
