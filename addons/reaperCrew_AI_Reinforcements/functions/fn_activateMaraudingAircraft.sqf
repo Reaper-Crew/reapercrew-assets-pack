@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Activation loop for marauding aircraft. Spawns aircraft with SAD waypoints at available spawnpoints.
+ *
+ * Arguments:
+ * 0: _triggerObject <OBJECT> - Trigger object containing aircraft spawn settings
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [trigger] call reapercrew_reinforcements_fnc_activateMaraudingAircraft
+ *
+ * Public: No
+ */
+
 params ["_triggerObject"];
 
 [_triggerObject] spawn {

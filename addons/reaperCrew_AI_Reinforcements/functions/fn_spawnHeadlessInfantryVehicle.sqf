@@ -14,7 +14,7 @@
  * Public: No
  */
 
-params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []]];
+params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_rushMode", false]];
 
 if (reaperCrew_debugReinforcementsSpawning == true) then {
 	[(format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;

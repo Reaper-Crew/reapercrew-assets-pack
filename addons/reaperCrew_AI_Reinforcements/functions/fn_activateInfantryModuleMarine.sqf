@@ -29,7 +29,8 @@ while {isNil "activeMarineTriggers"} do {
 
 	// Get variables from the trigger
 	_reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
-	_zoneThreshold = _triggerObject getVariable ["zoneThreshold",20];
+	_zoneThresholdValue = _triggerObject getVariable ["zoneThreshold",20];
+	_zoneThresholdMode = _triggerObject getVariable ["zoneThresholdMode","THRESHOLD"];
 	_rushMode = _triggerObject getVariable ["rushMode",false];
 	_reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
@@ -43,6 +44,9 @@ while {isNil "activeMarineTriggers"} do {
 		_allOpforUnits = (allUnits select {side _x == reaperCrew_reinforcements_side});
 		_opforUnits = _allOpforUnits inAreaArray _triggerObject;
 		_opforCounter = count _opforUnits;
+
+		// Calculate the zone threshold based on the selected mode
+		_zoneThreshold = [_zoneThresholdValue, _zoneThresholdMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneThreshold;
 
 		// Select Marine & group
 		_availableMarine = reaperCrew_reinforcements_transportBoat splitString ",";
@@ -72,7 +76,7 @@ while {isNil "activeMarineTriggers"} do {
 			_availableLZs = _boatSpawnpoint getVariable ["connectedLZs",[]];
 
 			if (count _availableLZs > 0) then {
-				[(format ["Chosen Spawnpoint has no %1 LZs", (count _availableLZs)])] call reapercrew_common_fnc_remoteLog;
+				[(format ["Chosen Spawnpoint has %1 LZs", (count _availableLZs)])] call reapercrew_common_fnc_remoteLog;
 				_boatLZ = (selectRandom _availableLZs);
 				[[_boatLZ, getPos _boatSpawnpoint, _reinforcementsMarine, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
 				// Adjust the number of available reinforcements

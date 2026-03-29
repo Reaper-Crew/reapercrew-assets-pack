@@ -1,10 +1,10 @@
 /*
  * Author: Xeenenta
- * Configures the PRR based on the players group
+ * Configures the player's PRR channel based on their group and assigns
+ * multi-PTT bindings based on available radios.
  *
  * Arguments:
- * 0: 
- * 1: 
+ * None
  *
  * Return Value:
  * None
@@ -15,109 +15,62 @@
  * Public: No
  */
 
-// Only execute on players
+// Wait for ACRE to finish initialising
 sleep 15;
 
 diag_log "[Reaper Crew]: Running client ACRE configuration";
 
-if (hasInterface) then {
-	_personalRadio = [];
-	_interteamRadio = [];
-	_longRangeRadio = [];
+if (!hasInterface) exitWith {};
 
-	// Add the radios to variables
-	_personalRadio = ["ACRE_PRC343"] call acre_api_fnc_getRadioByType;
+// Group name to PRR channel mapping
+private _groupChannelMap = createHashMap;
+_groupChannelMap set ["Zero", 12];
+_groupChannelMap set ["Reaper-1-1", 1];
+_groupChannelMap set ["Reaper-1-2", 2];
+_groupChannelMap set ["Reaper-1-3", 3];
+_groupChannelMap set ["Thunder", 4];
+_groupChannelMap set ["Hammer", 5];
+_groupChannelMap set ["Fury", 6];
+_groupChannelMap set ["Fury-1", 6];
+_groupChannelMap set ["Fury-2", 6];
+_groupChannelMap set ["Foxhound-1", 7];
+_groupChannelMap set ["Foxhound-2", 7];
+_groupChannelMap set ["Foxhound-3", 7];
+_groupChannelMap set ["Shadow", 8];
+_groupChannelMap set ["Viper", 9];
+_groupChannelMap set ["Phantom", 10];
+_groupChannelMap set ["Ugly-1", 11];
+_groupChannelMap set ["Ugly-2", 11];
+_groupChannelMap set ["Sentinel", 13];
 
-	if (!isNil "_personalRadio") then {
-		// Set the radio channels for the short range
-		switch (groupId (group player)) do {
-			case "Zero": {
-				[_personalRadio, 12] call acre_api_fnc_setRadioChannel;
-			};
-			case "Reaper-1-1": {
-				[_personalRadio, 1] call acre_api_fnc_setRadioChannel;
-			};
-			case "Reaper-1-2": {
-				[_personalRadio, 2] call acre_api_fnc_setRadioChannel;
-			};
-			case "Reaper-1-3": {
-				[_personalRadio, 3] call acre_api_fnc_setRadioChannel;
-			};
-			case "Thunder": {
-				[_personalRadio, 4] call acre_api_fnc_setRadioChannel;
-			};
-			case "Hammer": {
-				[_personalRadio, 5] call acre_api_fnc_setRadioChannel;
-			};
-			// Fury
-			case "Fury": {
-				[_personalRadio, 6] call acre_api_fnc_setRadioChannel;
-			};
-			case "Fury-1": {
-				[_personalRadio, 6] call acre_api_fnc_setRadioChannel;
-			};
-			case "Fury-2": {
-				[_personalRadio, 6] call acre_api_fnc_setRadioChannel;
-			};
-			// Foxhound
-			case "Foxhound-1": {
-				[_personalRadio, 7] call acre_api_fnc_setRadioChannel;
-			};
-			case "Foxhound-2": {
-				[_personalRadio, 7] call acre_api_fnc_setRadioChannel;
-			};
-			case "Foxhound-3": {
-				[_personalRadio, 7] call acre_api_fnc_setRadioChannel;
-			};
-			case "Shadow": {
-				[_personalRadio, 8] call acre_api_fnc_setRadioChannel;
-			};
-			case "Viper": {
-				[_personalRadio, 9] call acre_api_fnc_setRadioChannel;
-			};
-			case "Phantom": {
-				[_personalRadio, 10] call acre_api_fnc_setRadioChannel;
-			};
-			// Ugly
-			case "Ugly-1": {
-				[_personalRadio, 11] call acre_api_fnc_setRadioChannel;
-			};
-			case "Ugly-2": {
-				[_personalRadio, 11] call acre_api_fnc_setRadioChannel;
-			};
-			// Sentinel
-			case "Sentinel": {
-				[_personalRadio, 13] call acre_api_fnc_setRadioChannel;
-			};
-		};
+// Set PRR channel based on group
+private _personalRadio = ["ACRE_PRC343"] call acre_api_fnc_getRadioByType;
+
+if (!isNil "_personalRadio") then {
+	private _groupName = groupId (group player);
+	private _channel = _groupChannelMap getOrDefault [_groupName, -1];
+	if (_channel > 0) then {
+		[_personalRadio, _channel] call acre_api_fnc_setRadioChannel;
 	};
-
-	// Assign the PTT values
-	_interteamRadio = ["ACRE_PRC148"] call acre_api_fnc_getRadioByType;
-	_longRangeRadio = ["ACRE_PRC152"] call acre_api_fnc_getRadioByType;
-
-
-	// Check for LRR
-	// If just team radio
-	if (!isNil "_interteamRadio") then {
-		_success = [ [ _personalRadio, _interteamRadio] ] call acre_api_fnc_setMultiPushToTalkAssignment;
-	};
-	// If team radio and LRR (Officer most likely)
-	if (!isNil "_longRangeRadio" && !isNil "_interteamRadio") then {
-		_success = [ [ _personalRadio, _interteamRadio, _longRangeRadio] ] call acre_api_fnc_setMultiPushToTalkAssignment;
-		[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
-	};
-	// IF LRR but no team radio, pilot most likely
-	if (!isNil "_longRangeRadio" && isNil "_interteamRadio") then {
-		_success = [ [ _personalRadio, _longRangeRadio] ] call acre_api_fnc_setMultiPushToTalkAssignment;
-		[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
-	};
-	
 };
 
+// Configure multi-PTT based on available radios
+private _interteamRadio = ["ACRE_PRC148"] call acre_api_fnc_getRadioByType;
+private _longRangeRadio = ["ACRE_PRC152"] call acre_api_fnc_getRadioByType;
 
-
-
-
-
-
+if (!isNil "_longRangeRadio" && {!isNil "_interteamRadio"}) then {
+	// All three radios (officer)
+	[[ _personalRadio, _interteamRadio, _longRangeRadio]] call acre_api_fnc_setMultiPushToTalkAssignment;
+	[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
+} else {
+	if (!isNil "_longRangeRadio") then {
+		// PRR + long range (pilot)
+		[[ _personalRadio, _longRangeRadio]] call acre_api_fnc_setMultiPushToTalkAssignment;
+		[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
+	} else {
+		if (!isNil "_interteamRadio") then {
+			// PRR + inter-team
+			[[ _personalRadio, _interteamRadio]] call acre_api_fnc_setMultiPushToTalkAssignment;
+		};
+	};
+};

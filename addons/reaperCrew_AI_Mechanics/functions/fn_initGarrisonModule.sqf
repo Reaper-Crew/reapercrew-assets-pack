@@ -4,7 +4,7 @@
 *
 * Arguments:
 * 0: Logic <LOGIC>
-* 1: 
+* 1:
 *
 * Return Value:
 * None
@@ -29,19 +29,27 @@ _useRegularTroops = _logic getVariable ["regularTroops",true];
 _useEliteTroops = _logic getVariable ["eliteTroops",false];
 _useSpecialForces = _logic getVariable ["specialTroops",false];
 _codeOnSpawnGroup = _logic getVariable ["codeOnSpawnGroup",""];
+_minUnitsPerBuilding = _logic getVariable ["minUnitsPerBuilding", 4];
+_maxUnitsPerBuilding = _logic getVariable ["maxUnitsPerBuilding", 10];
+_minPositionDistance = _logic getVariable ["minPositionDistance", 3];
+_activationCondition = _logic getVariable ["activationCondition", "true"];
 
-// Build array of available squads
+// Build array of available squads as [classnames, skill] pairs
 _troopsArrays = [];
 
 if (_useRegularTroops) then {
-	_troopsArrays append (reaperCrew_reinforcements_regularTroops splitString ",");
+	_troopsArrays pushBack [(reaperCrew_reinforcements_regularTroops splitString ","), reaperCrew_reinforcements_regularTroopsDifficulty];
 };
 if (_useEliteTroops) then {
-  _troopsArrays append (reaperCrew_reinforcements_eliteTroops splitString ",");
+	_troopsArrays pushBack [(reaperCrew_reinforcements_eliteTroops splitString ","), reaperCrew_reinforcements_eliteTroopsDifficulty];
 };
 if (_useSpecialForces) then {
-  _troopsArrays append (reaperCrew_reinforcements_specialForces splitString ",");
+	_troopsArrays pushBack [(reaperCrew_reinforcements_specialForces splitString ","), reaperCrew_reinforcements_specialForcesDifficulty];
 };
+
+// Wait for activation condition to be met
+_activationCode = compile _activationCondition;
+waitUntil { call _activationCode || {sleep 5; false} };
 
 // Call activate function
 [
@@ -50,5 +58,8 @@ if (_useSpecialForces) then {
   _logicArea,
   _troopsArrays,
   _codeOnSpawnGroup,
-  reaperCrew_reinforcements_side
+  reaperCrew_reinforcements_side,
+  _minUnitsPerBuilding,
+  _maxUnitsPerBuilding,
+  _minPositionDistance
 ] call reapercrew_ai_mechanics_fnc_activateGarrisonModule;

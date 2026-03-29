@@ -84,8 +84,9 @@ Before starting, configure these in `Options > Addon Options`:
 
 1. Place **Garrison Area** module
 2. Resize area to cover target buildings
-3. Configure Max Units and troop types
-4. (Optional) Add code on spawn for custom behavior
+3. Configure Max Units, troop types, and per-building min/max limits
+4. (Optional) Set an activation condition to defer spawning
+5. (Optional) Add code on spawn for custom behaviour
 
 ### Ambush Setup (Suppress Position)
 
@@ -162,6 +163,7 @@ Before starting, configure these in `Options > Addon Options`:
 | AI Mechanics | Garrison Area | `reaperCrew_moduleGarrison` |
 | AI Mechanics | Suppress Position | `reaperCrew_moduleSuppressPosition` |
 | AI Mechanics | Convoy | `reaperCrew_moduleAwesomeConvoy` |
+| AI Mechanics | Unlimited Ammo | `reaperCrew_moduleUnlimitedAmmo` |
 | Logistics | Resupply Point | `reaperCrew_moduleResupplyPoint` |
 | Logistics | Vehicle Spawnpoint | `reaperCrew_moduleResupplyVehicleSpawnpoint` |
 | Logistics | Respawn Vehicle | `reaperCrew_moduleRespawnVehicle` |
@@ -243,7 +245,7 @@ diag_log format ["Vehicle: %1", activeVehicleTriggers];
 
 ### Custom Spawn Code (codeOnSpawn)
 ```sqf
-{ _x setSkill 0.95 } forEach (units _thisGroup);
+// Skill is set automatically from CBA settings, but can be overridden:
 _thisGroup allowFleeing 0;
 ```
 

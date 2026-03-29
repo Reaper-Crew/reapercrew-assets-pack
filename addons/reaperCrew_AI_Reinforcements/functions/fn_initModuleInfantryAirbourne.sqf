@@ -22,6 +22,7 @@ _activated = param [2,true,[true]];
 _randomTrigger = objNull;
 _reinforcementsCount = _logic getVariable ["reinforcementCount",50];
 _zoneThreshold = _logic getVariable ["zoneThreshold",20];
+_zoneThresholdMode = _logic getVariable ["zoneThresholdMode","THRESHOLD"];
 _directionMin = _logic getVariable ["directionMin",90];
 _directionMax = _logic getVariable ["directionMax",180];
 _distanceMin = _logic getVariable ["distanceMin",500];
@@ -33,6 +34,7 @@ _rushMode = _logic getVariable ["rushMode",false];
 _codeOnSpawnGroup = _logic getVariable ["codeOnSpawnGroup",""];
 _waveDelay = _logic getVariable ["waveDelay",60];
 _additionalCondition = _logic getVariable ["additionalCondition",true];
+_deliveryMode = _logic getVariable ["deliveryMode","LAND"];
 
 _logicArea = _logic getVariable ["objectarea", [50, 50, 0, false, -1]];
 _logicArea2D = [getPos _logic, _logicArea select 0, _logicArea select 1];
@@ -58,6 +60,7 @@ _activationTrigger setTriggerInterval 5;
 // Assign required variable to trigger
 _activationTrigger setVariable ["reinforcementCount", _reinforcementsCount];
 _activationTrigger setVariable ["zoneThreshold", _zoneThreshold];
+_activationTrigger setVariable ["zoneThresholdMode", _zoneThresholdMode];
 _activationTrigger setVariable ["directionMin", _directionMin];
 _activationTrigger setVariable ["directionMax", _directionMax];
 _activationTrigger setVariable ["distanceMin", _distanceMin];
@@ -67,6 +70,7 @@ _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];
 _activationTrigger setVariable ["waveDelay", _waveDelay];
 _activationTrigger setVariable ["moduleObject", _logic];
+_activationTrigger setVariable ["deliveryMode", _deliveryMode];
 
 _triggerCondition = format ["(this && {isTouchingGround _x} count thisList > 0) && %1", _additionalCondition];
 

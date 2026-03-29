@@ -1,56 +1,47 @@
-// Create variables
+/*
+ * Author: Xeenenta
+ * Initialises the reinforcements system. Creates global trigger tracking arrays
+ * and spawns a debug logging loop (when enabled via CBA settings).
+ * Runs as postInit on the server.
+ *
+ * Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * call reapercrew_reinforcements_fnc_initReinforcementsSystem
+ *
+ * Public: No
+ */
+
+// Global arrays that track active spawnpoint triggers per type
 activeInfantryTriggers = [];
 activeVehicleTriggers = [];
 activeAircraftTriggers = [];
 activeMarineTriggers = [];
 
-if (!isServer) exitWith {["Server checked failed - skipping reinforcements system"] call reapercrew_common_fnc_remoteLog;};
-
-// Output debug information
-[] spawn {
-
-	// Infantry Spawns
-	while { true } do {
-		if (reaperCrew_InfantrySpawnCheckbox == true) then {
-			[(format ["Found the following active infantry triggers: %1", activeInfantryTriggers])] call reapercrew_common_fnc_remoteLog;
-		};
-		sleep 15;
-	};
-
+if (!isServer) exitWith {
+	["Server checked failed - skipping reinforcements system"] call reapercrew_common_fnc_remoteLog;
 };
 
+// Single debug loop that logs active triggers when the corresponding CBA setting is enabled
 [] spawn {
+	private _debugConfig = [
+		["reaperCrew_InfantrySpawnCheckbox", "infantry", {activeInfantryTriggers}],
+		["reaperCrew_VehicleSpawnCheckbox", "vehicle", {activeVehicleTriggers}],
+		["reaperCrew_AircraftSpawnCheckbox", "aircraft", {activeAircraftTriggers}],
+		["reaperCrew_MarineSpawnCheckbox", "marine", {activeMarineTriggers}]
+	];
 
-	// Vehicle Spawns
-	while { true } do {
-		if (reaperCrew_VehicleSpawnCheckbox == true) then {
-			[(format ["Found the following active vehicle triggers: %1", activeVehicleTriggers])] call reapercrew_common_fnc_remoteLog;
-		};
+	while {true} do {
+		{
+			_x params ["_settingName", "_label", "_triggersCode"];
+			if (missionNamespace getVariable [_settingName, false]) then {
+				[(format ["Found the following active %1 triggers: %2", _label, call _triggersCode])] call reapercrew_common_fnc_remoteLog;
+			};
+		} forEach _debugConfig;
 		sleep 15;
 	};
-
-};
-
-[] spawn {
-
-	// Aircraft Spawns
-	while { true } do {
-		if (reaperCrew_AircraftSpawnCheckbox == true) then {
-			[(format ["Found the following active aircraft triggers: %1", activeAircraftTriggers])] call reapercrew_common_fnc_remoteLog;
-		};
-		sleep 15;
-	};
-
-};
-
-[] spawn {
-
-	// Aircraft Spawns
-	while { true } do {
-		if (reaperCrew_MarineSpawnCheckbox == true) then {
-			[(format ["Found the following active marine triggers: %1", activeMarineTriggers])] call reapercrew_common_fnc_remoteLog;
-		};
-		sleep 15;
-	};
-
 };

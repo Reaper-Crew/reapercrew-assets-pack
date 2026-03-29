@@ -1,6 +1,23 @@
+/*
+ * Author: Xeenenta
+ * Activation loop for foot mobile reinforcements. While the trigger is active, spawns
+ * infantry groups at available spawnpoints when the zone is below its threshold.
+ *
+ * Arguments:
+ * 0: Trigger Object <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [thisTrigger] spawn reapercrew_reinforcements_fnc_activateInfantryModuleFootMobile
+ *
+ * Public: No
+ */
+
 params ["_triggerObject"];
 
-// Don't run if the array isn't available
+// Wait for the spawnpoint system to initialise
 while {isNil "activeInfantryTriggers"} do {
 	if (reaperCrew_InfantrySpawnCheckbox == true) then {
 		["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
@@ -11,66 +28,53 @@ while {isNil "activeInfantryTriggers"} do {
 [_triggerObject] spawn {
 	params ["_triggerObject"];
 
-	// Get Variables
+	// Get variables from the trigger
 	_reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
-	_zoneThreshold = _triggerObject getVariable ["zoneThreshold",20];
+	_zoneThresholdValue = _triggerObject getVariable ["zoneThreshold",20];
+	_zoneThresholdMode = _triggerObject getVariable ["zoneThresholdMode","THRESHOLD"];
 	_reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 	_rushMode = _triggerObject getVariable ["rushMode",false];
 	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 	_waveDelay = _triggerObject getVariable ["waveDelay",60];
 	_moduleObject = _triggerObject getVariable ["moduleObject", objnull];
 
-	// Do for as long as trigger is active
 	while { triggerActivated _triggerObject } do {
 
-		// Get a count of the number of units in the area
+		// Count enemy units in the zone
 		_opforCount = count ((allUnits select {side _x == reaperCrew_reinforcements_side}) inAreaArray _triggerObject);
 
-		// Output debug information
+		// Calculate the zone threshold based on the selected mode
+		_zoneThreshold = [_zoneThresholdValue, _zoneThresholdMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneThreshold;
+
 		if (reaperCrew_ReinforcementsCheckbox == true) then {
 			[(format ["Reinforcements module is active, found %1 enemies within the zone", _opforCount])] call reapercrew_common_fnc_remoteLog;
 			[(format ["Available squad choices: %1", _reinforcementGroups])] call reapercrew_common_fnc_remoteLog;
 		};
 
-		// Select a random squad
+		// Select a random squad from the troop arrays
 		_randomSquad = selectRandom _reinforcementGroups;
 		_squadArray = _randomSquad select 0;
 		_squadSkill = _randomSquad select 1;
 		_squadCount = count _squadArray;
 
-		// Get the available spawnpoints
+		// Get spawnpoints that are currently available (not on cooldown)
 		_availableSpawnpoints = [_moduleObject, activeInfantryTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
 
-		// Only spawn if the following conditions are met
-		if ((_opforCount < _zoneThreshold) and (_reinforcementsCount > _squadCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count _availableSpawnpoints) > 0 )) then {
-			
-			// Select a random spawnpoint
-			_randomSpawn = (selectRandom _availableSpawnpoints);
+		// Only spawn if zone is below threshold, reinforcements remain, and spawnpoints exist
+		if ((_opforCount < _zoneThreshold) and (_reinforcementsCount > _squadCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count _availableSpawnpoints) > 0)) then {
 
-			// Send the command to spawn units
+			_randomSpawn = selectRandom _availableSpawnpoints;
+
 			[[getPos _randomSpawn, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantry"] call reapercrew_common_fnc_executeDistributed;
 
-			// Reduce the number of available reinforcements
-			_reinforcementsCount = (_reinforcementsCount - _squadCount);
+			_reinforcementsCount = _reinforcementsCount - _squadCount;
 			_triggerObject setVariable ["reinforcementCount", _reinforcementsCount];
 
-			// Output debug information
 			if (reaperCrew_ReinforcementsCheckbox == true) then {
 				[(format ["Reinforcements created, %1 infantry remain", _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 			};
-
 		};
 
 		sleep _waveDelay;
 	};
-
-
-
-
-
-
-
-
 };
-
-

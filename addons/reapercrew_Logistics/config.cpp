@@ -128,13 +128,13 @@ class CfgVehicles
 		scopeCurator=0;
 		// Dragging
         // ace_dragging_canDrag = 1;
-        ace_dragging_dragPosition[] = {0, 1.2, 0};
+        ace_dragging_dragPosition[] = {0, 2, 0};
         // ace_dragging_dragDirection = 0;
 		// ace_maxWeightDrag = 9999;
 
         // Carrying
         // ace_dragging_canCarry = 1;
-        ace_dragging_carryPosition[] = {0, 1.2, 0};
+        ace_dragging_carryPosition[] = {0, 2, 0};
         // ace_dragging_carryDirection = 0;
 
 		class TransportItems{};
@@ -152,6 +152,12 @@ class CfgVehicles
             	    condition = "true";
             	    exceptions[] = {};
             	    statement = "[_player, _target] call ace_dragging_fnc_carryObject;";
+            	};
+            	class dropObject {
+            	    displayName = "Drop Object (force)";
+            	    condition = "true";
+            	    exceptions[] = {};
+            	    statement = "[_player, _target] call ace_dragging_fnc_dropObject;";
             	};
 			};
 		};

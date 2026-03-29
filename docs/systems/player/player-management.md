@@ -159,6 +159,41 @@ rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\ReaperCrewLogoPatch.paa
 
 ---
 
+### NVG Colour Effect
+
+Applies a Modern Warfare-style green tint when NVGs are activated, replacing the default ArmA 3 NVG appearance.
+
+**CBA Setting:**
+
+| Setting | Variable | Default | Description |
+|---------|----------|---------|-------------|
+| Enable NVG Effect | `reaperCrew_nvgEffect_enabled` | true | Toggle the custom NVG colour correction |
+
+**How It Works:**
+- Uses CBA `visionMode` player event to detect NVG activation
+- Creates a `ColorCorrections` post-process effect on NVG enable, destroys on disable
+- Works for both player view and Zeus curator camera
+- Does not use `ppEffectForceInNVG` (incompatible with curator camera)
+
+---
+
+### Treatment Notification
+
+Displays a flashing on-screen notification when a player is being treated by another player via ACE medical.
+
+**Events Monitored:**
+- `ace_treatmentStarted` - Shows "{Medic Name} is treating you"
+- `ace_treatmentSucceded` - Stops notification
+- `ace_treatmentFailed` - Stops notification
+
+**Behaviour:**
+- Only fires for treatment by another player (self-treatment ignored)
+- Pulses between full and 30% opacity on 0.8s cycle
+- Prevents notification stacking
+- Stops if patient dies
+
+---
+
 ### ACE Actions
 
 Automatically adds ACE self-actions on mission start.
@@ -279,6 +314,9 @@ hintSilent parseText _info;
 | `savePlayerLoadoutGlobal` | Module: Save loadouts |
 | `fixPlayerFatigueGlobal` | Module: Reset fatigue |
 | `addACEActions` | Register ACE self-actions |
+| `initNvgEffect` | Apply custom NVG colour correction |
+| `initTreatmentNotification` | Register ACE treatment event listeners |
+| `showTreatmentNotification` | Display/hide treatment notification |
 
 ### Group Display Functions
 

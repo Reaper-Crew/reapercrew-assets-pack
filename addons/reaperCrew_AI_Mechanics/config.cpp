@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class ReaperCrew_AI_Mechanics
 	{
-		units[] = {"reaperCrew_module_ai_mechanics_base", "reaperCrew_moduleGarrison", "reaperCrew_moduleSuppressPosition", "reaperCrew_moduleAwesomeConvoy"};
+		units[] = {"reaperCrew_module_ai_mechanics_base", "reaperCrew_moduleGarrison", "reaperCrew_moduleSuppressPosition", "reaperCrew_moduleAwesomeConvoy", "reaperCrew_moduleUnlimitedAmmo"};
 		weapons[]={""};
 		requiredVersion=1;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings", "ReaperCrew_Common", "reaperCrew_AI_Common", "myTag_addonName"};
@@ -42,6 +42,7 @@ class CfgFunctions
 			class remoteGarrisonSpawn{};
 			class initConvoySetup{};
 			class activateConvoySetup{};
+			class initUnlimitedAmmo{};
 		};
 	};
 };
@@ -90,6 +91,14 @@ class CfgVehicles
             size3[] = {5, 5, -1};
         };
 		class Attributes: AttributesBase {
+			class activationCondition: Edit {
+				displayName = "Activation Condition";
+				property = "activationCondition";
+				typeName = "STRING";
+				tooltip = "Condition that must be true before units are spawned. Evaluated continuously until true.";
+				control = "Edit";
+				defaultValue = """true""";
+			};
 			class maxCount: Edit {
 				displayName = "Max Units";
 				property = "MaxUnits";
@@ -122,6 +131,30 @@ class CfgVehicles
 				control = "Checkbox";
 				defaultValue = "false";
 			};
+			class minUnitsPerBuilding: Edit {
+				displayName = "Min Units Per Building";
+				property = "minUnitsPerBuilding";
+				typeName = "NUMBER";
+				tooltip = "Minimum number of units to place in a building. Buildings with fewer available positions than this will be skipped.";
+				control = "Edit";
+				defaultValue = "4";
+			};
+			class maxUnitsPerBuilding: Edit {
+				displayName = "Max Units Per Building";
+				property = "maxUnitsPerBuilding";
+				typeName = "NUMBER";
+				tooltip = "Maximum number of units to place in a building. Excess positions will be discarded.";
+				control = "Edit";
+				defaultValue = "10";
+			};
+			class minPositionDistance: Edit {
+				displayName = "Min Position Distance";
+				property = "minPositionDistance";
+				typeName = "NUMBER";
+				tooltip = "Minimum distance in metres between garrison positions within the same building. Prevents AI clustering.";
+				control = "Edit";
+				defaultValue = "3";
+			};
 			class codeOnSpawnGroup: Edit {
 				displayName = "Code on spawn";
 				property = "codeOnSpawn";
@@ -131,6 +164,12 @@ class CfgVehicles
 				defaultValue = """true""";
 			};
 		};
+	};
+	class reaperCrew_moduleUnlimitedAmmo: reaperCrew_module_ai_mechanics_base
+	{
+		displayName = "Unlimited Ammo";
+		function = "reapercrew_ai_mechanics_fnc_initUnlimitedAmmo";
+		scope = 2;
 	};
 	class reaperCrew_moduleSuppressPosition: reaperCrew_module_ai_mechanics_base
 	{

@@ -1,81 +1,76 @@
 /*
-* Author: Xeenenta
-* Calls the activate script for convoy configuration and passes in the variables from the module
-*
-* Arguments:
-* 0: Logic <LOGIC>
-* 1: 
-*
-* Return Value:
-* None
-*
-* Example:
-* [_logic] call reapercrew_ai_mechanics_fnc_activateConvoySetup
-*
-* Public: No
-*/
+ * Author: Xeenenta
+ * Activates a convoy module. Disables simulation on convoy vehicles until an activation
+ * condition is met, then waits for contact (Hit EH) before dismounting crew and rushing.
+ *
+ * Arguments:
+ * 0: Trigger Object <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [_triggerObject] call reapercrew_ai_mechanics_fnc_activateConvoySetup
+ *
+ * Public: No
+ */
 
 params ["_triggerObject"];
 
-_convoyActivateCondition = _logic getVariable ["ActivationCode","true"];
+// Read module attributes
+_convoyActivateCondition = _triggerObject getVariable ["ActivationCode","true"];
 _convoyActivateCode = compile (format ["sleep 5; %1", _convoyActivateCondition]);
 
-// Random Variable name to support multiple contacts
+// Generate a unique variable name so multiple convoys don't clash
 _convoyContactConditionVariableName = format ["ConvoyContact%1", ([1000,9999] call BIS_fnc_randomInt)];
 
+// Initialise the contact variable to false
 _convoyContactConditionDeclaration = format ["%1 = false;", _convoyContactConditionVariableName];
-_convoyContactConditionDeclarationCode = compile _convoyContactConditionDeclaration;
-call _convoyContactConditionDeclarationCode;
+call compile _convoyContactConditionDeclaration;
 
+// Compile the check code for waitUntil
 _convoyContactConditionCheck = format ["%1 == true", _convoyContactConditionVariableName];
 _convoyContactConditionCheckCode = compile _convoyContactConditionCheck;
-diag_log _convoyContactConditionCheck;
 
-_convoyContactRuntime = _logic getVariable ["ContactCode","true"];
+_convoyContactRuntime = _triggerObject getVariable ["ContactCode","true"];
 _convoyContactRuntimeCode = compile _convoyContactRuntime;
 
-// Convoy Settings
 _preserveWreckage = true;
 
-// Assume only vehicles are sync'd
+// Collect all synchronised vehicles and their crew
 _allConvoyVehicles = synchronizedObjects _triggerObject;
-
-// Setup steps
-// Disable all simulation
 _allConvoyUnits = [];
 {
 	_allConvoyUnits append (crew _x);
+	// Prevent engine garbage collection so wreckage persists
 	if (_preserveWreckage) then {
-
 		removeFromRemainsCollector [_x];
-	}; 
-	
+	};
 } forEach _allConvoyVehicles;
 
-// Crew units
+// Freeze all crew and vehicles until activation
 {
 	_x enableSimulationGlobal false;
 	_x disableAI "MINEDETECTION";
 } forEach _allConvoyUnits;
 
-// Vehicles proper
-// Crew units
 {
 	_x enableSimulationGlobal false;
 } forEach _allConvoyVehicles;
 
-// Event handlers to vehicles
-{ 
+// Add Hit EH to each crew member to detect contact
+{
 	_x addEventHandler ["Hit", {
 		params ["_unit", "_source", "_damage", "_instigator"];
 
+		// Ignore friendly fire and environmental damage
+		if (isNull _instigator) exitWith {};
 		if (side _unit == side _instigator) exitWith {};
 		if (_damage < 0.25) exitWith {};
 
+		// Set the contact variable to true to trigger the dismount sequence
 		_convoyContactConditionVariableName = _unit getVariable ["convoyContactConditionVariableName", ""];
-		_convoyContactConditionTrigger = format ["%1 = true;", _convoyContactConditionVariableName];
-		_convoyContactConditionTriggerCode = compile _convoyContactConditionTrigger;
-		call _convoyContactConditionTriggerCode;
+		call compile format ["%1 = true;", _convoyContactConditionVariableName];
 
 		_unit removeAllEventHandlers "Hit";
 		["Convoy event handler activated"] call reapercrew_common_fnc_remoteLog;
@@ -83,44 +78,36 @@ _allConvoyUnits = [];
 	_x setVariable ["convoyContactConditionVariableName", _convoyContactConditionVariableName, true];
 } forEach _allConvoyUnits;
 
-// Wait until activated
+// Wait for the activation condition before enabling the convoy
 waitUntil _convoyActivateCode;
 ["Convoy Activated"] call reapercrew_common_fnc_remoteLog;
 
-// Enable sim on all vehicles
+// Enable simulation on vehicles and drivers
 {
-	_vehicleDriver = driver _x;
-	_vehicleDriver enableSimulationGlobal true;
+	(driver _x) enableSimulationGlobal true;
 	_x enableSimulationGlobal true;
 } forEach _allConvoyVehicles;
 
+// Wait for contact (Hit EH sets the variable to true)
 waitUntil _convoyContactConditionCheckCode;
 ["Convoy Contacted"] call reapercrew_common_fnc_remoteLog;
 
+// Dismount sequence - stop vehicles and order non-gunner crew out
 {
 	_vehicleUnit = _x;
 	_allVehicleOccupants = crew _vehicleUnit;
-	[(format ["Found vehicle occupants %1", _allVehicleOccupants])] call reapercrew_common_fnc_remoteLog;
-	// Deplete all fuel to stop movement
+
+	// Kill the engine to prevent AI driving off
 	_vehicleUnit setFuel 0;
 
 	[_allVehicleOccupants, _vehicleUnit] spawn {
 		params ["_allVehicleOccupants", "_vehicleUnit"];
-		[(format ["Running on vehicle %1", _vehicleUnit])] call reapercrew_common_fnc_remoteLog;
 		{
-
 			_vehicleMember = _x;
 			_vehicleMember enableSimulationGlobal true;
-			[_vehicleMember] spawn {
-				params ["_vehicleMember"];
-				sleep 30;
-				_vehicleMember enableSimulationGlobal true;
-			};
-			// Don't dismount gunners
-			if (assignedGunner _vehicleUnit == _vehicleMember) then {
-				// Do nothing
-			} else {
-				[(format ["Dismounting unit %1", _vehicleMember])] call reapercrew_common_fnc_remoteLog;
+
+			// Keep gunners in the vehicle, dismount everyone else
+			if (assignedGunner _vehicleUnit != _vehicleMember) then {
 				(group _vehicleMember) setBehaviour "AWARE";
 				doStop _vehicleMember;
 				[_vehicleMember] orderGetIn false;
@@ -129,7 +116,9 @@ waitUntil _convoyContactConditionCheckCode;
 				commandGetOut _vehicleMember;
 				unassignVehicle _vehicleMember;
 				_vehicleMember leaveVehicle _vehicleUnit;
-				_distance = [20,50] call BIS_fnc_randomInt;
+
+				// Move to a random position nearby
+				_distance = [20, 50] call BIS_fnc_randomInt;
 				_direction = [0, 360] call BIS_fnc_randomInt;
 				_movePos = _vehicleMember getRelPos [_distance, _direction];
 				_vehicleMember doMove _movePos;
@@ -141,22 +130,23 @@ waitUntil _convoyContactConditionCheckCode;
 	sleep 1;
 } forEach _allConvoyVehicles;
 
-// Custom Code
+// Run any custom contact code from the module
 call _convoyContactRuntimeCode;
 
+// Collect all unique groups from convoy units
 _allConvoyGroups = [];
 {
 	_allConvoyGroups pushBackUnique (group _x);
 } forEach _allConvoyUnits;
 
+// After 2 minutes, order all groups to rush
 sleep 120;
 ["Rushing units"] call reapercrew_common_fnc_remoteLog;
-
 {
 	[_x, 2000] spawn lambs_wp_fnc_taskRush;
 	sleep 30;
 } forEach _allConvoyGroups;
 
+// After 30 minutes, allow engine garbage collection on wreckage
 sleep 1800;
-// After 30 mins, add back to GC
 addToRemainsCollector _allConvoyVehicles;

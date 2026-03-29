@@ -2,11 +2,12 @@
 
 ## Overview
 
-The AI Mechanics system provides three specialized modules for creating dynamic AI behaviors in your missions:
+The AI Mechanics system provides four specialised modules for creating dynamic AI behaviours in your missions:
 
 - **Garrison Area** - Automatically populate buildings with AI units
 - **Suppress Position** - Create coordinated suppressive fire positions
 - **Convoy** - Create vehicle convoys that respond to contact for compelling scenarios
+- **Unlimited Ammo** - Give synchronised vehicles infinite ammunition
 
 ## Modules
 
@@ -22,24 +23,29 @@ All modules are found in Eden Editor under: `Systems (F5) > Modules > Reaper Cre
 
 ### Overview
 
-The Garrison Area module automatically spawns AI units and places them in nearby buildings. Units are positioned in building interiors and will always hold their positions.
+The Garrison Area module automatically spawns AI units and places them in nearby buildings. Units are distributed across buildings with one group per building, and skill levels are automatically applied based on the troop type selected (configured via CBA settings in AI Common).
 
 ### Quick Start
 
 1. Place the **Garrison Area** module in Eden Editor
 2. Resize the module's area to cover the buildings you want garrisoned
 3. Configure the troop types and maximum unit count
-4. Preview or start the mission
+4. (Optional) Set an activation condition to defer spawning until needed
+5. Preview or start the mission
 
 ### Attributes
 
 | Attribute | Property | Type | Default | Description |
 |-----------|----------|------|---------|-------------|
+| Activation Condition | `activationCondition` | String | `"true"` | Condition that must be true before units are spawned |
 | Max Units | `MaxUnits` | Number | 50 | Maximum number of AI to spawn in the area |
 | Regular Troops | `regularTroops` | Checkbox | true | Include regular troops from unit pool |
 | Elite Troops | `eliteTroops` | Checkbox | false | Include elite troops from unit pool |
 | Special Forces | `specialTroops` | Checkbox | false | Include special forces from unit pool |
-| Code on Spawn | `codeOnSpawn` | String | `"true"` | Custom SQF code executed when group spawns |
+| Min Units Per Building | `minUnitsPerBuilding` | Number | 4 | Buildings with fewer valid positions are skipped |
+| Max Units Per Building | `maxUnitsPerBuilding` | Number | 10 | Caps the number of units placed in any single building |
+| Min Position Distance | `minPositionDistance` | Number | 3 | Minimum distance (metres) between positions within a building |
+| Code on Spawn | `codeOnSpawn` | String | `"true"` | Custom SQF code executed when each building group spawns |
 
 ### Area Configuration
 
@@ -49,19 +55,26 @@ The Garrison Area module automatically spawns AI units and places them in nearby
 
 ### How It Works
 
-1. Module initializes on server
+1. Module initialises on server and waits for activation condition
 2. Finds all buildings in the configured area using LAMBS
 3. Filters buildings with valid interior positions (ceiling check)
-4. Spawns a single group with units from selected troop pools
-5. Places each unit at a building position
-6. Units are set to "UP" stance with pathfinding disabled
+4. Groups positions by building
+5. Filters positions within each building by minimum distance to prevent clustering
+6. Applies per-building min/max limits (skips buildings below minimum, caps at maximum)
+7. Respects the global max unit count across all buildings
+8. Spawns one group per building, distributed across headless clients
+9. Each unit is assigned a random stance (UP/MIDDLE) with pathfinding disabled
+10. Skill is automatically set based on the troop type (Regular/Elite/SF) from CBA settings
 
 ### Code Examples
 
-**Basic Garrison with Custom Skill:**
+**Deferred Spawning:**
 ```sqf
-// In the "Code on Spawn" field:
-{ _x setSkill 0.9 } forEach (units _thisGroup);
+// In the "Activation Condition" field:
+garrisonActive
+
+// Then in a trigger or script:
+garrisonActive = true;
 ```
 
 **Add Custom Equipment:**
@@ -74,10 +87,13 @@ The Garrison Area module automatically spawns AI units and places them in nearby
 
 ### Tips
 
-- Place module center in areas with dense buildings
+- Place module centre in areas with dense buildings
 - Keep Max Units reasonable (40-60) for performance
-- Units use dynamic simulation for performance optimization
-- Works with Headless Client for load distribution
+- Units use dynamic simulation for performance optimisation
+- Each building spawns as a separate group, distributed across headless clients
+- Use the activation condition to defer spawning and reduce mission startup load
+- Garrison units will not trigger other dynamically simulated units to activate — only players can
+- Skill levels are inherited from the CBA AI Common settings for each troop type
 
 ### Troubleshooting
 
@@ -85,6 +101,8 @@ The Garrison Area module automatically spawns AI units and places them in nearby
 - Verify buildings exist in the module area
 - Check that selected troop pools have valid classnames
 - Ensure at least one troop type checkbox is enabled
+- Check the activation condition is returning true
+- Buildings with fewer positions than Min Units Per Building will be skipped
 
 ---
 
@@ -302,3 +320,42 @@ triggerActivated convoyStartTrigger
 - Contact detection requires damage > 0.25
 - Enemy must be the damage source
 - Gunners intentionally stay mounted
+
+---
+
+## Unlimited Ammo Module
+
+| Editor Name | Classname |
+|-------------|-----------|
+| Unlimited Ammo | `reaperCrew_moduleUnlimitedAmmo` |
+
+### Overview
+
+The Unlimited Ammo module gives synchronised vehicles infinite ammunition. Ammo is replenished instantly after each shot via a Fired event handler.
+
+### Quick Start
+
+1. Place the **Unlimited Ammo** module in Eden Editor
+2. Place the vehicle(s) you want to have unlimited ammo
+3. Synchronise the vehicle(s) to the module
+4. Preview or start the mission
+
+### How It Works
+
+1. Module initialises on server
+2. Iterates all synchronised vehicles
+3. Adds a `Fired` event handler to each vehicle on all machines (JIP-safe)
+4. The event handler resets vehicle ammo to full after every shot
+5. Handles locality transfers automatically — the EH fires wherever the vehicle is local
+
+### Tips
+
+- Sync any vehicle type — works with static weapons, armour, aircraft, etc.
+- Multiple vehicles can be synced to a single module
+- The EH persists through locality changes (e.g. headless client transfers)
+
+### Troubleshooting
+
+**Vehicle runs out of ammo:**
+- Verify the vehicle is synchronised to the module (check sync line in Eden)
+- Ensure the vehicle is not a `Man` unit — only vehicles are processed

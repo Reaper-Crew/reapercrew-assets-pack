@@ -179,27 +179,48 @@ Infantry spawn with a transport vehicle and drive to a dismount position, then r
 |-------------|-----------|
 | Infantry - Airborne | `reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter` |
 
-Infantry are delivered by helicopter to a landing zone, then rush.
+Infantry are delivered by helicopter to a landing zone, then rush. Supports two delivery modes: landing or fastroping.
 
 **Additional Attributes:**
 
 | Attribute | Type | Default | Description |
 |-----------|------|---------|-------------|
+| Delivery Mode | Combo | LAND | LAND: helicopter lands and troops disembark. FASTROPE: helicopter hovers and troops fastrope down (requires ACE Fastroping) |
 | Direction Min | Number | 90 | Minimum approach direction (degrees) |
 | Direction Max | Number | 180 | Maximum approach direction (degrees) |
 | Distance Min | Number | 500 | Minimum landing distance (meters) |
 | Distance Max | Number | 800 | Maximum landing distance (meters) |
 
-**Behavior:**
+**Behavior (LAND mode):**
 1. Creates helipad at landing position (auto-deleted after 10 minutes)
 2. Spawns helicopter at spawnpoint (flies at 250m altitude)
 3. Spawns infantry group in helicopter cargo (size adjusted to capacity)
 4. Helicopter flies path waypoints (if defined)
-5. Helicopter performs transport unload
+5. Helicopter performs transport unload at helipad
 6. Infantry form up then execute `taskRush`
 7. Helicopter returns to spawn and is deleted
 
-**Best for:** Rapid deployment, bypassing terrain, long-range reinforcement
+**Behavior (FASTROPE mode):**
+1. Spawns helicopter at spawnpoint (flies at 250m altitude)
+2. Spawns infantry group in helicopter cargo (size adjusted to capacity)
+3. Helicopter flies path waypoints (if defined)
+4. Helicopter approaches waypoint position, descends to 25m AGL
+5. Helicopter is manually positioned directly over the waypoint using `setVelocityTransformation`
+6. Helicopter is pinned in place; ACE `deployAI` deploys ropes and sends units down sequentially
+7. Script waits for all units to reach the ground before releasing the helicopter
+8. FRIES is stowed, helicopter returns to spawn and is deleted
+9. Infantry form up then execute `taskRush`
+
+**Fastrope Requirements:**
+- ACE Fastroping must be loaded
+- The helicopter must have `ace_fastroping_enabled` in its config (vanilla and most major mod helicopters have this via ACE compat patches — RHS, CUP, 3CB, etc.)
+- If the helicopter does not have ACE fastroping config, the waypoint completes immediately and troops remain aboard. A warning is logged to RPT
+
+**Known Issues (Fastrope):**
+- Ropes may appear to hang slightly above ground level despite being functionally long enough (34.5m default vs 25m hover height). This is a visual issue within ACE's rope physics
+- In MP, other clients may see minor visual jitter on the helicopter during deployment. The position hold uses `setPosASL` (global effect) but `setVelocity` and `setVectorDirAndUp` are local-effect commands. The helicopter remains functionally pinned
+
+**Best for:** Rapid deployment, bypassing terrain, long-range reinforcement. FASTROPE mode is ideal for deploying into areas without flat landing zones
 
 **Associated Spawnpoint:** Aircraft Spawnpoint
 

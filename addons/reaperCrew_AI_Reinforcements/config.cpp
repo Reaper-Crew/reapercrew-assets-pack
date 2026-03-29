@@ -77,6 +77,8 @@ class CfgFunctions
 			class adjustGroupToVehicle{};
 			class adjustGroupLeader{};
 			class getAvailableSpawnpoints{};
+			class getZoneThreshold{};
+			class waypointFastrope{};
 			
 		};
 	};
@@ -244,6 +246,17 @@ class CfgVehicles
 		class Attributes: AttributesBase {
 			#include "attributes.hpp"
 			#include "randomLZAttributes.hpp"
+			class deliveryMode: Combo {
+				displayName = "Delivery Mode";
+				property = "deliveryMode";
+				typeName = "STRING";
+				tooltip = "LAND: Helicopter lands and troops disembark. FASTROPE: Helicopter hovers and troops fastrope down (requires ACE Fastroping).";
+				defaultValue = """LAND""";
+				class Values {
+					class 0 { name = "Land"; value = "LAND"; };
+					class 1 { name = "Fastrope"; value = "FASTROPE"; };
+				};
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryMarine: reaperCrew_moduleReinforcementsSpawnerBase

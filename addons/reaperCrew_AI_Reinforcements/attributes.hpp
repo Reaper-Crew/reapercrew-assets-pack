@@ -6,11 +6,22 @@ class reinforcementCount: Edit {
 	control = "Edit";
 	defaultValue = "50";
 };
+class zoneThresholdMode: Combo {
+	displayName = "Zone Threshold Mode";
+	property = "zoneThresholdMode";
+	typeName = "STRING";
+	tooltip = "Threshold: fixed maximum enemy count. Ratio: enemy count scales with players in the zone.";
+	defaultValue = """THRESHOLD""";
+	class Values {
+		class 0 { name = "Threshold"; value = "THRESHOLD"; };
+		class 1 { name = "Player Ratio"; value = "RATIO"; };
+	};
+};
 class zoneThreshold: Edit {
-	displayName = "Zone Threshold";
+	displayName = "Zone Threshold / Ratio";
 	property = "zoneThreshold";
 	typeName = "NUMBER";
-	tooltip = "";
+	tooltip = "In Threshold mode: maximum enemy count in the zone. In Ratio mode: number of enemy per player.";
 	control = "Edit";
 	defaultValue = "20";
 };

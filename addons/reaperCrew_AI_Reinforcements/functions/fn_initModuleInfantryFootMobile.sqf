@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Initialises a foot mobile infantry module. Reads attributes, builds troop arrays, and creates an activation trigger.
+ *
+ * Arguments:
+ * 0: _logic <OBJECT> - Module logic object
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [logic] call reapercrew_reinforcements_fnc_initModuleInfantryFootMobile
+ *
+ * Public: No
+ */
+
 // Argument 0 is module logic.
 _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];
@@ -14,6 +30,7 @@ while {isNil "activeInfantryTriggers"} do {
 // Get variables
 _reinforcementsCount = _logic getVariable ["reinforcementCount",50];
 _zoneThreshold = _logic getVariable ["zoneThreshold",20];
+_zoneThresholdMode = _logic getVariable ["zoneThresholdMode","THRESHOLD"];
 _logicArea = _logic getVariable ["objectarea", [50, 50, 0, false, -1]];
 _logicArea2D = [getPos _logic, _logicArea select 0, _logicArea select 1];
 _useRegularTroops = _logic getVariable ["regularTroops",true];
@@ -46,6 +63,7 @@ _activationTrigger setTriggerInterval 5;
 _activationTrigger setVariable ["troopArrays", _troopsArrays];
 _activationTrigger setVariable ["reinforcementCount", _reinforcementsCount];
 _activationTrigger setVariable ["zoneThreshold", _zoneThreshold];
+_activationTrigger setVariable ["zoneThresholdMode", _zoneThresholdMode];
 _activationTrigger setVariable ["logicArea2D", _logicArea2D];
 _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];

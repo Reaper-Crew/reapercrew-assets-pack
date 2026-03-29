@@ -29,7 +29,8 @@ while {isNil "activeVehicleTriggers"} do {
 
 	// Get variables from the trigger
 	_reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
-	_zoneThreshold = _triggerObject getVariable ["zoneThreshold",20];
+	_zoneThresholdValue = _triggerObject getVariable ["zoneThreshold",20];
+	_zoneThresholdMode = _triggerObject getVariable ["zoneThresholdMode","THRESHOLD"];
 	_directionMin = _triggerObject getVariable ["directionMin",90];
 	_directionMax = _triggerObject getVariable ["directionMax",180];
 	_distanceMin = _triggerObject getVariable ["distanceMin",500];
@@ -47,6 +48,9 @@ while {isNil "activeVehicleTriggers"} do {
 		_allOpforUnits = (allUnits select {side _x == reaperCrew_reinforcements_side});
 		_opforUnits = _allOpforUnits inAreaArray _triggerObject;
 		_opforCounter = count _opforUnits;
+
+		// Calculate the zone threshold based on the selected mode
+		_zoneThreshold = [_zoneThresholdValue, _zoneThresholdMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneThreshold;
 
 		// Select Vehicle & group
 		_availableVehicle = reaperCrew_reinforcements_transportGround splitString ",";
@@ -112,7 +116,7 @@ while {isNil "activeVehicleTriggers"} do {
 
 			_reinforcementsPathway = _spawnTrigger getVariable ["_reinforcementsPathway", []];
 
-			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
+			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _rushMode], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
 
 			// Adjust the number of available reinforcements
 			_reinforcementsCount = _reinforcementsCount - _unitCount;

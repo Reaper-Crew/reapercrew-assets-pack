@@ -26,7 +26,8 @@ while {isNil "activeAircraftTriggers"} do {
 
 // Get variables from the trigger
 _reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
-_zoneThreshold = _triggerObject getVariable ["zoneThreshold",20];
+_zoneThresholdValue = _triggerObject getVariable ["zoneThreshold",20];
+_zoneThresholdMode = _triggerObject getVariable ["zoneThresholdMode","THRESHOLD"];
 _directionMin = _triggerObject getVariable ["directionMin",90];
 _directionMax = _triggerObject getVariable ["directionMax",180];
 _distanceMin = _triggerObject getVariable ["distanceMin",500];
@@ -36,6 +37,7 @@ _reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 _codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 _waveDelay = _triggerObject getVariable ["waveDelay",60];
 _moduleObject = _triggerObject getVariable ["moduleObject", objnull];
+_deliveryMode = _triggerObject getVariable ["deliveryMode", "LAND"];
 
 // Run code only while the trigger is activated
 while { triggerActivated _triggerObject } do {
@@ -44,6 +46,9 @@ while { triggerActivated _triggerObject } do {
 	_allOpforUnits = (allUnits select {side _x == reaperCrew_reinforcements_side});
 	_opforUnits = _allOpforUnits inAreaArray _triggerObject;
 	_opforCounter = count _opforUnits;
+
+	// Calculate the zone threshold based on the selected mode
+	_zoneThreshold = [_zoneThresholdValue, _zoneThresholdMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneThreshold;
 
 	// Select aircraft & group
 	_availableAircraft = reaperCrew_reinforcements_transportHelicopter splitString ",";
@@ -76,28 +81,36 @@ while { triggerActivated _triggerObject } do {
 
 			// Increment search criteria
 			_searchRadius = _searchRadius + 100;
-			_landingPosition = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsAircraft];
+			private _candidatePos = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsAircraft];
 
 			if (reaperCrew_debugWaypointMechanics == true) then {
 				[(format ["Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius])] call reapercrew_common_fnc_remoteLog;
 			};
 
-			if (_searchRadius > 500) then {
-				_landingPosition pushBack _searchCenterPos;
-				if (reaperCrew_debugWaypointMechanics == true) then {
-					["Search radius exceeded, defaulting to center point"] call reapercrew_common_fnc_remoteLog;
+			if (count _candidatePos > 0) then {
+				// Reject positions with obstacles that could damage the helicopter on approach or landing
+				private _obstacles = nearestTerrainObjects [_candidatePos, ["TREE", "BUILDING", "ROCK", "ROCKS", "FENCE", "WALL"], 25];
+				if (count _obstacles == 0) then {
+					_landingPosition = _candidatePos;
 				};
 			};
 
-			if (reaperCrew_debugWaypointMechanics == true) then {
-				[(format ["Search complete, found position of %1", _landingPosition])] call reapercrew_common_fnc_remoteLog;
+			// Fallback after 500m — accept any position to avoid infinite search
+			if (_searchRadius > 500 && count _landingPosition == 0) then {
+				if (count _candidatePos > 0) then {
+					_landingPosition = _candidatePos;
+				} else {
+					_landingPosition = +_searchCenterPos;
+				};
+				if (reaperCrew_debugWaypointMechanics == true) then {
+					["Search radius exceeded, using best available position"] call reapercrew_common_fnc_remoteLog;
+				};
 			};
-
 		};
 
 		_reinforcementsPathway = _spawnTrigger getVariable ["_reinforcementsPathway", []];
 
-		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
+		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _deliveryMode, _rushMode], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
 
 		// Adjust the number of available reinforcements
 		_reinforcementsCount = _reinforcementsCount - _unitCount;

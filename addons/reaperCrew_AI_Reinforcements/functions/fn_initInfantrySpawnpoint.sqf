@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Creates a 2000m detection trigger for a foot mobile infantry spawnpoint.
+ *
+ * Arguments:
+ * 0: _logic <OBJECT> - Module logic object
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [logic] call reapercrew_reinforcements_fnc_initInfantrySpawnpoint
+ *
+ * Public: No
+ */
+
 // Argument 0 is module logic.
 _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];

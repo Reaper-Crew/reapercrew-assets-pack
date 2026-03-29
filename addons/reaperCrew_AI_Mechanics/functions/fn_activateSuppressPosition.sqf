@@ -1,19 +1,19 @@
 /*
-* Author: Xeenenta
-* Suppress random players within a position
-*
-* Arguments:
-* 0: Logic <LOGIC>
-* 1: 
-*
-* Return Value:
-* None
-*
-* Example:
-* [_logic] call reapercrew_ai_mechanics_fnc_activateSuppressPosition
-*
-* Public: No
-*/
+ * Author: Xeenenta
+ * Activates the suppress position module. Each synchronised gunner independently
+ * selects random players in the trigger zone and fires suppressive bursts at them.
+ *
+ * Arguments:
+ * 0: Trigger Object <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [thisTrigger] call reapercrew_ai_mechanics_fnc_activateSuppressPosition
+ *
+ * Public: No
+ */
 
 params ["_triggerObject"];
 
@@ -21,27 +21,24 @@ params ["_triggerObject"];
 
 _syncGunners = _triggerObject getVariable ["_syncGunners", []];
 
+// Brief delay before suppression begins
 sleep 10;
 
+// Spawn an independent loop for each gunner
 {
-
 	[_triggerObject, _x] spawn {
 		params ["_triggerObject", "_gunner"];
+
 		while { triggerActivated _triggerObject && alive _gunner } do {
-			// Get all players in the zone
-			_allPlayersinZone = (allPlayers inAreaArray _triggerObject);
+			_allPlayersinZone = allPlayers inAreaArray _triggerObject;
 
-			// Select one at random
-			_randomPlayer = selectRandom _allPlayersinZone;
+			// Only suppress if there are players in the zone
+			if (count _allPlayersinZone > 0) then {
+				_randomPlayer = selectRandom _allPlayersinZone;
+				[_gunner, getPosATL _randomPlayer, ([1, 10] call BIS_fnc_randomInt), 5, unitPos _gunner] call zen_ai_fnc_suppressiveFire;
+			};
 
-			[format ["Suppressing player %1", (name _randomPlayer)]] call reapercrew_common_fnc_remoteLog;
-
-			// Begin Supression
-			[_gunner, (getPosATL _randomPlayer), ([1,10] call BIS_fnc_randomInt), 5, (UnitPos _gunner)] call zen_ai_fnc_suppressiveFire;
-
-			// Wait
-			sleep ([1,10] call BIS_fnc_randomInt);
+			sleep ([1, 10] call BIS_fnc_randomInt);
 		};
 	};
-
 } forEach _syncGunners;

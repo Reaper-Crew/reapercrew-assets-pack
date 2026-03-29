@@ -44,26 +44,15 @@ _supplyCrate = _classname createVehicle [0,0,0];
 [_resupplyObject, _supplyCrate, [([-10,10] call BIS_fnc_randomInt), -3, 0], 0] call BIS_fnc_relPosObject;
 _supplyCrate enableSimulationGlobal true;
 
+// Initialise crate contents based on type
 switch (_crateType) do {
 	case "smallArms": {
 		[_supplyCrate] call reapercrew_logistics_fnc_logisticsInitCrateSmallArms;
 	};
-	case "medical": {
-		_classname = "ReaperCrew_PlasticCase_Medical";
-	};
 	case "indirectFires": {
-		_classname = "ReaperCrew_SupplyCrateIDF";
 		[_supplyCrate] call reapercrew_logistics_fnc_logisticsInitCrateIDF;
 	};
-	case "vehicleFuel": {
-		_classname = "RC_CargoNet_01_barrels_F";
-	};
-	case "vehicleAmmo": {
-		_classname = "RC_VirtualReammoBox_F";
-	};
-	case "emptyTransport": {
-		_classname = "Land_WoodenCrate_01_F";
-	};
+	// medical, vehicleFuel, vehicleAmmo, emptyTransport use default contents from config
 };
 
 // Removing because code temporarily broken

@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Creates a 25000m detection trigger for an aircraft spawnpoint, with pathway extraction.
+ *
+ * Arguments:
+ * 0: _logic <OBJECT> - Module logic object
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [logic] call reapercrew_reinforcements_fnc_initAircraftSpawnpoint
+ *
+ * Public: No
+ */
+
 // Argument 0 is module logic.
 _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];

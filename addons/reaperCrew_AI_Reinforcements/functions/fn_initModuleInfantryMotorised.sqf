@@ -1,15 +1,16 @@
 /*
  * Author: Xeenenta
- * This function is run during the init phase of the Helicopter reinforcements module and should setup the necessary triggers in order to start the reinforcements process.
+ * Initialises the Motorised reinforcements module. Reads module attributes, builds
+ * troop arrays from CBA settings, and creates a player-activated trigger.
  *
  * Arguments:
- * 0: Object <OBJECT> 
+ * 0: Logic <OBJECT>
  *
  * Return Value:
  * None
  *
  * Example:
- * [_logic] call reapercrew_reinforcements_fnc_initModuleInfantryAirbourne
+ * [_logic] call reapercrew_reinforcements_fnc_initModuleInfantryMotorised
  *
  * Public: No
  */
@@ -22,6 +23,7 @@ _activated = param [2,true,[true]];
 _randomTrigger = objNull;
 _reinforcementsCount = _logic getVariable ["reinforcementCount",50];
 _zoneThreshold = _logic getVariable ["zoneThreshold",20];
+_zoneThresholdMode = _logic getVariable ["zoneThresholdMode","THRESHOLD"];
 _directionMin = _logic getVariable ["directionMin",90];
 _directionMax = _logic getVariable ["directionMax",180];
 _distanceMin = _logic getVariable ["distanceMin",500];
@@ -58,6 +60,7 @@ _activationTrigger setTriggerInterval 5;
 // Assign required variable to trigger
 _activationTrigger setVariable ["reinforcementCount", _reinforcementsCount];
 _activationTrigger setVariable ["zoneThreshold", _zoneThreshold];
+_activationTrigger setVariable ["zoneThresholdMode", _zoneThresholdMode];
 _activationTrigger setVariable ["directionMin", _directionMin];
 _activationTrigger setVariable ["directionMax", _directionMax];
 _activationTrigger setVariable ["distanceMin", _distanceMin];

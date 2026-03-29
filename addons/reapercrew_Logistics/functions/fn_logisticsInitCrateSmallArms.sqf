@@ -16,7 +16,7 @@
 
 params ["_supplyCrate"];
 
-// Only run when object local
+// Only run on server (crate is created server-side, CargoGlobal commands broadcast)
 if !(isServer) exitWith {diag_log "[LOGISTICS]: Server check failed - skipping crate init"};
 
 // Small Arms

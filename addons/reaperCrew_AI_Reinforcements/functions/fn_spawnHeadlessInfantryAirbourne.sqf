@@ -1,22 +1,36 @@
 /*
  * Author: Xeenenta
- * Code that runs on the headless client/server to spawn the helicopter and associated infantry
+ * Code that runs on the headless client/server to spawn the helicopter and associated infantry.
+ * Supports LAND mode (helicopter lands, troops disembark) and FASTROPE mode (helicopter hovers,
+ * troops fastrope down via ACE fastroping).
  *
  * Arguments:
- * 0: Object <OBJECT> 
+ * 0: Landing Position <ARRAY>
+ * 1: Spawn Position <ARRAY>
+ * 2: Aircraft Classname <STRING>
+ * 3: Reinforcements Group <ARRAY>
+ * 4: Reinforcements Group Skill <NUMBER>
+ * 5: Code on Spawn Group <STRING>
+ * 6: Waypoints List <ARRAY> (optional)
+ * 7: Delivery Mode <STRING> (optional, default: "LAND")
  *
  * Return Value:
  * None
  *
  * Example:
- * [] call reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne
+ * [_pos, _spawnPos, "B_Heli_Transport_01_F", ["B_Soldier_F"], 50, "true", [], "LAND"] call reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne
  *
  * Public: No
  */
 
-params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []]];
+params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_deliveryMode", "LAND"], ["_rushMode", false]];
 
 ["Running reinforcements script"] call reapercrew_common_fnc_remoteLog;
+
+// Normalise positions to 2D — addWaypoint with [x,y] places waypoints on terrain
+// Do NOT add Z=0 as that means sea level for aircraft, causing them to fly into terrain
+_landingPosition = [_landingPosition select 0, _landingPosition select 1];
+_spawnPosition = [_spawnPosition select 0, _spawnPosition select 1];
 
 // Create Helipad
 _helipad = "Land_HelipadEmpty_F" createVehicle _landingPosition;
@@ -29,10 +43,10 @@ _helipad = "Land_HelipadEmpty_F" createVehicle _landingPosition;
 };
 
 // Create Helicopter
-// Create vehicle
 _helicopter = createVehicle [_aircraftClass, _spawnPosition, [], 0, "FLY"];
 _helicopter setPos _spawnPosition;
 _helicopter setDir (_spawnPosition getDir _landingPosition);
+
 // Create Helicopter Crew
 _helicopterCrew = createGroup [reaperCrew_reinforcements_side, true];
 createVehicleCrew _helicopter;
@@ -60,27 +74,6 @@ if (count _waypointsList > 0) then {
 	} forEach _waypointsList;
 };
 
-// Transport Unload
-_waypoint = _helicopterCrew addWaypoint [_landingPosition, 50];
-_waypoint setWaypointType "TR UNLOAD";
-_waypoint waypointAttachVehicle _helipad;
-
-// // Return to base - REMOVED TEMPORARILY DUE TO BUG
-// if (count _waypointsList > 0) then {
-//     reverse _waypointsList;
-// 	{
-// 		// MOVE
-// 		_waypoint =_helicopterCrew addWaypoint [_x, -1];
-// 		_waypoint setWaypointType "MOVE";
-// 		_waypoint setWaypointForceBehaviour true;
-// 		_waypoint setWaypointBehaviour "CARELESS";
-// 	} forEach _waypointsList;
-// };
-
-_waypoint = _helicopterCrew addWaypoint [_spawnPosition, -1];
-_waypoint setWaypointStatements ["true", "deleteVehicle vehicle this; {deleteVehicle _x} forEach thisList"];
- _waypoint setWaypointTimeout [5, 7.5, 10];
-
 // Create Infantry
 _infantryGroup = [_spawnPosition, reaperCrew_reinforcements_side, _reinforcementsGroup, [],[],[], [],[],180] call BIS_fnc_spawnGroup;
 _infantryGroup allowFleeing 0;
@@ -96,6 +89,34 @@ _infantryGroup allowFleeing 0;
 // FAILSAFE: Adjust group to match vehicle size
 [_helicopter, _infantryGroup, "CARGO"] call reapercrew_reinforcements_fnc_adjustGroupToVehicle;
 
+// Delivery mode determines how the helicopter drops off troops
+if (_deliveryMode == "FASTROPE") then {
+
+	// Fastrope waypoint using our own script
+	_waypoint = _helicopterCrew addWaypoint [_landingPosition, -1];
+	_waypoint setWaypointType "SCRIPTED";
+	_waypoint setWaypointScript "rc_assets_pack\addons\reaperCrew_AI_Reinforcements\functions\fn_waypointFastrope.sqf";
+
+	// Return to base and delete
+	_waypoint = _helicopterCrew addWaypoint [_spawnPosition, -1];
+	_waypoint setWaypointStatements ["true", "deleteVehicle vehicle this; {deleteVehicle _x} forEach thisList"];
+	_waypoint setWaypointTimeout [5, 7.5, 10];
+
+} else {
+
+	// LAND mode - original behaviour
+	// Transport Unload
+	_waypoint = _helicopterCrew addWaypoint [_landingPosition, 50];
+	_waypoint setWaypointType "TR UNLOAD";
+	_waypoint waypointAttachVehicle _helipad;
+
+	// Return to base and delete
+	_waypoint = _helicopterCrew addWaypoint [_spawnPosition, -1];
+	_waypoint setWaypointStatements ["true", "deleteVehicle vehicle this; {deleteVehicle _x} forEach thisList"];
+	_waypoint setWaypointTimeout [5, 7.5, 10];
+
+};
+
 // Form Up
 _waypoint =_infantryGroup addWaypoint [_landingPosition, -1];
 _waypoint setWaypointType "MOVE";
@@ -110,8 +131,6 @@ _waypoint setWaypointType "SCRIPTED";
 _waypoint setWaypointStatements ["true", "[this, 2000] spawn lambs_wp_fnc_taskRush; [leader this] call reapercrew_reinforcements_fnc_adjustGroupLeader;"];
 _waypoint setWaypointForceBehaviour true;
 _waypoint setWaypointBehaviour "AWARE";
-
-_infantryGroup;
 
 // Run extra code
 _extraCodeString = format ['params ["_thisGroup"]; %1', _codeOnSpawnGroup];
