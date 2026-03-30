@@ -104,7 +104,7 @@ while {isNil "activeVehicleTriggers"} do {
 				if (_searchRadius > 200) then {
 					_landingPosition pushBack _searchCenterPos;
 					if (reaperCrew_debugWaypointMechanics == true) then {
-						["Search radius exceeded, defaulting to center point"] call reapercrew_common_fnc_remoteLog;
+						["Search radius exceeded, defaulting to centre point"] call reapercrew_common_fnc_remoteLog;
 					};
 				};
 

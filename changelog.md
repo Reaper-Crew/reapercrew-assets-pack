@@ -53,6 +53,7 @@
 - **AMBIENCE:** Added re-entry guard to prevent duplicate CAS loops when players leave and re-enter the trigger area
 - **PLAYER MANAGEMENT:** Moved hasInterface check before ACRE init sleep to avoid needless delay on headless clients
 - **PLAYER MANAGEMENT:** Fixed ACRE radio presence check using isNil instead of empty string comparison
+- **ALL ADDONS:** Converted remaining active diag_log calls to remoteLog across AI Mechanics and Player Management addons; new addons (Ambience, Mission Mechanics) use remoteLog from the start
 
 ### Removed
 - N/A

@@ -30,17 +30,17 @@ private _taskDuration = _logic getVariable ["taskDuration", 300];
 private _broadcastProgress = _logic getVariable ["broadcastProgress", true];
 private _broadcastMessage = _logic getVariable ["broadcastMessage", "Task progress"];
 
-// Validate — all three variable names are required (check for empty string or 0 from unset Eden attributes)
+// Validate - all three variable names are required (check for empty string or 0 from unset Eden attributes)
 if (_startVariable isEqualTo "" || _inProgressVariable isEqualTo "" || _completedVariable isEqualTo "" || _startVariable isEqualTo 0 || _inProgressVariable isEqualTo 0 || _completedVariable isEqualTo 0) exitWith {
-	[(format ["ERROR: Timed Task module has empty variable names — start: '%1', inProgress: '%2', completed: '%3'", _startVariable, _inProgressVariable, _completedVariable])] call reapercrew_common_fnc_remoteLog;
+	[(format ["ERROR: Timed Task module has empty variable names - start: '%1', inProgress: '%2', completed: '%3'", _startVariable, _inProgressVariable, _completedVariable])] call reapercrew_common_fnc_remoteLog;
 };
 
 // Initialise in-progress and completed variables to false on all machines
-// Start variable is NOT initialised here — it is created externally (e.g. by a trigger or interaction objective)
+// Start variable is NOT initialised here - it is created externally (e.g. by a trigger or interaction objective)
 missionNamespace setVariable [_inProgressVariable, false, true];
 missionNamespace setVariable [_completedVariable, false, true];
 
-[(format ["Timed Task initialised — start: %1, inProgress: %2, completed: %3, duration: %4s, broadcast: %5", _startVariable, _inProgressVariable, _completedVariable, _taskDuration, _broadcastProgress])] call reapercrew_common_fnc_remoteLog;
+[(format ["Timed Task initialised - start: %1, inProgress: %2, completed: %3, duration: %4s, broadcast: %5", _startVariable, _inProgressVariable, _completedVariable, _taskDuration, _broadcastProgress])] call reapercrew_common_fnc_remoteLog;
 
 // Wait for the start variable to exist and become true
 waitUntil {
@@ -48,7 +48,7 @@ waitUntil {
 	!isNil _startVariable && {missionNamespace getVariable [_startVariable, false]}
 };
 
-// Task started — broadcast in-progress state to all machines
+// Task started - broadcast in-progress state to all machines
 missionNamespace setVariable [_inProgressVariable, true, true];
 [(format ["Timed Task started: %1 (%2s)", _startVariable, _taskDuration])] call reapercrew_common_fnc_remoteLog;
 
@@ -84,13 +84,13 @@ private _startTime = CBA_missionTime;
 	};
 };
 
-// Main thread — wait for duration to elapse
+// Main thread - wait for duration to elapse
 waitUntil {
 	sleep 1;
 	(CBA_missionTime - _startTime) >= _taskDuration
 };
 
-// Task completed — setting inProgress to false terminates the progress reporter thread
+// Task completed - setting inProgress to false terminates the progress reporter thread
 missionNamespace setVariable [_inProgressVariable, false, true];
 missionNamespace setVariable [_completedVariable, true, true];
 

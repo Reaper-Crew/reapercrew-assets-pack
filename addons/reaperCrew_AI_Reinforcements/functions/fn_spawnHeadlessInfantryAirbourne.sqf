@@ -27,7 +27,7 @@ params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcements
 
 ["Running reinforcements script"] call reapercrew_common_fnc_remoteLog;
 
-// Normalise positions to 2D — addWaypoint with [x,y] places waypoints on terrain
+// Normalise positions to 2D - addWaypoint with [x,y] places waypoints on terrain
 // Do NOT add Z=0 as that means sea level for aircraft, causing them to fly into terrain
 _landingPosition = [_landingPosition select 0, _landingPosition select 1];
 _spawnPosition = [_spawnPosition select 0, _spawnPosition select 1];

@@ -90,7 +90,7 @@ The radar functions as a vehicle with standard considerations:
 
 **Initial Detection:**
 - Creates elliptical marker (250m x 250m)
-- Color: Red
+- Colour: Red
 - Random offset of 230m from actual position
 
 **Subsequent Detections:**

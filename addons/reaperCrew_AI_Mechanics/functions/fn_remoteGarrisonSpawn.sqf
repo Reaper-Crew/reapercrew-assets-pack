@@ -3,7 +3,7 @@
 * Spawns a garrison group for a single building
 *
 * Arguments:
-* 0: Center Position <ARRAY>
+* 0: Centre Position <ARRAY>
 * 1: Building Positions <ARRAY> - Positions within a single building
 * 2: Troop Arrays <ARRAY> - Array of [classnames, skill] pairs
 * 3: Code to run on spawn <STRING>

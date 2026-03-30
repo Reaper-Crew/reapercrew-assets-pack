@@ -96,7 +96,7 @@ while { triggerActivated _triggerObject } do {
 				};
 			};
 
-			// Fallback after 500m — accept any position to avoid infinite search
+			// Fallback after 500m - accept any position to avoid infinite search
 			if (_searchRadius > 500 && count _landingPosition == 0) then {
 				if (count _candidatePos > 0) then {
 					_landingPosition = _candidatePos;

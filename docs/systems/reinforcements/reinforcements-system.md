@@ -118,7 +118,8 @@ All infantry reinforcement modules share these attributes:
 | Attribute | Type | Default | Description |
 |-----------|------|---------|-------------|
 | Reinforcement Count | Number | 50 | Total units to spawn over time |
-| Zone Threshold | Number | 20 | Stop spawning when enemy count exceeds this - prevents overpopulating the area |
+| Zone Threshold Mode | Combo | THRESHOLD | How the zone threshold value is interpreted. **Threshold**: static maximum enemy count. **Player Ratio**: threshold value is multiplied by the number of players in the zone |
+| Zone Threshold | Number | 20 | In Threshold mode: maximum enemy count in the zone. In Ratio mode: number of enemy per player |
 | Regular Troops | Checkbox | true | Include regular troops from unit pool |
 | Elite Troops | Checkbox | false | Include elite troops from unit pool |
 | Special Forces | Checkbox | false | Include special forces from unit pool |
@@ -314,15 +315,24 @@ Marauding modules provide a persistent flow of enemy vehicles or aircraft into a
 
 ### Zone Threshold
 
-The zone threshold prevents over-spawning. The system counts enemy units in the reinforcement module's trigger area:
+The zone threshold prevents over-spawning. The system counts enemy units in the reinforcement module's trigger area and compares against the threshold. The threshold can operate in two modes, selectable per module:
+
+**Threshold Mode (default):**
+The zone threshold value is used as a static maximum. Spawning pauses when the enemy count in the zone reaches or exceeds this value.
+
+**Player Ratio Mode:**
+The zone threshold value is multiplied by the number of players currently inside the zone. This scales AI density proportionally to the player count, keeping the challenge consistent regardless of attendance. The effective threshold is calculated by `fn_getZoneThreshold`:
 
 ```
-_opforCount = count ((allUnits select {side _x == reaperCrew_reinforcements_side}) inAreaArray _triggerObject)
+effectiveThreshold = zoneThresholdValue * (number of players in zone)
 ```
 
-- Spawning pauses when `opforCount >= zoneThreshold`
-- Spawning resumes when enemy count drops below threshold
-- Default threshold: 20 units
+If no players are in the zone, the effective threshold is 0 and no spawning occurs.
+
+**Common behaviour:**
+- Spawning pauses when `opforCount >= effectiveThreshold`
+- Spawning resumes when enemy count drops below the threshold
+- Default threshold value: 20
 
 ### Wave Delay & Cooldowns
 

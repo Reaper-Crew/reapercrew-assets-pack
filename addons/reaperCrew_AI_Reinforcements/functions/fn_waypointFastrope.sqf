@@ -35,7 +35,7 @@ params ["_group", "_waypointPosition"];
 
 // Exit if ACE Fastroping is not loaded
 if (!isClass (configFile >> "CfgPatches" >> "ace_fastroping")) exitWith {
-	["Fastrope: ABORT — ACE Fastroping not loaded"] call reapercrew_common_fnc_remoteLog;
+	["Fastrope: ABORT - ACE Fastroping not loaded"] call reapercrew_common_fnc_remoteLog;
 	true
 };
 
@@ -45,18 +45,18 @@ private _vehicle = vehicle leader _group;
 // Exit if the helicopter has no passengers that can be deployed
 private _cargoCount = {assignedVehicleRole _x select 0 == "cargo"} count crew _vehicle;
 if (_cargoCount == 0) exitWith {
-	["Fastrope: ABORT — no cargo units in vehicle"] call reapercrew_common_fnc_remoteLog;
+	["Fastrope: ABORT - no cargo units in vehicle"] call reapercrew_common_fnc_remoteLog;
 	true
 };
 [(format ["Fastrope: Found %1 cargo units to deploy", _cargoCount])] call reapercrew_common_fnc_remoteLog;
 
-// Check the helicopter has ACE fastroping config — deployAI requires this
+// Check the helicopter has ACE fastroping config - deployAI requires this
 private _config = configOf _vehicle;
 private _configEnabled = getNumber (_config >> "ace_fastroping_enabled");
 [(format ["Fastrope: ace_fastroping_enabled = %1", _configEnabled])] call reapercrew_common_fnc_remoteLog;
 
 if (_configEnabled == 0) exitWith {
-	[(format ["Fastrope: ABORT — %1 has no ace_fastroping_enabled config, fastrope not possible", typeOf _vehicle])] call reapercrew_common_fnc_remoteLog;
+	[(format ["Fastrope: ABORT - %1 has no ace_fastroping_enabled config, fastrope not possible", typeOf _vehicle])] call reapercrew_common_fnc_remoteLog;
 	true
 };
 
@@ -157,7 +157,7 @@ _vehicle setVariable ["rc_fastrope_holdPosition", true];
 	params ["_vehicle", "_hoverPos", "_hoverDir", "_hoverUp"];
 	private _driver = driver _vehicle;
 	while {_vehicle getVariable ["rc_fastrope_holdPosition", false]} do {
-		// Keep pilot MOVE disabled — deployAI re-enables it asynchronously when it
+		// Keep pilot MOVE disabled - deployAI re-enables it asynchronously when it
 		// thinks deployment is done, but last units may still be descending
 		_driver disableAI "MOVE";
 		_vehicle setPosASL _hoverPos;
@@ -168,7 +168,7 @@ _vehicle setVariable ["rc_fastrope_holdPosition", true];
 	_driver enableAI "MOVE";
 };
 
-// Deploy AI via ACE — handles ropes, unit extraction, and timing
+// Deploy AI via ACE - handles ropes, unit extraction, and timing
 [_vehicle, false, false] call ace_fastroping_fnc_deployAI;
 
 // Wait for ropes to deploy

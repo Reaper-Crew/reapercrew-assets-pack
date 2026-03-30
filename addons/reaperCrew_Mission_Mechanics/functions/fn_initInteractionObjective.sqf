@@ -28,7 +28,7 @@ private _actionDuration = _logic getVariable ["actionDuration", 5];
 private _actionCondition = _logic getVariable ["actionCondition", "true"];
 private _completionVariable = _logic getVariable ["completionVariable", ""];
 
-// Validate — require at least one synced object and a completion variable name
+// Validate - require at least one synced object and a completion variable name
 private _syncedObjects = synchronizedObjects _logic;
 
 if (count _syncedObjects == 0) exitWith {
@@ -55,7 +55,7 @@ missionNamespace setVariable [_completionVariable, false, true];
 		{},                                                                  // code (start)
 		{},                                                                  // code (progress)
 		{
-			// Completion — broadcast the variable globally via setVariable [name, value, true]
+			// Completion - broadcast the variable globally via setVariable [name, value, true]
 			params ["_target", "_caller", "_actionId", "_arguments"];
 			_arguments params ["_variableName"];
 			missionNamespace setVariable [_variableName, true, true];
@@ -70,4 +70,4 @@ missionNamespace setVariable [_completionVariable, false, true];
 	] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 } forEach _syncedObjects;
 
-[(format ["Interaction Objective initialised — variable: %1, objects: %2, text: %3, duration: %4s", _completionVariable, count _syncedObjects, _actionText, _actionDuration])] call reapercrew_common_fnc_remoteLog;
+[(format ["Interaction Objective initialised - variable: %1, objects: %2, text: %3, duration: %4s", _completionVariable, count _syncedObjects, _actionText, _actionDuration])] call reapercrew_common_fnc_remoteLog;

@@ -229,11 +229,11 @@ REAPER-1-2
 ...
 ```
 
-### Weight Color Coding
+### Weight Colour Coding
 
-Player weight is color-coded to indicate load status:
+Player weight is colour-coded to indicate load status:
 
-| Weight | Color | Hex Code |
+| Weight | Colour | Hex Code |
 |--------|-------|----------|
 | ≤ 30 kg | Green | #00FF00 |
 | 31-35 kg | Orange | #FFA500 |
@@ -328,7 +328,7 @@ hintSilent parseText _info;
 | `getUnitInfoST` | Build player info text |
 | `getUnitRole` | Extract player role |
 | `getWeight` | Get numeric weight (kg) |
-| `getWeightColour` | Get hex color for weight |
+| `getWeightColour` | Get hex colour for weight |
 
 ---
 

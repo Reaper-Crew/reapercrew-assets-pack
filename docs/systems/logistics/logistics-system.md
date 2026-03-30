@@ -282,7 +282,7 @@ Configure under `Options > Addon Options > Reaper Crew - Logistics`:
 ### Custom Crate Contents
 
 ```sqf
-// In init.sqf or mission script - customize small arms crate
+// In init.sqf or mission script - customise small arms crate
 // Format: comma-separated classnames
 reaperCrew_rifleMagazines = "rhs_mag_30Rnd_556x45_M855A1_Stanag,rhs_mag_30Rnd_556x45_M855A1_Stanag_Tracer_Red";
 reaperCrew_machinegunMagazines = "rhs_200rnd_556x45_M_SAW";
