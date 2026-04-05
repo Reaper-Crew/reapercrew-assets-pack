@@ -45,7 +45,7 @@ private _layer = "reaperCrew_treatmentLayer" call BIS_fnc_rscLayer;
 	while {missionNamespace getVariable ["reaperCrew_treatmentActive", false] && {alive player}} do {
 		private _medicName = missionNamespace getVariable ["reaperCrew_treatmentMedicName", ""];
 		private _text = format ["<t size='1.4' color='#ffffff' align='center' shadow='2'>%1 is treating you</t>", _medicName];
-		private _alpha = if (_fadeIn) then { 1 } else { 0.3 };
+		private _alpha = [0.3, 1] select _fadeIn;
 
 		("reaperCrew_treatmentLayer" call BIS_fnc_rscLayer) cutRsc ["RscDynamicText", "PLAIN", -1, false];
 

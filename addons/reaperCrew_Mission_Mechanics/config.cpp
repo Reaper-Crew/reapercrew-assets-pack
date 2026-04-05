@@ -3,9 +3,9 @@ class CfgPatches
 	class reaperCrew_Mission_Mechanics
 	{
 		units[] = {"reaperCrew_moduleMissionMechanicsBase", "reaperCrew_moduleInteractionObjective", "reaperCrew_moduleTimedTask"};
-		weapons[] = {""};
+		weapons[] = {};
 		vehicles[] = {""};
-		requiredVersion = 1.0;
+		requiredVersion = 2.02;
 		requiredAddons[] = {"A3_Modules_F", "ReaperCrew_Common"};
 	};
 };

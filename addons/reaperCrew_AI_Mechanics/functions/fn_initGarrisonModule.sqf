@@ -48,8 +48,9 @@ if (_useSpecialForces) then {
 };
 
 // Wait for activation condition to be met
-_activationCode = compile _activationCondition;
-waitUntil { call _activationCode || {sleep 5; false} };
+while {isNil _activationCondition || {!(missionNamespace getVariable [_activationCondition, false])}} do {
+	sleep 5;
+};
 
 // Call activate function
 [

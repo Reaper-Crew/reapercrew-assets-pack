@@ -31,7 +31,7 @@ private _completionVariable = _logic getVariable ["completionVariable", ""];
 // Validate - require at least one synced object and a completion variable name
 private _syncedObjects = synchronizedObjects _logic;
 
-if (count _syncedObjects == 0) exitWith {
+if (_syncedObjects isEqualTo []) exitWith {
 	["ERROR: Interaction Objective module has no synchronised objects"] call reapercrew_common_fnc_remoteLog;
 };
 

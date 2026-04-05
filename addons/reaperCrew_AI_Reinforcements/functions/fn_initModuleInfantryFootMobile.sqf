@@ -21,7 +21,7 @@ _activated = param [2,true,[true]];
 
 // Don't run if the array isn't available
 while {isNil "activeInfantryTriggers"} do {
-	if (reaperCrew_ReinforcementsCheckbox == true) then {
+	if (reaperCrew_ReinforcementsCheckbox) then {
 		["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 60;

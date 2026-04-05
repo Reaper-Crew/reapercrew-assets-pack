@@ -19,7 +19,7 @@ if !(hasInterface) exitWith {["Player check failed - Not starting SABRE sync tas
 if !(canSuspend) exitWith {["canSuspend check failed - not running network sync", (name player)] call reapercrew_common_fnc_remoteLog;};
 
 _hasInit = [currentNamespace, "DataLinkSystemStarted", false] call BIS_fnc_getServerVariable;
-while {_hasInit == false} do {
+while {!_hasInit} do {
 	_hasInit = [currentNamespace, "DataLinkSystemStarted", false] call BIS_fnc_getServerVariable;
 	["System not started, pausing scheduled task init", (name player)] call reapercrew_common_fnc_remoteLog;
 	sleep 15;

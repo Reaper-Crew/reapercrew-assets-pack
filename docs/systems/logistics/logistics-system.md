@@ -161,6 +161,36 @@ Place this module to mark where delivery vehicles will spawn.
 B_Truck_01_mover_F,B_MRAP_01_F,B_LSV_01_unarmed_F,B_Quadbike_01_F
 ```
 
+### Script Overrides
+
+Mission makers can define custom code to run against spawned vehicles and drivers by setting global variables. These are evaluated on each spawn, so they can be updated mid-mission.
+
+| Variable | Arguments | Description |
+|----------|-----------|-------------|
+| `reaperCrew_vehicleDelivery_onVehicleCreated` | `[_vehicle, _spawnPosition, _deliveryPoint]` | Code to run on the vehicle after creation |
+| `reaperCrew_vehicleDelivery_onDriverCreated` | `[_unit, _vehicle, _spawnPosition, _deliveryPoint]` | Code to run on each driver unit after loadout |
+
+Both default to `{}` (no-op) if not set. The code only runs where the vehicle/unit is local. If effects need to be broadcast (e.g. `setObjectTextureGlobal`), that is the responsibility of the override code.
+
+**Examples:**
+
+```sqf
+// Randomise vehicle colour in init.sqf
+reaperCrew_vehicleDelivery_onVehicleCreated = {
+    params ["_vehicle", "_spawnPos", "_deliveryPos"];
+    _vehicle setObjectTextureGlobal [0, selectRandom ["texture1.paa", "texture2.paa"]];
+};
+
+// Give driver a sidearm
+reaperCrew_vehicleDelivery_onDriverCreated = {
+    params ["_unit", "_vehicle", "_spawnPos", "_deliveryPos"];
+    _unit addWeapon "hgun_Pistol_heavy_01_F";
+};
+
+// Clear override mid-mission
+reaperCrew_vehicleDelivery_onVehicleCreated = {};
+```
+
 ### Troubleshooting
 
 - Check player's group is in permitted groups list

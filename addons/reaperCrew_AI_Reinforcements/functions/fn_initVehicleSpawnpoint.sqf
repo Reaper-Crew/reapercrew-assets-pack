@@ -24,7 +24,7 @@ if (!isServer) exitWith {["Server checked failed - Not initialising init for Veh
 
 // Don't run if the array isn't available
 while {isNil "activeVehicleTriggers"} do {
-	if (reaperCrew_VehicleSpawnCheckbox == true) then {
+	if (reaperCrew_VehicleSpawnCheckbox) then {
 		["Vehicle triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
@@ -46,7 +46,7 @@ _outerZone setVehicleVarName (format ["VehicleSpawn_%1_%2", (mapGridPosition _lo
 
 [_logic, _outerZone] call reapercrew_reinforcements_fnc_getPathway;
 
-if (reaperCrew_VehicleSpawnCheckbox == true) then {
+if (reaperCrew_VehicleSpawnCheckbox) then {
 	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 };
 

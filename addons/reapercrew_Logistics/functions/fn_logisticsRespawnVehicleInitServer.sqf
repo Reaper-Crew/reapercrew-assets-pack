@@ -33,7 +33,7 @@ if (!isNull _attachedObject) then {
 ["Checking for synchronizedObjects"] call reapercrew_common_fnc_remoteLog;
 _syncObjects = synchronizedObjects _logic;
 // Check if the array is empty
-if (count _syncObjects > 0) then {
+if (_syncObjects isNotEqualTo []) then {
 	// If not empty, push all of the sync units into the _units array
 	{
 		[format ["Found syncronised unit: %1", _x]] call reapercrew_common_fnc_remoteLog;
@@ -42,7 +42,7 @@ if (count _syncObjects > 0) then {
 };
 
 // Check to see if we've picked up any units at all
-if (count _units == 0) exitWith {["No units defined, exiting"] call reapercrew_common_fnc_remoteLog;};
+if (_units isEqualTo []) exitWith {["No units defined, exiting"] call reapercrew_common_fnc_remoteLog;};
 
 [(format ["Affected Units: %1", _units])] call reapercrew_common_fnc_remoteLog;
 

@@ -2,10 +2,10 @@ class CfgPatches
 {
 	class reaperCrew_AI_Reinforcements
 	{
-		units[] = {""};
-		weapons[] = {""};
+		units[] = {};
+		weapons[] = {};
 		vehicles[] = {""};
-		requiredVersion = 1.0;
+		requiredVersion = 2.02;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings", "ReaperCrew_Common", "reaperCrew_AI_Common"};
 	};
 };

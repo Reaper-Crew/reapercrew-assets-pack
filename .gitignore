@@ -9,3 +9,6 @@ arc/*
 *.tga
 addons/*/*.jpg
 *.py
+build_all*
+.hemttout/*
+.hemtt/*

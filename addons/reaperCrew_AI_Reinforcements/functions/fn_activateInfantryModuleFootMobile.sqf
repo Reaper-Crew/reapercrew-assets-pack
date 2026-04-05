@@ -19,7 +19,7 @@ params ["_triggerObject"];
 
 // Wait for the spawnpoint system to initialise
 while {isNil "activeInfantryTriggers"} do {
-	if (reaperCrew_InfantrySpawnCheckbox == true) then {
+	if (reaperCrew_InfantrySpawnCheckbox) then {
 		["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
@@ -36,7 +36,7 @@ while {isNil "activeInfantryTriggers"} do {
 	_rushMode = _triggerObject getVariable ["rushMode",false];
 	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 	_waveDelay = _triggerObject getVariable ["waveDelay",60];
-	_moduleObject = _triggerObject getVariable ["moduleObject", objnull];
+	_moduleObject = _triggerObject getVariable ["moduleObject", objNull];
 
 	while { triggerActivated _triggerObject } do {
 
@@ -46,7 +46,7 @@ while {isNil "activeInfantryTriggers"} do {
 		// Calculate the zone threshold based on the selected mode
 		_zoneThreshold = [_zoneThresholdValue, _zoneThresholdMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneThreshold;
 
-		if (reaperCrew_ReinforcementsCheckbox == true) then {
+		if (reaperCrew_ReinforcementsCheckbox) then {
 			[(format ["Reinforcements module is active, found %1 enemies within the zone", _opforCount])] call reapercrew_common_fnc_remoteLog;
 			[(format ["Available squad choices: %1", _reinforcementGroups])] call reapercrew_common_fnc_remoteLog;
 		};
@@ -61,7 +61,7 @@ while {isNil "activeInfantryTriggers"} do {
 		_availableSpawnpoints = [_moduleObject, activeInfantryTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
 
 		// Only spawn if zone is below threshold, reinforcements remain, and spawnpoints exist
-		if ((_opforCount < _zoneThreshold) and (_reinforcementsCount > _squadCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count _availableSpawnpoints) > 0)) then {
+		if ((_opforCount < _zoneThreshold) and (_reinforcementsCount > _squadCount) and (!reaperCrew_pauseInfantryReinforcements) and ((count _availableSpawnpoints) > 0)) then {
 
 			_randomSpawn = selectRandom _availableSpawnpoints;
 
@@ -70,7 +70,7 @@ while {isNil "activeInfantryTriggers"} do {
 			_reinforcementsCount = _reinforcementsCount - _squadCount;
 			_triggerObject setVariable ["reinforcementCount", _reinforcementsCount];
 
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
+			if (reaperCrew_ReinforcementsCheckbox) then {
 				[(format ["Reinforcements created, %1 infantry remain", _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 			};
 		};

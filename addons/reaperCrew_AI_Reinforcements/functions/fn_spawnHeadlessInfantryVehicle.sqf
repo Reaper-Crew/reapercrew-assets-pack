@@ -16,7 +16,7 @@
 
 params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_rushMode", false]];
 
-if (reaperCrew_debugReinforcementsSpawning == true) then {
+if (reaperCrew_debugReinforcementsSpawning) then {
 	[(format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 };
 
@@ -43,7 +43,7 @@ _spawnedGroup setBehaviour "AWARE";
 // FAILSAFE: Adjust group to match vehicle size
 [_vehicle, _spawnedGroup, "FULL"] call reapercrew_reinforcements_fnc_adjustGroupToVehicle;
 
-if (reaperCrew_debugWaypointMechanics == true) then {
+if (reaperCrew_debugWaypointMechanics) then {
 	[format ["List of available waypoints: %1", _waypointsList], (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 };
 

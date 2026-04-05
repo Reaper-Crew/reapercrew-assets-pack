@@ -31,7 +31,7 @@ if (!isNull _attachedObject) then {
 };
 
 // Check that the array of units isn't empty
-if (count _units == 0) exitWith {
+if (_units isEqualTo []) exitWith {
 	["No units assigned, exiting"] call reapercrew_common_fnc_remoteLog;
 };
 

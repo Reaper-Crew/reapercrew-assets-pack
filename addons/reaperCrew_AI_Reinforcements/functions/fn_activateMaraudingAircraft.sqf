@@ -24,7 +24,7 @@ params ["_triggerObject"];
 	_AircraftFrequencyMin = _triggerObject getVariable ["AircraftFrequencyMin",180];
 	_AircraftFrequencyMax = _triggerObject getVariable ["AircraftFrequencyMax",240];
 	_AircraftsArray = _triggerObject getVariable ["AircraftsArray",[]];
-	_moduleObject = _triggerObject getVariable ["moduleObject", objnull];
+	_moduleObject = _triggerObject getVariable ["moduleObject", objNull];
 
 	// Do for as long as trigger is active
 	while { triggerActivated _triggerObject } do {
@@ -33,10 +33,10 @@ params ["_triggerObject"];
 		_availableSpawnpoints = [_moduleObject, activeAircraftTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
 
 		// If the number of alive Aircrafts is lower than the number of concurrent Aircrafts
-		if ( ((count _availableSpawnpoints) > 0) && (reaperCrew_pauseAircraftReinforcements == false) && (_AircraftCount > 0) ) then {
+		if ( ((count _availableSpawnpoints) > 0) && (!reaperCrew_pauseAircraftReinforcements) && (_AircraftCount > 0) ) then {
 
 			// Output debug information
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
+			if (reaperCrew_ReinforcementsCheckbox) then {
 				[(format ["Marauding Aircrafts are active, %1 remain", _AircraftCount])] call reapercrew_common_fnc_remoteLog;
 			};
 
@@ -56,7 +56,7 @@ params ["_triggerObject"];
 			_triggerObject setVariable ["AircraftCount",_AircraftCount];
 
 		} else {
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
+			if (reaperCrew_ReinforcementsCheckbox) then {
 				["Module alive but conditions not met"] call reapercrew_common_fnc_remoteLog;
 			};
 		};

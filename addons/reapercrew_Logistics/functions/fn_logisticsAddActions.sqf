@@ -41,7 +41,7 @@ _crateAction = ['Spawn Medical Crate','Spawn Medical Crate','', {
 _actionsList pushBack _crateAction;
 
 // Indirect Fires Crate
-if (reaperCrew_IDFCrate == true) then {
+if (reaperCrew_IDFCrate) then {
 	_crateAction = ['Spawn IDF Crate','Spawn IDF Crate','', { 
 		["Spawning crate...", 5, {true}, {
 			_recievedParams = _this select 0;
@@ -53,7 +53,7 @@ if (reaperCrew_IDFCrate == true) then {
 	_actionsList pushBack _crateAction;
 };
 
-if (reaperCrew_VehicleFuelCheckbox == true) then {
+if (reaperCrew_VehicleFuelCheckbox) then {
 	_crateAction = ['Spawn Vehicle Fuel Crate','Spawn Vehicle Fuel Crate','', { 
 		["Spawning crate...", 5, {true}, {
 			_recievedParams = _this select 0;
@@ -65,7 +65,7 @@ if (reaperCrew_VehicleFuelCheckbox == true) then {
 	_actionsList pushBack _crateAction;
 };
 
-if (reaperCrew_VehicleAmmoCheckbox == true) then {
+if (reaperCrew_VehicleAmmoCheckbox) then {
 	_crateAction = ['Spawn Vehicle Ammo Crate','Spawn Vehicle Ammo Crate','', { 
 		["Spawning crate...", 5, {true}, {
 			_recievedParams = _this select 0;
@@ -77,7 +77,7 @@ if (reaperCrew_VehicleAmmoCheckbox == true) then {
 	_actionsList pushBack _crateAction;
 };
 
-if (reaperCrew_transportCheckbox == true) then {
+if (reaperCrew_transportCheckbox) then {
 	_crateAction = ['Spawn Transport Crate','Spawn Transport Crate','', { 
 		["Spawning crate...", 5, {true}, {
 			_recievedParams = _this select 0;

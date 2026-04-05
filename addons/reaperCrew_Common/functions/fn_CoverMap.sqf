@@ -35,13 +35,13 @@ for "_i" from 0 to 270 step 90 do {
 	[_i,_markerPos,[_sizeMarker,_sizeOut - _size1]] call bis_fnc_log;
 
 	_marker = format ["bis_fnc_moduleCoverMap_%1",_i];
-	createmarker [_marker,_markerPos];
-	_marker setmarkerpos _markerPos;
-	_marker setmarkersize [_sizeMarker,_sizeOut - _size1];
-	_marker setmarkerdir _dirTemp;
-	_marker setmarkershape "rectangle";
-	_marker setmarkerbrush "solid";
-	_marker setmarkercolor "colorBlack";
+	createMarker [_marker,_markerPos];
+	_marker setMarkerPosLocal _markerPos;
+	_marker setMarkerSizeLocal [_sizeMarker,_sizeOut - _size1];
+	_marker setMarkerDirLocal _dirTemp;
+	_marker setMarkerShapeLocal "rectangle";
+	_marker setMarkerBrushLocal "solid";
+	_marker setMarkerColor "colorBlack";
 
 
 	_markerPos = [
@@ -49,20 +49,20 @@ for "_i" from 0 to 270 step 90 do {
 		_posY + (cos _dirTemp * _size1) + (cos (_dirTemp + 90) * _size2)
 	];
 	_marker = format ["bis_fnc_moduleCoverMap_dot_%1",_i];
-	createmarker [_marker,_markerPos];
-	_marker setmarkerpos _markerPos;
-	_marker setmarkersize [0.75,0.75];
-	_marker setmarkerdir _dir;
-	_marker setmarkertype "mil_box_noShadow";
-	_marker setmarkercolor "colorBlack";
+	createMarker [_marker,_markerPos];
+	_marker setMarkerPosLocal _markerPos;
+	_marker setMarkerSizeLocal [0.75,0.75];
+	_marker setMarkerDirLocal _dir;
+	_marker setMarkerTypeLocal "mil_box_noShadow";
+	_marker setMarkerColor "colorBlack";
 };
 
 //--- Frame
 _marker = "bis_fnc_moduleCoverMap_border";
-createmarker [_marker,_pos];
-_marker setmarkerpos _pos;
-_marker setmarkersize [_sizeX,_sizeY];
-_marker setmarkerdir _dir;
-_marker setmarkershape "rectangle";
-_marker setmarkerbrush "border";
-_marker setmarkercolor "colorblack";
+createMarker [_marker,_pos];
+_marker setMarkerPosLocal _pos;
+_marker setMarkerSizeLocal [_sizeX,_sizeY];
+_marker setMarkerDirLocal _dir;
+_marker setMarkerShapeLocal "rectangle";
+_marker setMarkerBrushLocal "border";
+_marker setMarkerColor "colorblack";

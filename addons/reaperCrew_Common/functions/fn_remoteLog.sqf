@@ -26,8 +26,8 @@ if (name player == "" or isNull player) then {
 // Determine the message
 _fullMessage = format ["[%1](%2): %3", _fnc_scriptNameParent, _name, _logMessage];
 
-// If isMultiplayer == false then we are local, put the output to systemChat
-if (isMultiplayer == false) then {
+// If isMultiplayer == false and systemChat is not suppressed, put the output to systemChat
+if (!isMultiplayer && !reaperCrew_suppressSystemChat) then {
 	systemChat _fullMessage;
 };
 

@@ -2,10 +2,10 @@ class CfgPatches
 {
 	class reaperCrew_CUP_SimpleObjects
 	{
-		units[] = {""};
-		weapons[] = {""};
+		units[] = {};
+		weapons[] = {};
 		vehicles[] = {""};
-		requiredVersion = 1.0;
+		requiredVersion = 2.02;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings", "reaperCrew_SimpleObjects", "AiA_BaseConfig_F", "AiA_CA_Config"};
 		skipWhenMissingDependencies = 1;
 	};

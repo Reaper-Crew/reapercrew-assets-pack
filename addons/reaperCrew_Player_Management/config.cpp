@@ -4,7 +4,7 @@ class CfgPatches
 	{
 		units[] = {"reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleSavePlayerLoadout", "reaperCrew_moduleFixFatigue"};
 		weapons[]={};
-		requiredVersion=1;
+		requiredVersion=2.02;
 		requiredAddons[]=
 		{"ReaperCrew_Common", "acre_sys_sounds", "cba_settings"};
 	};

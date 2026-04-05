@@ -31,7 +31,7 @@ if (!isNull _attachedObject) then {
 // Check to see if the module has syncronised units
 _syncObjects = synchronizedObjects _logic;
 // Check if the array is empty
-if (count _syncObjects > 0) then {
+if (_syncObjects isNotEqualTo []) then {
 	// If not empty, push all of the sync units into the _units array
 	{
 		_units pushBack _x;
@@ -40,7 +40,7 @@ if (count _syncObjects > 0) then {
 
 ["Checking _units array element count"] call reapercrew_common_fnc_remoteLog;
 // Check that the array of units isn't empty
-if (count _units == 0) exitWith {
+if (_units isEqualTo []) exitWith {
 	["No units assigned, exiting"] call reapercrew_common_fnc_remoteLog;
 };
 

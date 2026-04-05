@@ -2,10 +2,10 @@ class CfgPatches
 {
 	class Training_Missions
 	{
-		units[] = {""};
-		weapons[] = {""};
+		units[] = {};
+		weapons[] = {};
 		vehicles[] = {""};
-		requiredVersion = 1.0;
+		requiredVersion = 2.02;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings"};
 	};
 };

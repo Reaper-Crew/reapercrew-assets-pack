@@ -32,7 +32,7 @@ _objectsSyncToModule = [_reinforcementsModule,["reaperCrew_moduleReinforcementsB
 [(format ["Global spawnpoints: %1", _globalActiveTriggers])] call reapercrew_common_fnc_remoteLog;
 
 // Only intersect the arrays if greater than 0, otherwise just return as normal
-if ((count _syncObjects) > 0) then {
+if (_syncObjects isNotEqualTo []) then {
 	_result = _syncObjects arrayIntersect _globalActiveTriggers;
 } else {
 	_result = _globalActiveTriggers;

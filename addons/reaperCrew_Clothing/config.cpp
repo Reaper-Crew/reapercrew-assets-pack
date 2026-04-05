@@ -14,7 +14,7 @@ class CfgPatches
 			"MTP_Soldier_F", 
 			"MTP_Soldier_F_Medic"
 		};
-		requiredVersion=0.100000;
+		requiredVersion=2.02;
 		requiredAddons[]=
 		{
 			"ReaperCrew_Common", 

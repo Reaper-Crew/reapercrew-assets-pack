@@ -3,9 +3,9 @@ class CfgPatches
 	class reaperCrew_Ambience
 	{
 		units[] = {"reaperCrew_moduleAmbienceBase", "reaperCrew_moduleAmbientCAS"};
-		weapons[] = {""};
+		weapons[] = {};
 		vehicles[] = {""};
-		requiredVersion = 1.0;
+		requiredVersion = 2.02;
 		requiredAddons[] = {"A3_Modules_F", "ReaperCrew_Common"};
 	};
 };

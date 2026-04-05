@@ -32,7 +32,7 @@ if (reaperCrew_sabreCounterBattery_DebugTasks) then {
 	// If not already registered, register
 	if !(_x in _totalExistingRegisters) then {
 		// Add event handler
-		_x addEventHandler ["fired", {
+		_x addEventHandler ["Fired", {
 			[_this select 0] call reapercrew_sabre_counterBattery_fnc_componentLCMREventFired;
 		}];
 		// Register unit in variable
@@ -53,4 +53,4 @@ if (reaperCrew_sabreCounterBattery_DebugTasks) then {
 	} else {
 		[(format ["Skipping register of %1 - already registered", _x])] call reapercrew_common_fnc_remoteLog;
 	};
-} ForEach _totalEntitiesList;
+} forEach _totalEntitiesList;

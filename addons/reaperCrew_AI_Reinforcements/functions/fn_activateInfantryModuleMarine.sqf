@@ -18,7 +18,7 @@ params ["_triggerObject"];
 
 // Don't run if the array isn't available
 while {isNil "activeMarineTriggers"} do {
-	if (reaperCrew_MarineSpawnCheckbox == true) then {
+	if (reaperCrew_MarineSpawnCheckbox) then {
 		["Marine triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
@@ -35,7 +35,7 @@ while {isNil "activeMarineTriggers"} do {
 	_reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 	_waveDelay = _triggerObject getVariable ["waveDelay",60];
-	_moduleObject = _triggerObject getVariable ["moduleObject", objnull];
+	_moduleObject = _triggerObject getVariable ["moduleObject", objNull];
 
 	// Run code only while the trigger is activated
 	while { triggerActivated _triggerObject } do {
@@ -64,10 +64,10 @@ while {isNil "activeMarineTriggers"} do {
 		_availableSpawnpoints = [_moduleObject, activeMarineTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
 
 		// Only run if; Zone above threshold, Reinforcements remain and spawn points are available
-		if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count _availableSpawnpoints) > 0 )) then {
+		if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (!reaperCrew_pauseInfantryReinforcements) and ((count _availableSpawnpoints) > 0 )) then {
 
 			// Output debug information if enabled
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
+			if (reaperCrew_ReinforcementsCheckbox) then {
 				[(format ["Spawning a group of %1 units using Marine of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsMarine, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 			};
 
