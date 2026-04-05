@@ -59,19 +59,17 @@ if (_personalRadio != "") then {
 private _interteamRadio = ["ACRE_PRC148"] call acre_api_fnc_getRadioByType;
 private _longRangeRadio = ["ACRE_PRC152"] call acre_api_fnc_getRadioByType;
 
-if (_longRangeRadio != "" && {_interteamRadio != ""}) then {
-	// All three radios (officer)
-	[[ _personalRadio, _interteamRadio, _longRangeRadio]] call acre_api_fnc_setMultiPushToTalkAssignment;
+// Build PTT assignment from whichever radios the player actually has
+private _pttRadios = [];
+if (_personalRadio != "") then { _pttRadios pushBack _personalRadio; };
+if (_interteamRadio != "") then { _pttRadios pushBack _interteamRadio; };
+if (_longRangeRadio != "") then { _pttRadios pushBack _longRangeRadio; };
+
+if (count _pttRadios > 1) then {
+	[_pttRadios] call acre_api_fnc_setMultiPushToTalkAssignment;
+};
+
+// Set long-range to channel 2 if present
+if (_longRangeRadio != "") then {
 	[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
-} else {
-	if (_longRangeRadio != "") then {
-		// PRR + long range (pilot)
-		[[ _personalRadio, _longRangeRadio]] call acre_api_fnc_setMultiPushToTalkAssignment;
-		[_longRangeRadio, 2] call acre_api_fnc_setRadioChannel;
-	} else {
-		if (_interteamRadio != "") then {
-			// PRR + inter-team
-			[[ _personalRadio, _interteamRadio]] call acre_api_fnc_setMultiPushToTalkAssignment;
-		};
-	};
 };

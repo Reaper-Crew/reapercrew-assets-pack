@@ -93,14 +93,6 @@ class CfgVehicles
             size3[] = {5, 5, -1};
         };
 		class Attributes: AttributesBase {
-			class activationCondition: Edit {
-				displayName = "Activation Condition";
-				property = "activationCondition";
-				typeName = "STRING";
-				tooltip = "Condition that must be true before units are spawned. Evaluated continuously until true.";
-				control = "Edit";
-				defaultValue = """true""";
-			};
 			class maxCount: Edit {
 				displayName = "Max Units";
 				property = "MaxUnits";

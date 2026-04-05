@@ -32,7 +32,6 @@ _codeOnSpawnGroup = _logic getVariable ["codeOnSpawnGroup",""];
 _minUnitsPerBuilding = _logic getVariable ["minUnitsPerBuilding", 4];
 _maxUnitsPerBuilding = _logic getVariable ["maxUnitsPerBuilding", 10];
 _minPositionDistance = _logic getVariable ["minPositionDistance", 3];
-_activationCondition = _logic getVariable ["activationCondition", "true"];
 
 // Build array of available squads as [classnames, skill] pairs
 _troopsArrays = [];
@@ -47,9 +46,11 @@ if (_useSpecialForces) then {
 	_troopsArrays pushBack [(reaperCrew_reinforcements_specialForces splitString ","), reaperCrew_reinforcements_specialForcesDifficulty];
 };
 
-// Wait for activation condition to be met
-while {isNil _activationCondition || {!(missionNamespace getVariable [_activationCondition, false])}} do {
-	sleep 5;
+// Wait for a synchronised trigger to activate (if one exists)
+_syncedTrigger = (synchronizedObjects _logic) select {_x isKindOf "EmptyDetector"};
+if (count _syncedTrigger > 0) then {
+	_syncedTrigger = _syncedTrigger select 0;
+	waitUntil {sleep 5; triggerActivated _syncedTrigger};
 };
 
 // Call activate function
