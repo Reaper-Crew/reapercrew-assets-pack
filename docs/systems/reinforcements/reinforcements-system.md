@@ -118,8 +118,9 @@ All infantry reinforcement modules share these attributes:
 | Attribute | Type | Default | Description |
 |-----------|------|---------|-------------|
 | Reinforcement Count | Number | 50 | Total units to spawn over time |
-| Zone Threshold Mode | Combo | THRESHOLD | How the zone threshold value is interpreted. **Threshold**: static maximum enemy count. **Player Ratio**: threshold value is multiplied by the number of players in the zone |
-| Zone Threshold | Number | 20 | In Threshold mode: maximum enemy count in the zone. In Ratio mode: number of enemy per player |
+| Zone Limit Mode | Combo | CEILING | How the zone limit is calculated. **Ceiling**: fixed maximum enemy count. **Player Ratio / Ceiling**: scales with players but capped at the ceiling |
+| Zone Ceiling | Number | 80 | Hard maximum number of enemy AI allowed in the zone |
+| Zone Ratio | Number | 3 | Number of AI per player in the zone. Only used in Player Ratio / Ceiling mode |
 | Regular Troops | Checkbox | true | Include regular troops from unit pool |
 | Elite Troops | Checkbox | false | Include elite troops from unit pool |
 | Special Forces | Checkbox | false | Include special forces from unit pool |
@@ -311,28 +312,38 @@ Marauding modules provide a persistent flow of enemy vehicles or aircraft into a
 
 ---
 
-## Zone Threshold & Wave Mechanics
+## Zone Ceiling & Wave Mechanics
 
-### Zone Threshold
+### Zone Ceiling
 
-The zone threshold prevents over-spawning. The system counts enemy units in the reinforcement module's trigger area and compares against the threshold. The threshold can operate in two modes, selectable per module:
+The zone ceiling prevents over-spawning. The system counts enemy units in the reinforcement module's trigger area and compares against the effective ceiling. The ceiling can operate in two modes, selectable per module:
 
-**Threshold Mode (default):**
-The zone threshold value is used as a static maximum. Spawning pauses when the enemy count in the zone reaches or exceeds this value.
+**Ceiling Mode (default):**
+The zone ceiling value is used as a static maximum. Spawning pauses when the enemy count in the zone reaches or exceeds this value.
 
-**Player Ratio Mode:**
-The zone threshold value is multiplied by the number of players currently inside the zone. This scales AI density proportionally to the player count, keeping the challenge consistent regardless of attendance. The effective threshold is calculated by `fn_getZoneThreshold`:
+**Player Ratio / Ceiling Mode:**
+The zone ratio is multiplied by the number of players currently inside the zone, but the result is capped at the zone ceiling. This scales AI density proportionally to the player count while guaranteeing a hard upper limit. The effective ceiling is calculated by `fn_getZoneCeiling`:
 
 ```
-effectiveThreshold = zoneThresholdValue * (number of players in zone)
+effectiveCeiling = min(ceil(zoneRatio * playerCount), zoneCeiling)
 ```
 
-If no players are in the zone, the effective threshold is 0 and no spawning occurs.
+If no players are in the zone, the effective ceiling is 0 and no spawning occurs. With many players, the ceiling prevents runaway AI counts.
+
+**Testing Override:**
+In singleplayer or low player count testing, ratio-configured modules will barely spawn any units. To force all ratio modules to behave as ceiling-only mode, add the following to your mission's `init.sqf`:
+
+```sqf
+reaperCrew_debugOverrideRatio = true;
+```
+
+This causes all ratio modules to use their ceiling value directly. A log message is written each time the override takes effect. Remove this line before deploying the mission.
 
 **Common behaviour:**
-- Spawning pauses when `opforCount >= effectiveThreshold`
-- Spawning resumes when enemy count drops below the threshold
-- Default threshold value: 20
+- Spawning pauses when `opforCount >= effectiveCeiling`
+- Spawning resumes when enemy count drops below the ceiling
+- Default ceiling value: 80
+- Default ratio value: 3
 
 ### Wave Delay & Cooldowns
 
@@ -346,7 +357,7 @@ If no players are in the zone, the effective threshold is 0 and no spawning occu
 ### Spawn Conditions
 
 For spawning to occur, ALL conditions must be true:
-1. Enemy count < Zone threshold
+1. Enemy count < Zone ceiling
 2. Reinforcements remaining > 0
 3. Pause setting is OFF
 4. At least one spawnpoint is available

@@ -29,8 +29,9 @@ while {isNil "activeInfantryTriggers"} do {
 
 // Get variables
 _reinforcementsCount = _logic getVariable ["reinforcementCount",50];
-_zoneThreshold = _logic getVariable ["zoneThreshold",20];
-_zoneThresholdMode = _logic getVariable ["zoneThresholdMode","THRESHOLD"];
+_zoneCeiling = _logic getVariable ["zoneCeiling",80];
+_zoneRatio = _logic getVariable ["zoneRatio",3];
+_zoneLimitMode = _logic getVariable ["zoneLimitMode","CEILING"];
 _logicArea = _logic getVariable ["objectarea", [50, 50, 0, false, -1]];
 _logicArea2D = [getPos _logic, _logicArea select 0, _logicArea select 1];
 _useRegularTroops = _logic getVariable ["regularTroops",true];
@@ -62,8 +63,9 @@ _activationTrigger setTriggerInterval 5;
 // Set trigger variables
 _activationTrigger setVariable ["troopArrays", _troopsArrays];
 _activationTrigger setVariable ["reinforcementCount", _reinforcementsCount];
-_activationTrigger setVariable ["zoneThreshold", _zoneThreshold];
-_activationTrigger setVariable ["zoneThresholdMode", _zoneThresholdMode];
+_activationTrigger setVariable ["zoneCeiling", _zoneCeiling];
+_activationTrigger setVariable ["zoneRatio", _zoneRatio];
+_activationTrigger setVariable ["zoneLimitMode", _zoneLimitMode];
 _activationTrigger setVariable ["logicArea2D", _logicArea2D];
 _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];

@@ -20,8 +20,15 @@ The Reaper Crew Assets Pack is a comprehensive collection of systems, modules, a
 | System | Description |
 |--------|-------------|
 | [**AI Common**](docs/systems/ai/ai-common.md) | Global AI configuration including faction selection, unit pools, and skill settings |
-| [**AI Mechanics**](docs/systems/ai/ai-mechanics.md) | Garrison, Suppress Position, and Convoy modules |
+| [**AI Mechanics**](docs/systems/ai/ai-mechanics.md) | Garrison, Suppress Position, Convoy, Unlimited Ammo, and Surrender Area modules |
 | [**AI Reinforcements**](docs/systems/reinforcements/reinforcements-system.md) | Dynamic reinforcement spawning with multiple delivery methods |
+
+### Mission Systems
+
+| System | Description |
+|--------|-------------|
+| [**Ambience**](docs/systems/ambience/ambience-system.md) | Ambient effects modules including CAS strikes |
+| [**Mission Mechanics**](docs/systems/mission-mechanics/mission-mechanics-system.md) | Gameplay modules including Interaction Objectives and Timed Tasks |
 
 ### SABRE Network
 
@@ -57,8 +64,10 @@ All systems are configured through CBA Settings (`Options > Addon Options`) unde
 
 Modules are found under `Systems (F5) > Modules`:
 
-- **Reaper Crew - AI** - AI behaviour modules (Garrison, Suppress, Convoy)
+- **Reaper Crew - AI** - AI behaviour modules (Garrison, Suppress, Convoy, Unlimited Ammo, Surrender Area)
 - **Reaper Crew - Reinforcements** - Spawnpoints and reinforcement modules
+- **Reaper Crew - Ambience** - Ambient effects modules (CAS strikes)
+- **Reaper Crew - Mission Mechanics** - Gameplay modules (Interaction Objective, Timed Task)
 - **Reaper Crew - Logistics** - Resupply and vehicle management
 - **Reaper Crew - Player Management** - Player utility modules
 
@@ -74,7 +83,11 @@ docs/
 └── systems/
     ├── ai/
     │   ├── ai-common.md      # Faction & unit pool configuration
-    │   └── ai-mechanics.md   # Garrison, Suppress, Convoy
+    │   └── ai-mechanics.md   # Garrison, Suppress, Convoy, Unlimited Ammo, Surrender Area
+    ├── ambience/
+    │   └── ambience-system.md
+    ├── mission-mechanics/
+    │   └── mission-mechanics-system.md
     ├── reinforcements/
     │   └── reinforcements-system.md
     ├── sabre/

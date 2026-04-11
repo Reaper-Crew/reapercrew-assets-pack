@@ -77,7 +77,7 @@ class CfgFunctions
 			class adjustGroupToVehicle{};
 			class adjustGroupLeader{};
 			class getAvailableSpawnpoints{};
-			class getZoneThreshold{};
+			class getZoneCeiling{};
 			class waypointFastrope{};
 			
 		};

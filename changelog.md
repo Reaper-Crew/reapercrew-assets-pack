@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 5.7
+## Version 6.0
 
 ### Added
 - **MISSION MECHANICS:** New addon - reaperCrew_Mission_Mechanics with Interaction Objective module (hold action on synced objects that publishes a global variable on completion)
@@ -11,10 +11,11 @@
 - **MECHANICS:** Added minimum position distance attribute to Garrison module to prevent AI clustering
 - **MECHANICS:** Added activation condition attribute to Garrison module for deferred spawning
 - **MECHANICS:** Added Unlimited Ammo module, sync vehicles in Eden to give them infinite ammunition
+- **MECHANICS:** Added Surrender Area module - sync AI units in Eden and they surrender via ACE captives when players enter the area, with configurable delay, stagger timing, weapon drop, and vehicle ejection options
 - **PLAYER MANAGEMENT:** Added enhanced NVG colour effect (Modern Warfare preset), toggleable via CBA settings
 - **PLAYER MANAGEMENT:** Added flashing on-screen notification when a player is being treated by another player via ACE medical
-- **REINFORCEMENTS:** Added zone threshold mode selector (Threshold / Player Ratio) to all reinforcements modules
-- **REINFORCEMENTS:** Added shared zone threshold calculation function
+- **REINFORCEMENTS:** Added zone limit mode selector (Ceiling / Player Ratio with Ceiling) to all reinforcement modules, with separate ceiling and ratio attributes
+- **REINFORCEMENTS:** Added shared zone ceiling calculation function; ratio mode is capped by the ceiling to prevent runaway AI counts
 - **REINFORCEMENTS:** Added delivery mode selector (Land / Fastrope) to helicopter reinforcements module
 - **REINFORCEMENTS:** Added custom fastrope waypoint script using ACE deployAI with helicopter position hold to prevent drift during deployment
 
@@ -56,7 +57,7 @@
 - **ALL ADDONS:** Converted remaining active diag_log calls to remoteLog across AI Mechanics and Player Management addons; new addons (Ambience, Mission Mechanics) use remoteLog from the start
 
 ### Removed
-- N/A
+- **REINFORCEMENTS:** Removed `fn_getZoneThreshold` function, replaced by `fn_getZoneCeiling` with separate ceiling and ratio parameters
 
 ---
 

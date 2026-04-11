@@ -21,8 +21,9 @@ _activated = param [2,true,[true]];
 
 _randomTrigger = objNull;
 _reinforcementsCount = _logic getVariable ["reinforcementCount",50];
-_zoneThreshold = _logic getVariable ["zoneThreshold",20];
-_zoneThresholdMode = _logic getVariable ["zoneThresholdMode","THRESHOLD"];
+_zoneCeiling = _logic getVariable ["zoneCeiling",80];
+_zoneRatio = _logic getVariable ["zoneRatio",3];
+_zoneLimitMode = _logic getVariable ["zoneLimitMode","CEILING"];
 _directionMin = _logic getVariable ["directionMin",90];
 _directionMax = _logic getVariable ["directionMax",180];
 _distanceMin = _logic getVariable ["distanceMin",500];
@@ -59,8 +60,9 @@ _activationTrigger setTriggerInterval 5;
 
 // Assign required variable to trigger
 _activationTrigger setVariable ["reinforcementCount", _reinforcementsCount];
-_activationTrigger setVariable ["zoneThreshold", _zoneThreshold];
-_activationTrigger setVariable ["zoneThresholdMode", _zoneThresholdMode];
+_activationTrigger setVariable ["zoneCeiling", _zoneCeiling];
+_activationTrigger setVariable ["zoneRatio", _zoneRatio];
+_activationTrigger setVariable ["zoneLimitMode", _zoneLimitMode];
 _activationTrigger setVariable ["directionMin", _directionMin];
 _activationTrigger setVariable ["directionMax", _directionMax];
 _activationTrigger setVariable ["distanceMin", _distanceMin];

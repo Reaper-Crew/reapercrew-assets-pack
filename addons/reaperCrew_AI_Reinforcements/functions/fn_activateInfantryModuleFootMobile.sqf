@@ -30,8 +30,9 @@ while {isNil "activeInfantryTriggers"} do {
 
 	// Get variables from the trigger
 	_reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
-	_zoneThresholdValue = _triggerObject getVariable ["zoneThreshold",20];
-	_zoneThresholdMode = _triggerObject getVariable ["zoneThresholdMode","THRESHOLD"];
+	_zoneCeiling = _triggerObject getVariable ["zoneCeiling",80];
+	_zoneRatio = _triggerObject getVariable ["zoneRatio",3];
+	_zoneLimitMode = _triggerObject getVariable ["zoneLimitMode","CEILING"];
 	_reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 	_rushMode = _triggerObject getVariable ["rushMode",false];
 	_codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
@@ -43,8 +44,8 @@ while {isNil "activeInfantryTriggers"} do {
 		// Count enemy units in the zone
 		_opforCount = count ((allUnits select {side _x == reaperCrew_reinforcements_side}) inAreaArray _triggerObject);
 
-		// Calculate the zone threshold based on the selected mode
-		_zoneThreshold = [_zoneThresholdValue, _zoneThresholdMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneThreshold;
+		// Calculate the effective zone ceiling based on the selected mode
+		_effectiveCeiling = [_zoneCeiling, _zoneRatio, _zoneLimitMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneCeiling;
 
 		if (reaperCrew_ReinforcementsCheckbox) then {
 			[(format ["Reinforcements module is active, found %1 enemies within the zone", _opforCount])] call reapercrew_common_fnc_remoteLog;
@@ -61,7 +62,7 @@ while {isNil "activeInfantryTriggers"} do {
 		_availableSpawnpoints = [_moduleObject, activeInfantryTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
 
 		// Only spawn if zone is below threshold, reinforcements remain, and spawnpoints exist
-		if ((_opforCount < _zoneThreshold) and (_reinforcementsCount > _squadCount) and (!reaperCrew_pauseInfantryReinforcements) and ((count _availableSpawnpoints) > 0)) then {
+		if ((_opforCount < _effectiveCeiling) and (_reinforcementsCount > _squadCount) and (!reaperCrew_pauseInfantryReinforcements) and ((count _availableSpawnpoints) > 0)) then {
 
 			_randomSpawn = selectRandom _availableSpawnpoints;
 

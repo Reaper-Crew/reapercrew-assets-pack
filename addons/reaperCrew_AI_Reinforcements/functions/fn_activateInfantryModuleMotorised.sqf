@@ -29,8 +29,9 @@ while {isNil "activeVehicleTriggers"} do {
 
 	// Get variables from the trigger
 	_reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
-	_zoneThresholdValue = _triggerObject getVariable ["zoneThreshold",20];
-	_zoneThresholdMode = _triggerObject getVariable ["zoneThresholdMode","THRESHOLD"];
+	_zoneCeiling = _triggerObject getVariable ["zoneCeiling",80];
+	_zoneRatio = _triggerObject getVariable ["zoneRatio",3];
+	_zoneLimitMode = _triggerObject getVariable ["zoneLimitMode","CEILING"];
 	_directionMin = _triggerObject getVariable ["directionMin",90];
 	_directionMax = _triggerObject getVariable ["directionMax",180];
 	_distanceMin = _triggerObject getVariable ["distanceMin",500];
@@ -49,8 +50,8 @@ while {isNil "activeVehicleTriggers"} do {
 		_opforUnits = _allOpforUnits inAreaArray _triggerObject;
 		_opforCounter = count _opforUnits;
 
-		// Calculate the zone threshold based on the selected mode
-		_zoneThreshold = [_zoneThresholdValue, _zoneThresholdMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneThreshold;
+		// Calculate the effective zone ceiling based on the selected mode
+		_effectiveCeiling = [_zoneCeiling, _zoneRatio, _zoneLimitMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneCeiling;
 
 		// Select Vehicle & group
 		_availableVehicle = reaperCrew_reinforcements_transportGround splitString ",";
@@ -66,7 +67,7 @@ while {isNil "activeVehicleTriggers"} do {
 		_availableSpawnpoints = [_moduleObject, activeVehicleTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
 
 		// Only run if; Zone above threshold, Reinforcements remain and spawn points are available
-		if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (!reaperCrew_pauseInfantryReinforcements) and ((count _availableSpawnpoints) > 0 )) then {
+		if ((_opforCounter < _effectiveCeiling) and (_reinforcementsCount > _unitCount) and (!reaperCrew_pauseInfantryReinforcements) and ((count _availableSpawnpoints) > 0 )) then {
 
 			// Output debug information if enabled
 			if (reaperCrew_debugReinforcementsSpawning) then {

@@ -40,7 +40,7 @@ Before starting, configure these in `Options > Addon Options`:
 1. Place **Infantry Spawnpoint** modules at spawn locations (2km from objective)
 2. Place **Infantry - Foot Mobile** module at objective
 3. (Optional) Synchronize spawnpoints to module for dedicated sources
-4. Configure: Reinforcement Count, Zone Threshold, Troop Types
+4. Configure: Reinforcement Count, Zone Ceiling, Troop Types
 
 ### Motorised Reinforcements
 
@@ -96,6 +96,41 @@ Before starting, configure these in `Options > Addon Options`:
 2. Place **Suppress Position** module
 3. Synchronize gunners → module
 4. Resize trigger area as needed
+
+### Surrender Scenario
+
+**Goal:** AI surrender when players enter an area.
+
+1. Place AI units at the surrender location
+2. Place **Surrender Area** module
+3. Synchronise AI units to the module
+4. Resize the trigger area as needed
+5. (Optional) Set an activation condition to control when surrender becomes possible
+
+### Ambient CAS
+
+**Goal:** Background air strikes for atmosphere.
+
+1. Place **Ambient CAS** module in the mission area
+2. Configure aircraft type and strike parameters
+3. Set player proximity gating and strike frequency
+
+### Interaction Objective
+
+**Goal:** Hold-action objective on a synced object.
+
+1. Place the target object in Eden
+2. Place **Interaction Objective** module
+3. Synchronise the object to the module
+4. Configure the completion variable name
+
+### Timed Task
+
+**Goal:** Configurable countdown timer with status variables.
+
+1. Place **Timed Task** module
+2. Configure timer duration and variable names
+3. (Optional) Enable progress broadcasts via side chat
 
 ### Convoy Scenario
 
@@ -164,6 +199,10 @@ Before starting, configure these in `Options > Addon Options`:
 | AI Mechanics | Suppress Position | `reaperCrew_moduleSuppressPosition` |
 | AI Mechanics | Convoy | `reaperCrew_moduleAwesomeConvoy` |
 | AI Mechanics | Unlimited Ammo | `reaperCrew_moduleUnlimitedAmmo` |
+| AI Mechanics | Surrender Area | `reaperCrew_moduleSurrenderArea` |
+| Ambience | Ambient CAS | `reaperCrew_moduleAmbientCAS` |
+| Mission Mechanics | Interaction Objective | `reaperCrew_moduleInteractionObjective` |
+| Mission Mechanics | Timed Task | `reaperCrew_moduleTimedTask` |
 | Logistics | Resupply Point | `reaperCrew_moduleResupplyPoint` |
 | Logistics | Vehicle Spawnpoint | `reaperCrew_moduleResupplyVehicleSpawnpoint` |
 | Logistics | Respawn Vehicle | `reaperCrew_moduleRespawnVehicle` |
@@ -188,7 +227,8 @@ Before starting, configure these in `Options > Addon Options`:
 
 ### Reinforcements
 - Reinforcement Count: 50
-- Zone Threshold: 20
+- Zone Ceiling: 80
+- Zone Ratio: 3 (AI per player, in Ratio mode)
 - Wave Delay: 60 seconds
 - Spawnpoint Cooldown: Wave Delay + 2 seconds
 
@@ -208,7 +248,7 @@ Before starting, configure these in `Options > Addon Options`:
 ### Units Not Spawning
 1. Check CBA faction setting matches unit classnames
 2. Verify spawnpoint is within activation distance
-3. Confirm zone threshold not exceeded
+3. Confirm zone ceiling not exceeded
 4. Check pause settings are OFF
 5. Verify spawnpoint conditions are met
 
@@ -292,7 +332,9 @@ myMissionVariable
 ## Documentation Links
 
 - [AI Common](systems/ai/ai-common.md) - Faction and unit pool configuration
-- [AI Mechanics](systems/ai/ai-mechanics.md) - Garrison, Suppress, Convoy modules
+- [AI Mechanics](systems/ai/ai-mechanics.md) - Garrison, Suppress, Convoy, Unlimited Ammo, Surrender Area
+- [Ambience](systems/ambience/ambience-system.md) - Ambient CAS strikes
+- [Mission Mechanics](systems/mission-mechanics/mission-mechanics-system.md) - Interaction Objectives, Timed Tasks
 - [Reinforcements](systems/reinforcements/reinforcements-system.md) - Dynamic AI spawning
 - [SABRE Core](systems/sabre/sabreCore.md) - Network framework
 - [Counter-Battery](systems/sabre/sabreCounterBattery.md) - Radar detection

@@ -6,24 +6,32 @@ class reinforcementCount: Edit {
 	control = "Edit";
 	defaultValue = "50";
 };
-class zoneThresholdMode: Combo {
-	displayName = "Zone Threshold Mode";
-	property = "zoneThresholdMode";
+class zoneLimitMode: Combo {
+	displayName = "Zone Limit Mode";
+	property = "zoneLimitMode";
 	typeName = "STRING";
-	tooltip = "Threshold: fixed maximum enemy count. Ratio: enemy count scales with players in the zone.";
-	defaultValue = """THRESHOLD""";
+	tooltip = "Ceiling: fixed maximum enemy count. Player Ratio / Ceiling: enemy count scales with players in the zone, capped at the ceiling.";
+	defaultValue = """CEILING""";
 	class Values {
-		class 0 { name = "Threshold"; value = "THRESHOLD"; };
-		class 1 { name = "Player Ratio"; value = "RATIO"; };
+		class 0 { name = "Ceiling"; value = "CEILING"; };
+		class 1 { name = "Player Ratio / Ceiling"; value = "RATIO_CEILING"; };
 	};
 };
-class zoneThreshold: Edit {
-	displayName = "Zone Threshold / Ratio";
-	property = "zoneThreshold";
+class zoneCeiling: Edit {
+	displayName = "Zone Ceiling";
+	property = "zoneCeiling";
 	typeName = "NUMBER";
-	tooltip = "In Threshold mode: maximum enemy count in the zone. In Ratio mode: number of enemy per player.";
+	tooltip = "Hard maximum number of enemy AI allowed in the zone.";
 	control = "Edit";
-	defaultValue = "20";
+	defaultValue = "80";
+};
+class zoneRatio: Edit {
+	displayName = "Zone Ratio";
+	property = "zoneRatio";
+	typeName = "NUMBER";
+	tooltip = "Number of AI per player in the zone. Only used in Player Ratio / Ceiling mode.";
+	control = "Edit";
+	defaultValue = "3";
 };
 class regularTroops: Checkbox {
 	displayName = "Regular Troops";
