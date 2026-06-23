@@ -1,7 +1,7 @@
 # Variables
 $imageToPaa = 'G:\SteamLibrary\steamapps\common\Arma 3 Tools\ImageToPAA\ImageToPAA.exe'
 $pboProject = 'C:\Program Files (x86)\Mikero\DePboTools\bin\pboProject.exe'
-$modDirectory = 'P:\RC_Assets_Pack\addons'
+$modDirectory = 'P:\RC_ASSETS_PACK\addons'
 $outputFolder = 'P:\@ASSETS_PACK'
 
 # Build Textures First - You can add stuff to this array
@@ -15,17 +15,17 @@ Foreach ($directory in $TextureFolders)
 }
 
 # Clean old PBOs
-Remove-Item "P:\RC_Assets_Pack\addons" -Include *.pbo,*.bisign
-# Remove-Item "P:\RC_Assets_Pack_2_CUP\addons" -Include *.pbo,*.bisign
-# Remove-Item "P:\RC_Assets_Pack_2_CUP_TERRAINS\addons" -Include *.pbo,*.bisign
-# Remove-Item "P:\RC_Assets_Pack_2_CWR3\addons" -Include *.pbo,*.bisign
+Remove-Item "P:\RC_ASSETS_PACK\addons" -Include *.pbo,*.bisign
+# Remove-Item "P:\RC_ASSETS_PACK_2_CUP\addons" -Include *.pbo,*.bisign
+# Remove-Item "P:\RC_ASSETS_PACK_2_CUP_TERRAINS\addons" -Include *.pbo,*.bisign
+# Remove-Item "P:\RC_ASSETS_PACK_2_CWR3\addons" -Include *.pbo,*.bisign
 
 # Build PBOs
-& "$pboProject" -W -P "P:\RC_Assets_Pack\addons" -M="P:\@ASSETS_PACK"
+& "$pboProject" -W -P "P:\RC_ASSETS_PACK\addons" -M="P:\@ASSETS_PACK"
 # Leaving the below disabled until they are converted to Mikero
-# & "$pboProject" -P "P:\RC_Assets_Pack_2_CUP\addons" -M="P:\@ASSETS_PACK_CUP"
-# & "$pboProject" -P "P:\RC_Assets_Pack_2_CUP_TERRAINS\addons" -M="P:\@ASSETS_PACK_CUP_TERRAINS"
-# & "$pboProject" -P "P:\RC_Assets_Pack_2_CWR3\addons" -M="P:\@ASSETS_PACK_CWR3"
+# & "$pboProject" -P "P:\RC_ASSETS_PACK_2_CUP\addons" -M="P:\@ASSETS_PACK_CUP"
+# & "$pboProject" -P "P:\RC_ASSETS_PACK_2_CUP_TERRAINS\addons" -M="P:\@ASSETS_PACK_CUP_TERRAINS"
+# & "$pboProject" -P "P:\RC_ASSETS_PACK_2_CWR3\addons" -M="P:\@ASSETS_PACK_CWR3"
 
 Start-Sleep 10
 

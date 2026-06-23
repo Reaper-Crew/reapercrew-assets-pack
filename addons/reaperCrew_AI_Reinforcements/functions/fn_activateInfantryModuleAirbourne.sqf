@@ -112,7 +112,12 @@ while { triggerActivated _triggerObject } do {
 
 		_reinforcementsPathway = _spawnTrigger getVariable ["_reinforcementsPathway", []];
 
-		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _deliveryMode, _rushMode], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
+		private _resolvedDeliveryMode = _deliveryMode;
+		if (_deliveryMode == "RANDOM") then {
+			_resolvedDeliveryMode = selectRandom ["LAND", "FASTROPE"];
+		};
+
+		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _resolvedDeliveryMode, _rushMode], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
 
 		// Adjust the number of available reinforcements
 		_reinforcementsCount = _reinforcementsCount - _unitCount;

@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 6.1
+
+### Added
+- **REINFORCEMENTS:** Added RANDOM delivery mode to airborne reinforcements module - each helicopter independently picks land or fastrope at random per wave
+
+### Changed
+- **REINFORCEMENTS:** Fastrope waypoint script now aborts gracefully if no units have left the vehicle after 30 seconds (handles ACE deployAIRecursive scheduling failures); helicopter is lowered to near-ground before forcing units out to prevent fall deaths, and ropes are cut manually on abort
+- **REINFORCEMENTS:** Added 30-second timeout to ACE rope cleanup wait to prevent fastrope script hanging in edge cases
+- **AMBIENCE:** Fixed CAS re-entry guard race condition - switched from boolean flag to script handle with `scriptDone` check; a boolean had a window where it was clear but the previous loop was still sleeping between strikes
+- **AMBIENCE:** Refactored Ambient CAS dummy target creation out of a spawned thread; cleanup is now scheduled via `CBA_fnc_waitAndExecute` instead
+- **PLAYER MANAGEMENT:** Fixed NVG colour effect not fully counteracting ACE3's green washout - desaturate value updated to full desaturate
+- **PLAYER MANAGEMENT:** NVG effect now uses `ppEffectForceInNVG` to ensure correct rendering in all cases
+- **PLAYER MANAGEMENT:** Fixed NVG effect not reapplying after closing Zeus while still in NVG mode
+- **PLAYER MANAGEMENT:** NVG event handler now defers vision mode re-check to the next scheduled frame to absorb transient ACE3 mode changes
+
 ## Version 6.0
 
 ### Added

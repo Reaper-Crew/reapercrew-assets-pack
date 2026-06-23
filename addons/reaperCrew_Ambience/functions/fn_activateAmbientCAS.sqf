@@ -37,7 +37,6 @@ private _delayMax = _triggerObject getVariable ["delayMax", 180];
 
 private _triggerPos = getPos _triggerObject;
 
-// Log configuration summary
 [(format ["Ambient CAS active - aircraft: %1, proximity: %2 (%3m), avoidPlayers: %4 (%5m), delay: %6-%7s", _aircraftClass, _proximityEnabled, _proximityRange, _avoidPlayers, _avoidRadius, _delayMin, _delayMax])] call reapercrew_common_fnc_remoteLog;
 
 while {triggerActivated _triggerObject} do {
@@ -65,33 +64,22 @@ while {triggerActivated _triggerObject} do {
 		};
 	};
 
-	// Execute strike
 	[(format ["Executing air strike at %1", mapGridPosition _strikePos])] call reapercrew_common_fnc_remoteLog;
-	// Fire-and-forget: create a dummy target, run CAS, then clean up
-	[_strikePos, _strikeDir, _aircraftClass, _strikeType] spawn {
-		params ["_pos", "_dir", "_class", "_type"];
 
-		// Create an invisible laser target as the CAS aim point
-		private _dummy = "LaserTargetCBase" createVehicle _pos;
-		_dummy enableSimulation false;
-		_dummy hideObject true;
-		_dummy setVariable ["vehicle", _class];
-		_dummy setVariable ["type", _type];
-		_dummy setDir _dir;
+	// Create an invisible laser target as the CAS aim point, execute the strike,
+	// then schedule cleanup via CBA rather than spawning a thread just to sleep and delete.
+	private _dummy = "LaserTargetCBase" createVehicle _strikePos;
+	_dummy enableSimulation false;
+	_dummy hideObject true;
+	_dummy setVariable ["vehicle", _aircraftClass];
+	_dummy setVariable ["type", _strikeType];
+	_dummy setDir _strikeDir;
 
-		// Execute the CAS strike via the vanilla module function
-		[_dummy, nil, true] call BIS_fnc_moduleCAS;
+	[_dummy, nil, true] call BIS_fnc_moduleCAS;
 
-		// Wait for the strike to complete, then remove the dummy object
-		sleep 10;
-		deleteVehicle _dummy;
-	};
+	[{deleteVehicle _this}, _dummy, 10] call CBA_fnc_waitAndExecute;
 
-	// Wait a random interval before the next strike
 	sleep ([_delayMin, _delayMax] call BIS_fnc_randomInt);
 };
-
-// Clean up re-entry guard so the trigger can fire again
-_triggerObject setVariable ["cas_active", nil];
 
 ["Ambient CAS deactivated - trigger no longer active"] call reapercrew_common_fnc_remoteLog;

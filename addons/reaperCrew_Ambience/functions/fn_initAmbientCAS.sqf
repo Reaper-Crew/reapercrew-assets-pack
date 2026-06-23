@@ -50,10 +50,13 @@ _activationTrigger setVariable ["avoidPlayers", _avoidPlayers];
 _activationTrigger setVariable ["avoidRadius", _avoidRadius];
 _activationTrigger setVariable ["delayMin", _delayMin];
 _activationTrigger setVariable ["delayMax", _delayMax];
+_activationTrigger setVariable ["cas_handle", scriptNull];
 
-// Activate the strike loop when players enter; guard against re-entry
+// Guard against concurrent loops using the script handle rather than a boolean.
+// scriptDone is definitively accurate - a boolean guard has a race window where
+// the variable is clear but a previous loop is still sleeping between strikes.
 _activationTrigger setTriggerStatements [
-	"this && {isNil {thisTrigger getVariable 'cas_active'}}",
-	"thisTrigger setVariable ['cas_active', true]; [thisTrigger] spawn reapercrew_ambience_fnc_activateAmbientCAS;",
-	"thisTrigger setVariable ['cas_active', nil];"
+	"this",
+	"private _h = thisTrigger getVariable ['cas_handle', scriptNull]; if (isNull _h || { scriptDone _h }) then { thisTrigger setVariable ['cas_handle', [thisTrigger] spawn reapercrew_ambience_fnc_activateAmbientCAS]; };",
+	"private _h = thisTrigger getVariable ['cas_handle', scriptNull]; if (!isNull _h && { !scriptDone _h }) then { terminate _h; }; thisTrigger setVariable ['cas_handle', scriptNull];"
 ];

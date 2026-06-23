@@ -250,11 +250,12 @@ class CfgVehicles
 				displayName = "Delivery Mode";
 				property = "deliveryMode";
 				typeName = "STRING";
-				tooltip = "LAND: Helicopter lands and troops disembark. FASTROPE: Helicopter hovers and troops fastrope down (requires ACE Fastroping).";
+				tooltip = "LAND: Helicopter lands and troops disembark. FASTROPE: Helicopter hovers and troops fastrope down (requires ACE Fastroping). RANDOM: Each helicopter independently chooses land or fastrope at random.";
 				defaultValue = """LAND""";
 				class Values {
 					class 0 { name = "Land"; value = "LAND"; };
 					class 1 { name = "Fastrope"; value = "FASTROPE"; };
+					class 2 { name = "Random"; value = "RANDOM"; };
 				};
 			};
 		};

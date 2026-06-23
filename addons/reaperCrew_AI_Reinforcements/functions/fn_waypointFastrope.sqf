@@ -179,22 +179,51 @@ waitUntil {
 };
 [(format ["Fastrope: Ropes deployed (%1 ropes)", count (_vehicle getVariable ["ace_fastroping_deployedRopes", []])])] call reapercrew_common_fnc_remoteLog;
 
-// Wait for ALL cargo units to actually be out of the vehicle and on the ground
+// Wait for ALL cargo units to actually be out of the vehicle and on the ground.
+// If no unit has left within 30s of ropes deploying, ACE's deployAIRecursive likely
+// failed to schedule (known issue when the helicopter's onPrepare function returns nil).
 ["Fastrope: Waiting for all units to reach the ground..."] call reapercrew_common_fnc_remoteLog;
+private _deployStart = CBA_missionTime;
+private _fastropeAborted = false;
+
 waitUntil {
 	sleep 1;
-	private _allOut = _unitsToDeploy findIf {vehicle _x == _vehicle} == -1;
+	private _unitsInVehicle = _unitsToDeploy select {vehicle _x == _vehicle};
+	private _allOut = count _unitsInVehicle == 0;
 	private _allGrounded = _unitsToDeploy findIf {alive _x && {getPos _x select 2 > 1}} == -1;
-	_allOut && _allGrounded
+
+	if (!_fastropeAborted && {CBA_missionTime - _deployStart > 30} && {count _unitsInVehicle == count _unitsToDeploy}) then {
+		["Fastrope: ABORT - no units have left the vehicle after 30s, forcing ground unload"] call reapercrew_common_fnc_remoteLog;
+		_fastropeAborted = true;
+	};
+
+	(_allOut && _allGrounded) || _fastropeAborted
 };
 
 // Release the helicopter position hold
 _vehicle setVariable ["rc_fastrope_holdPosition", false];
 
-// Wait for ACE to finish its own cleanup (ropes cut)
+if (_fastropeAborted) then {
+	// Stop the hold loop, then take over positioning to lower the helicopter
+	// before forcing units out - prevents deaths from falling at fastrope height
+	sleep 0.15; // allow hold loop's final setPosASL to complete before we take over
+	private _groundPos = +_hoverPos;
+	_groundPos set [2, _terrainHeight + 1.5];
+	(driver _vehicle) disableAI "MOVE";
+	_vehicle setPosASL _groundPos;
+	_vehicle setVelocity [0, 0, 0];
+	{ if (vehicle _x == _vehicle) then { moveOut _x } } forEach _unitsToDeploy;
+	sleep 2;
+	(driver _vehicle) enableAI "MOVE";
+	// deployAIRecursive never ran so ACE won't cut the ropes itself - do it manually
+	[_vehicle] call ace_fastroping_fnc_cutRopes;
+};
+
+// Wait for ACE to finish its own cleanup (ropes cut), with timeout in case of edge cases
+private _ropeCleanupTimeout = CBA_missionTime + 30;
 waitUntil {
 	sleep 0.5;
-	_vehicle getVariable ["ace_fastroping_deployedRopes", []] isEqualTo []
+	(_vehicle getVariable ["ace_fastroping_deployedRopes", []] isEqualTo []) || {CBA_missionTime > _ropeCleanupTimeout}
 };
 
 ["Fastrope: All units deployed, cleaning up"] call reapercrew_common_fnc_remoteLog;
