@@ -6,7 +6,7 @@ _groupSide = playerSide;
 // Get the players current vehicle
 _playerVehicle = assignedVehicle player;
 
-_spawnPosition = _playerVehicle getRelPos [100, (Random 360)];
+_spawnPosition = _playerVehicle getRelPos [100, (random 360)];
 
 _pickupGroup = [_spawnPosition, _groupSide, ["B_Soldier_TL_F","B_soldier_AR_F","B_Soldier_GL_F","B_soldier_LAT_F"]] call BIS_fnc_spawnGroup;
 

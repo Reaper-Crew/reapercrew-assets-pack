@@ -13,7 +13,7 @@
  * Public: No
  */
 
-diag_log "[Reaper Crew]: Configuring ACRE channel names";
+["Configuring ACRE channel names"] call reapercrew_common_fnc_remoteLog;
 
 ["ACRE_PRC148", "default", 1, "description", "Command Net"] call acre_api_fnc_setPresetChannelField;
 ["ACRE_PRC148", "default", 2, "description", "Logistics Net"] call acre_api_fnc_setPresetChannelField;

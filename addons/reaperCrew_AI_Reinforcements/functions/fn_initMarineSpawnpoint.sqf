@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Creates a 7500m detection trigger for a marine spawnpoint, storing connected LZ modules.
+ *
+ * Arguments:
+ * 0: _logic <OBJECT> - Module logic object
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [logic] call reapercrew_reinforcements_fnc_initMarineSpawnpoint
+ *
+ * Public: No
+ */
+
 // Argument 0 is module logic.
 _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];
@@ -8,7 +24,7 @@ if (!isServer) exitWith {["Server checked failed - Not initialising init for mar
 
 // Don't run if the array isn't available
 while {isNil "activeMarineTriggers"} do {
-	if (reaperCrew_MarineSpawnCheckbox == true) then {
+	if (reaperCrew_MarineSpawnCheckbox) then {
 		["Marine triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
@@ -28,7 +44,7 @@ _outerZone setTriggerStatements [_triggerCondition, " activeMarineTriggers pushB
 _outerZone setTriggerInterval 30;
 _outerZone setVehicleVarName (format ["MarineSpawn_%1_%2", (mapGridPosition _logic), ([10,99] call BIS_fnc_randomInt)]);
 
-if (reaperCrew_MarineSpawnCheckbox == true) then {
+if (reaperCrew_MarineSpawnCheckbox) then {
 	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 };
 

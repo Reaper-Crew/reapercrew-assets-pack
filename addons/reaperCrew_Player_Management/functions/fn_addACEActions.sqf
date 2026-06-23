@@ -1,3 +1,20 @@
+/*
+ * Author: Xeenenta
+ * Adds custom ACE self-interaction actions to the player.
+ * Currently adds a "Group Info" action to view group/unit information.
+ *
+ * Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * call reapercrew_player_management_fnc_addACEActions
+ *
+ * Public: No
+ */
+
 _AceAction = [
 	"GroupInfo",
 	"Group Info",
@@ -7,23 +24,3 @@ _AceAction = [
 ] call ace_interact_menu_fnc_createAction;
 
 [player, 1, ["ACE_SelfActions"], _AceAction] call ace_interact_menu_fnc_addActionToObject;
-
-// _treatmentCodeTarget = {
-// 	params ["_name"];
-// 	// Output prompt on remote target
-// 	_promptString = format ["%1 is treating you", _name];
-// 	cutText [_promptString, "PLAIN DOWN", 10];
-
-// }
-
-// _treatmentCodeCaller = {
-// 	// Call the notification event on the remote client
-// 	params ["_caller", "_target", "_selectionName", "_className", "_itemUser", "_usedItem", "_createLitter"];
-
-// 	// Don't pop up if treating yourself
-// 	// if (_caller == _target) exitWith {};
-
-// 	[(name _caller)] remoteExec ["treatmentCodeTarget", _target, false];
-// };
-
-// ["ace_treatmentStarted", _treatmentCodeCaller] call CBA_fnc_addEventHandler;

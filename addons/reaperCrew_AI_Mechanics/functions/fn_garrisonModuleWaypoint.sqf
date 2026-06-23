@@ -1,22 +1,25 @@
 /*
  * Author: Xeenenta
- * The waypoint aims to leverage dynamic simulation to allow headless client support. The idea is that this waypoint will fire when the unit is activated in order to fix units in place after the client transfer has taken place.
+ * Sets up garrison units after dynamic simulation transfer. Randomises stance,
+ * disables AI PATH/COVER/RADIOPROTOCOL, and suppresses voice on each unit.
  *
  * Arguments:
- * 0: Group <ARRAY>
+ * 0: Group <GROUP>
+ * 1: Position <ARRAY>
+ * 2: Target <OBJECT>
  *
  * Return Value:
  * None
  *
  * Example:
- * [_group] call xeen_garrison_fnc_modulegarrisonwaypoint
+ * [_group, _position, _target] call reapercrew_ai_mechanics_fnc_garrisonModuleWaypoint
  *
  * Public: No
  */
 
 params ["_group", "_position", "_target"];
 
-diag_log format ["GARRISON MODULE: Running waypoint function for group %1", str(_group)];
+[(format ["Running waypoint function for group %1", str(_group)])] call reapercrew_common_fnc_remoteLog;
 
 {
 	_x setUnitPos (selectRandom ["UP", "MIDDLE"]);

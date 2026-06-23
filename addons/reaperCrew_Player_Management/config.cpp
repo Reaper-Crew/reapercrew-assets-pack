@@ -4,9 +4,16 @@ class CfgPatches
 	{
 		units[] = {"reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleSavePlayerLoadout", "reaperCrew_moduleFixFatigue"};
 		weapons[]={};
-		requiredVersion=1;
+		requiredVersion=2.02;
 		requiredAddons[]=
-		{"ReaperCrew_Common", "acre_sys_sounds"};
+		{"ReaperCrew_Common", "acre_sys_sounds", "cba_settings"};
+	};
+};
+class Extended_PreInit_EventHandlers
+{
+	class reaperCrew_Player_Management_preInit
+	{
+		init="call compile preProcessFileLineNumbers 'rc_assets_pack\addons\reaperCrew_Player_Management\cba\XEH_preInit.sqf'";
 	};
 };
 class CfgEditorCategories
@@ -28,6 +35,9 @@ class CfgFunctions
 			file = "rc_assets_pack\addons\reaperCrew_Player_Management\functions";
 			class setACRESettings{postInit = 1;};
 			class addACEActions{postInit = 1;};
+			class initNvgEffect{postInit = 1;};
+			class initTreatmentNotification{postInit = 1;};
+			class showTreatmentNotification{};
 			class setPersonalACRESettingsLocal{};
 			class setPersonalACRESettingsServer{postInit = 1;};
 			class setUnitInsigniaGlobal{postInit = 1;};

@@ -39,7 +39,7 @@ while {isNil "DataLinkSystemStarted"} do {
 
 // Establish radar zone
 // Get config reference
-_detectionZone = getNumber (configFile >> "CfgVehicles" >> (typeOf _radarUnit) >> "counterBattery" >> "detectionRadius");
+_detectionZone = getNumber (configOf _radarUnit >> "counterBattery" >> "detectionRadius");
 // Create Marker
 _randomName = [1000,9999] call BIS_fnc_randomInt;
 _randomMarkerName = format ["RadarZone%1", _randomName];
@@ -69,10 +69,10 @@ switch (side _radarUnit) do {
 [(format ["Registered radar unit: %1", _radarUnit])] call reapercrew_common_fnc_remoteLog;
 
 // _radarZone setMarkerColor "ColorOrange";
-_radarZone setMarkerShape "ELLIPSE";
+_radarZone setMarkerShapeLocal "ELLIPSE";
 // _radarZone setMarkerSize [250, 250];
-_radarZone setMarkerSize [_detectionZone, _detectionZone];
-_radarZone setMarkerBrush "Border";
+_radarZone setMarkerSizeLocal [_detectionZone, _detectionZone];
+_radarZone setMarkerBrushLocal "Border";
 _radarZone setMarkerAlpha 0;
 
 // Save variables to object namespace

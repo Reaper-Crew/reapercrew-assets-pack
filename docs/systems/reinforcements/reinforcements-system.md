@@ -4,7 +4,7 @@
 
 The Reinforcements System provides mission makers with a way to programmatically create dynamic AI reinforcements without requiring any scripting. The system is designed to be performance-friendly and fully headless client compatible, making it ideal for large-scale operations.
 
-This system leverages the LAMBS Rush module for AI behavior and complements existing tools like Zeus Enhanced.
+This system leverages the LAMBS Rush module for AI behaviour and complements existing tools like Zeus Enhanced.
 
 ## Quick Start
 
@@ -118,7 +118,9 @@ All infantry reinforcement modules share these attributes:
 | Attribute | Type | Default | Description |
 |-----------|------|---------|-------------|
 | Reinforcement Count | Number | 50 | Total units to spawn over time |
-| Zone Threshold | Number | 20 | Stop spawning when enemy count exceeds this - prevents overpopulating the area |
+| Zone Limit Mode | Combo | CEILING | How the zone limit is calculated. **Ceiling**: fixed maximum enemy count. **Player Ratio / Ceiling**: scales with players but capped at the ceiling |
+| Zone Ceiling | Number | 80 | Hard maximum number of enemy AI allowed in the zone |
+| Zone Ratio | Number | 3 | Number of AI per player in the zone. Only used in Player Ratio / Ceiling mode |
 | Regular Troops | Checkbox | true | Include regular troops from unit pool |
 | Elite Troops | Checkbox | false | Include elite troops from unit pool |
 | Special Forces | Checkbox | false | Include special forces from unit pool |
@@ -135,12 +137,12 @@ All infantry reinforcement modules share these attributes:
 
 Infantry spawn and immediately rush toward enemy positions on foot.
 
-**Behavior:**
+**Behaviour:**
 1. Spawns infantry group at available spawnpoint
 2. Group immediately executes LAMBS `taskRush` with 2km radius
 3. No waypoints - direct engagement
 
-**Best for:** Close-range defense, urban areas, dense terrain
+**Best for:** Close-range defence, urban areas, dense terrain
 
 **Associated Spawnpoint:** Infantry Spawnpoint
 
@@ -161,7 +163,7 @@ Infantry spawn with a transport vehicle and drive to a dismount position, then r
 | Distance Min | Number | 500 | Minimum dismount distance (meters) |
 | Distance Max | Number | 800 | Maximum dismount distance (meters) |
 
-**Behavior:**
+**Behaviour:**
 1. Spawns infantry group at spawnpoint
 2. Creates transport vehicle (from AI Common settings)
 3. Group boards vehicle (size adjusted to vehicle capacity)
@@ -179,27 +181,48 @@ Infantry spawn with a transport vehicle and drive to a dismount position, then r
 |-------------|-----------|
 | Infantry - Airborne | `reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter` |
 
-Infantry are delivered by helicopter to a landing zone, then rush.
+Infantry are delivered by helicopter to a landing zone, then rush. Supports two delivery modes: landing or fastroping.
 
 **Additional Attributes:**
 
 | Attribute | Type | Default | Description |
 |-----------|------|---------|-------------|
+| Delivery Mode | Combo | LAND | LAND: helicopter lands and troops disembark. FASTROPE: helicopter hovers and troops fastrope down (requires ACE Fastroping) |
 | Direction Min | Number | 90 | Minimum approach direction (degrees) |
 | Direction Max | Number | 180 | Maximum approach direction (degrees) |
 | Distance Min | Number | 500 | Minimum landing distance (meters) |
 | Distance Max | Number | 800 | Maximum landing distance (meters) |
 
-**Behavior:**
+**Behaviour (LAND mode):**
 1. Creates helipad at landing position (auto-deleted after 10 minutes)
 2. Spawns helicopter at spawnpoint (flies at 250m altitude)
 3. Spawns infantry group in helicopter cargo (size adjusted to capacity)
 4. Helicopter flies path waypoints (if defined)
-5. Helicopter performs transport unload
+5. Helicopter performs transport unload at helipad
 6. Infantry form up then execute `taskRush`
 7. Helicopter returns to spawn and is deleted
 
-**Best for:** Rapid deployment, bypassing terrain, long-range reinforcement
+**Behaviour (FASTROPE mode):**
+1. Spawns helicopter at spawnpoint (flies at 250m altitude)
+2. Spawns infantry group in helicopter cargo (size adjusted to capacity)
+3. Helicopter flies path waypoints (if defined)
+4. Helicopter approaches waypoint position, descends to 25m AGL
+5. Helicopter is manually positioned directly over the waypoint using `setVelocityTransformation`
+6. Helicopter is pinned in place; ACE `deployAI` deploys ropes and sends units down sequentially
+7. Script waits for all units to reach the ground before releasing the helicopter
+8. FRIES is stowed, helicopter returns to spawn and is deleted
+9. Infantry form up then execute `taskRush`
+
+**Fastrope Requirements:**
+- ACE Fastroping must be loaded
+- The helicopter must have `ace_fastroping_enabled` in its config (vanilla and most major mod helicopters have this via ACE compat patches - RHS, CUP, 3CB, etc.)
+- If the helicopter does not have ACE fastroping config, the waypoint completes immediately and troops remain aboard. A warning is logged to RPT
+
+**Known Issues (Fastrope):**
+- Ropes may appear to hang slightly above ground level despite being functionally long enough (34.5m default vs 25m hover height). This is a visual issue within ACE's rope physics
+- In MP, other clients may see minor visual jitter on the helicopter during deployment. The position hold uses `setPosASL` (global effect) but `setVelocity` and `setVectorDirAndUp` are local-effect commands. The helicopter remains functionally pinned
+
+**Best for:** Rapid deployment, bypassing terrain, long-range reinforcement. FASTROPE mode is ideal for deploying into areas without flat landing zones
 
 **Associated Spawnpoint:** Aircraft Spawnpoint
 
@@ -211,7 +234,7 @@ Infantry are delivered by helicopter to a landing zone, then rush.
 
 Infantry spawn with a boat and land at predefined Marine LZ locations.
 
-**Behavior:**
+**Behaviour:**
 1. Spawns infantry group with boat at marine spawnpoint
 2. Group boards boat
 3. Boat travels to synchronized Marine LZ
@@ -251,7 +274,7 @@ Marauding modules provide a persistent flow of enemy vehicles or aircraft into a
 | Light Armour | Checkbox | true | Include light armour (APCs/IFVs) |
 | Technicals | Checkbox | true | Include technicals |
 
-**Behavior:**
+**Behaviour:**
 1. Waits for players to enter module area
 2. Spawns vehicle with crew at available vehicle spawnpoint
 3. Vehicle receives SAD (Search And Destroy) waypoint - automatically moves to a player location rather than just the centre of the module
@@ -289,19 +312,38 @@ Marauding modules provide a persistent flow of enemy vehicles or aircraft into a
 
 ---
 
-## Zone Threshold & Wave Mechanics
+## Zone Ceiling & Wave Mechanics
 
-### Zone Threshold
+### Zone Ceiling
 
-The zone threshold prevents over-spawning. The system counts enemy units in the reinforcement module's trigger area:
+The zone ceiling prevents over-spawning. The system counts enemy units in the reinforcement module's trigger area and compares against the effective ceiling. The ceiling can operate in two modes, selectable per module:
+
+**Ceiling Mode (default):**
+The zone ceiling value is used as a static maximum. Spawning pauses when the enemy count in the zone reaches or exceeds this value.
+
+**Player Ratio / Ceiling Mode:**
+The zone ratio is multiplied by the number of players currently inside the zone, but the result is capped at the zone ceiling. This scales AI density proportionally to the player count while guaranteeing a hard upper limit. The effective ceiling is calculated by `fn_getZoneCeiling`:
 
 ```
-_opforCount = count ((allUnits select {side _x == reaperCrew_reinforcements_side}) inAreaArray _triggerObject)
+effectiveCeiling = min(ceil(zoneRatio * playerCount), zoneCeiling)
 ```
 
-- Spawning pauses when `opforCount >= zoneThreshold`
-- Spawning resumes when enemy count drops below threshold
-- Default threshold: 20 units
+If no players are in the zone, the effective ceiling is 0 and no spawning occurs. With many players, the ceiling prevents runaway AI counts.
+
+**Testing Override:**
+In singleplayer or low player count testing, ratio-configured modules will barely spawn any units. To force all ratio modules to behave as ceiling-only mode, add the following to your mission's `init.sqf`:
+
+```sqf
+reaperCrew_debugOverrideRatio = true;
+```
+
+This causes all ratio modules to use their ceiling value directly. A log message is written each time the override takes effect. Remove this line before deploying the mission.
+
+**Common behaviour:**
+- Spawning pauses when `opforCount >= effectiveCeiling`
+- Spawning resumes when enemy count drops below the ceiling
+- Default ceiling value: 80
+- Default ratio value: 3
 
 ### Wave Delay & Cooldowns
 
@@ -315,7 +357,7 @@ _opforCount = count ((allUnits select {side _x == reaperCrew_reinforcements_side
 ### Spawn Conditions
 
 For spawning to occur, ALL conditions must be true:
-1. Enemy count < Zone threshold
+1. Enemy count < Zone ceiling
 2. Reinforcements remaining > 0
 3. Pause setting is OFF
 4. At least one spawnpoint is available
@@ -357,7 +399,7 @@ The `codeOnSpawn` parameter executes when a group spawns. The spawned group is a
 } forEach (units _thisGroup);
 ```
 
-**Set Behavior:**
+**Set Behaviour:**
 ```sqf
 _thisGroup setBehaviour "STEALTH";
 _thisGroup setSpeedMode "LIMITED";

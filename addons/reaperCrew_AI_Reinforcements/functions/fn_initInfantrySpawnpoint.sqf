@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Creates a 2000m detection trigger for a foot mobile infantry spawnpoint.
+ *
+ * Arguments:
+ * 0: _logic <OBJECT> - Module logic object
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [logic] call reapercrew_reinforcements_fnc_initInfantrySpawnpoint
+ *
+ * Public: No
+ */
+
 // Argument 0 is module logic.
 _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];
@@ -8,7 +24,7 @@ if (!isServer) exitWith {["Server checked failed - Not initialising init for inf
 
 // Don't run if the array isn't available
 while {isNil "activeInfantryTriggers"} do {
-	if (reaperCrew_InfantrySpawnCheckbox == true) then {
+	if (reaperCrew_InfantrySpawnCheckbox) then {
 		["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
@@ -28,7 +44,7 @@ _outerZone setTriggerStatements [_triggerCondition, " activeInfantryTriggers pus
 _outerZone setTriggerInterval 30;
 _outerZone setVehicleVarName (format ["InfantrySpawn_%1_%2", (mapGridPosition _logic), ([10,99] call BIS_fnc_randomInt)]);
 
-if (reaperCrew_InfantrySpawnCheckbox == true) then {
+if (reaperCrew_InfantrySpawnCheckbox) then {
 	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 };
 

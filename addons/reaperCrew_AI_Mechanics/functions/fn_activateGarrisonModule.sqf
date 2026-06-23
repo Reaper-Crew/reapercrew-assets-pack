@@ -1,26 +1,29 @@
-
-
 /*
 * Author: Xeenenta
 * Garrisons the nearby buildings
 *
 * Arguments:
 * 0: Max Count <NUMBER>
-* 1: Area <ARRAY>
-* 2: Troop Arrays <ARRAY>
-* 3: Code on spawn <STRING>
+* 1: Logic <LOGIC>
+* 2: Area Data <ARRAY>
+* 3: Troop Arrays <ARRAY>
+* 4: Code on spawn <STRING>
+* 5: Group Side <SIDE>
+* 6: Min Units Per Building <NUMBER>
+* 7: Max Units Per Building <NUMBER>
+* 8: Min Position Distance <NUMBER>
 *
 * Return Value:
 * None
 *
 * Example:
-* [50, [[0,0,0],0,0], [], "true"] call reapercrew_ai_mechanics_fnc_activateGarrisonModule
+* [50, _logic, [50,50,0,false,-1], [], "true", east, 4, 10, 3] call reapercrew_ai_mechanics_fnc_activateGarrisonModule
 *
 * Public: No
 */
 
 // Variables
-params ["_maxCount", "_logic", "_logicAreaData", "_troopArrays", "_codeOnSpawn", "_groupSide"];
+params ["_maxCount", "_logic", "_logicAreaData", "_troopArrays", "_codeOnSpawn", "_groupSide", "_minPerBuilding", "_maxPerBuilding", "_minDistance"];
 
 // Extract Position data
 _logicPosition = getPos _logic;
@@ -52,7 +55,66 @@ _buildingsListUnique = [];
 	_buildingsListUnique pushBackUnique _x;
 } forEach _buildingsData;
 
-// Call spawn script
-[[_logicPosition, _buildingsListUnique, _maxCount, _troopArrays, _codeOnSpawn, _groupSide], "reapercrew_ai_mechanics_fnc_remoteGarrisonSpawn"] call reapercrew_common_fnc_executeDistributed;
+// Group positions by their parent building
+_buildingMap = createHashMap;
+{
+	_pos = _x;
+	_building = nearestBuilding _pos;
+	_key = str _building;
+	_existing = _buildingMap getOrDefault [_key, []];
+	_existing pushBack _pos;
+	_buildingMap set [_key, _existing];
+} forEach _buildingsListUnique;
 
+// Apply per-building filtering
+_buildingGroups = [];
+_totalUnits = 0;
+{
+	_positions = _y;
 
+	// Filter positions that are too close together within this building
+	_spacedPositions = [];
+	{
+		_pos = _x;
+		if (_spacedPositions findIf {_pos distance _x < _minDistance} == -1) then {
+			_spacedPositions pushBack _pos;
+		};
+	} forEach _positions;
+
+	_posCount = count _spacedPositions;
+
+	// Skip buildings that don't meet the minimum
+	if (_posCount < _minPerBuilding) then {
+		continue;
+	};
+
+	// Cap to maximum positions per building, randomly selected
+	if (_posCount > _maxPerBuilding) then {
+		_spacedPositions = _spacedPositions call BIS_fnc_arrayShuffle;
+		_spacedPositions = _spacedPositions select [0, _maxPerBuilding];
+		_posCount = _maxPerBuilding;
+	};
+
+	// Respect the global max unit count
+	if ((_totalUnits + _posCount) > _maxCount) then {
+		_remaining = _maxCount - _totalUnits;
+		if (_remaining < _minPerBuilding) then {
+			continue;
+		};
+		_spacedPositions = _spacedPositions select [0, _remaining];
+		_posCount = _remaining;
+	};
+
+	_buildingGroups pushBack _spacedPositions;
+	_totalUnits = _totalUnits + _posCount;
+
+	// Stop if we've hit the global cap
+	if (_totalUnits >= _maxCount) then {
+		break;
+	};
+} forEach _buildingMap;
+
+// Call spawn script for each building, distributing across headless clients
+{
+	[[_logicPosition, _x, _troopArrays, _codeOnSpawn, _groupSide], "reapercrew_ai_mechanics_fnc_remoteGarrisonSpawn"] call reapercrew_common_fnc_executeDistributed;
+} forEach _buildingGroups;

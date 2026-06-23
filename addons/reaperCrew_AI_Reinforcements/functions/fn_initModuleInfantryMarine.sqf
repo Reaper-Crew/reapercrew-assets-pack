@@ -21,7 +21,9 @@ _activated = param [2,true,[true]];
 
 _randomTrigger = objNull;
 _reinforcementsCount = _logic getVariable ["reinforcementCount",50];
-_zoneThreshold = _logic getVariable ["zoneThreshold",20];
+_zoneCeiling = _logic getVariable ["zoneCeiling",80];
+_zoneRatio = _logic getVariable ["zoneRatio",3];
+_zoneLimitMode = _logic getVariable ["zoneLimitMode","CEILING"];
 _useRegularTroops = _logic getVariable ["regularTroops",true];
 _useEliteTroops = _logic getVariable ["eliteTroops",false];
 _useSpecialForces = _logic getVariable ["specialTroops",false];
@@ -53,7 +55,9 @@ _activationTrigger setTriggerInterval 5;
 
 // Assign required variable to trigger
 _activationTrigger setVariable ["reinforcementCount", _reinforcementsCount];
-_activationTrigger setVariable ["zoneThreshold", _zoneThreshold];
+_activationTrigger setVariable ["zoneCeiling", _zoneCeiling];
+_activationTrigger setVariable ["zoneRatio", _zoneRatio];
+_activationTrigger setVariable ["zoneLimitMode", _zoneLimitMode];
 _activationTrigger setVariable ["troopArrays", _troopsArrays];
 _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];
@@ -62,5 +66,5 @@ _activationTrigger setVariable ["moduleObject", _logic];
 
 _triggerCondition = format ["(this && {isTouchingGround _x} count thisList > 0) && %1", _additionalCondition];
 
-_activationTrigger setTriggerStatements [_additionalCondition, "[thisTrigger] spawn reapercrew_reinforcements_fnc_activateInfantryModuleMarine;", ""];
+_activationTrigger setTriggerStatements [_triggerCondition, "[thisTrigger] spawn reapercrew_reinforcements_fnc_activateInfantryModuleMarine;", ""];
 

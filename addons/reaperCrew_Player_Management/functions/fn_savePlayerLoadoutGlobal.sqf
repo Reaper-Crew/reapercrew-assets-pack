@@ -17,26 +17,26 @@
 params ["_logic"];
 
 // Only run on the server
-if (!isServer) exitWith { diag_log "[PLAYER MANAGEMENT]: Failed server check - exiting"; };
+if (!isServer) exitWith { ["Failed server check - exiting"] call reapercrew_common_fnc_remoteLog; };
 
 // Variables
 _units = [];
 
-diag_log "[PLAYER MANAGEMENT]: Checking for attached units";
+["Checking for attached units"] call reapercrew_common_fnc_remoteLog;
 // Check to see if the module was attached
 _attachedObject = attachedTo _logic;
 if (!isNull _attachedObject) then {
-	diag_log "[PLAYER MANAGEMENT]: Found attached unit";
+	["Found attached unit"] call reapercrew_common_fnc_remoteLog;
 	_units pushBack _attachedObject;
 };
 
 // Check that the array of units isn't empty
-if (count _units == 0) exitWith {
-	diag_log "[PLAYER MANAGEMENT]: No units assigned, exiting";
+if (_units isEqualTo []) exitWith {
+	["No units assigned, exiting"] call reapercrew_common_fnc_remoteLog;
 };
 
 {
-	diag_log format ["[PLAYER MANAGEMENT]: Executing save script on %1", name(_x)];
+	[(format ["Executing save script on %1", name(_x)])] call reapercrew_common_fnc_remoteLog;
 	remoteExec ["reapercrew_player_management_fnc_savePlayerLoadoutLocal", _x];
 } forEach _units;
 

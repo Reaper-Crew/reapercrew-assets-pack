@@ -17,7 +17,7 @@
 
 // Only run this on a server
 if (isServer) then {
-	diag_log "[Reaper Crew]: Starting JIP ACRE auto-configuation";
+	["Starting JIP ACRE auto-configuration"] call reapercrew_common_fnc_remoteLog;
 	[] remoteExec ["reapercrew_player_management_fnc_setPersonalACRESettingsLocal", 0, true];
 };
 

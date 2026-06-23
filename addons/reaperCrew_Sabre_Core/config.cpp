@@ -4,11 +4,9 @@ class CfgPatches
 	{
 		addonRootClass="A3_Props_F_Exp_A";
 		requiredAddons[] = {"A3_Modules_F", "cba_settings", "ReaperCrew_Common"};
-		requiredVersion=0.1;
-		units[]=
-		{
-			""
-		};
+		requiredVersion=2.02;
+		units[]={};
+
 		weapons[]={};
 	};
 };

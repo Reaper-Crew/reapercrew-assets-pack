@@ -2,11 +2,13 @@
 
 ## Overview
 
-The AI Mechanics system provides three specialized modules for creating dynamic AI behaviors in your missions:
+The AI Mechanics system provides five specialised modules for creating dynamic AI behaviours in your missions:
 
 - **Garrison Area** - Automatically populate buildings with AI units
 - **Suppress Position** - Create coordinated suppressive fire positions
 - **Convoy** - Create vehicle convoys that respond to contact for compelling scenarios
+- **Unlimited Ammo** - Give synchronised vehicles infinite ammunition
+- **Surrender Area** - Force synchronised AI to surrender via ACE when players enter an area
 
 ## Modules
 
@@ -22,24 +24,29 @@ All modules are found in Eden Editor under: `Systems (F5) > Modules > Reaper Cre
 
 ### Overview
 
-The Garrison Area module automatically spawns AI units and places them in nearby buildings. Units are positioned in building interiors and will always hold their positions.
+The Garrison Area module automatically spawns AI units and places them in nearby buildings. Units are distributed across buildings with one group per building, and skill levels are automatically applied based on the troop type selected (configured via CBA settings in AI Common).
 
 ### Quick Start
 
 1. Place the **Garrison Area** module in Eden Editor
 2. Resize the module's area to cover the buildings you want garrisoned
 3. Configure the troop types and maximum unit count
-4. Preview or start the mission
+4. (Optional) Set an activation condition to defer spawning until needed
+5. Preview or start the mission
 
 ### Attributes
 
 | Attribute | Property | Type | Default | Description |
 |-----------|----------|------|---------|-------------|
+| Activation Condition | `activationCondition` | String | `"true"` | Condition that must be true before units are spawned |
 | Max Units | `MaxUnits` | Number | 50 | Maximum number of AI to spawn in the area |
 | Regular Troops | `regularTroops` | Checkbox | true | Include regular troops from unit pool |
 | Elite Troops | `eliteTroops` | Checkbox | false | Include elite troops from unit pool |
 | Special Forces | `specialTroops` | Checkbox | false | Include special forces from unit pool |
-| Code on Spawn | `codeOnSpawn` | String | `"true"` | Custom SQF code executed when group spawns |
+| Min Units Per Building | `minUnitsPerBuilding` | Number | 4 | Buildings with fewer valid positions are skipped |
+| Max Units Per Building | `maxUnitsPerBuilding` | Number | 10 | Caps the number of units placed in any single building |
+| Min Position Distance | `minPositionDistance` | Number | 3 | Minimum distance (metres) between positions within a building |
+| Code on Spawn | `codeOnSpawn` | String | `"true"` | Custom SQF code executed when each building group spawns |
 
 ### Area Configuration
 
@@ -49,19 +56,26 @@ The Garrison Area module automatically spawns AI units and places them in nearby
 
 ### How It Works
 
-1. Module initializes on server
+1. Module initialises on server and waits for activation condition
 2. Finds all buildings in the configured area using LAMBS
 3. Filters buildings with valid interior positions (ceiling check)
-4. Spawns a single group with units from selected troop pools
-5. Places each unit at a building position
-6. Units are set to "UP" stance with pathfinding disabled
+4. Groups positions by building
+5. Filters positions within each building by minimum distance to prevent clustering
+6. Applies per-building min/max limits (skips buildings below minimum, caps at maximum)
+7. Respects the global max unit count across all buildings
+8. Spawns one group per building, distributed across headless clients
+9. Each unit is assigned a random stance (UP/MIDDLE) with pathfinding disabled
+10. Skill is automatically set based on the troop type (Regular/Elite/SF) from CBA settings
 
 ### Code Examples
 
-**Basic Garrison with Custom Skill:**
+**Deferred Spawning:**
 ```sqf
-// In the "Code on Spawn" field:
-{ _x setSkill 0.9 } forEach (units _thisGroup);
+// In the "Activation Condition" field:
+garrisonActive
+
+// Then in a trigger or script:
+garrisonActive = true;
 ```
 
 **Add Custom Equipment:**
@@ -74,10 +88,13 @@ The Garrison Area module automatically spawns AI units and places them in nearby
 
 ### Tips
 
-- Place module center in areas with dense buildings
+- Place module centre in areas with dense buildings
 - Keep Max Units reasonable (40-60) for performance
-- Units use dynamic simulation for performance optimization
-- Works with Headless Client for load distribution
+- Units use dynamic simulation for performance optimisation
+- Each building spawns as a separate group, distributed across headless clients
+- Use the activation condition to defer spawning and reduce mission startup load
+- Garrison units will not trigger other dynamically simulated units to activate - only players can
+- Skill levels are inherited from the CBA AI Common settings for each troop type
 
 ### Troubleshooting
 
@@ -85,6 +102,8 @@ The Garrison Area module automatically spawns AI units and places them in nearby
 - Verify buildings exist in the module area
 - Check that selected troop pools have valid classnames
 - Ensure at least one troop type checkbox is enabled
+- Check the activation condition is returning true
+- Buildings with fewer positions than Min Units Per Building will be skipped
 
 ---
 
@@ -187,7 +206,7 @@ The Convoy module creates a convoy system where vehicles maintain proper spacing
 1. Place the **Convoy** module in Eden Editor
 2. Place vehicles with crews (driver + passengers)
 3. Synchronize vehicles to the module in order (first = lead vehicle)
-4. Configure convoy behavior and activation condition
+4. Configure convoy behaviour and activation condition
 5. Create a variable trigger or set activation code
 
 ### Attributes
@@ -203,7 +222,7 @@ The Convoy module creates a convoy system where vehicles maintain proper spacing
 | Path Update Frequency | `reaperCrew_moduleAwesomeConvoy_pathFrequecy` | Number | 0.05 | How often path updates (seconds) |
 | Speed Control Frequency | `reaperCrew_moduleAwesomeConvoy_speedFrequecy` | Number | 0.2 | How often speed adjusts (seconds) |
 | Speed Mode | `reaperCrew_moduleAwesomeConvoy_speedMode` | Combo | NORMAL | Speed restriction mode |
-| Behaviour | `reaperCrew_moduleAwesomeConvoy_behaviourConv` | Combo | pushThroughContact | Contact response behavior |
+| Behaviour | `reaperCrew_moduleAwesomeConvoy_behaviourConv` | Combo | pushThroughContact | Contact response behaviour |
 | Debug Visualization | `reaperCrew_moduleAwesomeConvoy_debug` | Checkbox | false | Show path visualization |
 | Activation Code | `ActivationCode` | String | `activateConvoy == true;` | Condition to start convoy |
 | Contact Code | `ContactCode` | String | `"true"` | Code executed on contact |
@@ -217,7 +236,7 @@ The Convoy module creates a convoy system where vehicles maintain proper spacing
 
 ### Behaviour Modes
 
-- **AWARE** - Standard aware behavior
+- **AWARE** - Standard aware behaviour
 - **pushThroughContact** - Attempt to push through when engaged
 
 ### How It Works
@@ -302,3 +321,108 @@ triggerActivated convoyStartTrigger
 - Contact detection requires damage > 0.25
 - Enemy must be the damage source
 - Gunners intentionally stay mounted
+
+---
+
+## Unlimited Ammo Module
+
+| Editor Name | Classname |
+|-------------|-----------|
+| Unlimited Ammo | `reaperCrew_moduleUnlimitedAmmo` |
+
+### Overview
+
+The Unlimited Ammo module gives synchronised vehicles infinite ammunition. Ammo is replenished instantly after each shot via a Fired event handler.
+
+### Quick Start
+
+1. Place the **Unlimited Ammo** module in Eden Editor
+2. Place the vehicle(s) you want to have unlimited ammo
+3. Synchronise the vehicle(s) to the module
+4. Preview or start the mission
+
+### How It Works
+
+1. Module initialises on server
+2. Iterates all synchronised vehicles
+3. Adds a `Fired` event handler to each vehicle on all machines (JIP-safe)
+4. The event handler resets vehicle ammo to full after every shot
+5. Handles locality transfers automatically - the EH fires wherever the vehicle is local
+
+### Tips
+
+- Sync any vehicle type - works with static weapons, armour, aircraft, etc.
+- Multiple vehicles can be synced to a single module
+- The EH persists through locality changes (e.g. headless client transfers)
+
+### Troubleshooting
+
+**Vehicle runs out of ammo:**
+- Verify the vehicle is synchronised to the module (check sync line in Eden)
+- Ensure the vehicle is not a `Man` unit - only vehicles are processed
+
+---
+
+## Surrender Area Module
+
+| Editor Name | Classname |
+|-------------|-----------|
+| Surrender Area | `reaperCrew_moduleSurrenderArea` |
+
+### Overview
+
+The Surrender Area module causes synchronised AI units to surrender via ACE captives when players enter the module's area. Units surrender one at a time with configurable stagger timing, and can optionally drop weapons and eject from vehicles.
+
+### Quick Start
+
+1. Place the **Surrender Area** module in Eden Editor
+2. Place AI units you want to surrender
+3. Synchronise the AI units to the module
+4. Resize the trigger area as needed
+5. Preview or start the mission - when players enter the area, the synced units surrender
+
+### Attributes
+
+| Attribute | Property | Type | Default | Description |
+|-----------|----------|------|---------|-------------|
+| Activation Code | `reaperCrew_moduleSurrenderArea_activationCode` | String | `"true"` | Additional condition for trigger activation |
+| Surrender Delay | `reaperCrew_moduleSurrenderArea_surrenderDelay` | Number | 5 | Seconds to wait after trigger activation before first surrender |
+| Surrender Stagger | `reaperCrew_moduleSurrenderArea_surrenderStagger` | Number | 1 | Seconds between each unit surrendering |
+| Drop Weapons | `reaperCrew_moduleSurrenderArea_dropWeapons` | Checkbox | false | Units drop their primary weapon when surrendering |
+| Eject From Vehicles | `reaperCrew_moduleSurrenderArea_ejectFromVehicles` | Checkbox | true | Units in vehicles are ejected before surrendering |
+
+### How It Works
+
+1. Module initialises on server and retrieves all synchronised units
+2. Creates a trigger matching the module's area
+3. Trigger activates when any player on foot is present and the activation condition is met
+4. After the surrender delay, each synced unit is processed in order:
+   - Dead units and non-infantry objects are skipped
+   - Units already surrendering are skipped
+   - If in a vehicle and eject is enabled, the unit is ejected (with a 15-second timeout)
+   - AI movement, autocombat, and FSM are disabled; behaviour set to CARELESS
+   - Primary weapon is removed if drop weapons is enabled
+   - ACE surrender is triggered via CBA target event for correct locality
+   - Stagger delay is applied before processing the next unit
+5. Surrender is one-shot and does not repeat
+
+### Tips
+
+- Synchronise only infantry units - non-Man objects are automatically skipped
+- Use the surrender delay to create a realistic hesitation before units give up
+- Combine with an activation condition to script when surrender becomes possible (e.g. after a firefight)
+- The stagger timing creates a natural cascading surrender effect
+- Units in vehicles will be ejected first if the option is enabled; if ejection fails they are skipped
+
+### Troubleshooting
+
+**Units not surrendering:**
+- Verify ACE3 is loaded (uses ACE captives system)
+- Check units are properly synchronised to the module
+- Ensure the activation code returns true
+- Verify players are inside the trigger area AND on foot
+- Check that synced objects are infantry (Man class), not vehicles or modules
+
+**Units stuck in vehicles:**
+- Ensure "Eject From Vehicles" is enabled
+- Ejection has a 15-second timeout; if it fails the unit is skipped with a log warning

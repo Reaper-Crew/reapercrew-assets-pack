@@ -2,10 +2,10 @@ class CfgPatches
 {
 	class reaperCrew_AI_Reinforcements
 	{
-		units[] = {""};
-		weapons[] = {""};
+		units[] = {};
+		weapons[] = {};
 		vehicles[] = {""};
-		requiredVersion = 1.0;
+		requiredVersion = 2.02;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings", "ReaperCrew_Common", "reaperCrew_AI_Common"};
 	};
 };
@@ -77,6 +77,8 @@ class CfgFunctions
 			class adjustGroupToVehicle{};
 			class adjustGroupLeader{};
 			class getAvailableSpawnpoints{};
+			class getZoneCeiling{};
+			class waypointFastrope{};
 			
 		};
 	};
@@ -244,6 +246,18 @@ class CfgVehicles
 		class Attributes: AttributesBase {
 			#include "attributes.hpp"
 			#include "randomLZAttributes.hpp"
+			class deliveryMode: Combo {
+				displayName = "Delivery Mode";
+				property = "deliveryMode";
+				typeName = "STRING";
+				tooltip = "LAND: Helicopter lands and troops disembark. FASTROPE: Helicopter hovers and troops fastrope down (requires ACE Fastroping). RANDOM: Each helicopter independently chooses land or fastrope at random.";
+				defaultValue = """LAND""";
+				class Values {
+					class 0 { name = "Land"; value = "LAND"; };
+					class 1 { name = "Fastrope"; value = "FASTROPE"; };
+					class 2 { name = "Random"; value = "RANDOM"; };
+				};
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryMarine: reaperCrew_moduleReinforcementsSpawnerBase

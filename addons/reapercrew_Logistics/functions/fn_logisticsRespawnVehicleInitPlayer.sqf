@@ -1,6 +1,6 @@
 /*
  * Author: Xeenenta
- * A script designed to be run locally on each player to trigger the proper respawn behavior
+ * A script designed to be run locally on each player to trigger the proper respawn behaviour
  *
  * Arguments:
  * 0: N/A

@@ -192,7 +192,7 @@ if (reaperCrew_sabreCore_ActivateSystem) then {
     hint "SABRE network is operational";
 };
 
-// Check if system has initialized
+// Check if system has initialised
 if (!isNil "DataLinkSystemStarted" && {DataLinkSystemStarted}) then {
     hint "SABRE system initialization complete";
 };

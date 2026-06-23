@@ -16,8 +16,8 @@
 
 params ["_supplyCrate"];
 
-// Only run when object local
-if !(isServer) exitWith {diag_log "[LOGISTICS]: Server check failed - skipping crate init"};
+// Only run on server (crate is created server-side, CargoGlobal commands broadcast)
+if !(isServer) exitWith {["Server check failed - skipping crate init"] call reapercrew_common_fnc_remoteLog};
 
 // Small Arms
 _rifleMagazines = reaperCrew_rifleMagazines splitString ",";

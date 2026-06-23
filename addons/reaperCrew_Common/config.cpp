@@ -4,7 +4,7 @@ class CfgPatches
 	{
 		units[] = {};
 		weapons[]={};
-		requiredVersion=1;
+		requiredVersion=2.02;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings"};
 	};
 };

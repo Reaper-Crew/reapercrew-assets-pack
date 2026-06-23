@@ -11,15 +11,16 @@ _parentObject = [];
 _mapMarker = "";
 _mapTime = 0;
 {
-	_parentObject = _x;
-	[format ["Searching record %1", _parentObject]] call reapercrew_common_fnc_remoteLog;
-	_artilleryObjectReference = _x select 0;
-	if (_artilleryObjectReference == _artilleryUnit) then {
-		_foundRecord = _x;
-		_isFound = true;
-		_isFoundIndex = _forEachIndex;
-		["Found match"] call reapercrew_common_fnc_remoteLog;
-		break;
+	if (!_isFound) then {
+		_parentObject = _x;
+		[format ["Searching record %1", _parentObject]] call reapercrew_common_fnc_remoteLog;
+		_artilleryObjectReference = _x select 0;
+		if (_artilleryObjectReference == _artilleryUnit) then {
+			_foundRecord = _x;
+			_isFound = true;
+			_isFoundIndex = _forEachIndex;
+			["Found match"] call reapercrew_common_fnc_remoteLog;
+		};
 	};
 } forEach _knowledgeData;
 
@@ -40,7 +41,7 @@ if (_isFound) then {
 	// If isFound and _isInArea, then update existing
 	if (_isInArea) then {
 		if ( reaperCrew_sabreCounterBattery_DebugEvents ) then {
-			[format ["Association with %1 and %2 exists - updating entry", _x, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
+			[format ["Association with %1 and %2 exists - updating entry", _artilleryUnit, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
 			// Update Marker in the global space
     		[(getPos _artilleryUnit), _mapMarker] call reapercrew_sabre_counterBattery_fnc_componentLCMRMarkerSetup;
 
@@ -50,10 +51,10 @@ if (_isFound) then {
 	} else {
 		// If isFound but NOT _isInArea, add a new icon
 		if ( reaperCrew_sabreCounterBattery_DebugEvents ) then {
-			[format ["Association with %1 and %2 exists, but _isInArea false - Disassociating", _x, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
+			[format ["Association with %1 and %2 exists, but _isInArea false - Disassociating", _artilleryUnit, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
 		};
 		// Loop through and remove any entries with a reference to that object
-		diag_log _knowledgeData;
+		[(str _knowledgeData)] call reapercrew_common_fnc_remoteLog;
 		_knowledgeDataReplica = _knowledgeData;
 		{
 			_recordObject = _x select 0;
@@ -63,23 +64,23 @@ if (_isFound) then {
 				_knowledgeData deleteAt _forEachIndex;
 			}
 		} forEach _knowledgeDataReplica;
-		diag_log _knowledgeData;
+		[(str _knowledgeData)] call reapercrew_common_fnc_remoteLog;
 		// Recreate the marker record without the unit associated
 		_dissassociateEntry = [SabreDummyObject, _mapMarker, _mapTime];
 		// Delete existing
-		_knowledgeData deleteAt _isFoundIndex;
+		_knowledgeData deleteAt (_knowledgeData find _foundRecord);
 		// Readd
 		_knowledgeData pushBack _dissassociateEntry;
 		// Generate a new marker
 		_markerName = [(getPos _artilleryUnit)] call reapercrew_sabre_counterBattery_fnc_componentLCMRMarkerSetup;
 		// Add to data
 		_knowledgeData pushBackUnique [_artilleryUnit, _markerName, (diag_tickTime)];
-		diag_log _knowledgeData;
+		[(str _knowledgeData)] call reapercrew_common_fnc_remoteLog;
 	};
 
 } else {
 	// Not found at all, create a new marker
-	[format ["No association with %1 and %2 exists - creating", _x, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
+	[format ["No association with %1 and %2 exists - creating", _artilleryUnit, _artilleryUnit]] call reapercrew_common_fnc_remoteLog;
 	// Generate a new marker
 	_markerName = [(getPos _artilleryUnit)] call reapercrew_sabre_counterBattery_fnc_componentLCMRMarkerSetup;
 	// Add to data

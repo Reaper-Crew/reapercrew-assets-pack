@@ -6,6 +6,12 @@ _createdVehicle setPos _spawnPosition;
 
 _createdVehicle allowDamage false;
 
+// Run custom vehicle code if defined (local only)
+if (local _createdVehicle) then {
+	_onVehicleCreated = missionNamespace getVariable ["reaperCrew_vehicleDelivery_onVehicleCreated", {}];
+	[_createdVehicle, _spawnPosition, _deliveryPoint] call _onVehicleCreated;
+};
+
 // Create Driver
 _spawnedGroup = [_spawnPosition, civilian, ["C_Man_casual_1_F"], [],[],[],[],[],180] call BIS_fnc_spawnGroup;
 _spawnedGroup allowFleeing 0;
@@ -37,6 +43,14 @@ _spawnedGroup setBehaviour "CARELESS";
 	_x linkItem "ItemWatch";
 	_x linkItem "ItemGPS";	
 
+} forEach units _spawnedGroup;
+
+// Run custom driver code if defined (local only)
+_onDriverCreated = missionNamespace getVariable ["reaperCrew_vehicleDelivery_onDriverCreated", {}];
+{
+	if (local _x) then {
+		[_x, _createdVehicle, _spawnPosition, _deliveryPoint] call _onDriverCreated;
+	};
 } forEach units _spawnedGroup;
 
 _waypoint = _spawnedGroup addWaypoint [_deliveryPoint, -1];

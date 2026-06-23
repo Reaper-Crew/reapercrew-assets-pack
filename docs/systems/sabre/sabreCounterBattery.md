@@ -90,7 +90,7 @@ The radar functions as a vehicle with standard considerations:
 
 **Initial Detection:**
 - Creates elliptical marker (250m x 250m)
-- Color: Red
+- Colour: Red
 - Random offset of 230m from actual position
 
 **Subsequent Detections:**
@@ -266,7 +266,7 @@ _radar engineOn true;
 
 ## Known Issues
 
-- **Single Player:** System requires multiplayer; server-only functions do not initialize properly in SP
+- **Single Player:** System requires multiplayer; server-only functions do not initialise properly in SP
 - **Marker Locality:** Markers may occasionally disappear due to Arma's locality handling
 
 ---

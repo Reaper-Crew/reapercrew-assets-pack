@@ -18,15 +18,17 @@ params ["_triggerObject"];
 
 // Don't run if the array isn't available
 while {isNil "activeAircraftTriggers"} do {
-	if (reaperCrew_debugReinforcementsSpawning == true) then {
-		["Vehicle triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
+	if (reaperCrew_debugReinforcementsSpawning) then {
+		["Aircraft triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
 };
 
 // Get variables from the trigger
 _reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
-_zoneThreshold = _triggerObject getVariable ["zoneThreshold",20];
+_zoneCeiling = _triggerObject getVariable ["zoneCeiling",80];
+_zoneRatio = _triggerObject getVariable ["zoneRatio",3];
+_zoneLimitMode = _triggerObject getVariable ["zoneLimitMode","CEILING"];
 _directionMin = _triggerObject getVariable ["directionMin",90];
 _directionMax = _triggerObject getVariable ["directionMax",180];
 _distanceMin = _triggerObject getVariable ["distanceMin",500];
@@ -35,7 +37,8 @@ _rushMode = _triggerObject getVariable ["rushMode",false];
 _reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 _codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
 _waveDelay = _triggerObject getVariable ["waveDelay",60];
-_moduleObject = _triggerObject getVariable ["moduleObject", objnull];
+_moduleObject = _triggerObject getVariable ["moduleObject", objNull];
+_deliveryMode = _triggerObject getVariable ["deliveryMode", "LAND"];
 
 // Run code only while the trigger is activated
 while { triggerActivated _triggerObject } do {
@@ -44,6 +47,9 @@ while { triggerActivated _triggerObject } do {
 	_allOpforUnits = (allUnits select {side _x == reaperCrew_reinforcements_side});
 	_opforUnits = _allOpforUnits inAreaArray _triggerObject;
 	_opforCounter = count _opforUnits;
+
+	// Calculate the effective zone ceiling based on the selected mode
+	_effectiveCeiling = [_zoneCeiling, _zoneRatio, _zoneLimitMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneCeiling;
 
 	// Select aircraft & group
 	_availableAircraft = reaperCrew_reinforcements_transportHelicopter splitString ",";
@@ -57,10 +63,10 @@ while { triggerActivated _triggerObject } do {
 	_availableSpawnpoints = [_moduleObject, activeAircraftTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
 
 	// Only run if; Zone above threshold, Reinforcements remain and spawn points are available
-	if ((_opforCounter < _zoneThreshold) and (_reinforcementsCount > _unitCount) and (reaperCrew_pauseInfantryReinforcements == false) and ((count _availableSpawnpoints) > 0 )) then {
+	if ((_opforCounter < _effectiveCeiling) and (_reinforcementsCount > _unitCount) and (!reaperCrew_pauseInfantryReinforcements) and ((count _availableSpawnpoints) > 0 )) then {
 
 		// Output debug information if enabled
-		if (reaperCrew_debugReinforcementsSpawning == true) then {
+		if (reaperCrew_debugReinforcementsSpawning) then {
 			[(format ["Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 		};
 
@@ -72,32 +78,46 @@ while { triggerActivated _triggerObject } do {
 		_landingPosition = [];
 		_spawnTrigger = (selectRandom _availableSpawnpoints);
 		
-		while { (count _landingPosition) == 0 } do {
+		while { _landingPosition isEqualTo [] } do {
+			sleep 0.1; // Yield each iteration to avoid blocking the scheduler
 
 			// Increment search criteria
 			_searchRadius = _searchRadius + 100;
-			_landingPosition = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsAircraft];
+			private _candidatePos = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsAircraft];
 
-			if (reaperCrew_debugWaypointMechanics == true) then {
+			if (reaperCrew_debugWaypointMechanics) then {
 				[(format ["Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius])] call reapercrew_common_fnc_remoteLog;
 			};
 
-			if (_searchRadius > 500) then {
-				_landingPosition pushBack _searchCenterPos;
-				if (reaperCrew_debugWaypointMechanics == true) then {
-					["Search radius exceeded, defaulting to center point"] call reapercrew_common_fnc_remoteLog;
+			if (count _candidatePos > 0) then {
+				// Reject positions with obstacles that could damage the helicopter on approach or landing
+				private _obstacles = nearestTerrainObjects [_candidatePos, ["TREE", "BUILDING", "ROCK", "ROCKS", "FENCE", "WALL"], 25];
+				if (_obstacles isEqualTo []) then {
+					_landingPosition = _candidatePos;
 				};
 			};
 
-			if (reaperCrew_debugWaypointMechanics == true) then {
-				[(format ["Search complete, found position of %1", _landingPosition])] call reapercrew_common_fnc_remoteLog;
+			// Fallback after 500m - accept any position to avoid infinite search
+			if (_searchRadius > 500 && count _landingPosition == 0) then {
+				if (count _candidatePos > 0) then {
+					_landingPosition = _candidatePos;
+				} else {
+					_landingPosition = +_searchCenterPos;
+				};
+				if (reaperCrew_debugWaypointMechanics) then {
+					["Search radius exceeded, using best available position"] call reapercrew_common_fnc_remoteLog;
+				};
 			};
-
 		};
 
 		_reinforcementsPathway = _spawnTrigger getVariable ["_reinforcementsPathway", []];
 
-		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
+		private _resolvedDeliveryMode = _deliveryMode;
+		if (_deliveryMode == "RANDOM") then {
+			_resolvedDeliveryMode = selectRandom ["LAND", "FASTROPE"];
+		};
+
+		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _resolvedDeliveryMode, _rushMode], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
 
 		// Adjust the number of available reinforcements
 		_reinforcementsCount = _reinforcementsCount - _unitCount;
@@ -106,6 +126,6 @@ while { triggerActivated _triggerObject } do {
 	};
 	sleep _waveDelay;
 };
-if (reaperCrew_debugReinforcementsSpawning == true) then {
+if (reaperCrew_debugReinforcementsSpawning) then {
 	["Helicopter spawning has ended"] call reapercrew_common_fnc_remoteLog;
 };

@@ -2,9 +2,9 @@ class CfgPatches
 {
 	class ReaperCrew_AI_Mechanics
 	{
-		units[] = {"reaperCrew_module_ai_mechanics_base", "reaperCrew_moduleGarrison", "reaperCrew_moduleSuppressPosition", "reaperCrew_moduleAwesomeConvoy"};
-		weapons[]={""};
-		requiredVersion=1;
+		units[] = {"reaperCrew_module_ai_mechanics_base", "reaperCrew_moduleGarrison", "reaperCrew_moduleSuppressPosition", "reaperCrew_moduleAwesomeConvoy", "reaperCrew_moduleUnlimitedAmmo", "reaperCrew_moduleSurrenderArea"};
+		weapons[]={};
+		requiredVersion=2.02;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings", "ReaperCrew_Common", "reaperCrew_AI_Common", "myTag_addonName"};
 	};
 };
@@ -42,6 +42,9 @@ class CfgFunctions
 			class remoteGarrisonSpawn{};
 			class initConvoySetup{};
 			class activateConvoySetup{};
+			class initUnlimitedAmmo{};
+			class initSurrenderArea{};
+			class activateSurrenderArea{};
 		};
 	};
 };
@@ -122,6 +125,30 @@ class CfgVehicles
 				control = "Checkbox";
 				defaultValue = "false";
 			};
+			class minUnitsPerBuilding: Edit {
+				displayName = "Min Units Per Building";
+				property = "minUnitsPerBuilding";
+				typeName = "NUMBER";
+				tooltip = "Minimum number of units to place in a building. Buildings with fewer available positions than this will be skipped.";
+				control = "Edit";
+				defaultValue = "4";
+			};
+			class maxUnitsPerBuilding: Edit {
+				displayName = "Max Units Per Building";
+				property = "maxUnitsPerBuilding";
+				typeName = "NUMBER";
+				tooltip = "Maximum number of units to place in a building. Excess positions will be discarded.";
+				control = "Edit";
+				defaultValue = "10";
+			};
+			class minPositionDistance: Edit {
+				displayName = "Min Position Distance";
+				property = "minPositionDistance";
+				typeName = "NUMBER";
+				tooltip = "Minimum distance in metres between garrison positions within the same building. Prevents AI clustering.";
+				control = "Edit";
+				defaultValue = "3";
+			};
 			class codeOnSpawnGroup: Edit {
 				displayName = "Code on spawn";
 				property = "codeOnSpawn";
@@ -131,6 +158,12 @@ class CfgVehicles
 				defaultValue = """true""";
 			};
 		};
+	};
+	class reaperCrew_moduleUnlimitedAmmo: reaperCrew_module_ai_mechanics_base
+	{
+		displayName = "Unlimited Ammo";
+		function = "reapercrew_ai_mechanics_fnc_initUnlimitedAmmo";
+		scope = 2;
 	};
 	class reaperCrew_moduleSuppressPosition: reaperCrew_module_ai_mechanics_base
 	{
@@ -282,6 +315,59 @@ class CfgVehicles
 				tooltip = "Code executed when the convoy is hit";
 				control = "Edit";
 				defaultValue = """true""";
+			};
+		};
+	};
+	class reaperCrew_moduleSurrenderArea: reaperCrew_module_ai_mechanics_base
+	{
+		displayName = "Surrender Area";
+		function = "reapercrew_ai_mechanics_fnc_initSurrenderArea";
+		scope = 2;
+		canSetArea = 1;
+		canSetAreaShape = 1;
+		class AttributeValues {
+			size3[] = {50, 50, -1};
+		};
+		class Attributes: AttributesBase {
+			class ActivationCode: Edit {
+				displayName = "Activation Condition";
+				property = "reaperCrew_moduleSurrenderArea_activationCode";
+				typeName = "STRING";
+				tooltip = "Additional condition that must evaluate to true before the trigger fires. Use 'true' for no extra condition.";
+				control = "Edit";
+				defaultValue = """true""";
+			};
+			class surrenderDelay: Edit {
+				displayName = "Surrender Delay (s)";
+				property = "reaperCrew_moduleSurrenderArea_surrenderDelay";
+				typeName = "NUMBER";
+				tooltip = "Seconds to wait after trigger activation before units begin surrendering.";
+				control = "Edit";
+				defaultValue = "5";
+			};
+			class surrenderStagger: Edit {
+				displayName = "Stagger Interval (s)";
+				property = "reaperCrew_moduleSurrenderArea_surrenderStagger";
+				typeName = "NUMBER";
+				tooltip = "Seconds between each unit surrendering. Set to 0 for all at once.";
+				control = "Edit";
+				defaultValue = "1";
+			};
+			class dropWeapons: Checkbox {
+				displayName = "Drop Weapons";
+				property = "reaperCrew_moduleSurrenderArea_dropWeapons";
+				typeName = "BOOL";
+				tooltip = "If enabled, units will drop their primary weapon when surrendering.";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class ejectFromVehicles: Checkbox {
+				displayName = "Eject from Vehicles";
+				property = "reaperCrew_moduleSurrenderArea_ejectFromVehicles";
+				typeName = "BOOL";
+				tooltip = "If enabled, units in vehicles will be ordered out before surrendering. If disabled, mounted units are skipped.";
+				control = "Checkbox";
+				defaultValue = "true";
 			};
 		};
 	};

@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Initialises a foot mobile infantry module. Reads attributes, builds troop arrays, and creates an activation trigger.
+ *
+ * Arguments:
+ * 0: _logic <OBJECT> - Module logic object
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [logic] call reapercrew_reinforcements_fnc_initModuleInfantryFootMobile
+ *
+ * Public: No
+ */
+
 // Argument 0 is module logic.
 _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];
@@ -5,7 +21,7 @@ _activated = param [2,true,[true]];
 
 // Don't run if the array isn't available
 while {isNil "activeInfantryTriggers"} do {
-	if (reaperCrew_ReinforcementsCheckbox == true) then {
+	if (reaperCrew_ReinforcementsCheckbox) then {
 		["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 60;
@@ -13,7 +29,9 @@ while {isNil "activeInfantryTriggers"} do {
 
 // Get variables
 _reinforcementsCount = _logic getVariable ["reinforcementCount",50];
-_zoneThreshold = _logic getVariable ["zoneThreshold",20];
+_zoneCeiling = _logic getVariable ["zoneCeiling",80];
+_zoneRatio = _logic getVariable ["zoneRatio",3];
+_zoneLimitMode = _logic getVariable ["zoneLimitMode","CEILING"];
 _logicArea = _logic getVariable ["objectarea", [50, 50, 0, false, -1]];
 _logicArea2D = [getPos _logic, _logicArea select 0, _logicArea select 1];
 _useRegularTroops = _logic getVariable ["regularTroops",true];
@@ -45,7 +63,9 @@ _activationTrigger setTriggerInterval 5;
 // Set trigger variables
 _activationTrigger setVariable ["troopArrays", _troopsArrays];
 _activationTrigger setVariable ["reinforcementCount", _reinforcementsCount];
-_activationTrigger setVariable ["zoneThreshold", _zoneThreshold];
+_activationTrigger setVariable ["zoneCeiling", _zoneCeiling];
+_activationTrigger setVariable ["zoneRatio", _zoneRatio];
+_activationTrigger setVariable ["zoneLimitMode", _zoneLimitMode];
 _activationTrigger setVariable ["logicArea2D", _logicArea2D];
 _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];

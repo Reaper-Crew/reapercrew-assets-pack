@@ -8,7 +8,7 @@ params [
 	["_group", []]
 ];
 
-if (count units _group == 0) exitWith {
+if (units _group isEqualTo []) exitWith {
     // TODO: Return something signifying the group is empty for whatever purpose
 };
 

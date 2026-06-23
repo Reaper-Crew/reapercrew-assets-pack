@@ -3,7 +3,7 @@ class CfgPatches
 	class reaperCrew_Sabre_Component_CounterBattery
 	{
 		requiredAddons[] = {"reaperCrew_Sabre_Core"};
-		requiredVersion=0.1;
+		requiredVersion=2.02;
 		units[]={"reaperCrew_Sentinel_west_dst","reaperCrew_Sentinel_west_wdl","reaperCrew_Sentinel_east_dst","reaperCrew_Sentinel_east_wdl","reaperCrew_Sentinel_independent_dst","reaperCrew_Sentinel_independent_wdl"};
 		weapons[]={};
 	};
@@ -37,9 +37,9 @@ class CfgVehicles
 		scope=0;
 		scopeCurator=0;
 
-		hasDriver = true;
-		hasGunner = false;
-		hasCommander = false;
+		hasDriver = 1;
+		hasGunner = 0;
+		hasCommander = 0;
 		ace_cargo_hasCargo = 0;
 		radarTarget = 1;
 		class EventHandlers : EventHandlers {

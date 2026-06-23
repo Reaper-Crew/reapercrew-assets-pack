@@ -4,3 +4,6 @@
 ["reaperCrew_detectHeadlessTimer", "TIME", ["60", "How long should the system wait between runs of HC detection"], ["Reaper Crew - Headless Clients", "Headless Client Settings"], [60, 600, 60]] call cba_settings_fnc_init;
 
 ["reaperCrew_detectHeadlessClientsDebug", "CHECKBOX", ["DEBUG: Show headless detection output to console", "Tick to output debug info to logs"], ["Reaper Crew - Headless Clients", "Headless Client Settings"]] call cba_settings_fnc_init;
+
+// Logging settings
+["reaperCrew_suppressSystemChat", "CHECKBOX", ["Suppress SystemChat logging", "Suppress remoteLog output to SystemChat in singleplayer"], ["Reaper Crew - Logging", "Logging Settings"], false] call cba_settings_fnc_init;

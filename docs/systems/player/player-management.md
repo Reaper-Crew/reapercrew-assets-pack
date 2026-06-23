@@ -16,7 +16,7 @@ All modules are found in Eden Editor under: `Systems (F5) > Modules > Reaper Cre
 
 Strips all equipment from players and assigns parade/ceremonial uniforms based on role.
 
-**Behavior:**
+**Behaviour:**
 1. Removes all weapons, items, uniform, vest, backpack, headgear, goggles
 2. Assigns base uniform: `U_BG_Guerilla2_1`
 3. Assigns headgear: `RC_Beret_01`
@@ -47,7 +47,7 @@ Strips all equipment from players and assigns parade/ceremonial uniforms based o
 
 Captures and stores player loadouts for later restoration.
 
-**Behavior:**
+**Behaviour:**
 1. Uses ACRE API to filter loadout (excludes ACRE radios)
 2. Stores loadout in player variable: `Saved_Loadout`
 3. Also triggers insignia setup
@@ -72,7 +72,7 @@ if (count _savedLoadout > 0) then {
 
 Used to fix bugs that sometimes occur with player fatigue not being properly reset.
 
-**Behavior:**
+**Behaviour:**
 - Executes `player setFatigue 0` on all players
 
 **Usage:** Place module and activate when needed.
@@ -159,6 +159,41 @@ rc_assets_pack\addons\reaperCrew_Clothing\data\Insignias\ReaperCrewLogoPatch.paa
 
 ---
 
+### NVG Colour Effect
+
+Applies a Modern Warfare-style green tint when NVGs are activated, replacing the default ArmA 3 NVG appearance.
+
+**CBA Setting:**
+
+| Setting | Variable | Default | Description |
+|---------|----------|---------|-------------|
+| Enable NVG Effect | `reaperCrew_nvgEffect_enabled` | true | Toggle the custom NVG colour correction |
+
+**How It Works:**
+- Uses CBA `visionMode` player event to detect NVG activation
+- Creates a `ColorCorrections` post-process effect on NVG enable, destroys on disable
+- Works for both player view and Zeus curator camera
+- Does not use `ppEffectForceInNVG` (incompatible with curator camera)
+
+---
+
+### Treatment Notification
+
+Displays a flashing on-screen notification when a player is being treated by another player via ACE medical.
+
+**Events Monitored:**
+- `ace_treatmentStarted` - Shows "{Medic Name} is treating you"
+- `ace_treatmentSucceded` - Stops notification
+- `ace_treatmentFailed` - Stops notification
+
+**Behaviour:**
+- Only fires for treatment by another player (self-treatment ignored)
+- Pulses between full and 30% opacity on 0.8s cycle
+- Prevents notification stacking
+- Stops if patient dies
+
+---
+
 ### ACE Actions
 
 Automatically adds ACE self-actions on mission start.
@@ -194,11 +229,11 @@ REAPER-1-2
 ...
 ```
 
-### Weight Color Coding
+### Weight Colour Coding
 
-Player weight is color-coded to indicate load status:
+Player weight is colour-coded to indicate load status:
 
-| Weight | Color | Hex Code |
+| Weight | Colour | Hex Code |
 |--------|-------|----------|
 | ≤ 30 kg | Green | #00FF00 |
 | 31-35 kg | Orange | #FFA500 |
@@ -279,6 +314,9 @@ hintSilent parseText _info;
 | `savePlayerLoadoutGlobal` | Module: Save loadouts |
 | `fixPlayerFatigueGlobal` | Module: Reset fatigue |
 | `addACEActions` | Register ACE self-actions |
+| `initNvgEffect` | Apply custom NVG colour correction |
+| `initTreatmentNotification` | Register ACE treatment event listeners |
+| `showTreatmentNotification` | Display/hide treatment notification |
 
 ### Group Display Functions
 
@@ -290,7 +328,7 @@ hintSilent parseText _info;
 | `getUnitInfoST` | Build player info text |
 | `getUnitRole` | Extract player role |
 | `getWeight` | Get numeric weight (kg) |
-| `getWeightColour` | Get hex color for weight |
+| `getWeightColour` | Get hex colour for weight |
 
 ---
 

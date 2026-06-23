@@ -17,7 +17,7 @@ _actionsList = [];
 	},
 	{
 		_allowedGroups = reaperCrew_vehicleResupplyDeliveryGroups splitString ",";
-		count (entities "reaperCrew_moduleResupplyVehicleSpawnpoint") > 0 && ((groupId (group player)) in _allowedGroups)
+		entities "reaperCrew_moduleResupplyVehicleSpawnpoint" isNotEqualTo [] && ((groupId (group player)) in _allowedGroups)
 	},
 	{},
 	[_x] // Vehicle Classname

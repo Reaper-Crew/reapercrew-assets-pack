@@ -9,7 +9,7 @@ params ["_unit"];
 private _playerName = name _unit;
 private _playerRole = [_unit] call reapercrew_player_groups_fnc_getUnitRole;
 private _playerWeightST = [_unit] call reapercrew_player_groups_fnc_getUnitWeightST;
-private _playerWeapon = getText (configfile >> "CfgWeapons" >> currentWeapon _unit >> "displayName");
+private _playerWeapon = getText (configFile >> "CfgWeapons" >> currentWeapon _unit >> "displayName");
 if (_playerWeapon isEqualTo "") then { _playerWeapon = "Unarmed"; };
 
 private _str = format

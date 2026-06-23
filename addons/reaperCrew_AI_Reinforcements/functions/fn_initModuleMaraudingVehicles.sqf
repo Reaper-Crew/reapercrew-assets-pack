@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Initialises a marauding vehicle module with count, frequency, and type settings.
+ *
+ * Arguments:
+ * 0: _logic <OBJECT> - Module logic object
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [logic] call reapercrew_reinforcements_fnc_initModuleMaraudingVehicles
+ *
+ * Public: No
+ */
+
 // Argument 0 is module logic.
 _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];

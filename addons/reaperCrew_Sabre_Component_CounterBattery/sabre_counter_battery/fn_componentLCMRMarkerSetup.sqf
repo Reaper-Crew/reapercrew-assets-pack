@@ -7,10 +7,10 @@ if (_markerName == "") then {
 	_randomName = [1000,9999] call BIS_fnc_randomInt;
 	_markerNameString = format ["ArtilleryUnit%1", _randomName]; 
 	_markerName = createMarker [_markerNameString, _centerPoint];
-	_markerName setMarkerShape "ELLIPSE";
-	_markerName setMarkerSize [250, 250];
-	_markerName setMarkerBrush "SolidBorder";
-	_markerName setMarkerAlpha 0;
+	_markerName setMarkerShapeLocal "ELLIPSE";
+	_markerName setMarkerSizeLocal [250, 250];
+	_markerName setMarkerBrushLocal "SolidBorder";
+	_markerName setMarkerAlphaLocal 0;
 	_markerName setMarkerColor "ColorRed";
 	// diag_log "Adding marker";
 	_offset = 230;

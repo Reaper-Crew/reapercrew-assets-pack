@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Activation loop for marauding vehicles. Spawns vehicles with SAD waypoints at available spawnpoints.
+ *
+ * Arguments:
+ * 0: _triggerObject <OBJECT> - Trigger object containing vehicle spawn settings
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [trigger] call reapercrew_reinforcements_fnc_activateMaraudingVehicles
+ *
+ * Public: No
+ */
+
 params ["_triggerObject"];
 
 [_triggerObject] spawn {
@@ -9,7 +25,7 @@ params ["_triggerObject"];
 	_vehicleFrequencyMax = _triggerObject getVariable ["vehicleFrequencyMax",240];
 	_concurrentVehicles = _triggerObject getVariable ["concurrentVehicles",2];
 	_vehiclesArray = _triggerObject getVariable ["vehiclesArray",[]];
-	_moduleObject = _triggerObject getVariable ["moduleObject", objnull];
+	_moduleObject = _triggerObject getVariable ["moduleObject", objNull];
 
 	// Do for as long as trigger is active
 	while { triggerActivated _triggerObject } do {
@@ -18,10 +34,10 @@ params ["_triggerObject"];
 		_availableSpawnpoints = [_moduleObject, activeVehicleTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
 
 		// If the number of alive vehicles is lower than the number of concurrent vehicles
-		if ( ((count _availableSpawnpoints) > 0) && (reaperCrew_pauseVehicleReinforcements == false) && (_vehicleCount > 0) ) then {
+		if ( ((count _availableSpawnpoints) > 0) && (!reaperCrew_pauseVehicleReinforcements) && (_vehicleCount > 0) ) then {
 
 			// Output debug information
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
+			if (reaperCrew_ReinforcementsCheckbox) then {
 				[(format ["Marauding vehicles are active, %1 remain", _vehicleCount])] call reapercrew_common_fnc_remoteLog;
 			};
 
@@ -42,7 +58,7 @@ params ["_triggerObject"];
 			_triggerObject setVariable ["vehicleCount",_vehicleCount];
 
 		} else {
-			if (reaperCrew_ReinforcementsCheckbox == true) then {
+			if (reaperCrew_ReinforcementsCheckbox) then {
 				["Module alive but conditions not met"] call reapercrew_common_fnc_remoteLog;
 			};
 		};

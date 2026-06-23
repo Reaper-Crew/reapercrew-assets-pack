@@ -17,9 +17,9 @@ class CfgPatches
 			"reaperCrew_FOB_Crate",
 			"reaperCrew_ConstructionSupplies500"
 		};
-		weapons[] = {""};
+		weapons[] = {};
 		vehicles[] = {""};
-		requiredVersion = 1.0;
+		requiredVersion = 2.02;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings", "ReaperCrew_Common"};
 	};
 };
@@ -128,13 +128,13 @@ class CfgVehicles
 		scopeCurator=0;
 		// Dragging
         // ace_dragging_canDrag = 1;
-        ace_dragging_dragPosition[] = {0, 1.2, 0};
+        ace_dragging_dragPosition[] = {0, 2, 0};
         // ace_dragging_dragDirection = 0;
 		// ace_maxWeightDrag = 9999;
 
         // Carrying
         // ace_dragging_canCarry = 1;
-        ace_dragging_carryPosition[] = {0, 1.2, 0};
+        ace_dragging_carryPosition[] = {0, 2, 0};
         // ace_dragging_carryDirection = 0;
 
 		class TransportItems{};
@@ -152,6 +152,12 @@ class CfgVehicles
             	    condition = "true";
             	    exceptions[] = {};
             	    statement = "[_player, _target] call ace_dragging_fnc_carryObject;";
+            	};
+            	class dropObject {
+            	    displayName = "Drop Object (force)";
+            	    condition = "true";
+            	    exceptions[] = {};
+            	    statement = "[_player, _target] call ace_dragging_fnc_dropObject;";
             	};
 			};
 		};
@@ -266,51 +272,51 @@ class CfgVehicles
         class TransportItems
 		{
             class blood_1000 {
-                name = ACE_bloodIV;
+                name = "ACE_bloodIV";
                 count = 15;
             };
             class blood_500 {
-                name = ACE_bloodIV_500;
+                name = "ACE_bloodIV_500";
                 count = 12;
             };
             class blood_250 {
-                name = ACE_bloodIV_250;
+                name = "ACE_bloodIV_250";
                 count = 4;
             };
             class elasticbandage {
-                name = ACE_elasticBandage;
+                name = "ACE_elasticBandage";
                 count = 100;
             };
             class quickclotbandage {
-                name = ACE_quikclot;
+                name = "ACE_quikclot";
                 count = 100;
             };
             class packingbandage {
-                name = ACE_packingBandage;
+                name = "ACE_packingBandage";
                 count = 100;
             };
             class adenonsine {
-                name = ACE_adenosine;
+                name = "ACE_adenosine";
                 count = 20;
             };
             class epinephrine {
-                name = ACE_epinephrine;
+                name = "ACE_epinephrine";
                 count = 50;
             };
             class morphine {
-                name = ACE_morphine;
+                name = "ACE_morphine";
                 count = 20;
             };
             class tourniquet {
-                name = ACE_tourniquet;
+                name = "ACE_tourniquet";
                 count = 20;
             };
             class splint {
-                name = ACE_splint;
+                name = "ACE_splint";
                 count = 20;
             };
             class pak {
-                name = ACE_personalAidKit;
+                name = "ACE_personalAidKit";
                 count = 2;
             };
 

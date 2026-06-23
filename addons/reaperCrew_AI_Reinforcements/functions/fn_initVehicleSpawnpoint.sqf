@@ -1,3 +1,19 @@
+/*
+ * Author: Xeenenta
+ * Creates a 5000m detection trigger for a motorised vehicle spawnpoint, with pathway extraction.
+ *
+ * Arguments:
+ * 0: _logic <OBJECT> - Module logic object
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [logic] call reapercrew_reinforcements_fnc_initVehicleSpawnpoint
+ *
+ * Public: No
+ */
+
 // Argument 0 is module logic.
 _logic = param [0,objNull,[objNull]];
 _units = param [1,[],[[]]];
@@ -8,7 +24,7 @@ if (!isServer) exitWith {["Server checked failed - Not initialising init for Veh
 
 // Don't run if the array isn't available
 while {isNil "activeVehicleTriggers"} do {
-	if (reaperCrew_VehicleSpawnCheckbox == true) then {
+	if (reaperCrew_VehicleSpawnCheckbox) then {
 		["Vehicle triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	};
 	sleep 15;
@@ -30,7 +46,7 @@ _outerZone setVehicleVarName (format ["VehicleSpawn_%1_%2", (mapGridPosition _lo
 
 [_logic, _outerZone] call reapercrew_reinforcements_fnc_getPathway;
 
-if (reaperCrew_VehicleSpawnCheckbox == true) then {
+if (reaperCrew_VehicleSpawnCheckbox) then {
 	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 };
 
