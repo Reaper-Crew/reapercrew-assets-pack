@@ -45,10 +45,8 @@ while {isNil "activeVehicleTriggers"} do {
 	// Run code only while the trigger is activated
 	while { triggerActivated _triggerObject } do {
 
-		// Get a count of the number of units within the trigger area
-		_allOpforUnits = (allUnits select {side _x == reaperCrew_reinforcements_side});
-		_opforUnits = _allOpforUnits inAreaArray _triggerObject;
-		_opforCounter = count _opforUnits;
+		// Count all humanoid units in the zone (players, civilians and enemies) so the ceiling caps total load
+		_opforCounter = [_triggerObject, _moduleObject] call reapercrew_reinforcements_fnc_getZoneUnitCount;
 
 		// Calculate the effective zone ceiling based on the selected mode
 		_effectiveCeiling = [_zoneCeiling, _zoneRatio, _zoneLimitMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneCeiling;
@@ -117,7 +115,7 @@ while {isNil "activeVehicleTriggers"} do {
 
 			_reinforcementsPathway = _spawnTrigger getVariable ["_reinforcementsPathway", []];
 
-			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _rushMode], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
+			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _rushMode, _moduleObject], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
 
 			// Adjust the number of available reinforcements
 			_reinforcementsCount = _reinforcementsCount - _unitCount;

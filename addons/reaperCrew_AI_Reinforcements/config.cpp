@@ -78,6 +78,8 @@ class CfgFunctions
 			class adjustGroupLeader{};
 			class getAvailableSpawnpoints{};
 			class getZoneCeiling{};
+			class getZoneUnitCount{};
+			class watchSpawnedUnits{};
 			class waypointFastrope{};
 			
 		};

@@ -73,6 +73,10 @@ _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];
 _activationTrigger setVariable ["waveDelay", _waveDelay];
 _activationTrigger setVariable ["moduleObject", _logic];
 
+// Track units spawned by this module (may be outside the zone) and keep the array pruned of dead/null entries
+_logic setVariable ["spawnedUnits", [], true];
+[_logic] call reapercrew_reinforcements_fnc_watchSpawnedUnits;
+
 _triggerCondition = format ["(this && {isTouchingGround _x} count thisList > 0) && %1", _additionalCondition];
 
 _activationTrigger setTriggerStatements [_triggerCondition, "[thisTrigger] spawn reapercrew_reinforcements_fnc_activateInfantryModuleMotorised;", ""];

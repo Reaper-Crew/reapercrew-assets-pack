@@ -14,7 +14,7 @@
  * Public: No
  */
 
-params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_rushMode", false]];
+params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_rushMode", false], ["_moduleObject", objNull]];
 
 if (reaperCrew_debugReinforcementsSpawning) then {
 	[(format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
@@ -37,6 +37,17 @@ _spawnedGroup addVehicle _vehicle;
 		_x disableAI "FSM";
 	};
 } forEach units _spawnedGroup;
+
+// Register spawned units with the module so the zone counter can track them while they ingress
+// (the same group both drives and dismounts, so all of them legitimately count)
+if (!isNull _moduleObject) then {
+	private _existing = _moduleObject getVariable ["spawnedUnits", []];
+	private _updated = _existing + (units _spawnedGroup);
+	_moduleObject setVariable ["spawnedUnits", _updated, true];
+	if (reaperCrew_ReinforcementsCheckbox) then {
+		[format ["Tracked %1 newly spawned units: module spawnedUnits %2 -> %3", count (units _spawnedGroup), count _existing, count _updated]] call reapercrew_common_fnc_remoteLog;
+	};
+};
 
 _spawnedGroup setBehaviour "AWARE";
 

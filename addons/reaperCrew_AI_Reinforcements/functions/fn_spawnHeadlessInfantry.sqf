@@ -17,16 +17,26 @@
  * Public: No
  */
 
-params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup"];
+params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", ["_moduleObject", objNull]];
 
-[_spawnPoint, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup] spawn {
-	params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup"];
+[_spawnPoint, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup, _moduleObject] spawn {
+	params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", "_moduleObject"];
 	["Running reinforcement spawn script"] call reapercrew_common_fnc_remoteLog;
 	// Spawn the group
 	_spawnedGroup = [_spawnPoint, reaperCrew_reinforcements_side, _squadArray, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
 	{
 		_x triggerDynamicSimulation false;
 	} forEach units _spawnedGroup;
+
+	// Register spawned units with the module so the zone counter can track them
+	if (!isNull _moduleObject) then {
+		private _existing = _moduleObject getVariable ["spawnedUnits", []];
+		private _updated = _existing + (units _spawnedGroup);
+		_moduleObject setVariable ["spawnedUnits", _updated, true];
+		if (reaperCrew_ReinforcementsCheckbox) then {
+			[format ["Tracked %1 newly spawned units: module spawnedUnits %2 -> %3", count (units _spawnedGroup), count _existing, count _updated]] call reapercrew_common_fnc_remoteLog;
+		};
+	};
 
 	sleep 5;
 	_spawnedGroup setBehaviour "AWARE";

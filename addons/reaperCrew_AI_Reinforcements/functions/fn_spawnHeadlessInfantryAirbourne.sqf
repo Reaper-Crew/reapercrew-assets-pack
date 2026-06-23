@@ -23,7 +23,7 @@
  * Public: No
  */
 
-params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_deliveryMode", "LAND"], ["_rushMode", false]];
+params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_deliveryMode", "LAND"], ["_rushMode", false], ["_moduleObject", objNull]];
 
 ["Running reinforcements script"] call reapercrew_common_fnc_remoteLog;
 
@@ -85,6 +85,17 @@ _infantryGroup allowFleeing 0;
 		_x disableAI "FSM";
 	};
 } forEach units _infantryGroup;
+
+// Register the infantry group with the module so the zone counter can track them while they ingress.
+// Only the deployed infantry counts - the transport crew (_helicopterCrew) is excluded as it departs.
+if (!isNull _moduleObject) then {
+	private _existing = _moduleObject getVariable ["spawnedUnits", []];
+	private _updated = _existing + (units _infantryGroup);
+	_moduleObject setVariable ["spawnedUnits", _updated, true];
+	if (reaperCrew_ReinforcementsCheckbox) then {
+		[format ["Tracked %1 newly spawned units: module spawnedUnits %2 -> %3", count (units _infantryGroup), count _existing, count _updated]] call reapercrew_common_fnc_remoteLog;
+	};
+};
 
 // FAILSAFE: Adjust group to match vehicle size
 [_helicopter, _infantryGroup, "CARGO"] call reapercrew_reinforcements_fnc_adjustGroupToVehicle;

@@ -41,14 +41,14 @@ while {isNil "activeInfantryTriggers"} do {
 
 	while { triggerActivated _triggerObject } do {
 
-		// Count enemy units in the zone
-		_opforCount = count ((allUnits select {side _x == reaperCrew_reinforcements_side}) inAreaArray _triggerObject);
+		// Count all humanoid units in the zone (players, civilians and enemies) so the ceiling caps total load
+		_opforCount = [_triggerObject, _moduleObject] call reapercrew_reinforcements_fnc_getZoneUnitCount;
 
 		// Calculate the effective zone ceiling based on the selected mode
 		_effectiveCeiling = [_zoneCeiling, _zoneRatio, _zoneLimitMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneCeiling;
 
+		// Note: the in-zone/inbound unit count is logged centrally by fn_getZoneUnitCount
 		if (reaperCrew_ReinforcementsCheckbox) then {
-			[(format ["Reinforcements module is active, found %1 enemies within the zone", _opforCount])] call reapercrew_common_fnc_remoteLog;
 			[(format ["Available squad choices: %1", _reinforcementGroups])] call reapercrew_common_fnc_remoteLog;
 		};
 
@@ -66,7 +66,7 @@ while {isNil "activeInfantryTriggers"} do {
 
 			_randomSpawn = selectRandom _availableSpawnpoints;
 
-			[[getPos _randomSpawn, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantry"] call reapercrew_common_fnc_executeDistributed;
+			[[getPos _randomSpawn, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup, _moduleObject], "reapercrew_reinforcements_fnc_spawnHeadlessInfantry"] call reapercrew_common_fnc_executeDistributed;
 
 			_reinforcementsCount = _reinforcementsCount - _squadCount;
 			_triggerObject setVariable ["reinforcementCount", _reinforcementsCount];

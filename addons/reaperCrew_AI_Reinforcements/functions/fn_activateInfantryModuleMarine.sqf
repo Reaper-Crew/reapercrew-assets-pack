@@ -41,10 +41,8 @@ while {isNil "activeMarineTriggers"} do {
 	// Run code only while the trigger is activated
 	while { triggerActivated _triggerObject } do {
 
-		// Get a count of the number of units within the trigger area
-		_allOpforUnits = (allUnits select {side _x == reaperCrew_reinforcements_side});
-		_opforUnits = _allOpforUnits inAreaArray _triggerObject;
-		_opforCounter = count _opforUnits;
+		// Count all humanoid units in the zone (players, civilians and enemies) so the ceiling caps total load
+		_opforCounter = [_triggerObject, _moduleObject] call reapercrew_reinforcements_fnc_getZoneUnitCount;
 
 		// Calculate the zone threshold based on the selected mode
 		_effectiveCeiling = [_zoneCeiling, _zoneRatio, _zoneLimitMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneCeiling;
@@ -79,7 +77,7 @@ while {isNil "activeMarineTriggers"} do {
 			if (count _availableLZs > 0) then {
 				[(format ["Chosen Spawnpoint has %1 LZs", (count _availableLZs)])] call reapercrew_common_fnc_remoteLog;
 				_boatLZ = (selectRandom _availableLZs);
-				[[_boatLZ, getPos _boatSpawnpoint, _reinforcementsMarine, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
+				[[_boatLZ, getPos _boatSpawnpoint, _reinforcementsMarine, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, [], false, _moduleObject], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
 				// Adjust the number of available reinforcements
 				_reinforcementsCount = _reinforcementsCount - _unitCount;
 				_triggerObject setVariable ["reinforcementCount",_reinforcementsCount];

@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 6.2
+
+### Added
+- **REINFORCEMENTS:** New `fn_getZoneUnitCount` shared function counts all living humanoid units in a zone (players, civilians and enemies of any side, including agent-based ambient civilians and units mounted in vehicles), so the zone ceiling now caps total unit load instead of only enemy-faction units
+- **REINFORCEMENTS:** Modules now track the units they spawn in a per-module array so reinforcements that spawn outside the zone and ingress (airborne, motorised, marine) are counted against the ceiling while inbound, preventing the module overspawning before a wave arrives. Foot mobile is tracked too for consistency
+- **REINFORCEMENTS:** New `fn_watchSpawnedUnits` shared watcher, started per module from its init, prunes dead or removed units from the tracked array every 5 seconds to keep counts accurate
+
+### Changed
+- **REINFORCEMENTS:** Spawn tracking registers only the deployed infantry group; for airborne the separate transport crew is excluded (it departs), while for motorised and marine the same group drives and dismounts so it correctly counts
+- **REINFORCEMENTS:** Moved the per-wave zone count logging into the shared count function so all four reinforcement types report it (previously only foot mobile did); added debug logging for spawn registration (from/to array size) and watcher pruning, all gated by the reinforcements debug setting
+
 ## Version 6.1
 
 ### Added
