@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class ReaperCrew_AI_Mechanics
 	{
-		units[] = {"reaperCrew_module_ai_mechanics_base", "reaperCrew_moduleGarrison", "reaperCrew_moduleSuppressPosition", "reaperCrew_moduleAwesomeConvoy", "reaperCrew_moduleUnlimitedAmmo", "reaperCrew_moduleSurrenderArea"};
+		units[] = {"reaperCrew_module_ai_mechanics_base", "reaperCrew_moduleGarrison", "reaperCrew_modulePatrol", "reaperCrew_moduleSuppressPosition", "reaperCrew_moduleAwesomeConvoy", "reaperCrew_moduleUnlimitedAmmo", "reaperCrew_moduleSurrenderArea"};
 		weapons[]={};
 		requiredVersion=2.02;
 		requiredAddons[] = {"A3_Modules_F", "cba_settings", "ReaperCrew_Common", "reaperCrew_AI_Common", "myTag_addonName"};
@@ -36,6 +36,9 @@ class CfgFunctions
 		{
 			file = "rc_assets_pack\addons\reaperCrew_AI_Mechanics\functions";
 			class initGarrisonModule{};
+			class initPatrolModule{};
+			class activatePatrolModule{};
+			class remotePatrolSpawn{};
 			class initSuppressPosition{};
 			class activateSuppressPosition{};
 			class activateGarrisonModule{};
@@ -148,6 +151,75 @@ class CfgVehicles
 				tooltip = "Minimum distance in metres between garrison positions within the same building. Prevents AI clustering.";
 				control = "Edit";
 				defaultValue = "3";
+			};
+			class codeOnSpawnGroup: Edit {
+				displayName = "Code on spawn";
+				property = "codeOnSpawn";
+				typeName = "STRING";
+				tooltip = "";
+				control = "EditCodeMulti5";
+				defaultValue = """true""";
+			};
+		};
+	};
+	class reaperCrew_modulePatrol: reaperCrew_module_ai_mechanics_base
+	{
+		displayName = "Patrol Area";
+		function = "reapercrew_ai_mechanics_fnc_initPatrolModule";
+		scope = 2;
+		canSetArea = 1;
+		canSetAreaShape = 1;
+		class AttributeValues {
+            size3[] = {100, 100, -1};
+        };
+		class Attributes: AttributesBase {
+			class maxCount: Edit {
+				displayName = "Max Units";
+				property = "maxCount";
+				typeName = "NUMBER";
+				tooltip = "Maximum total number of units to spawn across all patrols in the area.";
+				control = "Edit";
+				defaultValue = "50";
+			};
+			class regularTroops: Checkbox {
+				displayName = "Regular Troops";
+				property = "regularTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class eliteTroops: Checkbox {
+				displayName = "Elite Troops";
+				property = "eliteTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class specialTroops: Checkbox {
+				displayName = "Special Forces";
+				property = "specialTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class minGroupSize: Edit {
+				displayName = "Min Group Size";
+				property = "minGroupSize";
+				typeName = "NUMBER";
+				tooltip = "Minimum number of units in each patrol group.";
+				control = "Edit";
+				defaultValue = "3";
+			};
+			class maxGroupSize: Edit {
+				displayName = "Max Group Size";
+				property = "maxGroupSize";
+				typeName = "NUMBER";
+				tooltip = "Maximum number of units in each patrol group.";
+				control = "Edit";
+				defaultValue = "6";
 			};
 			class codeOnSpawnGroup: Edit {
 				displayName = "Code on spawn";
