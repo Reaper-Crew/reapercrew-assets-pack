@@ -9,7 +9,14 @@
 
 ### Changed
 - **REINFORCEMENTS:** Spawn tracking registers only the deployed infantry group; for airborne the separate transport crew is excluded (it departs), while for motorised and marine the same group drives and dismounts so it correctly counts
-- **REINFORCEMENTS:** Moved the per-wave zone count logging into the shared count function so all four reinforcement types report it (previously only foot mobile did); added debug logging for spawn registration (from/to array size) and watcher pruning, all gated by the reinforcements debug setting
+- **REINFORCEMENTS:** Moved the per-wave zone count logging into the shared count function so all four reinforcement types report it (previously only foot mobile did); added logging for spawn registration (from/to tracked count) and watcher pruning
+- **ALL ADDONS:** Diagnostic logging is no longer gated behind debug CBA settings; existing log lines now always write to the server log
+
+### Removed
+- **SABRE:** Archived the SABRE Core and Counter-Battery components (`reaperCrew_Sabre_Core`, `reaperCrew_Sabre_Component_CounterBattery`) to `arc/`; their documentation and references have been removed
+- **WEAPONS:** Archived the `reaperCrew_Weapons` component (HK33, L85A3, M4 Benelli) to `arc/`
+- **CLOTHING:** Stripped `reaperCrew_Clothing` down to the beret (`RC_Beret_01`) and insignia configurations only; removed the combat uniform retextures, the Ranger Green helmet retexture, and the vest items (invisible plate carrier and battle belt) along with their textures
+- **ALL ADDONS:** Removed debug logging toggle settings and their gates. Reinforcements (`reaperCrew_debugReinforcementsSpawning`, `reaperCrew_debugWaypointMechanics`, `reaperCrew_ReinforcementsCheckbox`, and the per-type spawnpoint/HC discovery checkboxes), Common (`reaperCrew_detectHeadlessClientsDebug`) and SABRE Counter-Battery (`reaperCrew_sabreCounterBattery_DebugTasks`) debug settings are gone; the logging they controlled now always runs
 
 ## Version 6.1
 

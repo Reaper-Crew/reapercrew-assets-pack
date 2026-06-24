@@ -1,2 +1,0 @@
-// Init Settings
-["reaperCrew_sabreCore_ActivateSystem", "CHECKBOX", ["Activate SABRE network", "Tick to enable the sabre network"], ["Reaper Crew - SABRE", "Init Settings"]] call cba_settings_fnc_init;

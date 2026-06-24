@@ -30,13 +30,6 @@ The Reaper Crew Assets Pack is a comprehensive collection of systems, modules, a
 | [**Ambience**](docs/systems/ambience/ambience-system.md) | Ambient effects modules including CAS strikes |
 | [**Mission Mechanics**](docs/systems/mission-mechanics/mission-mechanics-system.md) | Gameplay modules including Interaction Objectives and Timed Tasks |
 
-### SABRE Network
-
-| System | Description |
-|--------|-------------|
-| [**SABRE Core**](docs/systems/sabre/sabreCore.md) | Information sharing network framework |
-| [**Counter-Battery**](docs/systems/sabre/sabreCounterBattery.md) | Radar-based indirect fire detection system |
-
 ### Support Systems
 
 | System | Description |
@@ -55,8 +48,6 @@ All systems are configured through CBA Settings (`Options > Addon Options`) unde
 - **Reaper Crew - AI Common** - Global AI configuration (faction, unit pools, skills)
 - **Reaper Crew - AI Reinforcements** - Reinforcement system settings and debugging
 - **Reaper Crew - Logistics** - Resupply crate contents and delivery settings
-- **Reaper Crew - SABRE** - Network activation settings
-- **Reaper Crew - SABRE (Counter Battery)** - Radar detection and artillery classnames
 
 **Important:** Save CBA settings in the **Mission** tab to ensure they persist with your mission file.
 
@@ -90,9 +81,6 @@ docs/
     │   └── mission-mechanics-system.md
     ├── reinforcements/
     │   └── reinforcements-system.md
-    ├── sabre/
-    │   ├── sabreCore.md
-    │   └── sabreCounterBattery.md
     ├── logistics/
     │   └── logistics-system.md
     └── player/

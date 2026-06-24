@@ -92,9 +92,7 @@ if (!isNull _moduleObject) then {
 	private _existing = _moduleObject getVariable ["spawnedUnits", []];
 	private _updated = _existing + (units _infantryGroup);
 	_moduleObject setVariable ["spawnedUnits", _updated, true];
-	if (reaperCrew_ReinforcementsCheckbox) then {
-		[format ["Tracked %1 newly spawned units: module spawnedUnits %2 -> %3", count (units _infantryGroup), count _existing, count _updated]] call reapercrew_common_fnc_remoteLog;
-	};
+	[format ["Tracked %1 newly spawned units: module spawnedUnits %2 -> %3", count (units _infantryGroup), count _existing, count _updated]] call reapercrew_common_fnc_remoteLog;
 };
 
 // FAILSAFE: Adjust group to match vehicle size

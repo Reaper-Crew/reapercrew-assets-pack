@@ -24,9 +24,7 @@ if (!isServer) exitWith {["Server checked failed - Not initialising init for inf
 
 // Don't run if the array isn't available
 while {isNil "activeInfantryTriggers"} do {
-	if (reaperCrew_InfantrySpawnCheckbox) then {
-		["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
-	};
+	["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	sleep 15;
 };
 
@@ -44,9 +42,7 @@ _outerZone setTriggerStatements [_triggerCondition, " activeInfantryTriggers pus
 _outerZone setTriggerInterval 30;
 _outerZone setVehicleVarName (format ["InfantrySpawn_%1_%2", (mapGridPosition _logic), ([10,99] call BIS_fnc_randomInt)]);
 
-if (reaperCrew_InfantrySpawnCheckbox) then {
-	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
-};
+[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 
 // Associate the created trigger with the module that created it
 _logic setVariable ["spawnpointTrigger", _outerZone, false];

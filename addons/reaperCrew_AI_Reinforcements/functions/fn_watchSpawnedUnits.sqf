@@ -42,9 +42,7 @@ params ["_module"];
 		// client appending new spawns
 		if (count _living != count _tracked) then {
 			_module setVariable ["spawnedUnits", _living, true];
-			if (reaperCrew_ReinforcementsCheckbox) then {
-				[format ["Pruned %1 dead/removed units: module spawnedUnits %2 -> %3", (count _tracked) - (count _living), count _tracked, count _living]] call reapercrew_common_fnc_remoteLog;
-			};
+			[format ["Pruned %1 dead/removed units: module spawnedUnits %2 -> %3", (count _tracked) - (count _living), count _tracked, count _living]] call reapercrew_common_fnc_remoteLog;
 		};
 
 		// Re-check every 5s. Cheap: it only ever walks this one module's small array, never allUnits,

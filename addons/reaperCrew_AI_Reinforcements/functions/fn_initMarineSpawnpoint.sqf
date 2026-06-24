@@ -24,9 +24,7 @@ if (!isServer) exitWith {["Server checked failed - Not initialising init for mar
 
 // Don't run if the array isn't available
 while {isNil "activeMarineTriggers"} do {
-	if (reaperCrew_MarineSpawnCheckbox) then {
-		["Marine triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
-	};
+	["Marine triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	sleep 15;
 };
 
@@ -44,9 +42,7 @@ _outerZone setTriggerStatements [_triggerCondition, " activeMarineTriggers pushB
 _outerZone setTriggerInterval 30;
 _outerZone setVehicleVarName (format ["MarineSpawn_%1_%2", (mapGridPosition _logic), ([10,99] call BIS_fnc_randomInt)]);
 
-if (reaperCrew_MarineSpawnCheckbox) then {
-	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
-};
+[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 
 // Save connected LZs as variable
 // Select a random syncronised landing point

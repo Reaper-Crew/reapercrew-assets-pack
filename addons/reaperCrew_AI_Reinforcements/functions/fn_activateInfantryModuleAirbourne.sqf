@@ -18,9 +18,7 @@ params ["_triggerObject"];
 
 // Don't run if the array isn't available
 while {isNil "activeAircraftTriggers"} do {
-	if (reaperCrew_debugReinforcementsSpawning) then {
-		["Aircraft triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
-	};
+	["Aircraft triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	sleep 15;
 };
 
@@ -64,9 +62,7 @@ while { triggerActivated _triggerObject } do {
 	if ((_opforCounter < _effectiveCeiling) and (_reinforcementsCount > _unitCount) and (!reaperCrew_pauseInfantryReinforcements) and ((count _availableSpawnpoints) > 0 )) then {
 
 		// Output debug information if enabled
-		if (reaperCrew_debugReinforcementsSpawning) then {
-			[(format ["Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
-		};
+		[(format ["Spawning a group of %1 units using vehicle of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsAircraft, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 
 		// Find landing position
 		_distance = [_distanceMin, _distanceMax] call BIS_fnc_randomInt;
@@ -83,9 +79,7 @@ while { triggerActivated _triggerObject } do {
 			_searchRadius = _searchRadius + 100;
 			private _candidatePos = _searchCenterPos findEmptyPosition [0, _searchRadius, _reinforcementsAircraft];
 
-			if (reaperCrew_debugWaypointMechanics) then {
-				[(format ["Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius])] call reapercrew_common_fnc_remoteLog;
-			};
+			[(format ["Searching grid %1 with a radius of %2", (mapGridPosition _searchCenterPos), _searchRadius])] call reapercrew_common_fnc_remoteLog;
 
 			if (count _candidatePos > 0) then {
 				// Reject positions with obstacles that could damage the helicopter on approach or landing
@@ -102,9 +96,7 @@ while { triggerActivated _triggerObject } do {
 				} else {
 					_landingPosition = +_searchCenterPos;
 				};
-				if (reaperCrew_debugWaypointMechanics) then {
-					["Search radius exceeded, using best available position"] call reapercrew_common_fnc_remoteLog;
-				};
+				["Search radius exceeded, using best available position"] call reapercrew_common_fnc_remoteLog;
 			};
 		};
 
@@ -124,6 +116,4 @@ while { triggerActivated _triggerObject } do {
 	};
 	sleep _waveDelay;
 };
-if (reaperCrew_debugReinforcementsSpawning) then {
-	["Helicopter spawning has ended"] call reapercrew_common_fnc_remoteLog;
-};
+["Helicopter spawning has ended"] call reapercrew_common_fnc_remoteLog;

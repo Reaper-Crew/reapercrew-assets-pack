@@ -37,9 +37,7 @@ params ["_triggerObject"];
 		if ( ((count _availableSpawnpoints) > 0) && (!reaperCrew_pauseVehicleReinforcements) && (_vehicleCount > 0) ) then {
 
 			// Output debug information
-			if (reaperCrew_ReinforcementsCheckbox) then {
-				[(format ["Marauding vehicles are active, %1 remain", _vehicleCount])] call reapercrew_common_fnc_remoteLog;
-			};
+			[(format ["Marauding vehicles are active, %1 remain", _vehicleCount])] call reapercrew_common_fnc_remoteLog;
 
 			_randomSpawn = (selectRandom _availableSpawnpoints);
 
@@ -58,9 +56,7 @@ params ["_triggerObject"];
 			_triggerObject setVariable ["vehicleCount",_vehicleCount];
 
 		} else {
-			if (reaperCrew_ReinforcementsCheckbox) then {
-				["Module alive but conditions not met"] call reapercrew_common_fnc_remoteLog;
-			};
+			["Module alive but conditions not met"] call reapercrew_common_fnc_remoteLog;
 		};
 		_sleepTimer = [_vehicleFrequencyMin,_vehicleFrequencyMax] call BIS_fnc_randomInt;
 		sleep _sleepTimer;

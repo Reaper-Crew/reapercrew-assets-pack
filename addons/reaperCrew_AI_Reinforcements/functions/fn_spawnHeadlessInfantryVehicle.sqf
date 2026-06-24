@@ -16,9 +16,7 @@
 
 params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_rushMode", false], ["_moduleObject", objNull]];
 
-if (reaperCrew_debugReinforcementsSpawning) then {
-	[(format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
-};
+[(format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 
 // Create the transport vehicle
 _vehicle = createVehicle [_vehicleClass, _spawnPosition];
@@ -44,9 +42,7 @@ if (!isNull _moduleObject) then {
 	private _existing = _moduleObject getVariable ["spawnedUnits", []];
 	private _updated = _existing + (units _spawnedGroup);
 	_moduleObject setVariable ["spawnedUnits", _updated, true];
-	if (reaperCrew_ReinforcementsCheckbox) then {
-		[format ["Tracked %1 newly spawned units: module spawnedUnits %2 -> %3", count (units _spawnedGroup), count _existing, count _updated]] call reapercrew_common_fnc_remoteLog;
-	};
+	[format ["Tracked %1 newly spawned units: module spawnedUnits %2 -> %3", count (units _spawnedGroup), count _existing, count _updated]] call reapercrew_common_fnc_remoteLog;
 };
 
 _spawnedGroup setBehaviour "AWARE";
@@ -54,9 +50,7 @@ _spawnedGroup setBehaviour "AWARE";
 // FAILSAFE: Adjust group to match vehicle size
 [_vehicle, _spawnedGroup, "FULL"] call reapercrew_reinforcements_fnc_adjustGroupToVehicle;
 
-if (reaperCrew_debugWaypointMechanics) then {
-	[format ["List of available waypoints: %1", _waypointsList], (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
-};
+[format ["List of available waypoints: %1", _waypointsList], (format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 
 // Add Waypoints
 // Get In

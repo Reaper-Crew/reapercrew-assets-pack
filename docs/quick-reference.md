@@ -23,10 +23,6 @@ Before starting, configure these in `Options > Addon Options`:
 - [ ] Set deliverable vehicles list
 - [ ] Set permitted groups for vehicle delivery
 
-### Reaper Crew - SABRE
-- [ ] Enable SABRE network if using Counter-Battery
-- [ ] Configure detectable artillery classnames
-
 **Important:** Save all settings in the **Mission** tab!
 
 ---
@@ -169,16 +165,6 @@ Before starting, configure these in `Options > Addon Options`:
 
 ---
 
-## SABRE Counter-Battery
-
-1. Enable SABRE network in CBA Settings
-2. Enable Counter-Battery system
-3. Configure detectable artillery classnames
-4. Place Sentinel Radar units with AI crew
-5. Give players `DataLinkTablet` item
-
----
-
 ## Key Module Classnames
 
 | System | Module | Classname |
@@ -236,11 +222,6 @@ Before starting, configure these in `Options > Addon Options`:
 - Max Speed: 40 km/h
 - Separation: 35 meters
 
-### Counter-Battery
-- Detection Radius: 6,180 meters
-- Marker Lifetime: 30 minutes
-- Network Sync: 15 seconds
-
 ---
 
 ## Troubleshooting Quick Checks
@@ -248,7 +229,7 @@ Before starting, configure these in `Options > Addon Options`:
 ### Units Not Spawning
 1. Check CBA faction setting matches unit classnames
 2. Verify spawnpoint is within activation distance
-3. Confirm zone ceiling not exceeded
+3. Confirm zone ceiling not exceeded (the count includes all humanoids in the zone - players and civilians too - plus the module's own reinforcements still inbound)
 4. Check pause settings are OFF
 5. Verify spawnpoint conditions are met
 
@@ -256,11 +237,6 @@ Before starting, configure these in `Options > Addon Options`:
 1. Check activation condition returns true
 2. Verify vehicles have crews assigned
 3. Ensure vehicles are synchronized to module
-
-### Markers Not Visible
-1. Player needs `DataLinkTablet` item
-2. SABRE Core must be enabled
-3. Wait up to 15 seconds for sync
 
 ### Vehicle Delivery Fails
 1. Verify group is in permitted list
@@ -336,7 +312,5 @@ myMissionVariable
 - [Ambience](systems/ambience/ambience-system.md) - Ambient CAS strikes
 - [Mission Mechanics](systems/mission-mechanics/mission-mechanics-system.md) - Interaction Objectives, Timed Tasks
 - [Reinforcements](systems/reinforcements/reinforcements-system.md) - Dynamic AI spawning
-- [SABRE Core](systems/sabre/sabreCore.md) - Network framework
-- [Counter-Battery](systems/sabre/sabreCounterBattery.md) - Radar detection
 - [Logistics](systems/logistics/logistics-system.md) - Resupply and delivery
 - [Player Management](systems/player/player-management.md) - Loadouts and ACRE

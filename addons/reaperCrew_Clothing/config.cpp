@@ -5,14 +5,10 @@ class CfgPatches
 		author="Reaper Crew";
 		weapons[]=
 		{
-			"RC_Beret_01", 
-			"RC_MTP_Uniform", 
-			"RC_MTP_Medic_Uniform"
+			"RC_Beret_01"
 		};
 		units[]=
 		{
-			"MTP_Soldier_F", 
-			"MTP_Soldier_F_Medic"
 		};
 		requiredVersion=2.02;
 		requiredAddons[]=
@@ -24,82 +20,9 @@ class CfgPatches
 };
 class CfgWeapons
 {
-
-	class U_B_CombatUniform_mcam_vest;
-	class U_B_CombatUniform_mcam;
-	class U_I_CombatUniform_shortsleeve;
-	class V_PlateCarrier1_blk;
-	class V_PlateCarrier2_blk;
-	class H_HelmetIA;
-	// class H_HelmetB;
-	class H_HelmetSpecB;
-	class B_Kitbag_tan;
-	class H_Booniehat_khk;
-	class Uniform_Base;
-	class HeadgearItem;
-	class UniformItem;
-	class VestItem;
-	class ItemCore;
-	class B_Radiobag_01_base_F;
-	class Vest_Camo_base: ItemCore
-	{
-		class ItemInfo;
-	};
-	class U_I_CombatUniform;
-	class xeen_reaperCrew_uniform_RangerGreen: U_I_CombatUniform {
-	scope=2;
-	displayName="Combat Uniform (RangerGreen)";
-	picture="rc_assets_pack\addons\reaperCrew_Common\data\insignia.paa";
-		class ItemInfo: UniformItem
-		{
-			uniformModel="-";
-			uniformClass="xeen_reaperCrew_uniform_RangerGreen";
-			containerClass="Supply40";
-			mass=40;
-		};
-	};
-	class xeen_reaperCrew_uniform_RangerGreenTrainer: U_I_CombatUniform {
-	scope=2;
-	displayName="Combat Uniform (RangerGreen - Trainer)";
-	picture="rc_assets_pack\addons\reaperCrew_Common\data\insignia.paa";
-		class ItemInfo: UniformItem
-		{
-			uniformModel="-";
-			uniformClass="xeen_reaperCrew_uniform_RangerGreenTrainer";
-			containerClass="Supply40";
-			mass=40;
-		};
-	};
-
-	#include "data\Vests\V_PlateCarrier1_rgr\V_PlateCarrier1_rgr.hpp"
-	#include "data\Helmets\H_HelmetB\headgear_b_helmet_plain.hpp"
 	#include "data\Helmets\H_Beret_Colonel\H_Beret_Colonel.hpp"
-	class V_Rangemaster_belt: Vest_Camo_base {
-		class ItemInfo;
-	};
-	class reaperCrew_V_Rangemaster_belt: V_Rangemaster_belt {
-		displayName="Battle Belt";
-		class ItemInfo: ItemInfo {
-			containerClass="Supply250";
-		};
-	};
 };
 
-class CfgVehicles
-{
-	class B_Soldier_base_F;
-	class I_soldier_F;
-	class xeen_reaperCrew_I_soldier_F_Uniform_Base: I_soldier_F {
-		side = 1;
-		// scope = 0;
-	};
-	class xeen_reaperCrew_uniform_RangerGreen: xeen_reaperCrew_I_soldier_F_Uniform_Base {
-		hiddenSelectionsTextures[]={"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\U_I_CombatUniform\RangerGreen\data\ia_soldier_01_clothing_CO.paa"};
-	};
-	class xeen_reaperCrew_uniform_RangerGreenTrainer: xeen_reaperCrew_I_soldier_F_Uniform_Base {
-		hiddenSelectionsTextures[]={"rc_assets_pack\addons\reaperCrew_Clothing\data\Uniforms\U_I_CombatUniform\RangerGreenTrainer\data\ia_soldier_01_clothing_CO.paa"};
-	};
-};
 class CfgUnitInsignia
 {	
 

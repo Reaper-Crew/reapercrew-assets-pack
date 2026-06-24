@@ -33,9 +33,7 @@ params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnG
 		private _existing = _moduleObject getVariable ["spawnedUnits", []];
 		private _updated = _existing + (units _spawnedGroup);
 		_moduleObject setVariable ["spawnedUnits", _updated, true];
-		if (reaperCrew_ReinforcementsCheckbox) then {
-			[format ["Tracked %1 newly spawned units: module spawnedUnits %2 -> %3", count (units _spawnedGroup), count _existing, count _updated]] call reapercrew_common_fnc_remoteLog;
-		};
+		[format ["Tracked %1 newly spawned units: module spawnedUnits %2 -> %3", count (units _spawnedGroup), count _existing, count _updated]] call reapercrew_common_fnc_remoteLog;
 	};
 
 	sleep 5;

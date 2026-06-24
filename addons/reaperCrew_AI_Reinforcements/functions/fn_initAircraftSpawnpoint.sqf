@@ -24,9 +24,7 @@ if (!isServer) exitWith {["Server checked failed - Not initialising init for Air
 
 // Don't run if the array isn't available
 while {isNil "activeAircraftTriggers"} do {
-	if (reaperCrew_AircraftSpawnCheckbox) then {
-		["Aircraft triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
-	};
+	["Aircraft triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	sleep 15;
 };
 
@@ -46,9 +44,7 @@ _outerZone setVehicleVarName (format ["AircraftSpawn_%1_%2", (mapGridPosition _l
 
 [_logic, _outerZone] call reapercrew_reinforcements_fnc_getPathway;
 
-if (reaperCrew_AircraftSpawnCheckbox) then {
-	[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
-};
+[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
 
 // Associate the created trigger with the module that created it
 _logic setVariable ["spawnpointTrigger", _outerZone, false];

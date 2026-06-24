@@ -19,9 +19,7 @@ params ["_triggerObject"];
 
 // Wait for the spawnpoint system to initialise
 while {isNil "activeInfantryTriggers"} do {
-	if (reaperCrew_InfantrySpawnCheckbox) then {
-		["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
-	};
+	["Infantry triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	sleep 15;
 };
 
@@ -48,9 +46,7 @@ while {isNil "activeInfantryTriggers"} do {
 		_effectiveCeiling = [_zoneCeiling, _zoneRatio, _zoneLimitMode, _triggerObject] call reapercrew_reinforcements_fnc_getZoneCeiling;
 
 		// Note: the in-zone/inbound unit count is logged centrally by fn_getZoneUnitCount
-		if (reaperCrew_ReinforcementsCheckbox) then {
-			[(format ["Available squad choices: %1", _reinforcementGroups])] call reapercrew_common_fnc_remoteLog;
-		};
+		[(format ["Available squad choices: %1", _reinforcementGroups])] call reapercrew_common_fnc_remoteLog;
 
 		// Select a random squad from the troop arrays
 		_randomSquad = selectRandom _reinforcementGroups;
@@ -71,9 +67,7 @@ while {isNil "activeInfantryTriggers"} do {
 			_reinforcementsCount = _reinforcementsCount - _squadCount;
 			_triggerObject setVariable ["reinforcementCount", _reinforcementsCount];
 
-			if (reaperCrew_ReinforcementsCheckbox) then {
-				[(format ["Reinforcements created, %1 infantry remain", _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
-			};
+			[(format ["Reinforcements created, %1 infantry remain", _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 		};
 
 		sleep _waveDelay;

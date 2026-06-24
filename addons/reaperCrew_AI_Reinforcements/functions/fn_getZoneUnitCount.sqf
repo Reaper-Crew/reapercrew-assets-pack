@@ -56,8 +56,6 @@ if (!isNull _moduleObject) then {
 };
 
 // Debug breakdown so every module type can see how the cap figure was reached
-if (reaperCrew_ReinforcementsCheckbox) then {
-	[format ["Zone unit count: %1 in zone + %2 inbound (tracked) = %3 total", count _inZone, _outsideCount, _total]] call reapercrew_common_fnc_remoteLog;
-};
+[format ["Zone unit count: %1 in zone + %2 inbound (tracked) = %3 total", count _inZone, _outsideCount, _total]] call reapercrew_common_fnc_remoteLog;
 
 _total

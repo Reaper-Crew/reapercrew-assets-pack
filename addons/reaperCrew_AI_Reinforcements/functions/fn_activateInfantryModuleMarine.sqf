@@ -18,9 +18,7 @@ params ["_triggerObject"];
 
 // Don't run if the array isn't available
 while {isNil "activeMarineTriggers"} do {
-	if (reaperCrew_MarineSpawnCheckbox) then {
-		["Marine triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
-	};
+	["Marine triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
 	sleep 15;
 };
 
@@ -66,9 +64,7 @@ while {isNil "activeMarineTriggers"} do {
 		if ((_opforCounter < _effectiveCeiling) and (_reinforcementsCount > _unitCount) and (!reaperCrew_pauseInfantryReinforcements) and ((count _availableSpawnpoints) > 0 )) then {
 
 			// Output debug information if enabled
-			if (reaperCrew_ReinforcementsCheckbox) then {
-				[(format ["Spawning a group of %1 units using Marine of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsMarine, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
-			};
+			[(format ["Spawning a group of %1 units using Marine of %2 class - %3 reinforcements remain", count _reinforcementsGroup, _reinforcementsMarine, _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
 
 			// Select a random spawnpoint
 			_boatSpawnpoint = (selectRandom _availableSpawnpoints);

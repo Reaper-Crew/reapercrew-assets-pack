@@ -36,9 +36,7 @@ params ["_triggerObject"];
 		if ( ((count _availableSpawnpoints) > 0) && (!reaperCrew_pauseAircraftReinforcements) && (_AircraftCount > 0) ) then {
 
 			// Output debug information
-			if (reaperCrew_ReinforcementsCheckbox) then {
-				[(format ["Marauding Aircrafts are active, %1 remain", _AircraftCount])] call reapercrew_common_fnc_remoteLog;
-			};
+			[(format ["Marauding Aircrafts are active, %1 remain", _AircraftCount])] call reapercrew_common_fnc_remoteLog;
 
 			_randomSpawn = (selectRandom _availableSpawnpoints);
 
@@ -56,9 +54,7 @@ params ["_triggerObject"];
 			_triggerObject setVariable ["AircraftCount",_AircraftCount];
 
 		} else {
-			if (reaperCrew_ReinforcementsCheckbox) then {
-				["Module alive but conditions not met"] call reapercrew_common_fnc_remoteLog;
-			};
+			["Module alive but conditions not met"] call reapercrew_common_fnc_remoteLog;
 		};
 		_sleepTimer = [_AircraftFrequencyMin,_AircraftFrequencyMax] call BIS_fnc_randomInt;
 		sleep _sleepTimer;
