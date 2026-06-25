@@ -35,10 +35,10 @@
         ace_dragging_canDrag = 1;
         ace_dragging_dragPosition[] = {0, 1.2, 0};
         ace_dragging_dragDirection = 0;
-		ace_maxWeightDrag = 9999;
+		ace_dragging_ignoreWeight = 1;
 
-        // Carrying
-        ace_dragging_canCarry = 1;
+        // Carrying (only medical crates are carryable)
+        ace_dragging_canCarry = 0;
         ace_dragging_carryPosition[] = {0, 1.2, 0};
         ace_dragging_carryDirection = 0;
 		class ACE_Actions {

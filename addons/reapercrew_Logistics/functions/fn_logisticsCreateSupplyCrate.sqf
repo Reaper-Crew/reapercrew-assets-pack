@@ -55,11 +55,5 @@ switch (_crateType) do {
 	// medical, vehicleFuel, vehicleAmmo, emptyTransport use default contents from config
 };
 
-// Removing because code temporarily broken
-if !(isNull _spawningPlayer) then {
-	[_supplyCrate, true, [0, 2, 0], 0, true] remoteExec ["ace_dragging_fnc_setCarryable", _supplyCrate];
-	[_supplyCrate, true, [0, 2, 0], 0, true] remoteExec ["ace_dragging_fnc_setDraggable", _supplyCrate];
-};
-
 // Return the created crate
 _supplyCrate;

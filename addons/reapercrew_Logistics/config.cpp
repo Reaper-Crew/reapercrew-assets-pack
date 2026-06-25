@@ -112,12 +112,9 @@ class CfgVehicles
 		scope = 2;
 	};
 	class Items_base_F;
+	class PlasticCase_01_base_F;
 	class CargoNet_01_ammo_base_F;
-	class B_CargoNet_01_ammo_F: CargoNet_01_ammo_base_F {
-		class ACE_Actions {
-            class ACE_MainActions{};
-        };
-	};
+	class B_CargoNet_01_ammo_F;
 	class CargoNet_01_barrels_F;
 	class VirtualReammoBox_F;
 	class ReaperCrew_SupplyCrate: B_CargoNet_01_ammo_F {
@@ -127,40 +124,19 @@ class CfgVehicles
 		scope=0;
 		scopeCurator=0;
 		// Dragging
-        // ace_dragging_canDrag = 1;
+        ace_dragging_canDrag = 1;
         ace_dragging_dragPosition[] = {0, 2, 0};
-        // ace_dragging_dragDirection = 0;
-		// ace_maxWeightDrag = 9999;
+        ace_dragging_dragDirection = 0;
+		ace_dragging_ignoreWeight = 1;
 
-        // Carrying
-        // ace_dragging_canCarry = 1;
+        // Carrying (only medical crates are carryable)
+        ace_dragging_canCarry = 0;
         ace_dragging_carryPosition[] = {0, 2, 0};
-        // ace_dragging_carryDirection = 0;
+        ace_dragging_carryDirection = 0;
 
 		class TransportItems{};
 		class TransportMagazines{};
 		class TransportWeapons{};
-		class ACE_Actions: ACE_Actions {
-            class ACE_MainActions {
-                condition = "true";
-				displayName = "Interactions";
-				distance = 10;
-				position = "[_target,  ace_interact_menu_cameraPosASL] call ace_interaction_fnc_getVehiclePosComplex";
-				selection = "";
-            	class PickUp {
-            	    displayName = "Pick Up";
-            	    condition = "true";
-            	    exceptions[] = {};
-            	    statement = "[_player, _target] call ace_dragging_fnc_carryObject;";
-            	};
-            	class dropObject {
-            	    displayName = "Drop Object (force)";
-            	    condition = "true";
-            	    exceptions[] = {};
-            	    statement = "[_player, _target] call ace_dragging_fnc_dropObject;";
-            	};
-			};
-		};
 	};
 	class ReaperCrew_SupplyCrateSmallArms: ReaperCrew_SupplyCrate {
 		displayName="Supply Crate (Small Arms)";
@@ -180,7 +156,7 @@ class CfgVehicles
 		};
 	};
 
-    class ReaperCrew_PlasticCase_Base: Items_base_F
+    class ReaperCrew_PlasticCase_Base: PlasticCase_01_base_F
 	{
 		author="Reaper Crew";
 		mapSize=0.650000;
@@ -203,15 +179,15 @@ class CfgVehicles
         ace_cargo_canLoad = 1;
 
 		// Dragging
-        // ace_dragging_canDrag = 1;
+        ace_dragging_canDrag = 1;
         ace_dragging_dragPosition[] = {0, 1.2, 0};
-        // ace_dragging_dragDirection = 0;
-		// ace_maxWeightDrag = 9999;
+        ace_dragging_dragDirection = 0;
+		ace_dragging_ignoreWeight = 1;
 
-        // Carrying
-        // ace_dragging_canCarry = 1;
+        // Carrying (only medical crates are carryable)
+        ace_dragging_canCarry = 0;
         ace_dragging_carryPosition[] = {0, 1.2, 0};
-        // ace_dragging_carryDirection = 0;
+        ace_dragging_carryDirection = 0;
 		class TransportItems
 		{
 		};
@@ -225,9 +201,6 @@ class CfgVehicles
 		{
 			"camo"
 		};
-		class ACE_Actions {
-            class ACE_MainActions{};
-        };
 
 		// hiddenselectionsTextures[]=
 		// {
@@ -254,21 +227,10 @@ class CfgVehicles
 		displayName="Supply Crate (Medical)";
 		model="\A3\Structures_F_Heli\Items\Luggage\PlasticCase_01_large_F.p3d";
 		icon="iconObject_1x2";
-		class ACE_Actions: ACE_Actions {
-            class ACE_MainActions {
-                condition = "true";
-				displayName = "Interactions";
-				distance = 10;
-				position = "[_target,  ace_interact_menu_cameraPosASL] call ace_interaction_fnc_getVehiclePosComplex";
-				selection = "";
-            	class PickUp {
-            	    displayName = "Pick Up";
-            	    condition = "true";
-            	    exceptions[] = {};
-            	    statement = "[_player, _target] call ace_dragging_fnc_carryObject;";
-            	};
-			};
-		};
+
+		// Carrying (medical crates are the only carryable crate; ignore weight)
+		ace_dragging_canCarry = 1;
+		ace_dragging_ignoreWeightCarry = 1;
         class TransportItems
 		{
             class blood_1000 {
@@ -343,10 +305,10 @@ class CfgVehicles
         ace_dragging_canDrag = 1;
         ace_dragging_dragPosition[] = {0, 1.2, 0};
         ace_dragging_dragDirection = 0;
-		ace_maxWeightDrag = 9999;
+		ace_dragging_ignoreWeight = 1;
 
-        // Carrying
-        ace_dragging_canCarry = 1;
+        // Carrying (only medical crates are carryable)
+        ace_dragging_canCarry = 0;
         ace_dragging_carryPosition[] = {0, 1.2, 0};
         ace_dragging_carryDirection = 0;
 
@@ -373,10 +335,10 @@ class CfgVehicles
         ace_dragging_canDrag = 1;
         ace_dragging_dragPosition[] = {0, 1.2, 0};
         ace_dragging_dragDirection = 0;
-		ace_maxWeightDrag = 9999;
+		ace_dragging_ignoreWeight = 1;
 
-        // Carrying
-        ace_dragging_canCarry = 1;
+        // Carrying (only medical crates are carryable)
+        ace_dragging_canCarry = 0;
         ace_dragging_carryPosition[] = {0, 1.2, 0};
         ace_dragging_carryDirection = 0;
 
