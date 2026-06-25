@@ -105,7 +105,10 @@ while {isNil "activeVehicleTriggers"} do {
 
 			_reinforcementsPathway = _spawnTrigger getVariable ["_reinforcementsPathway", []];
 
-			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _rushMode, _moduleObject], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
+			// Rush radius covers the dismount distance from players plus a buffer
+			_rushRadius = _distanceMax + 500;
+
+			[[_landingPosition, getPos _spawnTrigger, _reinforcementsVehicle, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _rushMode, _moduleObject, _rushRadius], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryVehicle"] call reapercrew_common_fnc_executeDistributed;
 
 			// Adjust the number of available reinforcements
 			_reinforcementsCount = _reinforcementsCount - _unitCount;

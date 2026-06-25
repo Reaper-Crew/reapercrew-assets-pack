@@ -1,6 +1,7 @@
 /*
  * Author: Xeenenta
- * Creates a 5000m detection trigger for a motorised vehicle spawnpoint, with pathway extraction.
+ * Initialises a motorised vehicle spawnpoint. Delegates the shared zone/trigger/capture work
+ * to fn_initSpawnpoint, then extracts the vehicle pathway.
  *
  * Arguments:
  * 0: _logic <OBJECT> - Module logic object
@@ -14,37 +15,11 @@
  * Public: No
  */
 
-// Argument 0 is module logic.
-_logic = param [0,objNull,[objNull]];
-_units = param [1,[],[[]]];
-_activated = param [2,true,[true]];
+params [["_logic", objNull, [objNull]]];
 
 // Only run on the server
-if (!isServer) exitWith {["Server checked failed - Not initialising init for Vehicle spawns"] call reapercrew_common_fnc_remoteLog;};
+if (!isServer) exitWith {["Server check failed - Not initialising init for Vehicle spawns"] call reapercrew_common_fnc_remoteLog;};
 
-// Don't run if the array isn't available
-while {isNil "activeVehicleTriggers"} do {
-	["Vehicle triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
-	sleep 15;
-};
-
-["Initialising Vehicle spawnpoint module"] call reapercrew_common_fnc_remoteLog;
-
-// Get variables
-_additionalCondition = _logic getVariable ["additionalCondition", "true"];
-_triggerCondition = format ["(this && { [objNull, 'VIEW'] checkVisibility [eyePos _x, getPosASL thisTrigger] == 0 } count thisList > 0) && {isTouchingGround _x} count thisList > 0 && %1", _additionalCondition];
-
-// Create detection trigger
-_outerZone = createTrigger ["EmptyDetector", position _logic, false];
-_outerZone setTriggerArea [5000, 5000, 0, false, -1];
-_outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_outerZone setTriggerStatements [_triggerCondition, " activeVehicleTriggers pushBack thisTrigger; ", " activeVehicleTriggers = activeVehicleTriggers - [thisTrigger];"];
-_outerZone setTriggerInterval 30;
-_outerZone setVehicleVarName (format ["VehicleSpawn_%1_%2", (mapGridPosition _logic), ([10,99] call BIS_fnc_randomInt)]);
+_outerZone = [_logic, "activeVehicleTriggers", 5000, 2500, "Vehicle Spawnpoint", "VehicleSpawn"] call reapercrew_reinforcements_fnc_initSpawnpoint;
 
 [_logic, _outerZone] call reapercrew_reinforcements_fnc_getPathway;
-
-[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
-
-// Associate the created trigger with the module that created it
-_logic setVariable ["spawnpointTrigger", _outerZone, false];

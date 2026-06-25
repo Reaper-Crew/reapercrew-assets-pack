@@ -23,7 +23,7 @@
  * Public: No
  */
 
-params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_deliveryMode", "LAND"], ["_rushMode", false], ["_moduleObject", objNull]];
+params ["_landingPosition", "_spawnPosition", "_aircraftClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_deliveryMode", "LAND"], ["_rushMode", false], ["_moduleObject", objNull], ["_rushRadius", 2000]];
 
 ["Running reinforcements script"] call reapercrew_common_fnc_remoteLog;
 
@@ -137,7 +137,7 @@ _waypoint setWaypointTimeout [10, 10, 10];
 // Task Rush
 _waypoint = _infantryGroup addWaypoint [_landingPosition, -1];
 _waypoint setWaypointType "SCRIPTED";
-_waypoint setWaypointStatements ["true", "[this, 2000] spawn lambs_wp_fnc_taskRush; [leader this] call reapercrew_reinforcements_fnc_adjustGroupLeader;"];
+_waypoint setWaypointStatements ["true", format ["[this, %1] spawn lambs_wp_fnc_taskRush; [leader this] call reapercrew_reinforcements_fnc_adjustGroupLeader;", _rushRadius]];
 _waypoint setWaypointForceBehaviour true;
 _waypoint setWaypointBehaviour "AWARE";
 

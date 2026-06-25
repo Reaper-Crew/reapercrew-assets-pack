@@ -14,7 +14,7 @@
  * Public: No
  */
 
-params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_rushMode", false], ["_moduleObject", objNull]];
+params ["_landingPosition", "_spawnPosition", "_vehicleClass", "_reinforcementsGroup", "_reinforcementsGroupSkill", "_codeOnSpawnGroup", ["_waypointsList", []], ["_rushMode", false], ["_moduleObject", objNull], ["_rushRadius", 2000]];
 
 [(format ["[%1]", name player])] call reapercrew_common_fnc_remoteLog;
 
@@ -84,7 +84,7 @@ _dismountPos = waypointPosition _waypoint;
 // Rush
 _waypoint =_spawnedGroup addWaypoint [_dismountPos, -1];
 _waypoint setWaypointType "SCRIPTED";
-_waypoint setWaypointStatements ["true", " [this, 2000] spawn lambs_wp_fnc_taskRush; [(assignedVehicle leader this)] call reapercrew_reinforcements_fnc_cleanupVehicle; thisList apply { _x leaveVehicle (assignedVehicle _x) }; [leader this] call reapercrew_reinforcements_fnc_adjustGroupLeader;"];
+_waypoint setWaypointStatements ["true", format [" [this, %1] spawn lambs_wp_fnc_taskRush; [(assignedVehicle leader this)] call reapercrew_reinforcements_fnc_cleanupVehicle; thisList apply { _x leaveVehicle (assignedVehicle _x) }; [leader this] call reapercrew_reinforcements_fnc_adjustGroupLeader;", _rushRadius]];
 _waypoint setWaypointForceBehaviour true;
 _waypoint setWaypointBehaviour "AWARE";
 

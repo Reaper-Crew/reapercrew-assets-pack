@@ -17,10 +17,10 @@
  * Public: No
  */
 
-params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", ["_moduleObject", objNull]];
+params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", ["_moduleObject", objNull], ["_rushRadius", 2000]];
 
-[_spawnPoint, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup, _moduleObject] spawn {
-	params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", "_moduleObject"];
+[_spawnPoint, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup, _moduleObject, _rushRadius] spawn {
+	params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", "_moduleObject", "_rushRadius"];
 	["Running reinforcement spawn script"] call reapercrew_common_fnc_remoteLog;
 	// Spawn the group
 	_spawnedGroup = [_spawnPoint, reaperCrew_reinforcements_side, _squadArray, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
@@ -48,8 +48,8 @@ params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnG
 
 	sleep 5;
 
-	// Make them rush
-	[_spawnedGroup, 2000] spawn lambs_wp_fnc_taskRush;
+	// Make them rush across the spawnpoint's outer zone
+	[_spawnedGroup, _rushRadius] spawn lambs_wp_fnc_taskRush;
 
 	// Run extra code
 	_extraCodeString = format ['params ["_thisGroup"]; %1', _codeOnSpawnGroup];

@@ -1,6 +1,7 @@
 /*
  * Author: Xeenenta
- * Creates a 25000m detection trigger for an aircraft spawnpoint, with pathway extraction.
+ * Initialises an aircraft spawnpoint. Delegates the shared zone/trigger/capture work to
+ * fn_initSpawnpoint, then extracts the aircraft pathway.
  *
  * Arguments:
  * 0: _logic <OBJECT> - Module logic object
@@ -14,37 +15,11 @@
  * Public: No
  */
 
-// Argument 0 is module logic.
-_logic = param [0,objNull,[objNull]];
-_units = param [1,[],[[]]];
-_activated = param [2,true,[true]];
+params [["_logic", objNull, [objNull]]];
 
 // Only run on the server
-if (!isServer) exitWith {["Server checked failed - Not initialising init for Aircraft spawns"] call reapercrew_common_fnc_remoteLog;};
+if (!isServer) exitWith {["Server check failed - Not initialising init for Aircraft spawns"] call reapercrew_common_fnc_remoteLog;};
 
-// Don't run if the array isn't available
-while {isNil "activeAircraftTriggers"} do {
-	["Aircraft triggers undefined, sleeping"] call reapercrew_common_fnc_remoteLog;
-	sleep 15;
-};
-
-["Initialising Aircraft spawnpoint module"] call reapercrew_common_fnc_remoteLog;
-
-// Get variables
-_additionalCondition = _logic getVariable ["additionalCondition", "true"];
-_triggerCondition = format ["(this && { [objNull, 'VIEW'] checkVisibility [eyePos _x, getPosASL thisTrigger] == 0 } count thisList > 0) && {isTouchingGround _x} count thisList > 0 && %1", _additionalCondition];
-
-// Create detection trigger
-_outerZone = createTrigger ["EmptyDetector", position _logic, false];
-_outerZone setTriggerArea [25000, 25000, 0, false, -1];
-_outerZone setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_outerZone setTriggerStatements [_triggerCondition, " activeAircraftTriggers pushBack thisTrigger; ", " activeAircraftTriggers = activeAircraftTriggers - [thisTrigger]; "];
-_outerZone setTriggerInterval 30;
-_outerZone setVehicleVarName (format ["AircraftSpawn_%1_%2", (mapGridPosition _logic), ([10,99] call BIS_fnc_randomInt)]);
+_outerZone = [_logic, "activeAircraftTriggers", 25000, 12500, "Aircraft Spawnpoint", "AircraftSpawn"] call reapercrew_reinforcements_fnc_initSpawnpoint;
 
 [_logic, _outerZone] call reapercrew_reinforcements_fnc_getPathway;
-
-[(format ["Trigger condition is: %1", _triggerCondition])] call reapercrew_common_fnc_remoteLog;
-
-// Associate the created trigger with the module that created it
-_logic setVariable ["spawnpointTrigger", _outerZone, false];

@@ -47,6 +47,8 @@ class CfgFunctions
 			class initReinforcementsSystem{postInit = 1;};
 
 			// Spawnpoints
+			class initSpawnpoint {};
+			class createSpawnpointDebugMarkers {};
 			class initInfantrySpawnpoint {};
 			class initVehicleSpawnpoint {};
 			class initAircraftSpawnpoint {};
@@ -119,21 +121,55 @@ class CfgVehicles
 		functionPriority = 1;
 		category = "reaperCrew_ModulesReinforcements";
 	};
-	class reaperCrew_moduleInfantrySpawn: reaperCrew_moduleReinforcementsBase
+	// Shared base for all spawnpoint types: a drawable outer area plus the common attributes.
+	// Children set their default area size (size3) and may override the inner zone default.
+	class reaperCrew_moduleSpawnpointBase: reaperCrew_moduleReinforcementsBase
 	{
-		displayName = "Infantry Spawnpoint";
-		scope = 2;
-		scopeCurator = 0;
-		function = "reapercrew_reinforcements_fnc_initInfantrySpawnpoint";
+		canSetArea = 1;
+		canSetAreaShape = 1;
 		class Attributes: AttributesBase {
 			class additionalCondition: Edit {
 				displayName = "Additional condition";
 				property = "additionalCondition";
 				typeName = "STRING";
-				tooltip = "";
+				tooltip = "Extra condition appended to the spawnpoint activation check.";
 				control = "Edit";
 				defaultValue = """true""";
 			};
+			class innerZone: Edit {
+				displayName = "Inner Zone";
+				property = "innerZone";
+				typeName = "NUMBER";
+				tooltip = "Radius (metres) within which the spawnpoint is disabled, so AI never spawn on top of players.";
+				control = "Edit";
+				defaultValue = "1000";
+			};
+			class capturable: Checkbox {
+				displayName = "Capturable";
+				property = "capturable";
+				typeName = "BOOL";
+				tooltip = "If ticked, the spawnpoint is permanently disabled once a player reaches its inner zone. Use to place spawnpoints in objective areas.";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class debugMarkers: Checkbox {
+				displayName = "Debug Markers";
+				property = "debugMarkers";
+				typeName = "BOOL";
+				tooltip = "If ticked, draws map markers for the centre, inner zone and outer zone of this spawnpoint.";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+		};
+	};
+	class reaperCrew_moduleInfantrySpawn: reaperCrew_moduleSpawnpointBase
+	{
+		displayName = "Infantry Spawnpoint";
+		scope = 2;
+		scopeCurator = 0;
+		function = "reapercrew_reinforcements_fnc_initInfantrySpawnpoint";
+		class AttributeValues {
+			size3[] = {2000, 2000, -1};
 		};
 	};
 	class reaperCrew_modulePathWaypoint: reaperCrew_moduleReinforcementsBase
@@ -142,57 +178,39 @@ class CfgVehicles
 		scope = 2;
 		scopeCurator = 0;
 	};
-    class reaperCrew_moduleVehicleSpawn: reaperCrew_moduleReinforcementsBase
+    class reaperCrew_moduleVehicleSpawn: reaperCrew_moduleSpawnpointBase
 	{
 		displayName = "Vehicle Spawnpoint";
 		scope = 2;
 		scopeCurator = 0;
 		function = "reapercrew_reinforcements_fnc_initVehicleSpawnpoint";
-		class Attributes: AttributesBase {
-			class additionalCondition: Edit {
-				displayName = "Additional condition";
-				property = "additionalCondition";
-				typeName = "STRING";
-				tooltip = "";
-				control = "Edit";
-				defaultValue = """true""";
-			};
+		class AttributeValues {
+			size3[] = {5000, 5000, -1};
+			innerZone = 2500;
 		};
 	};
-	class reaperCrew_moduleAircraftSpawn: reaperCrew_moduleReinforcementsBase
+	class reaperCrew_moduleAircraftSpawn: reaperCrew_moduleSpawnpointBase
 	{
 		displayName = "Aircraft Spawnpoint";
 		category = "reaperCrew_ModulesReinforcements";
 		scope = 2;
 		scopeCurator = 0;
 		function = "reapercrew_reinforcements_fnc_initAircraftSpawnpoint";
-		class Attributes: AttributesBase {
-			class additionalCondition: Edit {
-				displayName = "Additional condition";
-				property = "additionalCondition";
-				typeName = "STRING";
-				tooltip = "";
-				control = "Edit";
-				defaultValue = """true""";
-			};
+		class AttributeValues {
+			size3[] = {25000, 25000, -1};
+			innerZone = 12500;
 		};
 	};
-	class reaperCrew_moduleMarineSpawn: reaperCrew_moduleReinforcementsBase
+	class reaperCrew_moduleMarineSpawn: reaperCrew_moduleSpawnpointBase
 	{
 		displayName = "Marine Spawnpoint";
 		category = "reaperCrew_ModulesReinforcements";
 		scope = 2;
 		scopeCurator = 0;
 		function = "reapercrew_reinforcements_fnc_initMarineSpawnpoint";
-		class Attributes: AttributesBase {
-			class additionalCondition: Edit {
-				displayName = "Additional condition";
-				property = "additionalCondition";
-				typeName = "STRING";
-				tooltip = "";
-				control = "Edit";
-				defaultValue = """true""";
-			};
+		class AttributeValues {
+			size3[] = {7500, 7500, -1};
+			innerZone = 3750;
 		};
 	};
 	class reaperCrew_moduleMarineLZ: reaperCrew_moduleReinforcementsBase

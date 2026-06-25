@@ -62,7 +62,10 @@ while {isNil "activeInfantryTriggers"} do {
 
 			_randomSpawn = selectRandom _availableSpawnpoints;
 
-			[[getPos _randomSpawn, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup, _moduleObject], "reapercrew_reinforcements_fnc_spawnHeadlessInfantry"] call reapercrew_common_fnc_executeDistributed;
+			// Rush radius matches the spawnpoint's outer zone so AI reach players even when the zone is enlarged
+			_rushRadius = (triggerArea _randomSpawn) select 0;
+
+			[[getPos _randomSpawn, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup, _moduleObject, _rushRadius], "reapercrew_reinforcements_fnc_spawnHeadlessInfantry"] call reapercrew_common_fnc_executeDistributed;
 
 			_reinforcementsCount = _reinforcementsCount - _squadCount;
 			_triggerObject setVariable ["reinforcementCount", _reinforcementsCount];
