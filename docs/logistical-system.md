@@ -22,11 +22,13 @@ The settings for this resupply module can be found in the addon settings under '
 
 Make sure to save these settings under the 'mission' settings, rather than the server or client settings.
 
+Once spawned, all supply crates can be moved using ACE's native dragging, no matter how heavy their contents are. The medical crate is the only crate that can also be carried, so it can be lifted over obstacles. The old scripted 'Pick Up' and 'Drop Object' actions have been removed in favour of ACE dragging.
+
 ## Vehicle Deliveries
 
 The Vehicle Delivery system is designed to allow players to replenish vehicles lost during operations. It is particularly necessary when dealing with assets that cannot be loaded into other vehicles, such as tanks, SPGs and some cars. 
 
-Once requested, the vehicle will be driven by AI to the players location. During this time it will be immune from all damage, this is to prevent vehicles accidently becoming broken or damaged owing to the AI's love for smashing into trees and other objects. This immunity from damage is removed once the the waypoint is reached, and the AI driver will be automatically deleted. It is important to wait for the waypoint to complete fully to avoid any issues with vehicles being immunue to damage.
+Once requested, the vehicle will be driven by AI to the players location. During this time it will be immune from all damage, this is to prevent vehicles accidently becoming broken or damaged owing to the AI's love for smashing into trees and other objects. This immunity from damage is removed once the the waypoint is reached, and the AI driver will be automatically deleted along with its temporary group, so repeated deliveries don't leave empty groups behind. It is important to wait for the waypoint to complete fully to avoid any issues with vehicles being immunue to damage.
 
 The settings for this system are defined under 'Reaper Crew - Logistics'.
 

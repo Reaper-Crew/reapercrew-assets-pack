@@ -9,6 +9,8 @@ _playerVehicle = assignedVehicle player;
 _spawnPosition = _playerVehicle getRelPos [100, (random 360)];
 
 _pickupGroup = [_spawnPosition, _groupSide, ["B_Soldier_TL_F","B_soldier_AR_F","B_Soldier_GL_F","B_soldier_LAT_F"]] call BIS_fnc_spawnGroup;
+// The fireteam is deleted at the dropoff trigger, so auto-delete the group once it empties
+_pickupGroup deleteGroupWhenEmpty true;
 
 // Get the leader of the group
 _groupLeader = leader _pickupGroup;

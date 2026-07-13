@@ -3,20 +3,33 @@
 ## Version 6.2
 
 ### Added
-- **REINFORCEMENTS:** New `fn_getZoneUnitCount` shared function counts all living humanoid units in a zone (players, civilians and enemies of any side, including agent-based ambient civilians and units mounted in vehicles), so the zone ceiling now caps total unit load instead of only enemy-faction units
-- **REINFORCEMENTS:** Modules now track the units they spawn in a per-module array so reinforcements that spawn outside the zone and ingress (airborne, motorised, marine) are counted against the ceiling while inbound, preventing the module overspawning before a wave arrives. Foot mobile is tracked too for consistency
-- **REINFORCEMENTS:** New `fn_watchSpawnedUnits` shared watcher, started per module from its init, prunes dead or removed units from the tracked array every 5 seconds to keep counts accurate
+- **PLAYER MANAGEMENT:** New Loadout Laptop object (Reaper Crew > Player in the editor) with built-in Save Loadout and Self Heal actions; no supporting framework needed
+- **MECHANICS:** New Patrol Area module spawns variable-sized groups (min/max, unit cap) from the regular, elite and SF tiers, each patrolling the drawn area, with optional code-on-spawn
+- **REINFORCEMENTS:** Spawnpoint modules gained an Inner Zone exclusion radius, a Capturable option (disables when a player reaches the inner zone) and Debug Markers that draw the zones on the map
+- **REINFORCEMENTS:** The zone ceiling now counts every living person - players, civilians, mounted units - capping total unit load, not just enemy-faction units
+- **REINFORCEMENTS:** Inbound reinforcements (airborne, motorised, marine, foot mobile) count against the ceiling before arrival, preventing overspawn
+- **REINFORCEMENTS:** Dead or removed reinforcements are pruned from the count every few seconds, keeping the ceiling accurate
+- **REINFORCEMENTS:** Marauding Vehicles and Aircraft modules gained an Additional Condition attribute (matching the reinforcement modules), so script can stop them without players leaving the area
+- **COMMON:** New group cleanup watcher on every machine deletes its empty local groups every 15 minutes, guarding against the engine's silent per-side group limit
+- **COMMON:** Added nine callsign marker colours (Zero, Reaper-1-1 to 1-4, Hammer, Thunder, Sentinel, Fury), with the vanilla palette redeclared alongside
 
 ### Changed
-- **REINFORCEMENTS:** Spawn tracking registers only the deployed infantry group; for airborne the separate transport crew is excluded (it departs), while for motorised and marine the same group drives and dismounts so it correctly counts
-- **REINFORCEMENTS:** Moved the per-wave zone count logging into the shared count function so all four reinforcement types report it (previously only foot mobile did); added logging for spawn registration (from/to tracked count) and watcher pruning
-- **ALL ADDONS:** Diagnostic logging is no longer gated behind debug CBA settings; existing log lines now always write to the server log
+- **REINFORCEMENTS:** Spawnpoint setup is shared across all four types (infantry, vehicle, aircraft, marine), applying inner-zone exclusion and capture behaviour consistently
+- **LOGISTICS:** All supply crates are draggable regardless of weight and only the medical crate is carryable; the old Pick Up and Drop actions are replaced by ACE's native dragging
+- **REINFORCEMENTS:** Counting now matches how each type deploys: airborne excludes the departing transport crew; motorised and marine count the single group that drives in and dismounts
+- **REINFORCEMENTS:** All four types now log their per-wave zone count (previously only foot mobile), plus spawn and cleanup activity
+- **ALL ADDONS:** Diagnostic logging is no longer gated behind debug CBA settings and always writes to the server log
+- **MECHANICS:** Garrison and Patrol modules stagger their group spawns (one dispatch every 3 seconds) instead of spawning everything in one frame, preventing mid-mission activation jitter
+
+### Fixed
+- **AI MECHANICS / REINFORCEMENTS:** Garrison and patrol groups now sleep correctly under dynamic simulation: units spawned on a headless client never applied their setup on the server, leaving groups awake and able to wake distant ones. Only dedicated/headless multiplayer was affected
+- **ALL ADDONS:** Everything that spawns AI now marks its groups for engine auto-deletion once empty (garrison, patrol, all four reinforcement spawners, logistics drivers, training units, LZ smoke logics). Empty groups previously accumulated until the engine's per-side group limit was silently reached, breaking all further AI spawning mid-mission
 
 ### Removed
-- **SABRE:** Archived the SABRE Core and Counter-Battery components (`reaperCrew_Sabre_Core`, `reaperCrew_Sabre_Component_CounterBattery`) to `arc/`; their documentation and references have been removed
-- **WEAPONS:** Archived the `reaperCrew_Weapons` component (HK33, L85A3, M4 Benelli) to `arc/`
-- **CLOTHING:** Stripped `reaperCrew_Clothing` down to the beret (`RC_Beret_01`) and insignia configurations only; removed the combat uniform retextures, the Ranger Green helmet retexture, and the vest items (invisible plate carrier and battle belt) along with their textures
-- **ALL ADDONS:** Removed debug logging toggle settings and their gates. Reinforcements (`reaperCrew_debugReinforcementsSpawning`, `reaperCrew_debugWaypointMechanics`, `reaperCrew_ReinforcementsCheckbox`, and the per-type spawnpoint/HC discovery checkboxes), Common (`reaperCrew_detectHeadlessClientsDebug`) and SABRE Counter-Battery (`reaperCrew_sabreCounterBattery_DebugTasks`) debug settings are gone; the logging they controlled now always runs
+- **SABRE:** Archived the SABRE Core and Counter-Battery components, removing their docs and references
+- **WEAPONS:** Archived the Weapons component (HK33, L85A3, M4 Benelli)
+- **CLOTHING:** Stripped the Clothing component to the beret and insignia; removed the uniform retextures, Ranger Green helmet retexture and vest items with their textures
+- **ALL ADDONS:** Removed all debug logging CBA settings and their gates from Reinforcements and Common; logging always runs
 
 ## Version 6.1
 

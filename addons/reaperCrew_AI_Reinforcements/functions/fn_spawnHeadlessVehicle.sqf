@@ -26,9 +26,13 @@ params ["_spawnPoint", "_vehicleClassname", "_vehicleSkill", "_destination"];
 	// Spawn the group
 	_spawnedVehicle = [_spawnPoint, 0, _vehicleClassname, reaperCrew_reinforcements_side] call BIS_fnc_spawnVehicle;
 	_spawnedGroup = _spawnedVehicle select 2;
+	// The group is local to this machine, so the engine auto-deletes it once every member is dead,
+	// preventing empty groups from accumulating towards the per-side group limit
+	_spawnedGroup deleteGroupWhenEmpty true;
 
 	{
-		_x triggerDynamicSimulation false;
+		// Set on the server so the server does not treat these ingressing units as activators that wake garrisons
+		[_x, false] remoteExec ["triggerDynamicSimulation", 2];
 		_x setSkill (_vehicleSkill / 100);
 	} forEach units _spawnedGroup;
 

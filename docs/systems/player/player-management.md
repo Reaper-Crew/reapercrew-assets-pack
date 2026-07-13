@@ -79,6 +79,38 @@ Used to fix bugs that sometimes occur with player fatigue not being properly res
 
 ---
 
+## Placeable Objects
+
+### Loadout Laptop
+
+| Editor Name | Classname |
+|-------------|-----------|
+| Loadout Laptop | `reaperCrew_loadoutLaptop` |
+
+Found in the Eden Editor asset browser (Props) under: `Reaper Crew > Player`, or in the Zeus asset list.
+
+A laptop with two ACE interaction actions built in, so loadout saving and self healing are available in any mission without a supporting framework. Walk up to the laptop and use the ACE interaction menu (default Windows key).
+
+**Actions:**
+
+| Action | Behaviour |
+|--------|-----------|
+| Save Loadout | Stores the player's current loadout in the `Saved_Loadout` variable (ACRE radios filtered out) and refreshes insignia |
+| Self Heal | Fully heals the player via ACE medical |
+
+**Restoring a saved loadout:**
+
+The laptop only saves the loadout. Restoring it is left to the mission. The usual place to do this is the respawn template or an `onPlayerRespawn` script:
+
+```sqf
+_savedLoadout = player getVariable ["Saved_Loadout", []];
+if (count _savedLoadout > 0) then {
+    player setUnitLoadout _savedLoadout;
+};
+```
+
+---
+
 ## Automatic Systems
 
 These systems run automatically when the addon loads (postInit):

@@ -16,7 +16,7 @@ Before starting, configure these in `Options > Addon Options`:
 - [ ] Configure fire support vehicles (armour, technicals, aircraft)
 
 ### Reaper Crew - AI Reinforcements
-- [ ] Debug settings as needed for testing
+- [ ] Pause checkboxes (Live Mission Settings) left unticked
 
 ### Reaper Crew - Logistics
 - [ ] Configure crate contents (classnames for your mod setup)
@@ -73,6 +73,7 @@ Before starting, configure these in `Options > Addon Options`:
 2. Place **Marauding Vehicles** module in threat area
 3. Configure vehicle count and types (Heavy/Light Armour, Technicals)
 4. Configure spawn frequency (min/max seconds)
+5. (Optional) Set an Additional Condition so scripts can stop spawning
 
 ### Building Garrison
 
@@ -83,6 +84,15 @@ Before starting, configure these in `Options > Addon Options`:
 3. Configure Max Units, troop types, and per-building min/max limits
 4. (Optional) Set an activation condition to defer spawning
 5. (Optional) Add code on spawn for custom behaviour
+
+### Area Patrol
+
+**Goal:** AI groups patrolling an area.
+
+1. Place **Patrol Area** module
+2. Resize area to cover the patrol ground
+3. Configure Max Units, Min/Max Group Size, and troop types
+4. (Optional) Add code on spawn for custom behaviour
 
 ### Ambush Setup (Suppress Position)
 
@@ -149,6 +159,8 @@ Before starting, configure these in `Options > Addon Options`:
 3. Synchronize module → object
 4. Configure crate contents in CBA Settings
 
+Crates are moved with ACE dragging (only the medical crate can also be carried).
+
 ### Vehicle Delivery
 
 1. Place **Vehicle Spawnpoint** modules
@@ -162,6 +174,15 @@ Before starting, configure these in `Options > Addon Options`:
 2. Place **Respawn Vehicle** module
 3. Synchronize vehicle → module
 4. Enable supply refresh if desired
+
+---
+
+## Player Quick Setup
+
+### Loadout Laptop
+
+1. Place **Loadout Laptop** object (Reaper Crew > Player in Eden)
+2. Players use ACE interact for the built-in Save Loadout and Self Heal actions - no modules or framework needed
 
 ---
 
@@ -182,6 +203,7 @@ Before starting, configure these in `Options > Addon Options`:
 | Reinforcements | Marauding Vehicles | `reaperCrew_moduleReinforcementsHeadlessMaraudingVehicles` |
 | Reinforcements | Marauding Aircraft | `reaperCrew_moduleReinforcementsHeadlessMaraudingAircrafts` |
 | AI Mechanics | Garrison Area | `reaperCrew_moduleGarrison` |
+| AI Mechanics | Patrol Area | `reaperCrew_modulePatrol` |
 | AI Mechanics | Suppress Position | `reaperCrew_moduleSuppressPosition` |
 | AI Mechanics | Convoy | `reaperCrew_moduleAwesomeConvoy` |
 | AI Mechanics | Unlimited Ammo | `reaperCrew_moduleUnlimitedAmmo` |
@@ -195,17 +217,22 @@ Before starting, configure these in `Options > Addon Options`:
 | Player | Disarm All | `reaperCrew_moduleDisarmPlayers` |
 | Player | Save Loadout | `reaperCrew_moduleSavePlayerLoadout` |
 | Player | Fix Fatigue | `reaperCrew_moduleFixFatigue` |
+| Player | Loadout Laptop (object) | `reaperCrew_loadoutLaptop` |
 
 ---
 
 ## Activation Distances
 
-| Spawnpoint Type | Activation Distance |
-|-----------------|---------------------|
-| Infantry | 2 km |
-| Vehicle | 5 km |
-| Marine | 7.5 km |
-| Aircraft | 25 km |
+Default outer zone (activation) and inner exclusion zone per spawnpoint. The outer zone comes from the module's drawn area, so these are the defaults when the area is left untouched.
+
+| Spawnpoint Type | Outer Zone (default) | Inner Zone (default) |
+|-----------------|----------------------|----------------------|
+| Infantry | 2 km | 1 km |
+| Vehicle | 5 km | 2.5 km |
+| Marine | 7.5 km | 3.75 km |
+| Aircraft | 25 km | 12.5 km |
+
+Spawnpoints can also be made **Capturable** (permanently disabled once a player reaches the inner zone) and can draw **Debug Markers** for both zones on the map.
 
 ---
 

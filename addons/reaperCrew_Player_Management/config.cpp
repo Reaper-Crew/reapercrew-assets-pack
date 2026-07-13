@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class ReaperCrew_Player_Management
 	{
-		units[] = {"reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleSavePlayerLoadout", "reaperCrew_moduleFixFatigue"};
+		units[] = {"reaperCrew_moduleDisarmPlayers", "reaperCrew_moduleSavePlayerLoadout", "reaperCrew_moduleFixFatigue", "reaperCrew_loadoutLaptop"};
 		weapons[]={};
 		requiredVersion=2.02;
 		requiredAddons[]=
@@ -22,6 +22,15 @@ class CfgEditorCategories
     class reaperCrew_ModulesPlayers: NO_CATEGORY
 	{
 		displayName = "Reaper Crew - Player Management";
+		scope = 2;
+		scopeCurator = 2;
+	};
+};
+class CfgEditorSubcategories
+{
+	class reaperCrewPlayerObjects // Category class, you point to it in editorSubcategory property
+	{
+		displayName = "Player"; // Name visible in the list
 		scope = 2;
 		scopeCurator = 2;
 	};
@@ -98,6 +107,39 @@ class CfgVehicles
 		scope = 1;
 		scopeCurator = 2;
 		isGlobal = 0;
+	};
+	class Land_Laptop_03_black_F;
+	class reaperCrew_loadoutLaptop: Land_Laptop_03_black_F
+	{
+		author = "Reaper Crew";
+		displayName = "Loadout Laptop";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewPlayerObjects";
+		scope = 2;
+		scopeCurator = 2;
+		class ACE_Actions
+		{
+			class ACE_MainActions
+			{
+				displayName = "Interactions";
+				condition = "true";
+				selection = "";
+				class reaperCrew_saveLoadout
+				{
+					displayName = "Save Loadout";
+					condition = "true";
+					exceptions[] = {};
+					statement = "['Saving loadout...', 2, {true}, { [] call reapercrew_player_management_fnc_savePlayerLoadoutLocal; }, {}, []] call CBA_fnc_progressBar;";
+				};
+				class reaperCrew_selfHeal
+				{
+					displayName = "Self Heal";
+					condition = "true";
+					exceptions[] = {};
+					statement = "['Healing...', 2, {true}, { [player] call ace_medical_treatment_fnc_fullHealLocal; }, {}, []] call CBA_fnc_progressBar;";
+				};
+			};
+		};
 	};
 };
 class CfgAcreSounds {

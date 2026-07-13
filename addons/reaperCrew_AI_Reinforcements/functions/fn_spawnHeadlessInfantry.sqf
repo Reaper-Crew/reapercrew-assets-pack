@@ -24,8 +24,12 @@ params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnG
 	["Running reinforcement spawn script"] call reapercrew_common_fnc_remoteLog;
 	// Spawn the group
 	_spawnedGroup = [_spawnPoint, reaperCrew_reinforcements_side, _squadArray, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
+	// The group is local to this machine, so the engine auto-deletes it once every member is dead,
+	// preventing empty groups from accumulating towards the per-side group limit
+	_spawnedGroup deleteGroupWhenEmpty true;
 	{
-		_x triggerDynamicSimulation false;
+		// Set on the server so the server does not treat these ingressing units as activators that wake garrisons
+		[_x, false] remoteExec ["triggerDynamicSimulation", 2];
 	} forEach units _spawnedGroup;
 
 	// Register spawned units with the module so the zone counter can track them

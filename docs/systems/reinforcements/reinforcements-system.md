@@ -47,28 +47,44 @@ The reinforcement system writes its diagnostic output (spawn activity, zone unit
 
 Spawnpoints determine where reinforcement units can spawn. All spawnpoints are found in Eden Editor under: `Systems (F5) > Modules > Reaper Crew - Reinforcements`
 
-### Spawnpoint Types & Activation Distances
+### Spawnpoint Zones
 
-| Module | Classname | Distance | Best Used For |
-|--------|-----------|----------|---------------|
-| Infantry Spawnpoint | `reaperCrew_moduleInfantrySpawn` | 2km | Foot mobile infantry |
-| Vehicle Spawnpoint | `reaperCrew_moduleVehicleSpawn` | 5km | Motorised infantry, marauding vehicles |
-| Aircraft Spawnpoint | `reaperCrew_moduleAircraftSpawn` | 25km | Airborne infantry, marauding aircraft |
-| Marine Spawnpoint | `reaperCrew_moduleMarineSpawn` | 7.5km | Marine/amphibious infantry |
+Each spawnpoint has two concentric zones:
+
+- **Outer zone** - the activation radius. Players within it can trigger reinforcements. The outer zone is taken from the module's drawn area, so you can resize and reshape it in Eden; the values below are the default sizes used when the area is left untouched.
+- **Inner zone** - an exclusion radius around the spawnpoint. The spawnpoint will not activate while a player is inside it, so AI never spawn on top of players.
+
+| Module | Classname | Default Outer Zone | Default Inner Zone | Best Used For |
+|--------|-----------|--------------------|--------------------|---------------|
+| Infantry Spawnpoint | `reaperCrew_moduleInfantrySpawn` | 2km | 1km | Foot mobile infantry |
+| Vehicle Spawnpoint | `reaperCrew_moduleVehicleSpawn` | 5km | 2.5km | Motorised infantry, marauding vehicles |
+| Aircraft Spawnpoint | `reaperCrew_moduleAircraftSpawn` | 25km | 12.5km | Airborne infantry, marauding aircraft |
+| Marine Spawnpoint | `reaperCrew_moduleMarineSpawn` | 7.5km | 3.75km | Marine/amphibious infantry |
 
 ### Spawnpoint Activation Conditions
 
 A spawnpoint becomes active when ALL conditions are met:
-1. **Player proximity** - At least one player is within the activation distance
-2. **Line of sight** - Players cannot directly see the spawnpoint location
-3. **Ground contact** - At least one player is touching the ground (not in aircraft)
-4. **Additional condition** - Any custom condition specified returns true
+1. **Player proximity** - At least one player is within the outer zone
+2. **Inner zone clear** - No player is inside the inner exclusion zone
+3. **Line of sight** - Players cannot directly see the spawnpoint location
+4. **Ground contact** - At least one player is touching the ground (not in aircraft)
+5. **Not captured** - The spawnpoint has not been captured (see Capturable below)
+6. **Additional condition** - Any custom condition specified returns true
+
+### Capturable Spawnpoints
+
+If the **Capturable** attribute is ticked, the spawnpoint is permanently disabled the first time a player reaches its inner zone. This is a one-way latch and lets you place spawnpoints inside objective areas so that taking the objective shuts off its reinforcements. The captured state is published to the `reaperCrew_spawnpointCaptured` variable on the module logic for mission scripting. Capturable is off by default.
 
 ### Spawnpoint Attributes
 
-| Attribute | Type | Default | Description |
-|-----------|------|---------|-------------|
-| Additional Condition | String | `"true"` | Custom SQF condition code |
+| Attribute | Property | Type | Default | Description |
+|-----------|----------|------|---------|-------------|
+| Additional Condition | `additionalCondition` | String | `"true"` | Custom SQF condition appended to the activation check |
+| Inner Zone | `innerZone` | Number | 1000 | Inner exclusion radius (metres); the spawnpoint is disabled while a player is within it |
+| Capturable | `capturable` | Checkbox | false | If ticked, the spawnpoint is permanently disabled once a player reaches the inner zone |
+| Debug Markers | `debugMarkers` | Checkbox | false | If ticked, draws map markers for the centre, inner zone and outer zone of the spawnpoint |
+
+> **Note:** The outer zone is set by resizing the module's area in Eden, not via an attribute. Vehicle, aircraft and marine spawnpoints default their inner zone to half the outer zone; the Inner Zone attribute lets you override it per spawnpoint.
 
 ### Spawnpoint Modes of Operation
 
@@ -174,13 +190,13 @@ Infantry spawn with a transport vehicle and drive to a dismount position, then r
 |-------------|-----------|
 | Infantry - Airborne | `reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter` |
 
-Infantry are delivered by helicopter to a landing zone, then rush. Supports two delivery modes: landing or fastroping.
+Infantry are delivered by helicopter to a landing zone, then rush. Supports three delivery modes: landing, fastroping, or a random choice per helicopter.
 
 **Additional Attributes:**
 
 | Attribute | Type | Default | Description |
 |-----------|------|---------|-------------|
-| Delivery Mode | Combo | LAND | LAND: helicopter lands and troops disembark. FASTROPE: helicopter hovers and troops fastrope down (requires ACE Fastroping) |
+| Delivery Mode | Combo | LAND | LAND: helicopter lands and troops disembark. FASTROPE: helicopter hovers and troops fastrope down (requires ACE Fastroping). RANDOM: each helicopter independently chooses land or fastrope at random |
 | Direction Min | Number | 90 | Minimum approach direction (degrees) |
 | Direction Max | Number | 180 | Maximum approach direction (degrees) |
 | Distance Min | Number | 500 | Minimum landing distance (meters) |
@@ -266,6 +282,7 @@ Marauding modules provide a persistent flow of enemy vehicles or aircraft into a
 | Heavy Armour | Checkbox | true | Include heavy armour (MBTs) |
 | Light Armour | Checkbox | true | Include light armour (APCs/IFVs) |
 | Technicals | Checkbox | true | Include technicals |
+| Additional Condition | String | `"true"` | Custom SQF condition appended to the activation check. While it returns false the module stops spawning, even with players still in the area |
 
 **Behaviour:**
 1. Waits for players to enter module area
@@ -296,6 +313,7 @@ Marauding modules provide a persistent flow of enemy vehicles or aircraft into a
 | Fixed Wing Fighters | Checkbox | true | Include fighter aircraft |
 | Rotary CAS Heavy | Checkbox | true | Include attack helicopters |
 | Rotary CAS Light | Checkbox | true | Include light helicopters |
+| Additional Condition | String | `"true"` | Custom SQF condition appended to the activation check. While it returns false the module stops spawning, even with players still in the area |
 
 **Associated Spawnpoint:** Aircraft Spawnpoint
 
@@ -363,6 +381,10 @@ This causes all ratio modules to use their ceiling value directly. A log message
 - After spawning, spawnpoint is temporarily disabled
 - Cooldown duration: `waveDelay + 2` seconds
 - Prevents multiple units spawning at same location rapidly
+
+### Group Cleanup
+
+Every group spawned by the reinforcement and marauding modules is marked for engine auto-deletion once all of its members are dead. Empty groups therefore never accumulate towards the per-side group limit, no matter how many waves a long mission spawns.
 
 ### Spawn Conditions
 

@@ -34,7 +34,12 @@ for "_i" from 1 to _groupSize do {
 
 // Spawn the patrol group
 _spawnedGroup = [_spawnPos, _groupSide, _patrolUnits, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
-_spawnedGroup enableDynamicSimulation true;
+// The group is local to this machine, so the engine auto-deletes it once every member is dead,
+// preventing empty groups from accumulating towards the per-side group limit
+_spawnedGroup deleteGroupWhenEmpty true;
+// Dynamic simulation is managed by the server, so enable it on the server. This group is local to the
+// spawning headless client, but enableDynamicSimulation takes a global argument so the remote group is valid.
+[_spawnedGroup, true] remoteExec ["enableDynamicSimulation", 2];
 
 _spawnUnitsArray = units _spawnedGroup;
 
@@ -42,7 +47,8 @@ _spawnUnitsArray = units _spawnedGroup;
 {
 	_x setSkill ((_unitSkills select _forEachIndex) / 100);
 	_x disableAI "RADIOPROTOCOL";
-	_x triggerDynamicSimulation false;
+	// Set on the server so the server stops treating this unit as an activator that wakes other groups
+	[_x, false] remoteExec ["triggerDynamicSimulation", 2];
 	[_x, "ACE_NoVoice"] remoteExec ["setSpeaker", 0, _x];
 } forEach _spawnUnitsArray;
 

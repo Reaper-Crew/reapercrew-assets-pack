@@ -114,7 +114,9 @@ _totalUnits = 0;
 	};
 } forEach _buildingMap;
 
-// Call spawn script for each building, distributing across headless clients
+// Call spawn script for each building, distributing across headless clients. Dispatches are
+// staggered so a mid-mission activation doesn't spawn every group in one frame and cause jitter.
 {
 	[[_logicPosition, _x, _troopArrays, _codeOnSpawn, _groupSide], "reapercrew_ai_mechanics_fnc_remoteGarrisonSpawn"] call reapercrew_common_fnc_executeDistributed;
+	sleep 3;
 } forEach _buildingGroups;

@@ -76,9 +76,13 @@ if (count _waypointsList > 0) then {
 
 // Create Infantry
 _infantryGroup = [_spawnPosition, reaperCrew_reinforcements_side, _reinforcementsGroup, [],[],[], [],[],180] call BIS_fnc_spawnGroup;
+// The group is local to this machine, so the engine auto-deletes it once every member is dead,
+// preventing empty groups from accumulating towards the per-side group limit
+_infantryGroup deleteGroupWhenEmpty true;
 _infantryGroup allowFleeing 0;
 {
-	_x triggerDynamicSimulation false;
+	// Set on the server so the server does not treat these ingressing units as activators that wake garrisons
+	[_x, false] remoteExec ["triggerDynamicSimulation", 2];
 	_x moveInCargo _helicopter;
 	_x setSkill (_reinforcementsGroupSkill / 100);
 	if (_rushMode) then {

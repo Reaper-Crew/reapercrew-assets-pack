@@ -26,9 +26,13 @@ _vehicle setDir (_spawnPosition getDir _landingPosition);
 // Create the infantry group
 _spawnedGroup = [_spawnPosition, reaperCrew_reinforcements_side, _reinforcementsGroup, [],[],[], [],[],180] call BIS_fnc_spawnGroup;
 _spawnedGroup allowFleeing 0;
+// The group is local to this machine, so the engine auto-deletes it once every member is dead,
+// preventing empty groups from accumulating towards the per-side group limit
+_spawnedGroup deleteGroupWhenEmpty true;
 _spawnedGroup addVehicle _vehicle;
 {
-	_x triggerDynamicSimulation false;
+	// Set on the server so the server does not treat these ingressing units as activators that wake garrisons
+	[_x, false] remoteExec ["triggerDynamicSimulation", 2];
 	_x setSkill (_reinforcementsGroupSkill / 100);
 	//_x moveInAny _vehicle;
 	if (_rushMode) then {

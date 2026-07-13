@@ -65,4 +65,7 @@ while {_spawnedTotal < _maxCount} do {
 	[[_centre, _spawnPos, _groupSize, _troopArrays, _groupSide, _patrolRadius, _areaData, _codeOnSpawn], "reapercrew_ai_mechanics_fnc_remotePatrolSpawn"] call reapercrew_common_fnc_executeDistributed;
 
 	_spawnedTotal = _spawnedTotal + _groupSize;
+
+	// Stagger dispatches so a mid-mission activation doesn't spawn every group in one frame and cause jitter
+	sleep 3;
 };

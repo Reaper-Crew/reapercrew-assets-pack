@@ -40,6 +40,8 @@ Players interact with the synchronized object via ACE menu to spawn crates:
 | Vehicle Ammo | `RC_VirtualReammoBox_F` | 1000 units ACE rearm supply |
 | Transport | `Land_WoodenCrate_01_F` | Empty crate for general use |
 
+All crates can be dragged via ACE regardless of how much they contain. Only the medical crate can also be carried, so it can be lifted over obstacles when moving casualties' supplies forward.
+
 ### ACE Interaction
 
 On the resupply object:
@@ -146,7 +148,7 @@ Place this module to mark where delivery vehicles will spawn.
 ### Delivery Mechanics
 
 - **Damage Immunity:** Vehicle is invulnerable during transit (prevents AI collision damage)
-- **Driver:** Civilian AI with careless behaviour, deleted on arrival
+- **Driver:** Civilian AI with careless behaviour, deleted on arrival; its temporary group is automatically removed once empty, so repeated deliveries do not accumulate empty groups
 - **Important:** Wait for full waypoint completion before taking vehicle
 
 ### CBA Settings
@@ -230,7 +232,7 @@ The Respawn Vehicle system provides a mobile FOB capability where players respaw
 **Vehicle Recall:**
 - Players can request the respawn vehicle come to them
 - ACE Self-Interact > Call HQ Vehicle
-- AI driver delivers vehicle to selected map location
+- AI driver delivers vehicle to selected map location, then driver and its temporary group are removed
 
 ### CBA Settings
 
@@ -251,7 +253,7 @@ The Respawn Vehicle system provides a mobile FOB capability where players respaw
 
 ### Classname: `reaperCrew_FOB_Crate`
 
-A sling-loadable cargo crate with special consolidation ability.
+A sling-loadable cargo crate with special consolidation ability. Like the other supply crates, it can be dragged via ACE regardless of weight but cannot be carried.
 
 ### Special Action
 
@@ -358,7 +360,7 @@ The Logistics system integrates with several ACE modules:
 
 | ACE Module | Integration |
 |------------|-------------|
-| ACE Dragging | All crates can be carried/dragged |
+| ACE Dragging | All crates can be dragged regardless of their contents weight; only the medical crate can be carried |
 | ACE Refuel | Fuel crate provides 2000L refuel source |
 | ACE Rearm | Ammo crate provides 1000 units rearm supply |
 | ACE Medical | Medical crate contents match ACE medical items |

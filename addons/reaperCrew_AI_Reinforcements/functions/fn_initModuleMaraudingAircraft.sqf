@@ -30,6 +30,7 @@ _usefixedWingBombers = _logic getVariable ["fixedWingBombers",true];
 _usefixedWingFighters = _logic getVariable ["fixedWingFighters",true];
 _userotaryCASHeavy = _logic getVariable ["rotaryCASHeavy",true];
 _userotaryCASLight = _logic getVariable ["rotaryCASLight",true];
+_additionalCondition = _logic getVariable ["additionalCondition",true];
 
 // Build an array of available Aircrafts
 _AircraftsArray = [];
@@ -51,7 +52,8 @@ if (_userotaryCASLight) then {
 _activationTrigger = createTrigger ["EmptyDetector", (getPos _logic), false];
 _activationTrigger setTriggerArea [_logicArea select 0, _logicArea select 1, 0, false, -1];
 _activationTrigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_activationTrigger setTriggerStatements ["this && {isTouchingGround _x} count thisList > 0", "[thisTrigger] call reapercrew_reinforcements_fnc_activateMaraudingAircraft;", ""];
+_triggerCondition = format ["(this && {isTouchingGround _x} count thisList > 0) && %1", _additionalCondition];
+_activationTrigger setTriggerStatements [_triggerCondition, "[thisTrigger] call reapercrew_reinforcements_fnc_activateMaraudingAircraft;", ""];
 _activationTrigger setTriggerInterval 5;
 
 // Set trigger variables

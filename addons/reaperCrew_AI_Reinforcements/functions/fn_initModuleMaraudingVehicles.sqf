@@ -28,6 +28,7 @@ _concurrentVehicles = _logic getVariable ["concurrentVehicles",2];
 _useheavyArmour = _logic getVariable ["heavyArmour",true];
 _uselightArmour = _logic getVariable ["lightArmour",true];
 _usetechnicals = _logic getVariable ["technicals",true];
+_additionalCondition = _logic getVariable ["additionalCondition",true];
 
 // Build an array of available vehicles
 _vehiclesArray = [];
@@ -45,7 +46,8 @@ if (_usetechnicals) then {
 _activationTrigger = createTrigger ["EmptyDetector", (getPos _logic), false];
 _activationTrigger setTriggerArea [_logicArea select 0, _logicArea select 1, 0, false, -1];
 _activationTrigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_activationTrigger setTriggerStatements ["this && {isTouchingGround _x} count thisList > 0", "[thisTrigger] call reapercrew_reinforcements_fnc_activatemaraudingvehicles;", ""];
+_triggerCondition = format ["(this && {isTouchingGround _x} count thisList > 0) && %1", _additionalCondition];
+_activationTrigger setTriggerStatements [_triggerCondition, "[thisTrigger] call reapercrew_reinforcements_fnc_activatemaraudingvehicles;", ""];
 _activationTrigger setTriggerInterval 5;
 
 // Set trigger variables

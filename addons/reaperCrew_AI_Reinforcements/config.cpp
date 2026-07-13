@@ -343,6 +343,14 @@ class CfgVehicles
 				control = "Checkbox";
 				defaultValue = "true";
 			};
+			class additionalCondition: Edit {
+				displayName = "Additional condition";
+				property = "additionalCondition";
+				typeName = "STRING";
+				tooltip = "Extra condition appended to the module activation check. When it returns false the module stops spawning even with players in the area.";
+				control = "Edit";
+				defaultValue = """true""";
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessMaraudingAircrafts: reaperCrew_moduleReinforcementsSpawnerBase
@@ -407,6 +415,14 @@ class CfgVehicles
 				tooltip = "";
 				control = "Checkbox";
 				defaultValue = "true";
+			};
+			class additionalCondition: Edit {
+				displayName = "Additional condition";
+				property = "additionalCondition";
+				typeName = "STRING";
+				tooltip = "Extra condition appended to the module activation check. When it returns false the module stops spawning even with players in the area.";
+				control = "Edit";
+				defaultValue = """true""";
 			};
 
 		};

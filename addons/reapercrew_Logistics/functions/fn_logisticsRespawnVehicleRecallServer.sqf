@@ -6,6 +6,8 @@ _respawn_vehicle = [missionNamespace, "reaperCrew_respawn_vehicle", objNull] cal
 
 // Create Driver
 _spawnedGroup = [[0,0,0], civilian, ["C_Man_casual_1_F"], [],[],[],[],[],180] call BIS_fnc_spawnGroup;
+// The driver is deleted at the delivery waypoint, so auto-delete the group once it empties
+_spawnedGroup deleteGroupWhenEmpty true;
 _spawnedGroup allowFleeing 0;
 
 _spawnedGroup setBehaviour "CARELESS";

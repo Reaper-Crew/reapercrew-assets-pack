@@ -121,6 +121,7 @@ The AI Common settings are used by:
 
 - **Reinforcements System** - For spawning infantry and vehicles
 - **Garrison Module** - Uses unit pools for building occupation
+- **Patrol Module** - Uses unit pools for area patrols
 - **Marauding Modules** - Uses fire support vehicle pools
 
 ## Troubleshooting
