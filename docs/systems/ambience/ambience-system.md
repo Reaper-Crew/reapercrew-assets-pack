@@ -97,6 +97,25 @@ Strike positions are randomly selected within this area using `BIS_fnc_randomPos
 
 ---
 
+## Worked Example: Shattered Frontline Approach
+
+The players' route to the objective crosses an active frontline. Friendly and enemy air trade strikes in the distance while the players move through, without ever being hit themselves.
+
+**Eden setup:**
+
+1. Place an **Ambient CAS** module over the contested valley the players will skirt, and resize its area to roughly 1200m x 800m:
+   - Aircraft Classname: `"O_Plane_CAS_02_F"` (match the enemy faction)
+   - Strike Type: `1` (bomb runs read best at a distance)
+   - Strike Direction: set to the bearing the enemy air would realistically approach from
+   - Avoid Players: ticked, Avoid Radius: `600`
+   - Proximity Check: ticked, Proximity Range: `2500`
+   - Delay Min / Max: `90` / `240`
+2. Optionally place a second module further along the route with a friendly aircraft classname and the opposite strike direction, so both sides appear to be trading blows
+
+**Result:** As the players close to within 2.5 km, bombs begin falling in the valley every couple of minutes, always at least 600 m from any player. The battlefield feels alive for the whole transit, and the loop goes quiet automatically once the players move on. Attribute values not listed are left at their defaults.
+
+---
+
 ## Code Examples
 
 ### Scripted Activation

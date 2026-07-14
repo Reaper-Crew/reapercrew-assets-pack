@@ -13,33 +13,49 @@ The Reaper Crew Assets Pack is a comprehensive collection of systems, modules, a
 - **ZEN** - Zeus Enhanced
 - **ACRE2** - Advanced Combat Radio Environment
 
-## Systems Overview
+## Documentation
+
+### Getting Started
+
+- [Quick Reference](docs/quick-reference.md) - Mission maker cheat sheet
+- [Module Index](docs/modules.md) - Every Eden module with classnames and links
 
 ### AI Systems
 
-| System | Description |
-|--------|-------------|
-| [**AI Common**](docs/systems/ai/ai-common.md) | Global AI configuration including faction selection, unit pools, and skill settings |
-| [**AI Mechanics**](docs/systems/ai/ai-mechanics.md) | Garrison, Suppress Position, Convoy, Unlimited Ammo, and Surrender Area modules |
-| [**AI Reinforcements**](docs/systems/reinforcements/reinforcements-system.md) | Dynamic reinforcement spawning with multiple delivery methods |
+- [AI Common](docs/systems/ai/ai-common.md) - Faction, unit pools and skill configuration
+- [AI Mechanics](docs/systems/ai/ai-mechanics.md) - Overview and shared concepts
+  - [Garrison Area](docs/systems/ai/garrison.md) - Populate buildings with defenders
+  - [Patrol Area](docs/systems/ai/patrol.md) - Roaming patrols in a zone
+  - [Suppress Area](docs/systems/ai/suppress-position.md) - Suppressive fire positions
+  - [Convoy](docs/systems/ai/convoy.md) - Vehicle convoys with contact behaviour
+  - [Unlimited Ammo](docs/systems/ai/unlimited-ammo.md) - Infinite ammunition for synced vehicles
+  - [Surrender Area](docs/systems/ai/surrender-area.md) - Scripted ACE surrenders
+
+### Reinforcements
+
+- [Reinforcements System](docs/systems/reinforcements/reinforcements-system.md) - Overview, CBA settings, zone ceiling and wave mechanics
+  - [Spawnpoints](docs/systems/reinforcements/spawnpoints.md) - Spawn locations, zones, capturable objectives, pathing
+  - [Infantry - Foot Mobile](docs/systems/reinforcements/foot-mobile.md) - Infantry that rush on foot
+  - [Infantry - Motorised](docs/systems/reinforcements/motorised.md) - Vehicle-delivered infantry
+  - [Infantry - Helicopter](docs/systems/reinforcements/helicopter.md) - Heli-delivered infantry (land or fastrope)
+  - [Infantry - Marine](docs/systems/reinforcements/marine.md) - Boat-delivered infantry
+  - [Marauding Vehicles & Aircraft](docs/systems/reinforcements/marauding.md) - Persistent vehicle and air pressure
 
 ### Mission Systems
 
-| System | Description |
-|--------|-------------|
-| [**Ambience**](docs/systems/ambience/ambience-system.md) | Ambient effects modules including CAS strikes |
-| [**Mission Mechanics**](docs/systems/mission-mechanics/mission-mechanics-system.md) | Gameplay modules including Interaction Objectives and Timed Tasks |
+- [Mission Mechanics](docs/systems/mission-mechanics/mission-mechanics-system.md) - Interaction Objectives and Timed Tasks
+- [Ambience](docs/systems/ambience/ambience-system.md) - Ambient CAS strikes
 
 ### Support Systems
 
-| System | Description |
-|--------|-------------|
-| [**Logistics**](docs/systems/logistics/logistics-system.md) | Resupply points, vehicle delivery, and respawn vehicles |
-| [**Player Management**](docs/systems/player/player-management.md) | Loadout saving, ACRE configuration, and group management |
+- [Logistics](docs/systems/logistics/logistics-system.md) - Resupply points, vehicle delivery and respawn vehicles
+- [Player Management](docs/systems/player/player-management.md) - Loadouts, ACRE and player utilities
 
-## Quick Start
+### Development
 
-For mission makers who want to get started quickly, see the [Quick Reference Guide](docs/quick-reference.md).
+- [Developer Guide](docs/developer-guide.md) - For addon development
+- [Common Files Reference](docs/common-files.md) - Shared utilities and functions
+- [Functions Reference](docs/functions.md) - Public function documentation
 
 ## CBA Settings Categories
 
@@ -55,7 +71,7 @@ All systems are configured through CBA Settings (`Options > Addon Options`) unde
 
 Modules are found under `Systems (F5) > Modules`:
 
-- **Reaper Crew - AI** - AI behaviour modules (Garrison, Suppress, Convoy, Unlimited Ammo, Surrender Area)
+- **Reaper Crew - AI Mechanics** - AI behaviour modules (Garrison, Patrol, Suppress, Convoy, Unlimited Ammo, Surrender Area)
 - **Reaper Crew - Reinforcements** - Spawnpoints and reinforcement modules
 - **Reaper Crew - Ambience** - Ambient effects modules (CAS strikes)
 - **Reaper Crew - Mission Mechanics** - Gameplay modules (Interaction Objective, Timed Task)
@@ -65,30 +81,3 @@ Modules are found under `Systems (F5) > Modules`:
 ## Headless Client Support
 
 All reinforcement and AI systems are designed for **Headless Client (HC) compatibility**. AI spawning and management is automatically distributed to available headless clients when present, reducing server load in multiplayer missions.
-
-## Documentation Structure
-
-```
-docs/
-├── quick-reference.md        # Mission maker cheat sheet
-└── systems/
-    ├── ai/
-    │   ├── ai-common.md      # Faction & unit pool configuration
-    │   └── ai-mechanics.md   # Garrison, Suppress, Convoy, Unlimited Ammo, Surrender Area
-    ├── ambience/
-    │   └── ambience-system.md
-    ├── mission-mechanics/
-    │   └── mission-mechanics-system.md
-    ├── reinforcements/
-    │   └── reinforcements-system.md
-    ├── logistics/
-    │   └── logistics-system.md
-    └── player/
-        └── player-management.md
-```
-
-## Additional Resources
-
-- [Developer Guide](docs/developer-guide.md) - For addon development
-- [Common Files Reference](docs/common-files.md) - Shared utilities and functions
-- [Functions Reference](docs/functions.md) - Public function documentation

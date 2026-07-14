@@ -335,9 +335,9 @@ myMissionVariable
 ## Documentation Links
 
 - [AI Common](systems/ai/ai-common.md) - Faction and unit pool configuration
-- [AI Mechanics](systems/ai/ai-mechanics.md) - Garrison, Suppress, Convoy, Unlimited Ammo, Surrender Area
+- [AI Mechanics](systems/ai/ai-mechanics.md) - Overview with links to [Garrison](systems/ai/garrison.md), [Patrol](systems/ai/patrol.md), [Suppress](systems/ai/suppress-position.md), [Convoy](systems/ai/convoy.md), [Unlimited Ammo](systems/ai/unlimited-ammo.md), [Surrender Area](systems/ai/surrender-area.md)
 - [Ambience](systems/ambience/ambience-system.md) - Ambient CAS strikes
 - [Mission Mechanics](systems/mission-mechanics/mission-mechanics-system.md) - Interaction Objectives, Timed Tasks
-- [Reinforcements](systems/reinforcements/reinforcements-system.md) - Dynamic AI spawning
+- [Reinforcements](systems/reinforcements/reinforcements-system.md) - Overview with links to [Spawnpoints](systems/reinforcements/spawnpoints.md), [Foot Mobile](systems/reinforcements/foot-mobile.md), [Motorised](systems/reinforcements/motorised.md), [Helicopter](systems/reinforcements/helicopter.md), [Marine](systems/reinforcements/marine.md), [Marauding](systems/reinforcements/marauding.md)
 - [Logistics](systems/logistics/logistics-system.md) - Resupply and delivery
 - [Player Management](systems/player/player-management.md) - Loadouts and ACRE

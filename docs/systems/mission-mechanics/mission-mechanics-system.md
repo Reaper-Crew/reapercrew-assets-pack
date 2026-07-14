@@ -191,6 +191,25 @@ A complete "download intel from a laptop" objective:
 
 Result: Player holds action on laptop for 3 seconds, a 5-minute timer starts with progress updates, and the trigger fires when complete.
 
+### Eden Setup - Defend Until Extraction
+
+A "hold the area" objective using the Timed Task on its own:
+
+1. Place a **Timed Task** module:
+   - Start Variable: `"lz_secured"`
+   - In-Progress Variable: `"extraction_inbound"`
+   - Completed Variable: `"extraction_arrived"`
+   - Duration: `600`
+   - Broadcast Message: `"Extraction ETA"`
+2. Create a trigger over the landing zone (Anybody Present, your player side):
+   - On Activation: `lz_secured = true; publicVariable "lz_secured";`
+3. Create a second trigger:
+   - Condition: `extraction_arrived`
+   - On Activation: spawn or unhide the extraction helicopter and update the task
+4. Use `extraction_inbound` to drive pressure while the timer runs, for example as the Additional Condition on a [reinforcement module](../reinforcements/reinforcements-system.md) so enemy waves only flow while the players are holding the LZ
+
+Result: When players reach the LZ the ten minute countdown starts with ETA updates every minute, enemy pressure builds while it runs, and the extraction arrives when the timer completes.
+
 ---
 
 ## Code Examples
