@@ -76,9 +76,8 @@ Players must assault a walled compound held by dug-in defenders. Attribute value
    - Regular Troops: ticked
    - Min Units Per Building: `3` (occupy the smaller outbuildings too)
    - Max Units Per Building: `6` (spread the defence rather than packing one structure)
-2. To save server load at mission start, place a trigger (Anybody Present, area covering the approach to the compound) and synchronise it to the module
 
-**Result:** Nothing spawns until players enter the approach trigger. The compound then fills with defenders at one group per building, spread across every structure with three or more usable positions, and players have to clear it room by room. Skill comes from the AI Common CBA settings.
+**Result:** The compound fills with defenders at one group per building, spread across every structure with three or more usable positions, and players have to clear it room by room. Skill comes from the AI Common CBA settings. To spawn the garrison later in the mission instead of at start, see [Deferred Spawning](#deferred-spawning).
 
 Use one Garrison Area per defended location. Do not layer garrison modules over the same buildings; if you want a stronger defence in one part of a town, draw the areas so they cover separate buildings.
 
@@ -86,12 +85,7 @@ Use one Garrison Area per defended location. Do not layer garrison modules over 
 
 - Place module centre in areas with dense buildings
 - Keep Max Units reasonable (40-60) for performance
-- Units use dynamic simulation for performance optimisation
-- Each building spawns as a separate group, distributed across headless clients
 - Synchronise a trigger to defer spawning and reduce mission startup load
-- Group spawns are staggered (one every 3 seconds), so large garrisons take a short while to fully populate after activation
-- Garrison units will not trigger other dynamically simulated units to activate - only players can
-- Skill levels are inherited from the CBA AI Common settings for each troop type
 
 ## Troubleshooting
 

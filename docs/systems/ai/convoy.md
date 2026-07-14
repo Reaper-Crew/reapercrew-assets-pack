@@ -67,7 +67,7 @@ The Convoy module creates a convoy system where vehicles maintain proper spacing
 
 **Post-Contact Phase:**
 1. Custom contact code executes
-2. After 2 minutes, all groups execute LAMBS task rush
+2. After 2 minutes, groups execute LAMBS task rush, staggered 30 seconds apart, to simulate the enemy retaking the initiative
 3. After 30 minutes, vehicles added to garbage collection
 
 ## Code Examples
@@ -106,8 +106,6 @@ triggerActivated convoyStartTrigger
 - Give the travel waypoint to just the lead vehicle and nothing else
 - Place vehicles on roads with clear paths
 - Dismounted infantry should be in separate groups from the vehicle crews
-- Gunners stay in vehicles to provide fire support
-- Infantry dismounts will rush ambushing players after 30 seconds to simulate the enemy retaking the initiative
 - Adjust separation based on vehicle size (trucks need more space) - vehicles too close together can have unintended effects
 
 ## Troubleshooting

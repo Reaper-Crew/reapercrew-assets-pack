@@ -35,7 +35,7 @@ The Suppress Position module creates a trigger area where synchronized gunners w
 1. Module creates a trigger at its position
 2. Synchronized objects (gunners) are stored
 3. When players enter: trigger activates after 10-second delay
-4. Each gunner targets random players in the zone
+4. Each gunner targets random players in the zone, re-targeting every 1-10 seconds
 5. Uses ZEN's `zen_ai_fnc_suppressiveFire` for realistic suppression
 6. Gunners continue firing while trigger is active
 
@@ -85,8 +85,6 @@ Players must cross a bridge on the mission route. Two machine gun positions on t
 
 - Position gunners with good line of sight to the trigger area
 - Use multiple gunners for overlapping fields of fire
-- The 10-second delay helps prevent instant engagement
-- Gunners will re-target every 1-10 seconds randomly
 - Combine with the [Unlimited Ammo module](unlimited-ammo.md) so sustained fire never runs dry
 
 ## Troubleshooting

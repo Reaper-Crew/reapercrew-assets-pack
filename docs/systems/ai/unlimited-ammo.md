@@ -41,7 +41,6 @@ An ambush position needs its static weapons to keep firing for the whole engagem
 
 - Sync any vehicle type - works with static weapons, armour, aircraft, etc.
 - Multiple vehicles can be synced to a single module
-- The EH persists through locality changes (e.g. headless client transfers)
 
 ## Troubleshooting
 

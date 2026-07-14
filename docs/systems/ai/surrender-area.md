@@ -63,9 +63,8 @@ Once the players have fought through a village and broken its defence, the remai
 
 - Synchronise only infantry units - non-Man objects are automatically skipped
 - Use the surrender delay to create a realistic hesitation before units give up
+- Increase the stagger interval for a more natural cascading surrender effect
 - Combine with an activation condition to script when surrender becomes possible (e.g. after a firefight)
-- The stagger timing creates a natural cascading surrender effect
-- Units in vehicles will be ejected first if the option is enabled; if ejection fails they are skipped
 
 ## Troubleshooting
 

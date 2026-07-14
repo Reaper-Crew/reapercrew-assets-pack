@@ -82,8 +82,6 @@ Players must infiltrate a fuel depot at night. The open ground around the depot 
 - Keep Max Units reasonable for performance, especially on larger zones
 - Larger areas with smaller groups create a more dispersed patrol presence
 - Use Code on Spawn to apply custom behaviour, equipment or skill to each group (`_thisGroup` refers to the spawned group)
-- Patrol units use dynamic simulation and will not trigger other dynamically simulated units to activate - only players can
-- Group spawns are staggered (one every 3 seconds), so large patrol areas take a short while to fully populate after activation
 
 ## Troubleshooting
 
