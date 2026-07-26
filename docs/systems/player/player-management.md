@@ -132,21 +132,44 @@ Automatically configures ACRE radio preset channels on mission start.
 
 Group-based automatic channel selection:
 
-| Group ID | Channel |
-|----------|---------|
-| Zero | 12 |
-| Reaper-1-1 | 1 |
-| Reaper-1-2 | 2 |
-| Reaper-1-3 | 3 |
-| Thunder | 4 |
-| Hammer | 5 |
-| Fury, Fury-1, Fury-2 | 6 |
-| Foxhound-1, Foxhound-2, Foxhound-3 | 7 |
-| Shadow | 8 |
-| Viper | 9 |
-| Phantom | 10 |
-| Ugly-1, Ugly-2 | 11 |
-| Sentinel | 13 |
+An asset that deploys alone shares a net with the first of its series, so `Fury` and
+`Fury-1` tune to the same channel. Later instances are separate elements and take their own
+nets. A Reaper section's number is its channel.
+
+The radio presents channels in blocks of 16, which is how a player sees them, so the table
+gives both. Block 1 carries the manoeuvre and support elements, Block 2 the logistics and
+aviation elements.
+
+| Group ID | Block | Channel |
+|----------|-------|---------|
+| Reaper-1-1 | 1 | 1 |
+| Reaper-1-2 | 1 | 2 |
+| Reaper-1-3 | 1 | 3 |
+| Reaper-1-4 | 1 | 4 |
+| Thunder | 1 | 5 |
+| Hammer | 1 | 6 |
+| Fury, Fury-1 | 1 | 7 |
+| Fury-2 | 1 | 8 |
+| Fury-3 | 1 | 9 |
+| Shadow | 1 | 10 |
+| Anvil | 1 | 11 |
+| Zero | 1 | 12 |
+| Sentinel, Sentinel-1 | 1 | 13 |
+| Sentinel-2 | 1 | 14 |
+| Sentinel-3 | 1 | 15 |
+| Sentry | 1 | 16 |
+| Foxhound, Foxhound-1 | 2 | 1 |
+| Foxhound-2 | 2 | 2 |
+| Foxhound-3 | 2 | 3 |
+| Viper | 2 | 4 |
+| Phantom, Phantom-1 | 2 | 5 |
+| Phantom-2 | 2 | 6 |
+| Ugly, Ugly-1 | 2 | 7 |
+| Ugly-2 | 2 | 8 |
+| Ugly-3 | 2 | 9 |
+
+The section signs in `reaperCrew_Common` state the same block and channel, so they must be
+rebuilt whenever this table changes.
 
 **Multi-PTT Configuration:**
 

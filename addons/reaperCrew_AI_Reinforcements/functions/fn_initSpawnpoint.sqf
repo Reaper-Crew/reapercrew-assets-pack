@@ -40,12 +40,12 @@ _outerRadius = if (_logicArea isEqualTo [] || {(_logicArea select 0) <= 0}) then
 _innerRadius = (_logic getVariable ["innerZone", _defaultInner]) min _outerRadius;
 _capturable = _logic getVariable ["capturable", false];
 
-// Condition: player present + line of sight + touching ground + additionalCondition
+// Condition: player present + touching ground + additionalCondition
 //          + no in-zone player inside the inner radius
 //          + the spawnpoint has not been captured
 _additionalCondition = _logic getVariable ["additionalCondition", "true"];
 _triggerCondition = format [
-	"(this && { [objNull, 'VIEW'] checkVisibility [eyePos _x, getPosASL thisTrigger] == 0 } count thisList > 0)"
+	"(this)"
   + " && {isTouchingGround _x} count thisList > 0"
   + " && ({ isTouchingGround _x && {(thisTrigger distance2D _x) < (thisTrigger getVariable ['innerRadius', 0])} } count thisList) == 0"
   + " && !(thisTrigger getVariable ['spawnpointCaptured', false])"

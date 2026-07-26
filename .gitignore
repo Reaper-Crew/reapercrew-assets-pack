@@ -5,7 +5,6 @@ changelog.txt
 todo_notes.txt
 *.p3d
 arc/*
-*.paa
 *.tga
 addons/*/*.jpg
 *.py

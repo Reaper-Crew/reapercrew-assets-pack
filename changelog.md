@@ -1,5 +1,28 @@
 # Changelog
 
+# Version 6.3
+
+### Added
+- **PLAYER MANAGEMENT:** Anvil callsign for Combat Engineering, on Block 1 Channel 11
+- **PLAYER MANAGEMENT:** Sentry callsign for Ground Based Air Defence, on Block 1 Channel 16
+- **PLAYER MANAGEMENT:** Reaper-1-4 section, on Block 1 Channel 4
+- **PLAYER MANAGEMENT:** A third Fury, Sentinel, Foxhound and Ugly, and a second Phantom
+- **COMMON:** Section signs for the new callsigns
+
+### Changed
+- **PLAYER MANAGEMENT:** Each callsign instance now has its own net. A lone asset shares with the first of its series, so Fury and Fury-1 are together but Fury-2 and Fury-3 are separate
+- **PLAYER MANAGEMENT:** The matrix now spans two blocks. Foxhound, Viper, Phantom and Ugly move to Block 2, and Thunder, Hammer, Fury, Shadow, Sentinel and Sentry shift within Block 1. Reaper-1-1 to 1-3 and Zero are unchanged
+- **COMMON:** Section signs remade, each stating its block and channel as the radio words it
+- **COMMON:** Every callsign has its own sign, including the bare name, so `billboard_fury.paa` reads Fury and `billboard_fury1.paa` reads Fury-1
+- **COMMON:** Briefing zone, BCR muster point, communications and callsign channel boards remade to match
+- **COMMON:** `general_channels.paa` now lists the full matrix by block
+
+### Removed
+- **COMMON:** `billboard_reaper15.paa` and `billboard_reaper16.paa`, unreferenced and never allocated a channel
+- **COMMON:** `general_jtacComms1.paa`, which directed aircraft to a net that does not exist
+
+### Fixed
+
 ## Version 6.2
 
 ### Added

@@ -4,32 +4,58 @@
 
 ### General
 
-* rc_assets_pack\addons\reaperCrew_Common\data\general_bcrMusterPoint.paa
+Informational boards, in the same placard style as the callsign signs.
+
 * rc_assets_pack\addons\reaperCrew_Common\data\general_briefingZone.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\general_bcrMusterPoint.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\general_communications.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\general_channels.paa
+
+`general_channels.paa` lists the whole callsign matrix on one board, so it needs remaking
+whenever a channel changes.
+
+Brand artwork, not signage.
+
 * rc_assets_pack\addons\reaperCrew_Common\data\general_standardLogo.paa
 * rc_assets_pack\addons\reaperCrew_Common\data\insignia.paa
 * rc_assets_pack\addons\reaperCrew_Common\data\reaperLogo.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\general_channels.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\general_communications.paa
 
 ### Callsigns
 
-* rc_assets_pack\addons\reaperCrew_Common\data\billboard_zero.paa
+Each sign states its callsign and the block and channel that callsign's PRR is tuned to.
+There is one sign per callsign, including the bare name for an asset deploying alone, so
+pick the sign matching the group name the element actually uses. Listed in channel order.
+
 * rc_assets_pack\addons\reaperCrew_Common\data\billboard_reaper11.paa
 * rc_assets_pack\addons\reaperCrew_Common\data\billboard_reaper12.paa
 * rc_assets_pack\addons\reaperCrew_Common\data\billboard_reaper13.paa
 * rc_assets_pack\addons\reaperCrew_Common\data\billboard_reaper14.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\billboard_reaper15.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\billboard_reaper16.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\billboard_viper.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\billboard_ugly.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\billboard_shadow.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\billboard_phantom.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_thunder.paa
 * rc_assets_pack\addons\reaperCrew_Common\data\billboard_hammer.paa
 * rc_assets_pack\addons\reaperCrew_Common\data\billboard_fury.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\billboard_foxhound.paa
-* rc_assets_pack\addons\reaperCrew_Common\data\billboard_thunder.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_fury1.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_fury2.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_fury3.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_shadow.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_anvil.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_zero.paa
 * rc_assets_pack\addons\reaperCrew_Common\data\billboard_sentinel.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_sentinel1.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_sentinel2.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_sentinel3.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_sentry.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_foxhound.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_foxhound1.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_foxhound2.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_foxhound3.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_viper.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_phantom.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_phantom1.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_phantom2.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_ugly.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_ugly1.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_ugly2.paa
+* rc_assets_pack\addons\reaperCrew_Common\data\billboard_ugly3.paa
 
 # Marker Colours
 
