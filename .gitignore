@@ -12,3 +12,4 @@ addons/*/*.jpg
 build_all*
 .hemttout/*
 .hemtt/*
+conductor/
