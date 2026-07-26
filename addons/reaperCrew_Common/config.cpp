@@ -142,10 +142,16 @@ class CfgFunctions
 		};
 	};
 };
-// Full redeclaration of the base-game CfgMarkerColors (from a3\ui_f\config.cpp),
-// extended with Reaper Crew custom colours. Config classes merge across addons, so
-// the vanilla entries below are identical overrides and the reaperCrew_* entries are
-// additions - both the vanilla palette and ours are available on every mission.
+// Full redeclaration of the base-game CfgMarkerColors (from a3\ui_f\config.cpp), with the
+// Reaper Crew colours declared first. Config classes merge across addons, so the vanilla
+// entries are identical overrides and the reaperCrew_* entries are additions - both
+// palettes stay available on every mission. class Default stays first because every other
+// class inherits from it.
+//
+// Declaring ours first does not put them first in the marker colour dropdown. The engine
+// keeps a redeclared class in the position a3 first gave it and appends only genuinely new
+// classes, so the reaperCrew_* entries land after the vanilla palette however this file is
+// ordered. Confirmed in game. The order below is for reading the file, nothing more.
 class CfgMarkerColors
 {
 	class Default
@@ -153,6 +159,81 @@ class CfgMarkerColors
 		name = "$STR_CFG_MARKERCOL_DEFAULT";
 		color[] = {0,0,0,1};
 		scope = 1;
+	};
+	// Reaper Crew marker colours - CC1 for the whole platoon, then one visually
+	// distinct colour per callsign. Declared ahead of the vanilla palette so they
+	// head the marker colour dropdown.
+	class reaperCrew_ColorCC1: Default
+	{
+		name = "CC1";
+		color[] = {0.0,0.8,0.0,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorZero: Default
+	{
+		name = "Zero";
+		color[] = {1.0,0.75,0.0,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorReaper1: Default
+	{
+		name = "Reaper-1-1";
+		color[] = {0.15,0.4,0.9,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorReaper2: Default
+	{
+		name = "Reaper-1-2";
+		color[] = {0.85,0.1,0.1,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorReaper3: Default
+	{
+		name = "Reaper-1-3";
+		color[] = {0.1,0.65,0.15,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorReaper4: Default
+	{
+		name = "Reaper-1-4";
+		color[] = {0.6,0.2,0.85,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorHammer: Default
+	{
+		name = "Hammer";
+		color[] = {1.0,0.5,0.0,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorThunder: Default
+	{
+		name = "Thunder";
+		color[] = {0.0,0.75,0.8,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorSentinel: Default
+	{
+		name = "Sentinel";
+		color[] = {1.0,0.25,0.6,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorFury: Default
+	{
+		name = "Fury";
+		color[] = {0.55,0.8,0.1,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorAnvil: Default
+	{
+		name = "Anvil";
+		color[] = {0.0,0.85,0.5,1};
+		scope = 2;
+	};
+	class reaperCrew_ColorSentry: Default
+	{
+		name = "Sentry";
+		color[] = {0.85,0.1,0.75,1};
+		scope = 2;
 	};
 	class ColorBlack: Default
 	{
@@ -289,61 +370,7 @@ class CfgMarkerColors
 	};
 	class colorCivilian: ColorCIV
 	{
-		scope = 0;
-	};
-	// Reaper Crew callsign colours - one visually distinct colour per element.
-	class reaperCrew_ColorZero: Default
-	{
-		name = "Zero";
-		color[] = {1.0,0.75,0.0,1};
-		scope = 2;
-	};
-	class reaperCrew_ColorReaper1: Default
-	{
-		name = "Reaper-1-1";
-		color[] = {0.15,0.4,0.9,1};
-		scope = 2;
-	};
-	class reaperCrew_ColorReaper2: Default
-	{
-		name = "Reaper-1-2";
-		color[] = {0.85,0.1,0.1,1};
-		scope = 2;
-	};
-	class reaperCrew_ColorReaper3: Default
-	{
-		name = "Reaper-1-3";
-		color[] = {0.1,0.65,0.15,1};
-		scope = 2;
-	};
-	class reaperCrew_ColorReaper4: Default
-	{
-		name = "Reaper-1-4";
-		color[] = {0.6,0.2,0.85,1};
-		scope = 2;
-	};
-	class reaperCrew_ColorHammer: Default
-	{
-		name = "Hammer";
-		color[] = {1.0,0.5,0.0,1};
-		scope = 2;
-	};
-	class reaperCrew_ColorThunder: Default
-	{
-		name = "Thunder";
-		color[] = {0.0,0.75,0.8,1};
-		scope = 2;
-	};
-	class reaperCrew_ColorSentinel: Default
-	{
-		name = "Sentinel";
-		color[] = {1.0,0.25,0.6,1};
-		scope = 2;
-	};
-	class reaperCrew_ColorFury: Default
-	{
-		name = "Fury";
-		color[] = {0.55,0.8,0.1,1};
+		name = "Aviation";
 		scope = 2;
 	};
 };

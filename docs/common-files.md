@@ -59,10 +59,11 @@ pick the sign matching the group name the element actually uses. Listed in chann
 
 # Marker Colours
 
-`reaperCrew_Common` adds nine callsign marker colours, one visually distinct colour per element. They appear in the marker colour dropdown in Eden, Zeus and the in-game map alongside the vanilla palette (the vanilla colours remain available), and can be used from script with `setMarkerColor`.
+`reaperCrew_Common` adds a CC1 colour for markers that concern the whole platoon and eleven callsign colours, one visually distinct colour per element. They appear in the marker colour dropdown in Eden, Zeus and the in-game map alongside the vanilla palette (the vanilla colours remain available), and can be used from script with `setMarkerColor`. They are listed after the vanilla colours in the dropdown, which is an engine behaviour an addon cannot change: added colours are always appended to the base-game set.
 
 | Classname | Display Name | RGB |
 |-----------|--------------|-----|
+| `reaperCrew_ColorCC1` | CC1 | 0.0, 0.8, 0.0 |
 | `reaperCrew_ColorZero` | Zero | 1.0, 0.75, 0.0 |
 | `reaperCrew_ColorReaper1` | Reaper-1-1 | 0.15, 0.4, 0.9 |
 | `reaperCrew_ColorReaper2` | Reaper-1-2 | 0.85, 0.1, 0.1 |
@@ -72,6 +73,12 @@ pick the sign matching the group name the element actually uses. Listed in chann
 | `reaperCrew_ColorThunder` | Thunder | 0.0, 0.75, 0.8 |
 | `reaperCrew_ColorSentinel` | Sentinel | 1.0, 0.25, 0.6 |
 | `reaperCrew_ColorFury` | Fury | 0.55, 0.8, 0.1 |
+| `reaperCrew_ColorAnvil` | Anvil | 0.0, 0.85, 0.5 |
+| `reaperCrew_ColorSentry` | Sentry | 0.85, 0.1, 0.75 |
+
+CC1 takes the same value as the vanilla `ColorGreen`, which is the colour already used across all callsigns for platoon-wide markers. The two entries look identical in the dropdown; pick `reaperCrew_ColorCC1` so the intent is readable.
+
+The vanilla `colorCivilian` entry is the one used for aviation markers, so it is shown in the dropdown as **Aviation**. It has no fixed RGB: it inherits `ColorCIV`, which reads each player's own map colour settings, so the literal colour differs per player and its alpha is 0.8 rather than the 1 used by the entries above.
 
 ```sqf
 "marker_reaper11" setMarkerColor "reaperCrew_ColorReaper1";
