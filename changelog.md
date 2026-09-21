@@ -1,5 +1,16 @@
 # Changelog
 
+# Version 6.3.1
+
+### Added
+- **REINFORCEMENTS:** Foot mobile modules store their activation trigger on the logic as `activationTrigger`, so mission scripts can reach the zone
+- **REINFORCEMENTS:** `spawnHeadlessInfantry` takes an optional side, defaulting to the reinforcements side setting
+
+### Changed
+- **REINFORCEMENTS:** Foot mobile activation reads `reinforcementCount` and `waveDelay` from the trigger every wave, so values set on the trigger mid-mission are picked up
+
+### Removed
+
 # Version 6.3
 
 ### Added

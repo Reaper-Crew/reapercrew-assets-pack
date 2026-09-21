@@ -6,7 +6,11 @@
  * 0: Object <OBJECT> 
  * 0: Troops <ARRAY>
  * 2: Skill Level <INT>
- * 2: Rush Mode <BOOLEAN>
+ * 3: Rush Mode <BOOLEAN>
+ * 4: Code run on the group <STRING>
+ * 5: Module object <OBJECT> (optional)
+ * 6: Rush radius <NUMBER> (default 2000)
+ * 7: Side <SIDE> (default reaperCrew_reinforcements_side)
  *
  * Return Value:
  * None
@@ -17,13 +21,13 @@
  * Public: No
  */
 
-params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", ["_moduleObject", objNull], ["_rushRadius", 2000]];
+params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", ["_moduleObject", objNull], ["_rushRadius", 2000], ["_side", reaperCrew_reinforcements_side]];
 
-[_spawnPoint, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup, _moduleObject, _rushRadius] spawn {
-	params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", "_moduleObject", "_rushRadius"];
+[_spawnPoint, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup, _moduleObject, _rushRadius, _side] spawn {
+	params ["_spawnPoint", "_squadArray", "_squadSkill", "_rushMode", "_codeOnSpawnGroup", "_moduleObject", "_rushRadius", "_side"];
 	["Running reinforcement spawn script"] call reapercrew_common_fnc_remoteLog;
 	// Spawn the group
-	_spawnedGroup = [_spawnPoint, reaperCrew_reinforcements_side, _squadArray, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
+	_spawnedGroup = [_spawnPoint, _side, _squadArray, [],[],[],[],[],180] call BIS_fnc_spawnGroup;
 	// The group is local to this machine, so the engine auto-deletes it once every member is dead,
 	// preventing empty groups from accumulating towards the per-side group limit
 	_spawnedGroup deleteGroupWhenEmpty true;
