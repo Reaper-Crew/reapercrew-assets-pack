@@ -6,6 +6,7 @@ todo_notes.txt
 *.p3d
 arc/*
 *.tga
+*.png
 addons/*/*.jpg
 *.py
 build_all*
