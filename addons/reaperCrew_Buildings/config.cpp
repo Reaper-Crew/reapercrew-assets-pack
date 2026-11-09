@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class reaperCrew_Buildings
 	{
-		units[] = {"reaperCrew_HangarMid", "reaperCrew_HangarS", "reaperCrew_HangarN", "reaperCrew_HangarWDoorS", "reaperCrew_HangarWDoorN", "reaperCrew_HangarEDoorS", "reaperCrew_HangarEDoorN", "reaperCrew_HangarSW", "reaperCrew_HangarSE", "reaperCrew_HangarNW", "reaperCrew_HangarNE"};
+		units[] = {"reaperCrew_Corridor25A", "reaperCrew_Corridor25B", "reaperCrew_Corridor25C", "reaperCrew_Corridor50A", "reaperCrew_Corridor50B", "reaperCrew_Corridor50C", "reaperCrew_HangarMid", "reaperCrew_HangarS", "reaperCrew_HangarN", "reaperCrew_HangarWDoorS", "reaperCrew_HangarWDoorN", "reaperCrew_HangarEDoorS", "reaperCrew_HangarEDoorN", "reaperCrew_HangarSW", "reaperCrew_HangarSE", "reaperCrew_HangarNW", "reaperCrew_HangarNE"};
 		weapons[] = {};
 		requiredVersion = 2.02;
 		requiredAddons[] = {"A3_Structures_F", "ReaperCrew_Common"};
@@ -18,6 +18,66 @@ class CfgEditorSubcategories
 class CfgVehicles
 {
 	class House_F;
+	class reaperCrew_Corridor25A: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Corridor 25 m (straight)";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Corridor25A\Corridor25A.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+	};
+	class reaperCrew_Corridor25B: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Corridor 25 m (bypass)";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Corridor25B\Corridor25B.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+	};
+	class reaperCrew_Corridor25C: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Corridor 25 m (pillar chamber)";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Corridor25C\Corridor25C.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+	};
+	class reaperCrew_Corridor50A: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Corridor 50 m (straight)";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Corridor50A\Corridor50A.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+	};
+	class reaperCrew_Corridor50B: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Corridor 50 m (S-bend)";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Corridor50B\Corridor50B.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+	};
+	class reaperCrew_Corridor50C: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Corridor 50 m (zig-zag)";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Corridor50C\Corridor50C.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+	};
 	class reaperCrew_HangarMid: House_F
 	{
 		scope = 2;
