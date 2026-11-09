@@ -1,0 +1,3 @@
+[files]
+# Backlog models kept out of the pack (user 2026-10-28). Texture sources repeated in case this list replaces the project one.
+exclude = ["data/TvCart/**", "**/TvCart/*", "*.png", "*.tga", "*.psd", "*.spp"]
