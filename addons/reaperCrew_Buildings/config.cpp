@@ -2,10 +2,10 @@ class CfgPatches
 {
 	class reaperCrew_Buildings
 	{
-		units[] = {"reaperCrew_Corridor25A", "reaperCrew_Corridor25B", "reaperCrew_Corridor25C", "reaperCrew_Corridor50A", "reaperCrew_Corridor50B", "reaperCrew_Corridor50C", "reaperCrew_HangarMid", "reaperCrew_HangarS", "reaperCrew_HangarN", "reaperCrew_HangarWDoorS", "reaperCrew_HangarWDoorN", "reaperCrew_HangarEDoorS", "reaperCrew_HangarEDoorN", "reaperCrew_HangarSW", "reaperCrew_HangarSE", "reaperCrew_HangarNW", "reaperCrew_HangarNE"};
+		units[] = {"reaperCrew_Bunker01", "reaperCrew_Bunker02", "reaperCrew_Bunker03", "reaperCrew_Corridor25A", "reaperCrew_Corridor25B", "reaperCrew_Corridor25C", "reaperCrew_Corridor50A", "reaperCrew_Corridor50B", "reaperCrew_Corridor50C", "reaperCrew_Stairs01", "reaperCrew_HangarMid", "reaperCrew_HangarS", "reaperCrew_HangarN", "reaperCrew_HangarWDoorS", "reaperCrew_HangarWDoorN", "reaperCrew_HangarEDoorS", "reaperCrew_HangarEDoorN", "reaperCrew_HangarSW", "reaperCrew_HangarSE", "reaperCrew_HangarNW", "reaperCrew_HangarNE"};
 		weapons[] = {};
 		requiredVersion = 2.02;
-		requiredAddons[] = {"A3_Structures_F", "ReaperCrew_Common"};
+		requiredAddons[] = {"A3_Structures_F", "A3_Sounds_F", "ReaperCrew_Common"};
 	};
 };
 class CfgEditorSubcategories
@@ -15,9 +15,69 @@ class CfgEditorSubcategories
 		displayName = "Buildings";
 	};
 };
+class CfgAnimationSourceSounds
+{
+	// Vanilla ramp motor once as a blast door starts moving, ramp slam at each end of travel.
+	class reaperCrew_BlastDoorSound
+	{
+		class DoorMovement
+		{
+			loop = 0;
+			terminate = 1;
+			trigger = "(phase factor[0.01,0.02]) * (phase factor[0.99,0.98])";
+			sound0[] = {"A3\Sounds_F\environment\structures\doors\ServoRamp\ServoRampSound_1.wss", 3.1622777, 1, 60};
+			sound[] = {"sound0", 1};
+		};
+		class DoorMovementDone1
+		{
+			loop = 0;
+			terminate = 0;
+			trigger = "direction * (phase factor[0.98,0.995])";
+			sound0[] = {"A3\Sounds_F\environment\structures\doors\ServoRamp\ServoRampSlam.wss", 3.1622777, 1, 60};
+			sound[] = {"sound0", 1};
+		};
+		class DoorMovementDone2: DoorMovementDone1
+		{
+			trigger = "(1 - direction) * (phase factor[0.02,0.005])";
+		};
+	};
+};
 class CfgVehicles
 {
 	class House_F;
+	class reaperCrew_Bunker01: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Bunker 01";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Bunker01\Bunker01.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+		#include "data\Bunker01\Bunker01_doors.hpp"
+	};
+	class reaperCrew_Bunker02: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Bunker 02";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Bunker02\Bunker02.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+		#include "data\Bunker02\Bunker02_doors.hpp"
+	};
+	class reaperCrew_Bunker03: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Bunker 03";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Bunker03\Bunker03.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+		#include "data\Bunker03\Bunker03_doors.hpp"
+	};
 	class reaperCrew_Corridor25A: House_F
 	{
 		scope = 2;
@@ -74,6 +134,16 @@ class CfgVehicles
 		scopeCurator = 2;
 		displayName = "Corridor 50 m (zig-zag)";
 		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Corridor50C\Corridor50C.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+	};
+	class reaperCrew_Stairs01: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "Stairs 50 m (switchback)";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Stairs01\Stairs01.p3d";
 		editorCategory = "reaperCrew";
 		editorSubcategory = "reaperCrewBuildings";
 		destrType = "DestructNo";
