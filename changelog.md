@@ -1,5 +1,28 @@
 # Changelog
 
+# Version 6.4
+
+### Added
+- **REINFORCEMENTS:** Every reinforcement and marauding module stores its activation trigger on the logic as `activationTrigger`
+- **BUILDINGS:** New addon, under Reaper Crew > Buildings in the editor
+- **BUILDINGS:** Bunker 01, 02 and 03: underground bunkers with furnished rooms, building positions and blast doors that lift, operated from a keypad either side
+- **BUILDINGS:** Six connector corridors, 25 m and 50 m (straight, bypass, pillar chamber, S-bend, zig-zag), to join bunkers
+- **BUILDINGS:** Stairs 01, a 50 m switchback stairwell
+- **BUILDINGS:** Eleven hangar blocks forming a sealed 200 x 200 m hangar, and a Holding Pen composition (Groups > Empty > Reaper Crew > Buildings) placing all sixteen
+- **MISSION OBJECTS:** New addon, under Reaper Crew > Communications and Briefing in the editor. Requires CBA and ACE
+- **MISSION OBJECTS:** Starlink terminal, Silok jammer tower, WiFi Pineapple, USB power bank, mini computer and SATCOM X-wing antenna
+- **MISSION OBJECTS:** EW case holding a WiFi Pineapple, power bank and mini computer, with a lid screen set in its attributes
+- **MISSION OBJECTS:** Spoofer item: ACE self interaction places the EW case, ACE interaction on the case picks it up. Raises `rc_spoofer_placed` and `rc_spoofer_pickedUp` for mission scripts
+- **MISSION OBJECTS:** Video wall with six screens, each image set in its attributes
+- **MISSION OBJECTS:** Briefing podium on a stage platform, with a logo plate set in its attributes (Reaper Crew logo by default)
+- **MISSION OBJECTS:** Briefing Zone and Section Area compositions (Groups > Empty > Reaper Crew > Areas)
+- **MISSION OBJECTS:** A billboard for each of the pack's billboard images, under Reaper Crew > Billboards in the editor
+
+### Changed
+- **REINFORCEMENTS:** Marauding vehicles and aircraft read their count and frequency range from the trigger every pass, so values set on the trigger mid-mission are picked up
+- **REINFORCEMENTS:** Motorised, helicopter and marine modules read `reinforcementCount` and `waveDelay` from the trigger every wave
+- **REINFORCEMENTS:** Every module takes each spawn off the trigger's current count, so units added to the pool mid-wave are kept
+
 # Version 6.3.1
 
 ### Added

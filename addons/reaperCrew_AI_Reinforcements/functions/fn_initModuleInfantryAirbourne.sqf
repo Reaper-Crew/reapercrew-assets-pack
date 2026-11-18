@@ -72,6 +72,7 @@ _activationTrigger setVariable ["rushMode", _rushMode];
 _activationTrigger setVariable ["codeOnSpawnGroup", _codeOnSpawnGroup];
 _activationTrigger setVariable ["waveDelay", _waveDelay];
 _activationTrigger setVariable ["moduleObject", _logic];
+_logic setVariable ["activationTrigger", _activationTrigger];
 _activationTrigger setVariable ["deliveryMode", _deliveryMode];
 
 // Track units spawned by this module (may be outside the zone) and keep the array pruned of dead/null entries

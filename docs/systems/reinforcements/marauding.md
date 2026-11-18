@@ -52,6 +52,10 @@ The vehicle classes for each category are defined in the AI Common CBA settings.
 
 Marauding spawning can be paused mid-mission via the CBA settings menu under `Reaper Crew - AI Reinforcements > Live Mission Settings` (Pause Marauding Vehicles / Pause Marauding Aircraft). These can be toggled repeatedly during the mission as required. The Additional Condition attribute offers scripted control per module: while it returns false the module stops spawning without requiring players to leave the zone.
 
+## Live Values
+
+The remaining count and the frequency range can be changed mid-mission on the module's trigger, which the module holds as `activationTrigger`. See [Runtime Control](reinforcements-system.md#runtime-control) for the variable names.
+
 ## Logging
 
 The marauding modules write their diagnostic output (spawn activity, remaining vehicle/aircraft counts and spawnpoint availability) to the server log automatically. There are no debug toggles to enable.

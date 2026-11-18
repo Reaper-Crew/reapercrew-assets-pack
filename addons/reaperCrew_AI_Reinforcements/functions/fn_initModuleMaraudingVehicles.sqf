@@ -57,3 +57,4 @@ _activationTrigger setVariable ["vehicleFrequencyMax",_vehicleFrequencyMax];
 _activationTrigger setVariable ["concurrentVehicles",_concurrentVehicles];
 _activationTrigger setVariable ["vehiclesArray",_vehiclesArray];
 _activationTrigger setVariable ["moduleObject", _logic];
+_logic setVariable ["activationTrigger", _activationTrigger];

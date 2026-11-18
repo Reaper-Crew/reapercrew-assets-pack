@@ -218,6 +218,29 @@ reaperCrew_pauseInfantryReinforcements = true;
 reaperCrew_pauseInfantryReinforcements = false;
 ```
 
+**Live Values:**
+
+Every reinforcement and marauding module keeps its zone trigger on the module as `activationTrigger`. The values below are read from that trigger on every pass of the spawn loop, so a mission script can change them mid-mission and the module picks them up on its next pass. A new delay applies once the wait currently in progress ends.
+
+| Module | Pool | Delay |
+|--------|------|-------|
+| Foot Mobile, Motorised, Helicopter, Marine | `reinforcementCount` | `waveDelay` |
+| Marauding Vehicles | `vehicleCount` | `vehicleFrequencyMin`, `vehicleFrequencyMax` |
+| Marauding Aircraft | `AircraftCount` | `AircraftFrequencyMin`, `AircraftFrequencyMax` |
+
+Each spawn is taken off the pool as it stands at that moment, so units added while a wave is being spawned are kept.
+
+```sqf
+// Add 24 infantry to a module's pool
+private _trigger = myReinforcementsModule getVariable ["activationTrigger", objNull];
+_trigger setVariable ["reinforcementCount", (_trigger getVariable ["reinforcementCount", 0]) + 24];
+
+// Slow a marauding vehicles module down
+private _vehicleTrigger = myVehiclesModule getVariable ["activationTrigger", objNull];
+_vehicleTrigger setVariable ["vehicleFrequencyMin", 300];
+_vehicleTrigger setVariable ["vehicleFrequencyMax", 420];
+```
+
 **Check Active Spawnpoints:**
 ```sqf
 // View active triggers in debug

@@ -23,7 +23,6 @@ while {isNil "activeAircraftTriggers"} do {
 };
 
 // Get variables from the trigger
-_reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
 _zoneCeiling = _triggerObject getVariable ["zoneCeiling",80];
 _zoneRatio = _triggerObject getVariable ["zoneRatio",3];
 _zoneLimitMode = _triggerObject getVariable ["zoneLimitMode","CEILING"];
@@ -34,12 +33,15 @@ _distanceMax = _triggerObject getVariable ["distanceMax",800];
 _rushMode = _triggerObject getVariable ["rushMode",false];
 _reinforcementGroups = _triggerObject getVariable ["troopArrays", [[],20]];
 _codeOnSpawnGroup = _triggerObject getVariable ["codeOnSpawnGroup",""];
-_waveDelay = _triggerObject getVariable ["waveDelay",60];
 _moduleObject = _triggerObject getVariable ["moduleObject", objNull];
 _deliveryMode = _triggerObject getVariable ["deliveryMode", "LAND"];
 
 // Run code only while the trigger is activated
 while { triggerActivated _triggerObject } do {
+
+	// Read each wave so values set on the trigger mid-loop are picked up
+	_reinforcementsCount = _triggerObject getVariable ["reinforcementCount",50];
+	_waveDelay = _triggerObject getVariable ["waveDelay",60];
 
 	// Count all humanoid units in the zone (players, civilians and enemies) so the ceiling caps total load
 	_opforCounter = [_triggerObject, _moduleObject] call reapercrew_reinforcements_fnc_getZoneUnitCount;
@@ -113,8 +115,7 @@ while { triggerActivated _triggerObject } do {
 		[[_landingPosition, getPos _spawnTrigger, _reinforcementsAircraft, _reinforcementsGroup, _reinforcementsGroupSkill, _codeOnSpawnGroup, _reinforcementsPathway, _resolvedDeliveryMode, _rushMode, _moduleObject, _rushRadius], "reapercrew_reinforcements_fnc_spawnHeadlessInfantryAirbourne"] call reapercrew_common_fnc_executeDistributed;
 
 		// Adjust the number of available reinforcements
-		_reinforcementsCount = _reinforcementsCount - _unitCount;
-		_triggerObject setVariable ["reinforcementCount",_reinforcementsCount];
+		_triggerObject setVariable ["reinforcementCount", ((_triggerObject getVariable ["reinforcementCount", 0]) - _unitCount) max 0];
 
 	};
 	sleep _waveDelay;

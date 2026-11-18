@@ -20,14 +20,16 @@ params ["_triggerObject"];
 	params ["_triggerObject"];
 
 	// Get Variables
-	_AircraftCount = _triggerObject getVariable ["AircraftCount",50];
-	_AircraftFrequencyMin = _triggerObject getVariable ["AircraftFrequencyMin",180];
-	_AircraftFrequencyMax = _triggerObject getVariable ["AircraftFrequencyMax",240];
 	_AircraftsArray = _triggerObject getVariable ["AircraftsArray",[]];
 	_moduleObject = _triggerObject getVariable ["moduleObject", objNull];
 
 	// Do for as long as trigger is active
 	while { triggerActivated _triggerObject } do {
+
+		// Read each pass so values set on the trigger mid-loop are picked up
+		_AircraftCount = _triggerObject getVariable ["AircraftCount",50];
+		_AircraftFrequencyMin = _triggerObject getVariable ["AircraftFrequencyMin",180];
+		_AircraftFrequencyMax = _triggerObject getVariable ["AircraftFrequencyMax",240];
 
 		// Get the available spawnpoints
 		_availableSpawnpoints = [_moduleObject, activeAircraftTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
@@ -50,8 +52,7 @@ params ["_triggerObject"];
 
 			[[getPos _randomSpawn, (selectRandom _AircraftsArray), 50, getPos _nearestPlayer], "reapercrew_reinforcements_fnc_spawnHeadlessVehicle"] call reapercrew_common_fnc_executeDistributed;
 
-			_AircraftCount = _AircraftCount - 1;
-			_triggerObject setVariable ["AircraftCount",_AircraftCount];
+			_triggerObject setVariable ["AircraftCount", ((_triggerObject getVariable ["AircraftCount", 0]) - 1) max 0];
 
 		} else {
 			["Module alive but conditions not met"] call reapercrew_common_fnc_remoteLog;

@@ -19,6 +19,7 @@ The Reaper Crew Assets Pack is a comprehensive collection of systems, modules, a
 
 - [Quick Reference](docs/quick-reference.md) - Mission maker cheat sheet
 - [Module Index](docs/modules.md) - Every Eden module with classnames and links
+- [Credits](docs/credits.md) - Third-party images in the pack
 
 ### AI Systems
 

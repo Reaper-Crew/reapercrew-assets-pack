@@ -20,15 +20,17 @@ params ["_triggerObject"];
 	params ["_triggerObject"];
 
 	// Get Variables
-	_vehicleCount = _triggerObject getVariable ["vehicleCount",50];
-	_vehicleFrequencyMin = _triggerObject getVariable ["vehicleFrequencyMin",180];
-	_vehicleFrequencyMax = _triggerObject getVariable ["vehicleFrequencyMax",240];
 	_concurrentVehicles = _triggerObject getVariable ["concurrentVehicles",2];
 	_vehiclesArray = _triggerObject getVariable ["vehiclesArray",[]];
 	_moduleObject = _triggerObject getVariable ["moduleObject", objNull];
 
 	// Do for as long as trigger is active
 	while { triggerActivated _triggerObject } do {
+
+		// Read each pass so values set on the trigger mid-loop are picked up
+		_vehicleCount = _triggerObject getVariable ["vehicleCount",50];
+		_vehicleFrequencyMin = _triggerObject getVariable ["vehicleFrequencyMin",180];
+		_vehicleFrequencyMax = _triggerObject getVariable ["vehicleFrequencyMax",240];
 
 		// Get the available spawnpoints
 		_availableSpawnpoints = [_moduleObject, activeVehicleTriggers] call reapercrew_reinforcements_fnc_getAvailableSpawnpoints;
@@ -52,8 +54,7 @@ params ["_triggerObject"];
 
 			[[getPos _randomSpawn, (selectRandom _vehiclesArray), 50, getPos _nearestPlayer], "reapercrew_reinforcements_fnc_spawnHeadlessVehicle"] call reapercrew_common_fnc_executeDistributed;
 
-			_vehicleCount = _vehicleCount - 1;
-			_triggerObject setVariable ["vehicleCount",_vehicleCount];
+			_triggerObject setVariable ["vehicleCount", ((_triggerObject getVariable ["vehicleCount", 0]) - 1) max 0];
 
 		} else {
 			["Module alive but conditions not met"] call reapercrew_common_fnc_remoteLog;

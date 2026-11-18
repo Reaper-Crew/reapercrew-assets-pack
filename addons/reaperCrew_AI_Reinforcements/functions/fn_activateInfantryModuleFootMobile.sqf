@@ -69,7 +69,7 @@ while {isNil "activeInfantryTriggers"} do {
 
 			[[getPos _randomSpawn, _squadArray, _squadSkill, _rushMode, _codeOnSpawnGroup, _moduleObject, _rushRadius], "reapercrew_reinforcements_fnc_spawnHeadlessInfantry"] call reapercrew_common_fnc_executeDistributed;
 
-			_reinforcementsCount = _reinforcementsCount - _squadCount;
+			_reinforcementsCount = ((_triggerObject getVariable ["reinforcementCount", 0]) - _squadCount) max 0;
 			_triggerObject setVariable ["reinforcementCount", _reinforcementsCount];
 
 			[(format ["Reinforcements created, %1 infantry remain", _reinforcementsCount])] call reapercrew_common_fnc_remoteLog;
