@@ -40,6 +40,7 @@ The Reaper Crew Assets Pack is a comprehensive collection of systems, modules, a
   - [Infantry - Motorised](docs/systems/reinforcements/motorised.md) - Vehicle-delivered infantry
   - [Infantry - Helicopter](docs/systems/reinforcements/helicopter.md) - Heli-delivered infantry (land or fastrope)
   - [Infantry - Marine](docs/systems/reinforcements/marine.md) - Boat-delivered infantry
+  - [Infantry - Streamer](docs/systems/reinforcements/streamer.md) - One-shot trickle of individual infantry
   - [Marauding Vehicles & Aircraft](docs/systems/reinforcements/marauding.md) - Persistent vehicle and air pressure
 
 ### Mission Systems

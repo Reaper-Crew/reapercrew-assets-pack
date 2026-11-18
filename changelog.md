@@ -1,5 +1,14 @@
 # Changelog
 
+# Version 6.5
+
+### Added
+- **REINFORCEMENTS:** Streamer module (`reaperCrew_moduleReinforcementsStreamer`): once players enter its area it spawns a set number of individual infantry, one group each, at a set interval, and sends them to rush players. The module and its trigger delete themselves after the last unit spawns. Rush can be disabled, and code can be run on each unit
+
+### Changed
+
+### Removed
+
 # Version 6.4
 
 ### Added

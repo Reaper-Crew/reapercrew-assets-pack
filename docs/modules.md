@@ -31,6 +31,7 @@ Index of all Eden modules in the pack, grouped by editor category. See the linke
 | [Reinforcements (Infantry - Motorised)](systems/reinforcements/motorised.md) | `reaperCrew_moduleReinforcementsHeadlessInfantryMotorised` | Vehicle-delivered reinforcement waves |
 | [Reinforcements (Infantry - Helicopter)](systems/reinforcements/helicopter.md) | `reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter` | Helicopter-delivered reinforcement waves (land/fastrope/random) |
 | [Reinforcements (Infantry - Marine)](systems/reinforcements/marine.md) | `reaperCrew_moduleReinforcementsHeadlessInfantryMarine` | Boat-delivered reinforcement waves |
+| [Reinforcements (Infantry - Streamer)](systems/reinforcements/streamer.md) | `reaperCrew_moduleReinforcementsStreamer` | One-shot trickle of individual infantry that rush players |
 | [Marauding Vehicles](systems/reinforcements/marauding.md) | `reaperCrew_moduleReinforcementsHeadlessMaraudingVehicles` | Persistent armour/technical pressure on an area |
 | [Marauding Aircraft](systems/reinforcements/marauding.md) | `reaperCrew_moduleReinforcementsHeadlessMaraudingAircrafts` | Persistent air pressure on an area |
 

@@ -200,6 +200,7 @@ Crates are moved with ACE dragging (only the medical crate can also be carried).
 | Reinforcements | Infantry Motor | `reaperCrew_moduleReinforcementsHeadlessInfantryMotorised` |
 | Reinforcements | Infantry Airborne | `reaperCrew_moduleReinforcementsHeadlessInfantryHelicopter` |
 | Reinforcements | Infantry Marine | `reaperCrew_moduleReinforcementsHeadlessInfantryMarine` |
+| Reinforcements | Infantry Streamer | `reaperCrew_moduleReinforcementsStreamer` |
 | Reinforcements | Marauding Vehicles | `reaperCrew_moduleReinforcementsHeadlessMaraudingVehicles` |
 | Reinforcements | Marauding Aircraft | `reaperCrew_moduleReinforcementsHeadlessMaraudingAircrafts` |
 | AI Mechanics | Garrison Area | `reaperCrew_moduleGarrison` |
@@ -338,6 +339,6 @@ myMissionVariable
 - [AI Mechanics](systems/ai/ai-mechanics.md) - Overview with links to [Garrison](systems/ai/garrison.md), [Patrol](systems/ai/patrol.md), [Suppress](systems/ai/suppress-position.md), [Convoy](systems/ai/convoy.md), [Unlimited Ammo](systems/ai/unlimited-ammo.md), [Surrender Area](systems/ai/surrender-area.md)
 - [Ambience](systems/ambience/ambience-system.md) - Ambient CAS strikes
 - [Mission Mechanics](systems/mission-mechanics/mission-mechanics-system.md) - Interaction Objectives, Timed Tasks
-- [Reinforcements](systems/reinforcements/reinforcements-system.md) - Overview with links to [Spawnpoints](systems/reinforcements/spawnpoints.md), [Foot Mobile](systems/reinforcements/foot-mobile.md), [Motorised](systems/reinforcements/motorised.md), [Helicopter](systems/reinforcements/helicopter.md), [Marine](systems/reinforcements/marine.md), [Marauding](systems/reinforcements/marauding.md)
+- [Reinforcements](systems/reinforcements/reinforcements-system.md) - Overview with links to [Spawnpoints](systems/reinforcements/spawnpoints.md), [Foot Mobile](systems/reinforcements/foot-mobile.md), [Motorised](systems/reinforcements/motorised.md), [Helicopter](systems/reinforcements/helicopter.md), [Marine](systems/reinforcements/marine.md), [Streamer](systems/reinforcements/streamer.md), [Marauding](systems/reinforcements/marauding.md)
 - [Logistics](systems/logistics/logistics-system.md) - Resupply and delivery
 - [Player Management](systems/player/player-management.md) - Loadouts and ACRE

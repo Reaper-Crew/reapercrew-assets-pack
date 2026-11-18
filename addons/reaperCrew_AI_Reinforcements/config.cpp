@@ -58,6 +58,7 @@ class CfgFunctions
 			class initModuleInfantryAirbourne{};
 			class initModuleInfantryMotorised{};
 			class initModuleInfantryMarine{};
+			class initModuleInfantryStreamer{};
 
 			class initModuleMaraudingVehicles{};
 			class initModuleMaraudingAircraft{};
@@ -68,8 +69,10 @@ class CfgFunctions
 			class activateInfantryModuleAirbourne{};
 			class activateInfantryModuleMotorised{};
 			class activateInfantryModuleMarine{};
+			class activateInfantryModuleStreamer{};
 
 			class spawnHeadlessInfantry{};
+			class spawnHeadlessInfantryStreamer{};
 			class spawnHeadlessInfantryAirbourne{};
 			class spawnHeadlessInfantryVehicle{};
 			class spawnHeadlessVehicle{};
@@ -246,6 +249,84 @@ class CfgVehicles
 		scope = 2;
 		class Attributes: AttributesBase {
 			#include "attributes.hpp"
+		};
+	};
+	class reaperCrew_moduleReinforcementsStreamer: reaperCrew_moduleReinforcementsBase
+	{
+		displayName = "Reinforcements (Infantry - Streamer)";
+		function = "reapercrew_reinforcements_fnc_initModuleInfantryStreamer";
+		scope = 2;
+		scopeCurator = 0;
+		canSetArea = 1;
+		canSetAreaShape = 1;
+		class AttributeValues {
+			size3[] = {50, 50, -1};
+		};
+		class Attributes: AttributesBase {
+			class unitCount: Edit {
+				displayName = "Unit Count";
+				property = "unitCount";
+				typeName = "NUMBER";
+				tooltip = "Number of units spawned once the module activates.";
+				control = "Edit";
+				defaultValue = "10";
+			};
+			class spawnInterval: Edit {
+				displayName = "Spawn Interval (seconds)";
+				property = "spawnInterval";
+				typeName = "NUMBER";
+				tooltip = "Seconds between each unit spawning.";
+				control = "Edit";
+				defaultValue = "2";
+			};
+			class regularTroops: Checkbox {
+				displayName = "Regular Troops";
+				property = "regularTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class eliteTroops: Checkbox {
+				displayName = "Elite Troops";
+				property = "eliteTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class specialTroops: Checkbox {
+				displayName = "Special Forces";
+				property = "specialTroops";
+				typeName = "BOOL";
+				tooltip = "";
+				control = "Checkbox";
+				defaultValue = "false";
+			};
+			class rushMode: Checkbox {
+				displayName = "Enable Rush";
+				property = "rushMode";
+				typeName = "BOOL";
+				tooltip = "Units rush the nearest players. Untick to leave their behaviour to Code on spawn.";
+				control = "Checkbox";
+				defaultValue = "true";
+			};
+			class additionalCondition: Edit {
+				displayName = "Additional condition";
+				property = "additionalCondition";
+				typeName = "STRING";
+				tooltip = "";
+				control = "Edit";
+				defaultValue = """true""";
+			};
+			class codeOnSpawn: Edit {
+				displayName = "Code on spawn";
+				property = "codeOnSpawn";
+				typeName = "STRING";
+				tooltip = "Runs once per unit. _thisUnit is the spawned unit.";
+				control = "EditCodeMulti5";
+				defaultValue = """true""";
+			};
 		};
 	};
 	class reaperCrew_moduleReinforcementsHeadlessInfantryMotorised: reaperCrew_moduleReinforcementsSpawnerBase

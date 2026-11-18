@@ -15,6 +15,7 @@ This system leverages the LAMBS Rush module for AI behaviour and complements exi
 | [Infantry - Motorised](motorised.md) | Infantry delivered by transport vehicle |
 | [Infantry - Helicopter](helicopter.md) | Infantry delivered by helicopter (land, fastrope or random) |
 | [Infantry - Marine](marine.md) | Infantry delivered by boat to Marine LZs |
+| [Infantry - Streamer](streamer.md) | One-shot trickle of individual infantry that rush players |
 | [Marauding Vehicles & Aircraft](marauding.md) | Persistent vehicle and air pressure on an area |
 
 ## Quick Start
