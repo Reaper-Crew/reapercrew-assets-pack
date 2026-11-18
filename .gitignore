@@ -13,3 +13,6 @@ build_all*
 .hemttout/*
 .hemtt/*
 conductor/
+CLAUDE.md
+.gitignore
+convert_textures.sh

@@ -2,7 +2,7 @@ class CfgPatches
 {
 	class reaperCrew_Buildings
 	{
-		units[] = {"reaperCrew_Bunker01", "reaperCrew_Bunker02", "reaperCrew_Bunker03", "reaperCrew_Corridor25A", "reaperCrew_Corridor25B", "reaperCrew_Corridor25C", "reaperCrew_Corridor50A", "reaperCrew_Corridor50B", "reaperCrew_Corridor50C", "reaperCrew_Stairs01", "reaperCrew_HangarMid", "reaperCrew_HangarS", "reaperCrew_HangarN", "reaperCrew_HangarWDoorS", "reaperCrew_HangarWDoorN", "reaperCrew_HangarEDoorS", "reaperCrew_HangarEDoorN", "reaperCrew_HangarSW", "reaperCrew_HangarSE", "reaperCrew_HangarNW", "reaperCrew_HangarNE"};
+		units[] = {"reaperCrew_Bunker01", "reaperCrew_Bunker02", "reaperCrew_Bunker03", "reaperCrew_Corridor25A", "reaperCrew_Corridor25B", "reaperCrew_Corridor25C", "reaperCrew_Corridor50A", "reaperCrew_Corridor50B", "reaperCrew_Corridor50C", "reaperCrew_Stairs01", "reaperCrew_HangarMid", "reaperCrew_HangarS", "reaperCrew_HangarN", "reaperCrew_HangarWDoorS", "reaperCrew_HangarWDoorN", "reaperCrew_HangarEDoorS", "reaperCrew_HangarEDoorN", "reaperCrew_HangarSW", "reaperCrew_HangarSE", "reaperCrew_HangarNW", "reaperCrew_HangarNE", "reaperCrew_BR90Bridge10"};
 		weapons[] = {};
 		requiredVersion = 2.02;
 		requiredAddons[] = {"A3_Structures_F", "A3_Sounds_F", "ReaperCrew_Common"};
@@ -13,6 +13,10 @@ class CfgEditorSubcategories
 	class reaperCrewBuildings
 	{
 		displayName = "Buildings";
+	};
+	class reaperCrewEngineering
+	{
+		displayName = "Engineering";
 	};
 };
 class CfgAnimationSourceSounds
@@ -256,6 +260,16 @@ class CfgVehicles
 		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\HangarNE\HangarNE.p3d";
 		editorCategory = "reaperCrew";
 		editorSubcategory = "reaperCrewBuildings";
+		destrType = "DestructNo";
+	};
+	class reaperCrew_BR90Bridge10: House_F
+	{
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "BR90 No. 10 Bridge (26 m)";
+		model = "rc_assets_pack\addons\reaperCrew_Buildings\data\Csb10\Csb10.p3d";
+		editorCategory = "reaperCrew";
+		editorSubcategory = "reaperCrewEngineering";
 		destrType = "DestructNo";
 	};
 };
